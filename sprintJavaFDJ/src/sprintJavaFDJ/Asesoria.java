@@ -5,6 +5,6 @@ package sprintJavaFDJ;
  * @author Leonel Briones Palacios
  *
  */
-public interface IAsesoria {
+public interface Asesoria {
 	public void analizarUsuario();
 }
