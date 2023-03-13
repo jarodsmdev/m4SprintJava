@@ -1,19 +1,19 @@
-package sprintjava;
+package sprintJavaFDJ;
 
 public class Usuario implements Asesoria{
 
 	private String nombre;
 	private String fechaNacimiento;
-	private int rut;
+	private int run;
 
 	//CONSTRUCTOR POR DEFECTO
 	public Usuario() {}
 	
 	//CONSTRUCTOR PARAMETRIZADO
-	public Usuario(String nombre, String fechaNacimiento, int rut) {
+	public Usuario(String nombre, String fechaNacimiento, int run) {
 		this.nombre = nombre;
 		this.fechaNacimiento = fechaNacimiento;
-		this.rut = rut;
+		this.run = run;
 	}
 	
 	//MÉTODOS ACCESORES
@@ -25,12 +25,13 @@ public class Usuario implements Asesoria{
 		return fechaNacimiento;
 	}
 	
-	public int getRut() {
-		return rut;
+	public int getRun() {
+		return run;
 	}
 	
+	@Override
 	public void analizarUsuario() {
-		System.out.println("Nombre de Usuario: " + nombre + ", Fecha de nacimiento: " + fechaNacimiento + ", rut:" + rut );
+		System.out.println("Nombre de Usuario: " + nombre + ", Fecha de nacimiento: " + fechaNacimiento + ", RUN:" + run );
 		
 	}
 
