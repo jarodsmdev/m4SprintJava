@@ -164,12 +164,17 @@ public class Cliente extends Usuario {
 	
 	/** METODO OBTENER NOMBRE = NOMBRE Y APELLIDOS CONCATENADOS*/
 	public void obtenerNombre() {
-		
+		System.out.println(nombre + " " + apellido);
 	}
 	
 	/** METODO QUE RETORNA EL SISTEMA DE SALUD DEL CLIENTE */
 	public void obtenerSistemaSalud() {
-		
+		if(sistemaSalud ==1) {
+			System.out.println("FONASA");
+		}
+		else {
+			System.out.println("ISAPRE");
+		}
 	}
 	
 	/** DEBE MOSTRAR LOS DATOS DE LA CLASE USUARIO + DIRECCION Y COMUNA DEL CLIENTE*/
