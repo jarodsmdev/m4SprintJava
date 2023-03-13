@@ -40,7 +40,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			mensaje("Ingrese un RUT valido");
+			Utilidades.escribir("Ingrese un RUT valido");
 		}
 	}
 	public long getRut() {
@@ -57,7 +57,7 @@ public class Cliente extends Usuario {
 		}
 		else{
 			//opcion invalida
-			mensaje("Ha superado el limite de caracteres");
+			Utilidades.escribir("Ha superado el limite de caracteres");
 		}
 	}
 	public String getNombre() {
@@ -73,7 +73,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			mensaje("Ha superado el limite de caracteres");
+			Utilidades.escribir("Ha superado el limite de caracteres");
 		}
 	}
 	public String getApellido() {
@@ -99,7 +99,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			mensaje("Ha superado el maximo de caracteres");
+			Utilidades.escribir("Ha superado el maximo de caracteres");
 		}
 	}
 	public String getAfp() {
@@ -115,7 +115,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			mensaje("Ingrese una opcion valida. 1 FONASA || 2 ISAPRE");
+			Utilidades.escribir("Ingrese una opcion valida. 1 FONASA || 2 ISAPRE");
 			}
 	}
 	public char getSistemaSalud() {
@@ -131,7 +131,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			mensaje("Ha superado el limite de caracteres");
+			Utilidades.escribir("Ha superado el limite de caracteres");
 		}
 	}
 	public String getDireccion() {
@@ -147,7 +147,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			mensaje("Ha superado el maximo de caracteres");
+			Utilidades.escribir("Ha superado el maximo de caracteres");
 		}
 	}
 	public String getComuna() {
@@ -163,7 +163,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			mensaje("Ingrese una edad valida [0-149]");
+			Utilidades.escribir("Ingrese una edad valida [0-149]");
 		}
 	}
 	public int getEdad() {
@@ -172,16 +172,16 @@ public class Cliente extends Usuario {
 	
 	/** METODO OBTENER NOMBRE = NOMBRE Y APELLIDOS CONCATENADOS*/
 	public void obtenerNombre() {
-		mensaje(nombre + " " + apellido);
+		Utilidades.escribir(nombre + " " + apellido);
 	}
 	
 	/** METODO QUE RETORNA EL SISTEMA DE SALUD DEL CLIENTE */
 	public void obtenerSistemaSalud(char sistemaSalud) {
 		if(sistemaSalud ==1) {
-			mensaje("FONASA");
+			Utilidades.escribir("FONASA");
 		}
 		else {
-			mensaje("ISAPRE");
+			Utilidades.escribir("ISAPRE");
 		}
 	}
 	
