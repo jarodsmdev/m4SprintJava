@@ -6,6 +6,8 @@ public class Administrativo extends Usuario {
 	private String area;
 	private String expPrevia;
 
+	public Administrativo() {}
+	//el bob con usuario
 	public Administrativo(String nombreUsuario, String area, String expPrevia) {
 		super(nombreUsuario);
 		this.area = area;
@@ -35,6 +37,9 @@ public class Administrativo extends Usuario {
 	    this.expPrevia = expPrevia;
 	}
 
+	
+	//aqui iria el toostring con los super de usuario bob
+	
 
 
 }
