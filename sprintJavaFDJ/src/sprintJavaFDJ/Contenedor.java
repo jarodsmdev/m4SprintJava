@@ -44,11 +44,10 @@ public class Contenedor {
 	}
 	
 	/**
-	 * 
+	 * Método que permite mostrar sólo los objetos de la clase Usuario
 	 */
 	public void listarUsuarios() {
 		//TODO: LISTAR SOLO LOS DATOS DE LA CLASE USUARIO
-		//if(instanceof(Usuario)
 		for(Asesoria itemAsesoria: listaAsesoria) {
 			if(itemAsesoria instanceof Usuario) {
 				//MÉTODO MOSTRAR DETALLE
@@ -57,21 +56,26 @@ public class Contenedor {
 	}
 	
 	/**
-	 * @param
-	 * Recibe un tipo de usuario
+	 * @param tipo Asesoria
+	 * Recibe un objeto Asesoria y sólo muestra los objetos de este tipo
 	 */
 	public void listarUsuariosPorTipo(Asesoria tipoUsuario) {
 		for(Asesoria itemAsesoria: listaAsesoria) {
-			if(itemAsesoria instanceof tipoUsuario) {
+			if(itemAsesoria instanceof Asesoria) {
 				//MÉTODO MOSTRAR DETALLE
+				
 			}
 			
 		}
 	}
 	
+	/**
+	 * Lista todas la capacitaciones
+	 */
 	public void listarCapacitaciones() {
 		for(Capacitacion itemCapacitacion: listaCapacitacion) {
 			//MOSTRAR DATOS CAPACITACION + DATOS DE CLIENTE AL QUE ESTÁ ASOCIADA LA CAPACITACION
+		
 		}
 	}
 }
