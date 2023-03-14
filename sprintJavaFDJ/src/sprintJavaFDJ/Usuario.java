@@ -118,8 +118,7 @@ public class Usuario implements Asesoria{
 
 	@Override
 	public String toString() {
-		return "Usuario [nombreUsuario=" + nombreUsuario + ", fechaNacimiento=" + fechaNacimiento + ", run=" + run
-				+ "]";
+		return "Usuario [nombreUsuario=" + nombreUsuario + ", fechaNacimiento=" + fechaNacimiento + ", run=" + run + "]";
 	}
 
 

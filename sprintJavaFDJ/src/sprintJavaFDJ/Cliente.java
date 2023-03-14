@@ -23,9 +23,7 @@ public class Cliente extends Usuario {
 	private int cantidadVisitas; 
 	
 	/** Constructor vacio */
-	public Cliente() {
-		
-	}
+	public Cliente() {}
 	
 	/** Constructor con los atributos como parametros*/
 	public Cliente(String nombreUsuario, String fechaNacimiento, long rut,  String apellido, int telefono, String afp, char sistemaSalud, String direccion, String comuna, int edad) {
