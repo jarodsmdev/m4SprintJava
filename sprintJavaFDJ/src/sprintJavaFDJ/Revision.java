@@ -4,7 +4,6 @@
  */
 package sprintJavaFDJ;
 
-
 public class Revision {
 	private int idRevision;
 	private static int idRevSiguiente;
@@ -149,7 +148,6 @@ public class Revision {
 			default:
 				resultado = "SE PRODUJO UN ERROR";
 		}
-		
 		return resultado;
 	}
 	
