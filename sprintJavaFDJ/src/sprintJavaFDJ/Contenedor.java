@@ -36,7 +36,7 @@ public class Contenedor {
 	 */
 	public void eliminarUsuario(int run) {
 		for(int i; i < listaAsesoria.size(); i++) {
-			if(listaAsesoria.get(i).rut.equal(rut)) {
+			if(listaAsesoria.get(i).rut.equals(rut)) {
 				listaAsesoria.remove(i);
 				break;
 			}

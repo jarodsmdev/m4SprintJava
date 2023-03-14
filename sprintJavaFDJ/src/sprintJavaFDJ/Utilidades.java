@@ -6,8 +6,9 @@ public class Utilidades {
 
 	//public static String mensaje;
 	
-	public static void escribir(String mensaje) {
+	public static String escribir(String mensaje) {
 		System.out.println(mensaje);
+		return mensaje;
 	}
 	
 	public static String ingresar(String mensaje) {
