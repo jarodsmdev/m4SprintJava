@@ -7,7 +7,7 @@ public class Usuario implements Asesoria{
 
 	private String nombre;
 	private String fechaNacimiento;
-	private int rut;
+	private int run;
 
 
 	//CONSTRUCTOR POR DEFECTO
@@ -55,7 +55,7 @@ public class Usuario implements Asesoria{
 	//IMPLEMENTACION DE LA INTERFAZ ASESORIA
 	@Override
 	public void analizarUsuario() {
-		System.out.println("Nombre de Usuario: " + nombre + ", rut:" + rut );
+		System.out.println("Nombre de Usuario: " + nombre + ", rut:" + run );
 
 	}
 

@@ -18,8 +18,6 @@ public class Profesional extends Usuario {
 	 * de caracteres y un método analizarUsuario para imprimir información del
 	 * usuario en consola.
 	 */
-	public class Profesional extends Usuario {
-
 		private String titulo;
 		private String fechaIngreso;
 
@@ -120,4 +118,3 @@ public class Profesional extends Usuario {
 					+ ", fechaIngreso=" + fechaIngreso);
 		}
 	}
-}

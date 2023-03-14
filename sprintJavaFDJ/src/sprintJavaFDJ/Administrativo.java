@@ -5,11 +5,8 @@ import sprintJavaFDJ.Utilidades;
 public class Administrativo extends Usuario {
 
 	/**
-
 	Esta clase representa a un usuario administrativo, que hereda de la clase Usuario.
-
 	Contiene los atributos 'area' y 'expPrevia', así como los métodos getters y setters correspondientes.
-
 	Además, sobrescribe los métodos toString() y analizarUsuario() de la clase padre.
 	*/
 	
@@ -92,8 +89,3 @@ public class Administrativo extends Usuario {
 	Sobrescribe el método analizarUsuario() de la clase padre. Imprime una cadena que representa al usuario administrativo, incluyendo su nombre de usuario, área y experiencia previa, usando la clase Utilidades.
 	*/
 	}
-
-
-
-
-}
