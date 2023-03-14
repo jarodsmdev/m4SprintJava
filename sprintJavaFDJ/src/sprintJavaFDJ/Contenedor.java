@@ -67,25 +67,38 @@ public class Contenedor {
 	
 	/**
 	 * @param tipo Asesoria
-	 * Recibe un objeto Asesoria y sólo muestra los objetos de este tipo
+	 * Recibe un objeto Usuario y sólo muestra los objetos de este tipo
 	 */
-	public void listarUsuariosPorTipo(Asesoria tipoUsuario) {
+	public void listarUsuariosPorTipo(Class tipoUsuario) {
 		for(Asesoria itemAsesoria: listaAsesoria) {
-			if(itemAsesoria instanceof Asesoria) {
-				//MÉTODO MOSTRAR DETALLE
-				
+			Usuario usuario = (Usuario)itemAsesoria; //CASTING
+				if(tipoUsuario.isAssignableFrom(usuario.getClass())) {
+					Utilidades.escribir(usuario.analizarUsuario());
 			}
-			
 		}
 	}
 	
 	/**
-	 * Lista todas la capacitaciones
+	 * Método que Lista todas la capacitaciones e invoca un método para mostrar los datos del cliente asociado pasando como parámetro rut de tipo long
 	 */
 	public void listarCapacitaciones() {
 		for(Capacitacion itemCapacitacion: listaCapacitacion) {
 			//MOSTRAR DATOS CAPACITACION + DATOS DE CLIENTE AL QUE ESTÁ ASOCIADA LA CAPACITACION
-		
+			itemCapacitacion.toString();
+			mostrarDatosCliente(itemCapacitacion.getRun());
+		}
+	}
+	
+	/**
+	 * Método que muestra los datos de Cliente, recibe como parámetro rut de tipo long
+	 * @param rutCliente tipo long
+	 */
+	public void mostrarDatosCliente(long rutCliente) {
+		for(Asesoria itemCliente: listaAsesoria) {
+			Cliente cliente = (Cliente)itemCliente; //CASTING
+			if(cliente.getRun() == rutCliente) {
+				Utilidades.escribir(cliente.analizarUsuario());
+			}
 		}
 	}
 }
