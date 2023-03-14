@@ -7,25 +7,36 @@ package sprintJavaFDJ;
 
 public class Revision {
 	private int idRevision;
+	private static int idRevSiguiente;
 	private int idVisita;
+	//private static int idVisitaSiguiente;
 	private String nombreRevision;
+	private String detalles;
 	private int estado;
 	
 	/**
-	 * Constructor por defecto
+	 * Constructor por defecto.
+	 * idRevision es autogenerado
 	 */
-	public Revision() {}
+	public Revision() {
+		++idRevSiguiente;
+		this.idRevision = idRevSiguiente;
+//		++idVisitaSiguiente;
+//		this.idVisita = idVisitaSiguiente;
+	}
 	/**
-	 * Constructor parametrizado solicita todos los campos de clase
-	 * @param idRevision tipo int
-	 * @param idVisita tipo int
+	 * Constructor parametrizado solicita todos los campos de clase.
+	 * idRevision es autogenerado
 	 * @param nombreRevision tipo String
 	 * @param estado tipo int
 	 */
-	public Revision(int idRevision, int idVisita, String nombreRevision, int estado) {
-		this.idRevision = idRevision;
-		this.idVisita = idVisita;
+	public Revision(String nombreRevision, String detalles, int estado) {
+		++idRevSiguiente;
+		this.idRevision = idRevSiguiente;
+//		++idVisitaSiguiente;
+//		this.idVisita = idVisitaSiguiente;
 		this.nombreRevision = nombreRevision;
+		this.detalles = detalles;
 		this.estado = estado;
 	}
 	
@@ -74,7 +85,31 @@ public class Revision {
 	 * @param nombreRevision tipo String
 	 */
 	public void setNombreRevision(String nombreRevision) {
-		this.nombreRevision = nombreRevision;
+		if(nombreRevision.length() >= 10 && nombreRevision.length() <= 50) {
+			this.nombreRevision = nombreRevision;			
+		}else {
+			Utilidades.escribir("[!] Nombre Revisión debe tener entre 10 y 50 caracteres");
+		}
+	}
+	
+	/**
+	 * Obtiene campo de clase detalles tipo String
+	 * @return detalles tipo String
+	 */
+	public String getDetalles() {
+		return detalles;
+	}
+	
+	/**
+	 * Establece campo de clase detalles tipo String
+	 * @param detalles tipo String
+	 */
+	public void setDetalleRevisar(String detalles) {
+		if(detalles.length() >100) {
+			this.detalles = detalles;			
+		}else {
+			Utilidades.escribir("[!] Máximo 100 caracteres para escribir detalles de la Revsión.");
+		}
 	}
 	
 	/**
@@ -120,7 +155,7 @@ public class Revision {
 	
 	@Override
 	public String toString() {
-		return "Revision ID Revisión: " + idRevision + ", ID Visita: " + idVisita + ", Nombre Revisión: " + nombreRevision + ", Estado: " + mostrarResultadoRevision();
+		return "Revision ID Revisión: " + idRevision + ", ID Visita: " + idVisita + ", Nombre Revisión: " + nombreRevision + ", Detalles: " + detalles +", Estado: " + mostrarResultadoRevision();
 	}
 	
 }
