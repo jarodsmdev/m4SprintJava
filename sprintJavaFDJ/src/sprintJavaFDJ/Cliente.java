@@ -182,8 +182,8 @@ public class Cliente extends Usuario {
 	}
 	
 	/** METODO OBTENER NOMBRE = NOMBRE Y APELLIDOS CONCATENADOS*/
-	public void obtenerNombre() {
-		Utilidades.escribir(nombre + " " + apellido);
+	public String obtenerNombre() {
+		return Utilidades.escribir(nombre + " " + apellido);
 	}
 	
 	/** METODO QUE RETORNA EL SISTEMA DE SALUD DEL CLIENTE */
@@ -223,9 +223,21 @@ public class Cliente extends Usuario {
 		}
 	}
 	
-	/** METODO QUE MUESTRA LA CANTIDAD DE CAPACITACIONES, VISITAS A TERRENO Y ACCIDENTES DEL CLIENTE*/
+	/** METODOS QUE MUESTRAN LA CANTIDAD DE CAPACITACIONES, VISITAS A TERRENO Y ACCIDENTES DEL CLIENTE*/
 	
-	public void mostrarRelaciones() {
-		Utilidades.escribir("El cliente " + obtenerNombre() + "");
+	public void mostrarCantCapacitaciones() {
+		Utilidades.escribir("El cliente " + obtenerNombre() + " ha realizado " + cantidadCapacitaciones + " capacitaciones." );
+	}
+	public void mostrarCantAccidentes() {
+		Utilidades.escribir("El cliente " + obtenerNombre() + " ha tenido " + cantidadAccidentes + " accidentes.");
+	}
+	public void mostrarCantVisitasTerreno() {
+		Utilidades.escribir("El cliente " + obtenerNombre() + " ha recibido " + cantidadVisitas + " visitas a terreno.");
+	}
+	@Override
+	public String toString() {
+		return "Cliente: " + obtenerNombre() + "\n Telefono: " + getTelefono() + "\n AFP: " + getAfp() + "\n Sistema de Salud: " + getSistemaSalud()
+		+ "\n Direccion: " + getDireccion() + "\n Comuna: " + getComuna() + "\n Edad: " + getEdad();
+		
 	}
 }

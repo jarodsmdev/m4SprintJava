@@ -11,7 +11,12 @@ public class Main {
 		
 		Capacitacion cap1 = new Capacitacion();
 		
-		cliente1.agregarCapacitacion(cap1);
+		cliente1.setNombreUsuario("madness");
+		cliente1.setRut(19616866);
+		cliente1.setNombre("Loui");
+		cliente1.setApellido("Vuitton");
+		
+		cliente1.mostrarCantCapacitaciones();
 	}
 
 }

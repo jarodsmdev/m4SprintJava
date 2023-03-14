@@ -128,7 +128,15 @@ public class Capacitacion extends Cliente{
 		return cantidadAsistentes;
 	}
 	
+	/** METODO MOSTRAR DETALLES CAPACITACIONES*/
 	public void mostrarDetalle() {
 		Utilidades.escribir("La capacitacion será en " + getLugar() + "\n A las " + getHora() + " del día " + getDia() + "\n Y durara " + getDuracion() + " minutos.");
+	}
+	
+	/** SOBREESCRITURA DEL METODO TOSTRING() */
+	@Override
+	public String toString() {
+		return "Capacitacion ID: " + getID() + "\n Rut Cliente: " + getRun() + "\n Lugar: " + getLugar() + "\n Dia"
+				+ getDia() + "\n Hora: " + getHora() + "\n Duración: " + getDuracion() + "\n Cantidad Asistentes: " + getCantidadAccidentes();
 	}
 }
