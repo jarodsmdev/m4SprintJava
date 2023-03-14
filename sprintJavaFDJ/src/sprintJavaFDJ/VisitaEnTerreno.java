@@ -1,15 +1,19 @@
 package sprintJavaFDJ;
 
-import sprintJavaFDJ.Utilidades;
+/**
+ * 
+ * @author diurno
+ *
+ */
 
 public class VisitaEnTerreno {
 	
-	String identificador;
-	Cliente cliente;
-	String dia;
-	String hora;
-	String lugar;
-	String comentarios;
+	private String identificador;
+	private Cliente cliente;
+	private String dia;
+	private String hora;
+	private String lugar;
+	private String comentarios;
 	
 	public VisitaEnTerreno() {};
 	
@@ -99,10 +103,8 @@ public class VisitaEnTerreno {
 
 	@Override
 	public String toString() {
-		return "VisitaEnTerreno [identificador=" + identificador + ", cliente=" + cliente + ", dia=" + dia + ", hora="
-				+ hora + ", lugar=" + lugar + ", comentarios=" + comentarios + "]";
+		return "VisitaEnTerreno Identificador=" + identificador + ", Cliente=" + cliente.getRut() + ", Dia=" + dia + ", Hora="
+				+ hora + ", Lugar=" + lugar + ", Comentarios=" + comentarios;
 	}
 
-	
-	
 }

@@ -1,15 +1,15 @@
 package sprintJavaFDJ;
 
-import sprintJavaFDJ.Utilidades;
+//import sprintJavaFDJ.Utilidades;
 
 public class Accidente {
-	String identificador;
-	Cliente cliente;
-	String fecha;
-	String hora;
-	String lugar;
-	String origen;
-	String consecuencias;
+	private String identificador;
+	private Cliente cliente;
+	private String fecha;
+	private String hora;
+	private String lugar;
+	private String origen;
+	private String consecuencias;
 	
 	public Accidente() {};
 	
@@ -115,8 +115,8 @@ public class Accidente {
 
 	@Override
 	public String toString() {
-		return "Accidente [identificador=" + identificador + ", cliente=" + cliente + ", fecha=" + fecha + ", hora="
-				+ hora + ", lugar=" + lugar + ", origen=" + origen + ", consecuencias=" + consecuencias + "]";
+		return "Accidente Identificador=" + identificador + ", Cliente=" + cliente + ", Fecha=" + fecha + ", Hora="
+				+ hora + ", Lugar=" + lugar + ", Origen=" + origen + ", Consecuencias=" + consecuencias ;
 	}
 
 	
