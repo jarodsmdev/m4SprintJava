@@ -43,6 +43,12 @@ public class Profesional extends Usuario{
 		return "Profesional"+super.toString()+ "titulo=" + titulo + ", fechaIngreso=" + fechaIngreso;
 	}
 	
+	@Override
+	public void analizarUsuario() {
+		Utilidades.escribir("Profesional" + super.toString()+ "Profesional"+super.toString()+ "titulo=" + titulo + ", fechaIngreso=" + fechaIngreso) ;
+		
+	}
+	
 	
 
 	
