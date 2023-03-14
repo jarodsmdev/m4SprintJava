@@ -64,7 +64,7 @@ public class Accidente {
 	}
 
 	public void setCliente(Cliente cliente) {
-		if (cliente.getRut() <= 99999999) {
+		if (cliente.getRun() <= 99999999) {
 			this.cliente = cliente;
 		} else {
 			Utilidades.escribir("No puede exceder 99.999.999");
