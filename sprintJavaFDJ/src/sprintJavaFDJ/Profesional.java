@@ -113,8 +113,7 @@ public class Profesional extends Usuario {
 		 * Método analizarUsuario que imprime información del usuario en consola.
 		 */
 		@Override
-		public void analizarUsuario() {
-			Utilidades.escribir("Profesional" + super.toString() + "Profesional" + super.toString() + "titulo=" + titulo
-					+ ", fechaIngreso=" + fechaIngreso);
+		public String analizarUsuario() {
+			return "Profesional Nombre= " + super.getNombreUsuario() + ", RUN= " + super.getRun()+ "titulo=" + titulo+ ", fechaIngreso=" + fechaIngreso;
 		}
 	}
