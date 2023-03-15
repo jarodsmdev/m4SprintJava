@@ -81,7 +81,7 @@ public class Administrativo extends Usuario {
 	*/
 	@Override
 	public String toString() {
-		return "Administrativo" + super.toString()+ "area " +area + ", expPrevia=" + expPrevia ;
+		return "Administrativo area " +area + ", expPrevia=" + expPrevia ;
 	}
 	/**
 
@@ -89,6 +89,6 @@ public class Administrativo extends Usuario {
 	*/
 	@Override
 	public String analizarUsuario() {
-		return "MÉTODO NO IMPLEMENTADO";
+		return "Administrativo" + super.toString()+"area " +area + ", expPrevia=" + expPrevia ;
 	}
 }
