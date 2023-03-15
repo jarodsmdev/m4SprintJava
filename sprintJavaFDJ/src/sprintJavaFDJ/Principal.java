@@ -85,10 +85,20 @@ public class Principal {
 	public static void crearCliente() {
 		String capturador = Utilidades.ingresar("Ingrese el RUT del Cliente");
 		
-		if(Long.parseLong(respuesta) ==  Usuario.getRun()) { //cuando este listo el crear usuario hay q arreglar esta condicion
+		if(Long.parseLong(capturador) ==  Usuario.getRun()) { //cuando este listo el crear usuario hay q arreglar esta condicion
 			Cliente cliente = new Cliente();
+			listaUsuarios.mostrarUsuarios();
 			cliente.setNombre(Utilidades.ingresar("Ingrese el nombre del cliente"));
-			cliente.setApellido(Utilidades);
+			cliente.setApellido(Utilidades.ingresar("Ingrese el apellido del cliente"));
+			String capTel = Utilidades.ingresar("Ingrese el telefono del cliente");
+			cliente.setTelefono(Integer.parseInt(capTel));
+			cliente.setAfp(Utilidades.ingresar("Ingrese AFP"));
+			String capChar = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
+			cliente.setSistemaSalud(capChar.charAt(0));
+			cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección"));
+			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
+			String capEdad = Utilidades.ingresar("Ingrese la edad del cliente");
+			cliente.setEdad(Integer.parseInt(capEdad));
 		}
 		else {
 			Utilidades.escribir("El RUT no corresponde a ningun Usuario; cree un Usuario primero para continuar");
