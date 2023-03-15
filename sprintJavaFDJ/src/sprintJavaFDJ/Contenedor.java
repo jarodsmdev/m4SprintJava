@@ -34,48 +34,71 @@ public class Contenedor {
 	 * @param run
 	 * Recibe como parámetro rut para eliminar objeto
 	 */
-	public void eliminarUsuario(int run) {
-		for(int i; i < listaAsesoria.size(); i++) {
-			if(listaAsesoria.get(i).rut.equals(rut)) {
+	public void eliminarUsuario(long run) {
+		boolean encontrado = false;
+		for(int i = 0; i < listaAsesoria.size(); i++) {
+			Usuario usuario = (Usuario)listaAsesoria.get(i); //CASTING PARA OBTENER EL RUT DEL USUARIO
+			if(usuario.getRun() == run) {
 				listaAsesoria.remove(i);
+				Utilidades.escribir("[!] Se ha eliminado el usuario: " + usuario.analizarUsuario());
+				encontrado = true;
 				break;
 			}
-		};
+			if(encontrado == false) {
+				Utilidades.escribir("[!] No se ha encontrado el RUT");
+			}
+		}
 	}
 	
 	/**
 	 * Método que permite mostrar sólo los objetos de la clase Usuario
 	 */
 	public void listarUsuarios() {
-		//TODO: LISTAR SOLO LOS DATOS DE LA CLASE USUARIO
-		for(Asesoria itemAsesoria: listaAsesoria) {
-			if(itemAsesoria instanceof Usuario) {
-				//MÉTODO MOSTRAR DETALLE
+		//LISTAR SOLO LOS DATOS DE LA CLASE USUARIO
+		for(int i = 0; i < listaAsesoria.size(); i++) {
+			if(listaAsesoria.get(i) instanceof Usuario) {
+				Usuario usuario = (Usuario) listaAsesoria.get(i); //CASTING/REFUNDICIÓN
+				Utilidades.escribir((i+1) + ". " + usuario.analizarUsuario());
+			}else {
+				Utilidades.escribir("[!] No existen objetos de tipo Usuario");
 			}
 		}
 	}
 	
 	/**
 	 * @param tipo Asesoria
-	 * Recibe un objeto Asesoria y sólo muestra los objetos de este tipo
+	 * Recibe un objeto Usuario y sólo muestra los objetos de este tipo
 	 */
-	public void listarUsuariosPorTipo(Asesoria tipoUsuario) {
+	public void listarUsuariosPorTipo(Class<Asesoria> tipoUsuario) {
 		for(Asesoria itemAsesoria: listaAsesoria) {
-			if(itemAsesoria instanceof Asesoria) {
-				//MÉTODO MOSTRAR DETALLE
-				
+			Usuario usuario = (Usuario)itemAsesoria; //CASTING
+				if(tipoUsuario.isAssignableFrom(usuario.getClass())) {
+					Utilidades.escribir(usuario.analizarUsuario());
 			}
-			
 		}
 	}
 	
 	/**
-	 * Lista todas la capacitaciones
+	 * Método que Lista todas la capacitaciones e invoca un método para mostrar los datos del cliente asociado pasando como parámetro rut de tipo long
 	 */
 	public void listarCapacitaciones() {
 		for(Capacitacion itemCapacitacion: listaCapacitacion) {
 			//MOSTRAR DATOS CAPACITACION + DATOS DE CLIENTE AL QUE ESTÁ ASOCIADA LA CAPACITACION
-		
+			itemCapacitacion.toString();
+			mostrarDatosCliente(itemCapacitacion.getRun());
+		}
+	}
+	
+	/**
+	 * Método que muestra los datos de Cliente, recibe como parámetro rut de tipo long
+	 * @param rutCliente tipo long
+	 */
+	public void mostrarDatosCliente(long rutCliente) {
+		for(Asesoria itemCliente: listaAsesoria) {
+			Cliente cliente = (Cliente)itemCliente; //CASTING
+			if(cliente.getRun() == rutCliente) {
+				Utilidades.escribir(cliente.analizarUsuario());
+			}
 		}
 	}
 }

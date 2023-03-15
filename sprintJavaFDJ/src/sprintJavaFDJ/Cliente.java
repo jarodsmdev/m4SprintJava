@@ -23,9 +23,7 @@ public class Cliente extends Usuario {
 	private int cantidadVisitas; 
 	
 	/** Constructor vacio */
-	public Cliente() {
-		
-	}
+	public Cliente() {}
 	
 	/** Constructor con los atributos como parametros*/
 	public Cliente(String nombreUsuario, String fechaNacimiento, long rut,  String apellido, int telefono, String afp, char sistemaSalud, String direccion, String comuna, int edad) {
@@ -57,7 +55,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ha superado el limite de caracteres");
+			Utilidades.escribir("Ha superado el límite de caracteres");
 		}
 	}
 	public String getApellido() {
@@ -83,7 +81,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ha superado el maximo de caracteres");
+			Utilidades.escribir("Ha superado el máximo de caracteres");
 		}
 	}
 	public String getAfp() {
@@ -99,7 +97,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ingrese una opcion valida. 1 FONASA || 2 ISAPRE");
+			Utilidades.escribir("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
 			}
 	}
 	public char getSistemaSalud() {
@@ -115,7 +113,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ha superado el limite de caracteres");
+			Utilidades.escribir("Ha superado el límite de caracteres");
 		}
 	}
 	public String getDireccion() {
@@ -131,7 +129,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ha superado el maximo de caracteres");
+			Utilidades.escribir("Ha superado el máximo de caracteres");
 		}
 	}
 	public String getComuna() {
@@ -147,7 +145,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ingrese una edad valida [0-149]");
+			Utilidades.escribir("Ingrese una edad válida [0-149]");
 		}
 	}
 	public int getEdad() {
@@ -196,9 +194,12 @@ public class Cliente extends Usuario {
 		}
 	}
 	
-	/** DEBE MOSTRAR LOS DATOS DE LA CLASE USUARIO + DIRECCION Y COMUNA DEL CLIENTE*/
-	public void analizarUsuario() {
-		Utilidades.escribir(getNombreUsuario()+ " " + getRun() + " " + getFechaNacimiento() + getDireccion() + " " + getComuna());
+	/**
+	 * DEBE MOSTRAR LOS DATOS DE LA CLASE USUARIO + DIRECCION Y COMUNA DEL CLIENTE
+	 */
+	@Override
+	public String analizarUsuario() {
+		return getNombreUsuario()+ " " + getRun() + " " + getDireccion() + " " + getComuna();
 	}
 
 	/** METODO  QUE AGREGA CAPACITACIONES A ARRAYLIST QUE CONTIENEN TODAS LAS CAPACITACIONES DE CADA CLIENTE*/

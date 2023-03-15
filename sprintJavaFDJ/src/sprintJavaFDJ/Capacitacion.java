@@ -2,7 +2,7 @@ package sprintJavaFDJ;
 /** @author Leonel Briones, Priscila Carrillo, Andres Contreras, Kevin Moreno, Valentina Saldias*/
 /**@version 13/03 */
 public class Capacitacion extends Cliente{
-	private int iD;
+	private int id;
 	private Cliente rut;
 	private String dia;
 	private String hora;
@@ -16,9 +16,9 @@ public class Capacitacion extends Cliente{
 	}
 	
 	/** metodo constructor con los atributos como parametros */
-	public Capacitacion(int iD, long rut, String dia, String hora, String lugar, String duracion, int cantidadAsistentes ) {
+	public Capacitacion(int id, long rut, String dia, String hora, String lugar, String duracion, int cantidadAsistentes ) {
 		super.getRun();
-		this.iD = iD;
+		this.id = id;
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
@@ -29,11 +29,11 @@ public class Capacitacion extends Cliente{
 	/**@param IDS
 	 * Obligatorio
 	 * SETTER Y GETTER */
-	public void setID(int iD) {
-		this.iD = iD;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getID() {
-		return iD;
+	public int getId() {
+		return id;
 	}
 	
 	/** @param RUT 
@@ -60,7 +60,7 @@ public class Capacitacion extends Cliente{
 			this.dia = dia;
 		}
 		else {
-			Utilidades.escribir("Ingrese un dia valido.");
+			Utilidades.escribir("Ingrese un dia válido.");
 		}
 	}
 	public String getDia() {
@@ -91,7 +91,7 @@ public class Capacitacion extends Cliente{
 			this.lugar = lugar; 
 		}
 		else {
-			Utilidades.escribir("Ha superado el limite de caracteres");
+			Utilidades.escribir("Ha superado el límite de caracteres");
 		}
 	}
 	public String getLugar() {
@@ -106,7 +106,7 @@ public class Capacitacion extends Cliente{
 			this.duracion = duracion;
 		}
 		else{
-			Utilidades.escribir("Ha superado el limite de caracteres");
+			Utilidades.escribir("Ha superado el límite de caracteres");
 		}
 	}
 	public String getDuracion() {
@@ -121,7 +121,7 @@ public class Capacitacion extends Cliente{
 			this.cantidadAsistentes = cantidadAsistentes;
 		}
 		else {
-			Utilidades.escribir("Ingrese una cantidad valida de asistentes.");
+			Utilidades.escribir("Ingrese una cantidad válida de asistentes.");
 		}
 	}
 	public int getCantidadAsistentes() {
@@ -130,13 +130,13 @@ public class Capacitacion extends Cliente{
 	
 	/** METODO MOSTRAR DETALLES CAPACITACIONES*/
 	public void mostrarDetalle() {
-		Utilidades.escribir("La capacitacion será en " + getLugar() + "\n A las " + getHora() + " del día " + getDia() + "\n Y durara " + getDuracion() + " minutos.");
+		Utilidades.escribir("La capacitación será en " + getLugar() + "\n A las " + getHora() + " del día " + getDia() + "\n Y durará " + getDuracion() + " minutos.");
 	}
 	
 	/** SOBREESCRITURA DEL METODO TOSTRING() */
 	@Override
 	public String toString() {
-		return "Capacitacion ID: " + getID() + "\n Rut Cliente: " + getRun() + "\n Lugar: " + getLugar() + "\n Dia"
+		return "Capacitación ID: " + getId() + "\n Rut Cliente: " + getRun() + "\n Lugar: " + getLugar() + "\n Día"
 				+ getDia() + "\n Hora: " + getHora() + "\n Duración: " + getDuracion() + "\n Cantidad Asistentes: " + getCantidadAccidentes();
 	}
 }

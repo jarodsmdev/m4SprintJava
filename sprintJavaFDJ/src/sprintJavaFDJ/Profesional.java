@@ -18,8 +18,6 @@ public class Profesional extends Usuario {
 	 * de caracteres y un método analizarUsuario para imprimir información del
 	 * usuario en consola.
 	 */
-	public class Profesional extends Usuario {
-
 		private String titulo;
 		private String fechaIngreso;
 
@@ -27,8 +25,7 @@ public class Profesional extends Usuario {
 		 * 
 		 * Constructor por defecto de la clase Profesional
 		 */
-		public Profesional() {
-		}
+		public Profesional() {}
 
 		/**
 		 * 
@@ -84,18 +81,15 @@ public class Profesional extends Usuario {
 
 		/**
 		 * 
-		 * Método para establecer la fecha de ingreso del profesional con validación de
-		 * formato
-		 * 
-		 * @param fechaIngreso la fecha de ingreso del profesional en formato
-		 *                     "DD/MM/AAAA"
+		 * Método para establecer la fecha de ingreso del profesional con validación de formato
+		 * @param fechaIngreso la fecha de ingreso del profesional en formato "DD/MM/AAAA"
 		 */
 		public void setFechaIngreso(String fechaIngreso) {
 			String regex = "\\d{2}/\\d{2}/\\d{4}";
 			if (fechaIngreso.matches(regex)) {
 				this.fechaIngreso = fechaIngreso;
 			}
-			System.out.println("Debe ingresar con formato: DD/MM/AAAA");
+			Utilidades.escribir("Debe ingresar con formato: DD/MM/AAAA");
 		}
 
 		/**
@@ -115,9 +109,7 @@ public class Profesional extends Usuario {
 		 * Método analizarUsuario que imprime información del usuario en consola.
 		 */
 		@Override
-		public void analizarUsuario() {
-			Utilidades.escribir("Profesional" + super.toString() + "Profesional" + super.toString() + "titulo=" + titulo
-					+ ", fechaIngreso=" + fechaIngreso);
+		public String analizarUsuario() {
+			return "Profesional Nombre= " + super.getNombreUsuario() + ", RUN= " + super.getRun()+ "titulo=" + titulo+ ", fechaIngreso=" + fechaIngreso;
 		}
 	}
-}
