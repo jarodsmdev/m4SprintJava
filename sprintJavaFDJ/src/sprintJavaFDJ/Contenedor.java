@@ -69,7 +69,7 @@ public class Contenedor {
 	 * @param tipo Asesoria
 	 * Recibe un objeto Usuario y sólo muestra los objetos de este tipo
 	 */
-	public void listarUsuariosPorTipo(Class tipoUsuario) {
+	public void listarUsuariosPorTipo(Class<Asesoria> tipoUsuario) {
 		for(Asesoria itemAsesoria: listaAsesoria) {
 			Usuario usuario = (Usuario)itemAsesoria; //CASTING
 				if(tipoUsuario.isAssignableFrom(usuario.getClass())) {
