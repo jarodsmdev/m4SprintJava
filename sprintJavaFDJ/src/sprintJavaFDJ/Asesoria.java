@@ -6,5 +6,6 @@ package sprintJavaFDJ;
  *
  */
 public interface Asesoria {
-	public void analizarUsuario();
+	
+	public String analizarUsuario();
 }

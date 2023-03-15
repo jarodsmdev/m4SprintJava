@@ -1,10 +1,12 @@
 package sprintJavaFDJ;
+
+import java.util.ArrayList;
+
 /** @author Leonel Briones, Priscila Carrillo, Andres Contreras, Kevin Moreno, Valentina Saldias*/
 /**@version 13/03 */
 public class Cliente extends Usuario {
 
 	/** definicion de parametros de la clase Cliente */
-	private long rut; 
 	private String nombre;
 	private String apellido;
 	private int telefono;
@@ -13,15 +15,19 @@ public class Cliente extends Usuario {
 	private String direccion; 
 	private String comuna;
 	private int edad; 
+	ArrayList <Capacitacion> numeroCapacitacion = new ArrayList<Capacitacion>();
+	private int cantidadCapacitaciones;
+	ArrayList<Accidente> numeroAccidente = new ArrayList<Accidente>();
+	private int cantidadAccidentes;
+	ArrayList<VisitaEnTerreno> numeroVisitaTerreno = new ArrayList<VisitaEnTerreno>();
+	private int cantidadVisitas; 
 	
 	/** Constructor vacio */
-	public Cliente() {
-	}
+	public Cliente() {}
 	
 	/** Constructor con los atributos como parametros*/
-	public Cliente(long rut, String nombre, String apellido, int telefono, String afp, char sistemaSalud, String direccion, String comuna, int edad) {
-		this.rut = rut; 
-		this.nombre = nombre;
+	public Cliente(String nombreUsuario, String fechaNacimiento, long rut,  String apellido, int telefono, String afp, char sistemaSalud, String direccion, String comuna, int edad) {
+		super(nombreUsuario, fechaNacimiento, rut);
 		this.apellido = apellido; 
 		this.telefono = telefono;
 		this.afp = afp;
@@ -30,35 +36,11 @@ public class Cliente extends Usuario {
 		this.comuna = comuna;
 		this.edad = edad;
 	}
-	
-	/** @param RUT 
-	 * int menor a 99.999.999 
-	 * SETTER Y GETTER*/
-	public void setRut(long rut) {
-		if (rut <= 99999999) {
-			this.rut = rut; 
-		}
-		else {
-			//opcion invalida
-			Utilidades.escribir("Ingrese un RUT valido");
-		}
-	}
-	public long getRut() {
-		return rut;
-	}
-	
 	/** @param NOMBRE 
 	 * Obligatorio; minimo 5 caracteres - maximo 30
 	 * SETTER Y GETTER*/
-	
 	public void setNombre(String nombre) {
-		if(nombre.length() >=5 && nombre.length() <= 30) {
-			this.nombre = nombre; 
-		}
-		else{
-			//opcion invalida
-			Utilidades.escribir("Ha superado el limite de caracteres");
-		}
+		this.nombre = nombre; 
 	}
 	public String getNombre() {
 		return nombre; 
@@ -73,7 +55,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ha superado el limite de caracteres");
+			Utilidades.escribir("Ha superado el límite de caracteres");
 		}
 	}
 	public String getApellido() {
@@ -99,7 +81,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ha superado el maximo de caracteres");
+			Utilidades.escribir("Ha superado el máximo de caracteres");
 		}
 	}
 	public String getAfp() {
@@ -115,7 +97,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ingrese una opcion valida. 1 FONASA || 2 ISAPRE");
+			Utilidades.escribir("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
 			}
 	}
 	public char getSistemaSalud() {
@@ -131,7 +113,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ha superado el limite de caracteres");
+			Utilidades.escribir("Ha superado el límite de caracteres");
 		}
 	}
 	public String getDireccion() {
@@ -147,7 +129,7 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ha superado el maximo de caracteres");
+			Utilidades.escribir("Ha superado el máximo de caracteres");
 		}
 	}
 	public String getComuna() {
@@ -163,16 +145,43 @@ public class Cliente extends Usuario {
 		}
 		else {
 			//opcion invalida
-			Utilidades.escribir("Ingrese una edad valida [0-149]");
+			Utilidades.escribir("Ingrese una edad válida [0-149]");
 		}
 	}
 	public int getEdad() {
 		return edad;
 	}
 	
+	/** @param CANTIDAD DE CAPACITACIONES
+	 * SETTER Y GETTER */
+	public void setCantidadCapacitaciones(int cantidadCapacitaciones) {
+		this.cantidadCapacitaciones = cantidadCapacitaciones;
+	}
+	public int getCantidadCapacitaciones() {
+		return cantidadCapacitaciones;
+	}
+	
+	/** @param CANTIDAD DE ACCIDENTES
+	 * SETTER Y GETTER*/
+	public void setCantidadAccidentes(int cantidadAccidentes) {
+		this.cantidadAccidentes = cantidadAccidentes;
+	}
+	public int getCantidadAccidentes() {
+		return cantidadAccidentes;
+	}
+	
+	/** @param CANTIDAD DE VISITAS EN TERRENO
+	 * SETTER Y GETTER*/
+	public void setCantidadVisitas(int cantidadVisitas) {
+		this.cantidadVisitas = cantidadVisitas;
+	}
+	public int getCantidadVisitas() {
+		return cantidadVisitas;
+	}
+	
 	/** METODO OBTENER NOMBRE = NOMBRE Y APELLIDOS CONCATENADOS*/
-	public void obtenerNombre() {
-		Utilidades.escribir(nombre + " " + apellido);
+	public String obtenerNombre() {
+		return Utilidades.escribir(nombre + " " + apellido);
 	}
 	
 	/** METODO QUE RETORNA EL SISTEMA DE SALUD DEL CLIENTE */
@@ -185,8 +194,51 @@ public class Cliente extends Usuario {
 		}
 	}
 	
-	/** DEBE MOSTRAR LOS DATOS DE LA CLASE USUARIO + DIRECCION Y COMUNA DEL CLIENTE*/
-	public void analizarUsuario() {
+	/**
+	 * DEBE MOSTRAR LOS DATOS DE LA CLASE USUARIO + DIRECCION Y COMUNA DEL CLIENTE
+	 */
+	@Override
+	public String analizarUsuario() {
+		return getNombreUsuario()+ " " + getRun() + " " + getDireccion() + " " + getComuna();
+	}
+
+	/** METODO  QUE AGREGA CAPACITACIONES A ARRAYLIST QUE CONTIENEN TODAS LAS CAPACITACIONES DE CADA CLIENTE*/
+	public void agregarCapacitacion(Capacitacion nuevaCapacitacion) {
+		if(numeroCapacitacion.size() > -1) {
+			numeroCapacitacion.add(nuevaCapacitacion);
+			cantidadCapacitaciones++;
+		}
+	}
+	/** METODO QUE AGREGA ACCIDENTES A ARRAYLIST QUE ALMACENA TODOS LOS ACCIDENTES DEL CLIENTE*/
+	public void agregarAccidente(Accidente nuevoAccidente) {
+		if (numeroAccidente.size() > -1) {
+			numeroAccidente.add(nuevoAccidente);
+			cantidadAccidentes++;
+		}
+	}
+	/** METODO QUE AGREGA VISITAS A TERRENO A UN ARRAYLIST QUE GUARDA TODAS LAS VISITAS A TERRENO DEL CLIENTE */
+	public void agregarVisitaTerreno(VisitaEnTerreno nuevaVisita) {
+		if(numeroVisitaTerreno.size() > 0 ) {
+			numeroVisitaTerreno.add(nuevaVisita);
+			cantidadVisitas++;
+		}
+	}
+	
+	/** METODOS QUE MUESTRAN LA CANTIDAD DE CAPACITACIONES, VISITAS A TERRENO Y ACCIDENTES DEL CLIENTE*/
+	
+	public void mostrarCantCapacitaciones() {
+		Utilidades.escribir("El cliente " + obtenerNombre() + " ha realizado " + cantidadCapacitaciones + " capacitaciones." );
+	}
+	public void mostrarCantAccidentes() {
+		Utilidades.escribir("El cliente " + obtenerNombre() + " ha tenido " + cantidadAccidentes + " accidentes.");
+	}
+	public void mostrarCantVisitasTerreno() {
+		Utilidades.escribir("El cliente " + obtenerNombre() + " ha recibido " + cantidadVisitas + " visitas a terreno.");
+	}
+	@Override
+	public String toString() {
+		return "Cliente: " + obtenerNombre() + "\n Telefono: " + getTelefono() + "\n AFP: " + getAfp() + "\n Sistema de Salud: " + getSistemaSalud()
+		+ "\n Direccion: " + getDireccion() + "\n Comuna: " + getComuna() + "\n Edad: " + getEdad();
 		
 	}
 }

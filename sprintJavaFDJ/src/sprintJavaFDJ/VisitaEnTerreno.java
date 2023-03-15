@@ -61,7 +61,7 @@ public class VisitaEnTerreno {
 	}
 
 	public void setCliente(Cliente cliente) {
-		if (cliente.getRut() <= 99999999) {
+		if (cliente.getRun() <= 99999999) {
 			this.cliente = cliente;
 		} else {
 			Utilidades.escribir("No puede exceder 99.999.999");
@@ -124,8 +124,8 @@ public class VisitaEnTerreno {
 	 */
 	@Override
 	public String toString() {
-		return "VisitaEnTerreno Identificador=" + identificador + ", Cliente=" + cliente.getRut() + ", Dia=" + dia
-				+ ", Hora=" + hora + ", Lugar=" + lugar + ", Comentarios=" + comentarios;
+		return "VisitaEnTerreno Identificador=" + identificador + ", Cliente=" + cliente.getRun() + ", Dia=" + dia + ", Hora="
+				+ hora + ", Lugar=" + lugar + ", Comentarios=" + comentarios;
 	}
 
 }

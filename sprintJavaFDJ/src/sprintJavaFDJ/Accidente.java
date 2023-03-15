@@ -2,9 +2,8 @@ package sprintJavaFDJ;
 
 /**
  * 
- * @author Leonel Briones, Kevin Moreno, Valentia Saldias, Priscila Flores,
- *         Andres Contreras.
- *
+ * @author Leonel Briones, Kevin Moreno, Valentia Saldías, Priscila Flores, Andrés Contreras.
+ *      
  */
 public class Accidente {
 	private String identificador;
@@ -19,9 +18,8 @@ public class Accidente {
 	 * Constructores de la clase.
 	 */
 
-	public Accidente() {
-	};
 
+	public Accidente() {};
 	/**
 	 * 
 	 * @param identificador: String
@@ -33,8 +31,10 @@ public class Accidente {
 	 * @param consecuencias: String
 	 */
 
+
 	public Accidente(String identificador, Cliente cliente, String fecha, String hora, String lugar, String origen,
 			String consecuencias) {
+
 
 		this.identificador = identificador;
 		this.cliente = cliente;
@@ -64,7 +64,7 @@ public class Accidente {
 	}
 
 	public void setCliente(Cliente cliente) {
-		if (cliente.getRut() <= 99999999) {
+		if (cliente.getRun() <= 99999999) {
 			this.cliente = cliente;
 		} else {
 			Utilidades.escribir("No puede exceder 99.999.999");
