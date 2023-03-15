@@ -22,7 +22,7 @@ public class Cliente extends Usuario {
 	ArrayList<VisitaEnTerreno> numeroVisitaTerreno = new ArrayList<VisitaEnTerreno>();
 	private int cantidadVisitas; 
 	
-	/** Constructor vacio */
+	/** Constructor vacío */
 	public Cliente() {}
 	
 	/** Constructor con los atributos como parametros*/
@@ -40,7 +40,15 @@ public class Cliente extends Usuario {
 	 * Obligatorio; minimo 5 caracteres - maximo 30
 	 * SETTER Y GETTER*/
 	public void setNombre(String nombre) {
-		this.nombre = nombre; 
+		do {
+			if(nombre.length() > 4 && nombre.length() < 31) {
+			this.nombre = nombre; 
+		}
+			else {
+			Utilidades.escribir("Ha superado el limite de caracteres");
+		}
+		} 
+		while(nombre.length() < 4 || nombre.length() > 31);
 	}
 	public String getNombre() {
 		return nombre; 
@@ -50,13 +58,16 @@ public class Cliente extends Usuario {
 	 * Obligatorio; minimo 5 caracteres - maximo 30
 	 * SETTER Y GETTER */
 	public void setApellido(String apellido) {
-		if (apellido.length() >= 5 && apellido.length() <= 30) {
+		do {
+		if (apellido.length() > 4 && apellido.length() < 31) {
 			this.apellido = apellido; 
 		}
 		else {
 			//opcion invalida
 			Utilidades.escribir("Ha superado el límite de caracteres");
 		}
+		}
+		while(apellido.length() < 4 && apellido.length() > 31);
 	}
 	public String getApellido() {
 		return apellido;
@@ -68,6 +79,11 @@ public class Cliente extends Usuario {
 	public void setTelefono(int telefono) {
 		this.telefono = telefono; 
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTelefono() {
 		return telefono;
 	}
@@ -76,14 +92,20 @@ public class Cliente extends Usuario {
 	 * Minimo 4 caracteres - maximo 30
 	 *  SETTER Y GETTER */
 	public void setAfp(String afp) {
-		if(afp.length()>= 4 && afp.length()<=30) {
-			this.afp = afp;
-		}
-		else {
-			//opcion invalida
-			Utilidades.escribir("Ha superado el máximo de caracteres");
-		}
+		do {
+			if(afp.length()> 3 && afp.length()<31) {
+				this.afp = afp;
+			}else {
+				//opcion invalida
+				Utilidades.escribir("Ha superado el máximo de caracteres");
+			}
+		}while(afp.length() < 4  && afp.length()> 30);
 	}
+	
+	/**
+	 * 
+	 * @return tipo String
+	 */
 	public String getAfp() {
 		return afp;
 	}
@@ -92,14 +114,21 @@ public class Cliente extends Usuario {
 	 * 1 FONASA / 2 ISAPRE
 	 * SETTER, GETTER */
 	public void setSistemaSalud(char sistemaSalud) {
-		if(sistemaSalud == 1 || sistemaSalud ==2) {
+		do {
+			if(sistemaSalud == '1' || sistemaSalud == '2') {
 				this.sistemaSalud = sistemaSalud;
-		}
-		else {
-			//opcion invalida
-			Utilidades.escribir("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
+				Utilidades.escribir("OK");
+			}else {
+				//opcion invalida
+				Utilidades.escribir("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
 			}
+		}while(sistemaSalud != '1' && sistemaSalud != '2');
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public char getSistemaSalud() {
 		return sistemaSalud;
 	}
@@ -108,14 +137,20 @@ public class Cliente extends Usuario {
 	 * Maximo 70 caracteres
 	 * SETTER Y GETTER */
 	public void setDireccion(String direccion) {
-		if(direccion.length() <= 70) {
-			this.direccion = direccion; 
-		}
-		else {
-			//opcion invalida
-			Utilidades.escribir("Ha superado el límite de caracteres");
-		}
+		do {
+			if(direccion.length() < 71) {
+				this.direccion = direccion; 
+			}else {
+				//opcion invalida
+				Utilidades.escribir("Ha superado el límite de caracteres");
+			}
+		}while(direccion.length() > 70);
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getDireccion() {
 		return direccion;
 	}
@@ -124,14 +159,20 @@ public class Cliente extends Usuario {
 	 * Maximo 50 caracteres
 	 * SETTER Y GETTER */
 	public void setComuna(String comuna) {
-		if(comuna.length() <= 50) {
-			this.comuna = comuna; 
-		}
-		else {
-			//opcion invalida
-			Utilidades.escribir("Ha superado el máximo de caracteres");
-		}
+		do {
+			if(comuna.length() <= 50) {
+				this.comuna = comuna; 
+			}else {
+				//opcion invalida
+				Utilidades.escribir("Ha superado el máximo de caracteres");
+			}
+		}while(comuna.length() > 50);
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getComuna() {
 		return comuna;
 	}
@@ -140,14 +181,20 @@ public class Cliente extends Usuario {
 	 * Obligatorio: mayor o igual a 0 - menor que 150
 	 * SETTER Y GETTER*/
 	public void setEdad(int edad) {
-		if(edad >= 0 && edad < 150) {
-			this.edad = edad; 
-		}
-		else {
-			//opcion invalida
-			Utilidades.escribir("Ingrese una edad válida [0-149]");
-		}
+		do {
+			if(edad > -1 && edad < 150) {
+				this.edad = edad; 
+			}else{
+				//opcion invalida
+				Utilidades.escribir("Ingrese una edad válida [0-149]");
+			}
+		}while(edad < 0 || edad > 149);
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getEdad() {
 		return edad;
 	}

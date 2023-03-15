@@ -11,10 +11,8 @@ public class Utilidades {
 	
 	public static String ingresar(String mensaje) {
 		Scanner sc = new Scanner(System.in);
-		Utilidades.escribir(mensaje);
+		Utilidades.escribir("[+] " + mensaje);
 		String capturador = sc.nextLine();
-//		sc.close();
 		return capturador;
-
 	}
 }
