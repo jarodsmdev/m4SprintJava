@@ -90,15 +90,13 @@ public class Principal {
 			listaUsuarios.mostrarUsuarios();
 			cliente.setNombre(Utilidades.ingresar("Ingrese el nombre del cliente"));
 			cliente.setApellido(Utilidades.ingresar("Ingrese el apellido del cliente"));
-			String capTel = Utilidades.ingresar("Ingrese el telefono del cliente");
-			cliente.setTelefono(Integer.parseInt(capTel));
+			cliente.setTelefono(Integer.parseInt(Utilidades.ingresar("Ingrese numero de telefono")));
 			cliente.setAfp(Utilidades.ingresar("Ingrese AFP"));
 			String capChar = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
 			cliente.setSistemaSalud(capChar.charAt(0));
 			cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección"));
 			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
-			String capEdad = Utilidades.ingresar("Ingrese la edad del cliente");
-			cliente.setEdad(Integer.parseInt(capEdad));
+			cliente.setEdad(Integer.parseInt(Utilidades.ingresar("Ingrese la edad del cliente")));
 		}
 		else {
 			Utilidades.escribir("El RUT no corresponde a ningun Usuario; cree un Usuario primero para continuar");
