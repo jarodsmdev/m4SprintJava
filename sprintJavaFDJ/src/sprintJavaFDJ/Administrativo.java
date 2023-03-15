@@ -29,7 +29,7 @@ public class Administrativo extends Usuario {
 	@param fechaN La fecha de nacimiento del usuario.
 	@param run El número de identificación del usuario.
 	*/
-	public Administrativo(String nombreUsuario, String area, String expPrevia, String nombreuser, String fechaN, int run) {
+	public Administrativo(String area, String expPrevia, String nombreuser, String fechaN, int run) {
 		super(nombreuser, fechaN, run);
 		this.area = area;
 		this.expPrevia = expPrevia;
