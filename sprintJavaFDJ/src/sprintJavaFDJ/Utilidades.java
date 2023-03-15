@@ -13,8 +13,13 @@ public class Utilidades {
 		Scanner sc = new Scanner(System.in);
 		Utilidades.escribir(mensaje);
 		String capturador = sc.nextLine();
-		sc.close();
+//		sc.close();
 		return capturador;
 
+	}
+	
+	public static String preguntarDato(String pregunta) {
+		String capturador = Utilidades.ingresar(pregunta);
+		return capturador;
 	}
 }
