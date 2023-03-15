@@ -16,6 +16,13 @@ public class Contenedor {
 	}
 	/**
 	 * 
+	 * @param administrativo
+	 */
+	public void almacenarAdministrativo(Administrativo administrativo){
+		listaAsesoria.add(administrativo);
+	}
+	/**
+	 * 
 	 * @param profesional
 	 */
 	public void almacenarProfesional(Profesional profesional) {

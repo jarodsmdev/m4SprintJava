@@ -4,10 +4,15 @@ public class Principal {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		
 		menuPrincipal();
 	}
 	
 	public static void menuPrincipal() {
+		Contenedor contenedor = new Contenedor();
+		
+		
 		Utilidades.escribir("\t--MENÚ PRINCIPAL--");
 		
 		Utilidades.escribir("\n\t1. CREAR USUARIO" +
@@ -28,6 +33,7 @@ public class Principal {
 		switch(opcion) {
 			case 1:
 				Utilidades.escribir("Usuario");
+				Utilidades.ingresar("hohlhl");
 				break;
 			case 2:
 				Utilidades.escribir("Cliente");
@@ -37,6 +43,7 @@ public class Principal {
 				break;
 			case 4:
 				Utilidades.escribir("Administrativo");
+				crearAdministrador(contenedor);
 				break;
 			case 5:
 				Utilidades.escribir("Capacitación");
@@ -56,5 +63,29 @@ public class Principal {
 			default:
 				Utilidades.escribir("[!] Opción No Válida.");
 		}
+	}
+	public static void crearAdministrador (Contenedor contenedor) {
+		
+		Administrativo administrativo = new Administrativo();
+		
+		administrativo.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del Usuario"));
+		administrativo.setArea(Utilidades.ingresar("Ingresa Area"));
+		administrativo.setExpPrevia(Utilidades.ingresar("Ingrese experiencia previa"));
+		administrativo.setRut(Long.parseLong(Utilidades.ingresar("Ingrese rut")));
+		administrativo.obtenerFechaNac();
+		
+//		String nombreUsuario, String area, String expPrevia, String nombreuser, String fechaN, int run
+//		String nUsuario = Utilidades.ingresar("Ingresa nombre del Usuario");
+//		String area =Utilidades.ingresar("Ingresa Area");
+//		String exPrevia = Utilidades.ingresar("Ingrese experiencia previa");
+//		String nombreUser = Utilidades.ingresar("Ingrese nombre del Administrador");
+//		String fechaN = Utilidades.ingresar("Ingrese fecha de nacimiento");
+//		int run = Integer.parseInt(Utilidades.ingresar("Ingrese rut"));
+////		
+//	Administrativo administrativo = new Administrativo(nUsuario, area, exPrevia, nombreUser, fechaN, run);
+	
+	contenedor.almacenarAdministrativo(administrativo);
+	contenedor.listarUsuarios();
+	contenedor.toString();
 	}
 }

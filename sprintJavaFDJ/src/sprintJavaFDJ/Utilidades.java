@@ -13,7 +13,7 @@ public class Utilidades {
 		Scanner sc = new Scanner(System.in);
 		Utilidades.escribir(mensaje);
 		String capturador = sc.nextLine();
-		sc.close();
+//		sc.close();
 		return capturador;
 
 	}
