@@ -19,4 +19,3 @@ Este es un projecto colaborativo realizado en el bootcamp fullstack Java trainee
 |Andrés Contreras            |    [AndresSCP](https://github.com/AndresSCP)
 
 [Enlace Trello aquí](https://trello.com/b/8x0eFHMl/sprint)
-
