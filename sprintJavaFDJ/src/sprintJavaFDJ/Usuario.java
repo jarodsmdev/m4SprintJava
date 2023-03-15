@@ -54,6 +54,13 @@ public class Usuario implements Asesoria{
 	}
 
 	/**
+	 * 
+	 * @param fechaNacimiento
+	 */
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+	/**
 	 * METODO PARA OBTENER FECHA DE NACIMIENTO
 	 * @return String con el formato de fecha dd/mm/aaaa
 	 */
@@ -84,8 +91,8 @@ public class Usuario implements Asesoria{
 			this.run = run; 
 		}
 		else {
-			//opcion invalida
-			Utilidades.escribir("Ingrese un RUT valido");
+			//opcion inválida
+			Utilidades.escribir("Ingrese un RUT válido");
 		}
 	}
 	

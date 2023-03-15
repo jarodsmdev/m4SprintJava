@@ -18,8 +18,8 @@ public class Accidente {
 	 * Constructores de la clase.
 	 */
 
-	public Accidente() {};
 
+	public Accidente() {};
 	/**
 	 * 
 	 * @param identificador: String
@@ -31,7 +31,10 @@ public class Accidente {
 	 * @param consecuencias: String
 	 */
 
-	public Accidente(String identificador, Cliente cliente, String fecha, String hora, String lugar, String origen, String consecuencias) {
+
+	public Accidente(String identificador, Cliente cliente, String fecha, String hora, String lugar, String origen,
+			String consecuencias) {
+
 
 		this.identificador = identificador;
 		this.cliente = cliente;

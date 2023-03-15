@@ -71,7 +71,8 @@ public class Capacitacion extends Cliente{
 	 * HH : MM
 	 * SETTER Y GETTER */
 	public void setHora(String hora) {
-		if(hora.matches("^([01]?[0-9]|2[0-3]):[0-5][0-9]$")) {
+		String regEx = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$";
+		if(hora.matches(regEx)) {
 			this.hora = hora;
 		}
 		else {

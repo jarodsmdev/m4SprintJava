@@ -9,10 +9,24 @@ public class Contenedor {
 
 	/**
 	 * 
+	 * @param usuario
+	 */
+	public void almacenarUsuario(Usuario usuario) {
+		listaAsesoria.add(usuario);
+	}
+	/**
+	 * 
 	 * @param cliente
 	 */
 	public void almacenarCliente(Cliente cliente){
 		listaAsesoria.add(cliente);
+	}
+	/**
+	 * 
+	 * @param administrativo
+	 */
+	public void almacenarAdministrativo(Administrativo administrativo){
+		listaAsesoria.add(administrativo);
 	}
 	/**
 	 * 
@@ -100,5 +114,20 @@ public class Contenedor {
 				Utilidades.escribir(cliente.analizarUsuario());
 			}
 		}
+	}
+	
+	/**
+	 * Método que retorna true si existe el rut ingresado, false en caso de no encontrarlo
+	 * @param rutUsuario tipo long
+	 * @return boolean
+	 */
+	public boolean existeUsuario(long rutUsuario) {
+		for(Asesoria itemUsuario: listaAsesoria) {
+			Usuario usuario = (Usuario)itemUsuario; //CASTING
+			if(usuario.getRun() == rutUsuario) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
