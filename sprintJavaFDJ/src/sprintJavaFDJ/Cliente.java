@@ -15,11 +15,11 @@ public class Cliente extends Usuario {
 	private String direccion; 
 	private String comuna;
 	private int edad; 
-	ArrayList <Capacitacion> numeroCapacitacion = new ArrayList<Capacitacion>();
+	private ArrayList <Capacitacion> numeroCapacitacion = new ArrayList<Capacitacion>();
 	private int cantidadCapacitaciones;
-	ArrayList<Accidente> numeroAccidente = new ArrayList<Accidente>();
+	private ArrayList<Accidente> numeroAccidente = new ArrayList<Accidente>();
 	private int cantidadAccidentes;
-	ArrayList<VisitaEnTerreno> numeroVisitaTerreno = new ArrayList<VisitaEnTerreno>();
+	private ArrayList<VisitaEnTerreno> numeroVisitaTerreno = new ArrayList<VisitaEnTerreno>();
 	private int cantidadVisitas; 
 	
 	/** Constructor vacío */
@@ -95,11 +95,13 @@ public class Cliente extends Usuario {
 		do {
 			if(afp.length()> 3 && afp.length()<31) {
 				this.afp = afp;
+
 			}else {
 				//opcion invalida
 				Utilidades.escribir("Ha superado el máximo de caracteres");
 			}
 		}while(afp.length() < 4  && afp.length()> 30);
+
 	}
 	
 	/**
@@ -117,7 +119,6 @@ public class Cliente extends Usuario {
 		do {
 			if(sistemaSalud == '1' || sistemaSalud == '2') {
 				this.sistemaSalud = sistemaSalud;
-				Utilidades.escribir("OK");
 			}else {
 				//opcion invalida
 				Utilidades.escribir("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");

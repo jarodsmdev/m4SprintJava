@@ -9,9 +9,8 @@ public class Usuario implements Asesoria{
 
 	private String nombreUsuario;
 	private String fechaNacimiento;
-	private long run;
-
-
+	private static long run;
+	
 	/**
 	 * Método constructor predederminado
 	 */
@@ -49,17 +48,13 @@ public class Usuario implements Asesoria{
 	 * 
 	 * @return
 	 */
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
 	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	/**
-	 * 
-	 * @param fechaNacimiento
-	 */
-	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
 	/**
 	 * METODO PARA OBTENER FECHA DE NACIMIENTO
 	 * @return String con el formato de fecha dd/mm/aaaa
@@ -100,7 +95,7 @@ public class Usuario implements Asesoria{
 	 * 
 	 * @return
 	 */
-	public long getRun() {
+	public static long getRun() {
 		return run;
 	}
 	

@@ -1,5 +1,7 @@
 package sprintJavaFDJ;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Leonel Briones, Kevin Moreno, Valentia Saldias, Priscila Flores,
@@ -15,12 +17,15 @@ public class VisitaEnTerreno {
 	private String hora;
 	private String lugar;
 	private String comentarios;
+	ArrayList <Revision> revisiones = new ArrayList<Revision>();
 
 	/**
 	 * Constructores de la clase.
 	 */
 	
 	public VisitaEnTerreno() {
+		Revision revision = new Revision();
+		revisiones.add(revision);
 	};
 
 	/**
@@ -40,6 +45,8 @@ public class VisitaEnTerreno {
 		this.hora = hora;
 		this.lugar = lugar;
 		this.comentarios = comentarios;
+		Revision revision = new Revision();
+		revisiones.add(revision);
 	}
 
 	/**
@@ -117,6 +124,10 @@ public class VisitaEnTerreno {
 			Utilidades.escribir("Puede ingresar maximo 100 caracteres");
 		}
 
+	}
+		
+	public void agregarRevision(Revision nuevaRevision) {
+		revisiones.add(nuevaRevision);
 	}
 
 	/**

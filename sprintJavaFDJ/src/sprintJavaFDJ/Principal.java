@@ -1,9 +1,12 @@
 package sprintJavaFDJ;
 
+import java.util.ArrayList;
+
 public class Principal {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
 		Contenedor contenedor = new Contenedor();
 		menuPrincipal(contenedor);
 	}
@@ -33,6 +36,7 @@ public class Principal {
 			case 2:
 				Utilidades.escribir("\t-- CREACIÓN DE CLIENTE --\n");
 				crearCliente(contenedor);
+
 				break;
 			case 3:
 				Utilidades.escribir("\t-- CREACIÓN DE PROFESIONAL --\n");
@@ -61,6 +65,7 @@ public class Principal {
 				Utilidades.escribir("Opción No Válida.");
 		}
 	}
+
 	public static void crearAdministrador (Contenedor contenedor) {
 		
 		Administrativo administrativo = new Administrativo();
@@ -69,7 +74,7 @@ public class Principal {
 		administrativo.setArea(Utilidades.ingresar("Ingresa Área"));
 		administrativo.setExpPrevia(Utilidades.ingresar("Ingrese experiencia previa"));
 		administrativo.setRut(Long.parseLong(Utilidades.ingresar("Ingrese RUT")));
-		//administrativo.obtenerFechaNac();
+		administrativo.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]"));
 		
 		contenedor.almacenarAdministrativo(administrativo);
 		Utilidades.escribir("Personal Administrativo ha sido guardado exitosamente");
@@ -81,10 +86,12 @@ public class Principal {
 	}
 	
 	public static void crearUsuario(Contenedor contenedor) {
+
 		Usuario usuario = new Usuario();
 		usuario.setNombreUsuario(Utilidades.ingresar("Ingrese el nombre de Usuario"));
 		usuario.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]"));
 		usuario.setRut(Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Usuario")));
+
 		//listaUsuarios.agregarUsuario(usuario);
 		
 		contenedor.almacenarUsuario(usuario);
@@ -101,7 +108,7 @@ public class Principal {
 		//VALIDAR QUE EL CONTENIDO DE capturador sea tipo long
 		long capturador = Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Cliente"));
 		
-		
+		//VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS
 		if(contenedor.existeUsuario(capturador)) {
 			Cliente cliente = new Cliente();
 			cliente.setNombre(Utilidades.ingresar("Ingrese el nombre del cliente"));
@@ -113,11 +120,15 @@ public class Principal {
 			cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección"));
 			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
 			cliente.setEdad(Integer.parseInt(Utilidades.ingresar("Ingrese la edad del cliente")));
+			contenedor.almacenarCliente(cliente);
+
 		}else {
-			Utilidades.escribir("El RUT no corresponde a ningún Usuario; cree un Usuario primero para continuar");
+			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
 		}
+
 		
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
 	}
+
 }
