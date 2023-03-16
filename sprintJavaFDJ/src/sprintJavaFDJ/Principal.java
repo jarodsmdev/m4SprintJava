@@ -121,6 +121,7 @@ public class Principal {
 			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
 			cliente.setEdad(Integer.parseInt(Utilidades.ingresar("Ingrese la edad del cliente")));
 			contenedor.almacenarCliente(cliente);
+			Utilidades.escribir("El Cliente ha sido guardado correctamente");
 
 		}else {
 			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
