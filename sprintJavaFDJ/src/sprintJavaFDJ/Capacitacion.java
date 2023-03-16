@@ -1,9 +1,11 @@
 package sprintJavaFDJ;
+
 /** @author Leonel Briones, Priscila Carrillo, Andres Contreras, Kevin Moreno, Valentina Saldias*/
 /**@version 13/03 */
-public class Capacitacion extends Cliente{
+
+public class Capacitacion{
 	private int id;
-	private Cliente rut;
+	private long rut; //SE CAMBIA DE TIPO CLIENTE A LONG PARA CONTINUAR CON LA RELACION DE TIPO AGREGACION
 	private String dia;
 	private String hora;
 	private String lugar;
@@ -17,8 +19,8 @@ public class Capacitacion extends Cliente{
 	
 	/** metodo constructor con los atributos como parametros */
 	public Capacitacion(int id, long rut, String dia, String hora, String lugar, String duracion, int cantidadAsistentes ) {
-		super.getRun();
 		this.id = id;
+		this.rut = rut;
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
@@ -39,10 +41,10 @@ public class Capacitacion extends Cliente{
 	/** @param RUT 
 	 * Obligatorio
 	 * SETTER Y GETTER */
-	public void setRut(Cliente rut) {
+	public void setRut(long rut) {
 		this.rut = rut;
 	}
-	public Cliente getRut() {
+	public long getRut() {
 		return rut;
 	}
 	
@@ -137,7 +139,7 @@ public class Capacitacion extends Cliente{
 	/** SOBREESCRITURA DEL METODO TOSTRING() */
 	@Override
 	public String toString() {
-		return "Capacitación ID: " + getId() + "\n Rut Cliente: " + getRun() + "\n Lugar: " + getLugar() + "\n Día"
-				+ getDia() + "\n Hora: " + getHora() + "\n Duración: " + getDuracion() + "\n Cantidad Asistentes: " + getCantidadAccidentes();
+		return "Capacitación ID: " + getId() + "\n Rut Cliente: " + getRut() + "\n Lugar: " + getLugar() + "\n Día"
+				+ getDia() + "\n Hora: " + getHora() + "\n Duración: " + getDuracion() + "\n Cantidad Asistentes: " + getCantidadAsistentes();
 	}
 }

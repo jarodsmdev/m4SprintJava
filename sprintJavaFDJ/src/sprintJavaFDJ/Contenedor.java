@@ -83,13 +83,19 @@ public class Contenedor {
 	 * @param tipo Asesoria
 	 * Recibe un objeto Usuario y sólo muestra los objetos de este tipo
 	 */
-	public void listarUsuariosPorTipo(Class<Asesoria> tipoUsuario) {
-		for(Asesoria itemAsesoria: listaAsesoria) {
-			Usuario usuario = (Usuario)itemAsesoria; //CASTING
-				if(tipoUsuario.isAssignableFrom(usuario.getClass())) {
-					Utilidades.escribir(usuario.analizarUsuario());
-			}
-		}
+	public void listarUsuariosPorTipo(Class<? extends Usuario> tipoUsuario) {
+		for (Asesoria asesoria : listaAsesoria) {
+	        if (tipoUsuario.isAssignableFrom(asesoria.getClass())) {
+	            Usuario usuario = (Usuario) asesoria;
+	            if (usuario instanceof Cliente) {
+	                Cliente cliente = (Cliente) usuario; // Casting a Cliente
+	                Utilidades.escribir(cliente.analizarUsuario());
+	            } else if (usuario instanceof Administrativo) {
+	                Administrativo admin = (Administrativo) usuario; // Casting a Administrativo
+	                Utilidades.escribir(admin.analizarUsuario());
+	            }
+	        }
+	    }
 	}
 	
 	/**
@@ -99,7 +105,7 @@ public class Contenedor {
 		for(Capacitacion itemCapacitacion: listaCapacitacion) {
 			//MOSTRAR DATOS CAPACITACION + DATOS DE CLIENTE AL QUE ESTÁ ASOCIADA LA CAPACITACION
 			itemCapacitacion.toString();
-			mostrarDatosCliente(itemCapacitacion.getRun());
+			mostrarDatosCliente(itemCapacitacion.getRut());
 		}
 	}
 	
