@@ -69,7 +69,7 @@ public class Principal {
 		administrativo.setArea(Utilidades.ingresar("Ingresa Área"));
 		administrativo.setExpPrevia(Utilidades.ingresar("Ingrese experiencia previa"));
 		administrativo.setRut(Long.parseLong(Utilidades.ingresar("Ingrese RUT")));
-		//administrativo.obtenerFechaNac();
+		administrativo.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]"));
 		
 		contenedor.almacenarAdministrativo(administrativo);
 		Utilidades.escribir("Personal Administrativo ha sido guardado exitosamente");
@@ -102,7 +102,7 @@ public class Principal {
 		long capturador = Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Cliente"));
 		
 		
-		if(contenedor.existeUsuario(capturador)) {
+//		if(contenedor.existeUsuario(capturador)) {
 			Cliente cliente = new Cliente();
 			cliente.setNombre(Utilidades.ingresar("Ingrese el nombre del cliente"));
 			cliente.setApellido(Utilidades.ingresar("Ingrese el apellido del cliente"));
@@ -113,9 +113,11 @@ public class Principal {
 			cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección"));
 			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
 			cliente.setEdad(Integer.parseInt(Utilidades.ingresar("Ingrese la edad del cliente")));
-		}else {
-			Utilidades.escribir("El RUT no corresponde a ningún Usuario; cree un Usuario primero para continuar");
-		}
+			contenedor.almacenarCliente(cliente);
+			contenedor.mostrarDatosCliente(capturador);
+//		}else {
+//			Utilidades.escribir("El RUT no corresponde a ningún Usuario; cree un Usuario primero para continuar");
+//		}
 		
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
