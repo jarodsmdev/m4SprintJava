@@ -15,4 +15,9 @@ public class Utilidades {
 		String capturador = sc.nextLine();
 		return capturador;
 	}
+	
+	public static String preguntarDato(String pregunta) {
+		String capturador = Utilidades.ingresar(pregunta);
+		return capturador;
+	}
 }
