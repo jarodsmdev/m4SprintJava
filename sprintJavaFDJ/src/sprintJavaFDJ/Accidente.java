@@ -6,7 +6,8 @@ package sprintJavaFDJ;
  *      
  */
 public class Accidente {
-	private String identificador;
+	private int identificador;
+	private static int idIdentificador;
 	private Cliente cliente;
 	private String fecha;
 	private String hora;
@@ -17,9 +18,12 @@ public class Accidente {
 	/**
 	 * Constructores de la clase.
 	 */
+	public Accidente() {
+		++idIdentificador;
+		this.identificador = idIdentificador;
+	}
 
-
-	public Accidente() {};
+//	public Accidente() {};
 	/**
 	 * 
 	 * @param identificador: String
@@ -31,12 +35,11 @@ public class Accidente {
 	 * @param consecuencias: String
 	 */
 
-
 	public Accidente(String identificador, Cliente cliente, String fecha, String hora, String lugar, String origen,
 			String consecuencias) {
 
-
-		this.identificador = identificador;
+		++idIdentificador;
+		this.identificador = idIdentificador;
 		this.cliente = cliente;
 		this.fecha = fecha;
 		this.hora = hora;
@@ -51,11 +54,11 @@ public class Accidente {
 	 * @return Metodos getter y setter de la clase Accidente que retornan el
 	 *         identificador de tipo string.
 	 */
-	public String getIdentificador() {
+	public int getIdentificador() {
 		return identificador;
 	}
 
-	public void setIdentificador(String identificador) {
+	public void setIdentificador(int identificador) {
 		this.identificador = identificador;
 	}
 
@@ -64,11 +67,13 @@ public class Accidente {
 	}
 
 	public void setCliente(Cliente cliente) {
-		if (cliente.getRun() <= 99999999) {
-			this.cliente = cliente;
-		} else {
-			Utilidades.escribir("No puede exceder 99.999.999");
-		}
+		do {
+			if (cliente.getRun() <= 99999999) {
+				this.cliente = cliente;
+			} else {
+				Utilidades.escribir("No puede exceder 99.999.999");
+			}
+		} while (cliente.getRun() > 99999999);
 	}
 
 	public String getFecha() {
@@ -77,11 +82,13 @@ public class Accidente {
 
 	public void setFecha(String fecha) {
 		String regex = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}$";
-		if (fecha.matches(regex)) {
-			this.fecha = fecha;
-		} else {
-			Utilidades.escribir("La fecha no es valida");
-		}
+		do {
+			if (fecha.matches(regex)) {
+				this.fecha = fecha;
+			} else {
+				Utilidades.escribir("La fecha no es valida");
+			}
+		} while (!fecha.matches(regex));
 	}
 
 	public String getHora() {
@@ -90,11 +97,13 @@ public class Accidente {
 
 	public void setHora(String hora) {
 		String regex = "^(0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
-		if (hora.matches(regex)) {
-			this.hora = hora;
-		} else {
-			Utilidades.escribir("La hora no es valida");
-		}
+		do {
+			if (hora.matches(regex)) {
+				this.hora = hora;
+			} else {
+				Utilidades.escribir("La hora no es valida");
+			}
+		} while (!hora.matches(regex));
 	}
 
 	public String getLugar() {
@@ -102,11 +111,13 @@ public class Accidente {
 	}
 
 	public void setLugar(String lugar) {
-		if (lugar.length() >= 10 && lugar.length() <= 50) {
-			this.lugar = lugar;
-		} else {
-			Utilidades.escribir("Debe ingresar entre 10 y 50 caracteres");
-		}
+		do {
+			if (lugar.length() >= 10 && lugar.length() <= 50) {
+				this.lugar = lugar;
+			} else {
+				Utilidades.escribir("Debe ingresar entre 10 y 50 caracteres");
+			}
+		} while (lugar.length() < 10 || lugar.length() > 50);
 
 	}
 
@@ -115,11 +126,13 @@ public class Accidente {
 	}
 
 	public void setOrigen(String origen) {
-		if (origen.length() <= 100) {
-			this.origen = origen;
-		} else {
-			Utilidades.escribir("No puede ingresar mas de 100 caracteres");
-		}
+		do {
+			if (origen.length() <= 100) {
+				this.origen = origen;
+			} else {
+				Utilidades.escribir("No puede ingresar mas de 100 caracteres");
+			}
+		} while (origen.length() > 100);
 	}
 
 	public String getConsecuencias() {
@@ -127,11 +140,13 @@ public class Accidente {
 	}
 
 	public void setConsecuencias(String consecuencias) {
-		if (consecuencias.length() <= 100) {
-			this.consecuencias = consecuencias;
-		} else {
-			Utilidades.escribir("No puede ingresar mas de 100 caracteres");
-		}
+		do {
+			if (consecuencias.length() <= 100) {
+				this.consecuencias = consecuencias;
+			} else {
+				Utilidades.escribir("No puede ingresar mas de 100 caracteres");
+			}
+		} while (consecuencias.length() > 100);
 
 	}
 
