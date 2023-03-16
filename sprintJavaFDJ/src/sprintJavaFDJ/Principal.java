@@ -74,7 +74,7 @@ public class Principal {
 		administrativo.setArea(Utilidades.ingresar("Ingresa Área"));
 		administrativo.setExpPrevia(Utilidades.ingresar("Ingrese experiencia previa"));
 		administrativo.setRut(Long.parseLong(Utilidades.ingresar("Ingrese RUT")));
-		//administrativo.obtenerFechaNac();
+		administrativo.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]"));
 		
 		contenedor.almacenarAdministrativo(administrativo);
 		Utilidades.escribir("Personal Administrativo ha sido guardado exitosamente");
@@ -120,10 +120,12 @@ public class Principal {
 			cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección"));
 			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
 			cliente.setEdad(Integer.parseInt(Utilidades.ingresar("Ingrese la edad del cliente")));
+			contenedor.almacenarCliente(cliente);
 
 		}else {
 			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
 		}
+
 		
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
