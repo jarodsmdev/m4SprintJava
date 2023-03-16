@@ -26,8 +26,9 @@ public class Cliente extends Usuario {
 	public Cliente() {}
 	
 	/** Constructor con los atributos como parametros*/
-	public Cliente(String nombreUsuario, String fechaNacimiento, long rut,  String apellido, int telefono, String afp, char sistemaSalud, String direccion, String comuna, int edad) {
+	public Cliente(String nombreUsuario, String fechaNacimiento, long rut,  String nombre, String apellido, int telefono, String afp, char sistemaSalud, String direccion, String comuna, int edad) {
 		super(nombreUsuario, fechaNacimiento, rut);
+		this.nombre = nombre;
 		this.apellido = apellido; 
 		this.telefono = telefono;
 		this.afp = afp;
@@ -42,14 +43,14 @@ public class Cliente extends Usuario {
 	public void setNombre(String nombre) {
 		do {
 			if(nombre.length() > 4 && nombre.length() < 31) {
-			this.nombre = nombre; 
-		}
+				this.nombre = nombre; 
+			}
 			else {
-			Utilidades.escribir("Ha superado el limite de caracteres");
-		}
-		} 
-		while(nombre.length() < 4 || nombre.length() > 31);
+				Utilidades.escribir("Límite de caracteres entre 5 y 30");
+			}
+		}while(nombre.length() < 4 || nombre.length() > 31);
 	}
+	
 	public String getNombre() {
 		return nombre; 
 	}
@@ -67,7 +68,7 @@ public class Cliente extends Usuario {
 			Utilidades.escribir("Ha superado el límite de caracteres");
 		}
 		}
-		while(apellido.length() < 4 && apellido.length() > 31);
+		while(apellido.length() < 4 || apellido.length() > 31);
 	}
 	public String getApellido() {
 		return apellido;
@@ -247,7 +248,7 @@ public class Cliente extends Usuario {
 	 */
 	@Override
 	public String analizarUsuario() {
-		return getNombreUsuario()+ " " + getRun() + " " + getDireccion() + " " + getComuna();
+		return "Nombre Cliente: " + getNombreUsuario()+ ", Apellido: "+  getApellido()+ ", RUT: " + getRun() + ", Dirección: " + getDireccion() + ", Comuna: " + getComuna();
 	}
 
 	/** METODO  QUE AGREGA CAPACITACIONES A ARRAYLIST QUE CONTIENEN TODAS LAS CAPACITACIONES DE CADA CLIENTE*/
