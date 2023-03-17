@@ -91,6 +91,7 @@ public class Principal {
 					break;
 				case "7":
 					Utilidades.escribir("\t-- ESTABLECER VISITA EN TERRENO --\n\n");
+					crearVisitaTerreno(contenedor);
 					break;
 				case "8":
 					Utilidades.escribir("\t-- REVISIONES --\n\n");
@@ -172,8 +173,8 @@ public class Principal {
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
 	}
-	
-	/**
+	 
+    }/**
 	 * Permite Instanciar Objetos Capacitación
 	 * @param contenedor tipo Contenedor
 	 */
@@ -191,19 +192,34 @@ public class Principal {
 				Utilidades.escribir("Error de Ingreso, sólo se aceptan números\n");
 			}else {
 				//VALIDACION CORRECTA
-				Utilidades.escribir("VALIDACIÓN CORRECTA!");
+				//Utilidades.escribir("VALIDACIÓN CORRECTA!\n");
 				long inputRut = Long.parseLong(input);
 				if(contenedor.existeUsuario(inputRut)) {
-					//EXISTE USUARIO
-					Cliente cliente = contenedor.obtenerCliente(inputRut);
+					//EXISTE USUARIO OBTIENE CLIENTE
+					//Cliente cliente = contenedor.obtenerCliente(inputRut);
+					Utilidades.escribir("SE HA ENCONTRADO AL CLIENTE\n");
+					Capacitacion capacitacion = new Capacitacion();
+					capacitacion.setRut(inputRut);
+					capacitacion.setDia(Utilidades.ingresar("Ingrese día de la Semana: (Ej.: 'Lunes')"));
+					capacitacion.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
+					capacitacion.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
+					capacitacion.setDuracion(Utilidades.ingresar("Ingrese Duración en minutos: "));
+					capacitacion.setCantidadAsistentes(Integer.parseInt(Utilidades.ingresar("Ingrese cantidad de asistentes: (Máximo 999)")));
+					
+					//Agrega capacitación a la lista de Capacitacion
+					contenedor.almacenarCapacitacion(capacitacion);
+
+					Utilidades.escribir("Se ha creado la Capacitación correctamente.");
+
+					//TODO: PREGUNTAR SI DESEA SEGUIR INGRESANDO CAPACITACIONES AL MISMO CLIENTE
+					//VOLVER AL MENÚ
 				}else {
 					//NO EXISTE USUARIO
 				}
 			}
 		}while(!input.matches(regEx));
 	}
-
-	//crear profe
+	//crear profesional
 	public static void crearProfesional (Contenedor contenedor) {
 
  		Profesional profesional = new Profesional();
@@ -224,5 +240,58 @@ public class Principal {
 
 
 	}
+	/**
+     * Metodo crear visita en terreno
+     */
+    public static void crearVisitaTerreno(Contenedor contenedor) {
+    	
+    	//MOSTRAR CLIENTES
+		String input;
+		String regEx = "^[0-9]+$";
+		contenedor.listarUsuariosPorTipo(Cliente.class);
+		
+		do {
+			input = Utilidades.ingresar("Ingrese RUT Cliente: ");
+			if(input.trim().length() == 0) {
+				Utilidades.escribir("Error de Ingreso, Debe escribir RUT del Cliente a modificar.\n");
+			}else if(!input.matches(regEx)) {
+				Utilidades.escribir("Error de Ingreso, sólo se aceptan números\n");
+			}else {
+				//VALIDACION CORRECTA
+				//Utilidades.escribir("VALIDACIÓN CORRECTA!\n");
+				long inputRut = Long.parseLong(input);
+				if(contenedor.existeUsuario(inputRut)) {
+					//EXISTE USUARIO OBTIENE CLIENTE
+					//Cliente cliente = contenedor.obtenerCliente(inputRut);
+					Utilidades.escribir("SE HA ENCONTRADO AL CLIENTE\n");
+			        VisitaEnTerreno visitaTerreno = new VisitaEnTerreno();
+			        Cliente cl1 = new Cliente();
+			        
+			        cl1.setRut(inputRut);
+					visitaTerreno.setDia(Utilidades.ingresar("Ingresar Fecha con formato: DD/MM/AAAA"));
+					visitaTerreno.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
+					visitaTerreno.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
+					visitaTerreno.setComentarios(Utilidades.ingresar("Ingrese comentarios de la visita : "));
+					
+					//Agrega capacitación a la lista de visita terreno
+//					contenedor
+					cl1.agregarVisitaTerreno(visitaTerreno);
+					
+
+					Utilidades.escribir("Se ha creado la Visita Terreno correctamente.");
+
+					//TODO: PREGUNTAR SI DESEA SEGUIR INGRESANDO CAPACITACIONES AL MISMO CLIENTE
+					//VOLVER AL MENÚ
+				}else {
+					//NO EXISTE USUARIO
+				}
+			}
+		}while(!input.matches(regEx));
+
+
+
+	
+   
+	
 
 }
