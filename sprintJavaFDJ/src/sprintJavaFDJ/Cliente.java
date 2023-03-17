@@ -37,16 +37,17 @@ public class Cliente extends Usuario {
 		this.comuna = comuna;
 		this.edad = edad;
 	}
-	/** @param NOMBRE 
+	/** @param NOMBRE tipo String
 	 * Obligatorio; minimo 5 caracteres - maximo 30
-	 * SETTER Y GETTER*/
+	 * */
 	public void setNombre(String nombre) {
 		do {
-			if(nombre.length() > 4 && nombre.length() < 31) {
+			if (nombre.length() > 4 && nombre.length() < 31) {
 				this.nombre = nombre; 
 			}
 			else {
-				Utilidades.escribir("Límite de caracteres entre 5 y 30");
+				//opcion invalida
+				Utilidades.escribir("Error de ingreso. Rango de caracteres entre 5 y 30");
 			}
 		}while(nombre.length() < 4 || nombre.length() > 31);
 	}
@@ -60,15 +61,14 @@ public class Cliente extends Usuario {
 	 * SETTER Y GETTER */
 	public void setApellido(String apellido) {
 		do {
-		if (apellido.length() > 4 && apellido.length() < 31) {
-			this.apellido = apellido; 
-		}
-		else {
-			//opcion invalida
-			Utilidades.escribir("Ha superado el límite de caracteres");
-		}
-		}
-		while(apellido.length() < 4 || apellido.length() > 31);
+			if (apellido.length() > 4 && apellido.length() < 31) {
+				this.apellido = apellido; 
+			}
+			else {
+				//opcion invalida
+				Utilidades.escribir("Ha superado el límite de caracteres");
+			}
+		}while(apellido.length() < 4 || apellido.length() > 31);
 	}
 	public String getApellido() {
 		return apellido;
@@ -248,7 +248,7 @@ public class Cliente extends Usuario {
 	 */
 	@Override
 	public String analizarUsuario() {
-		return "Nombre Cliente: " + getNombreUsuario()+ ", Apellido: "+  getApellido()+ ", RUT: " + getRun() + ", Dirección: " + getDireccion() + ", Comuna: " + getComuna();
+		return "Cliente: " + getNombre() + ", RUT: " + getRun() + ", Dirección: " + getDireccion() + ", Comuna: " + getComuna();
 	}
 
 	/** METODO  QUE AGREGA CAPACITACIONES A ARRAYLIST QUE CONTIENEN TODAS LAS CAPACITACIONES DE CADA CLIENTE*/

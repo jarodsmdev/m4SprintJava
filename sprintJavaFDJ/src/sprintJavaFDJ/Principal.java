@@ -14,19 +14,30 @@ public class Principal {
 	public static void DebugMode(Contenedor contenedor) {
 		Usuario usuario1 = new Usuario();
 		usuario1.setNombreUsuario("SOY DE TIPO USUARIO1");
+		
 		Cliente cliente1 = new Cliente();
-		cliente1.setNombre("SOY DE TIPO CLIENTE1");
+		cliente1.setNombre("SOY CLIENTE1");
 		cliente1.setApellido("SOY APELLIDO DE CLIENTE1");
-		cliente1.setRut(123456);
-		cliente1.setDireccion("DIRECCION CLIENTE");
-		cliente1.setComuna("COMUNA CLIENTE");
+		cliente1.setRut(1234561);
+		cliente1.setDireccion("DIRECCION CLIENTE1");
+		cliente1.setComuna("COMUNA CLIENTE1");
+		
+		Cliente cliente2 = new Cliente();
+		cliente2.setNombre("SOY CLIENTE2");
+		cliente2.setApellido("SOY APELLIDO DE CLIENTE2");
+		cliente2.setRut(7894662);
+		cliente2.setDireccion("DIRECCION CLIENTE2");
+		cliente2.setComuna("COMUNA CLIENTE2");
+		
 		Administrativo administrativo1 = new Administrativo();
 		administrativo1.setNombreUsuario("SOY DE TIPO ADMINISTRATIVO1");
+		
 		Profesional profesional1 = new Profesional();
 		profesional1.setNombreUsuario("SOY DE TIPO PROFESIONAL1");
 		
 		contenedor.almacenarUsuario(usuario1);
 		contenedor.almacenarCliente(cliente1);
+		contenedor.almacenarCliente(cliente2);
 		contenedor.almacenarAdministrativo(administrativo1);
 		contenedor.almacenarProfesional(profesional1);
 		contenedor.almacenarProfesional(profesional1);
@@ -165,7 +176,30 @@ public class Principal {
 	 */
 	public static void crearCapacitacion(Contenedor contenedor) {
 		//MOSTRAR CLIENTES
+		String input;
+		String regEx = "^[0-9]+$";
 		contenedor.listarUsuariosPorTipo(Cliente.class);
+		
+		do {
+			input = Utilidades.ingresar("Ingrese RUT Cliente: ");
+			if(input.trim().length() == 0) {
+				Utilidades.escribir("Error de Ingreso, Debe escribir RUT del Cliente a modificar.\n");
+			}else if(!input.matches(regEx)) {
+				Utilidades.escribir("Error de Ingreso, sólo se aceptan números\n");
+			}else {
+				//VALIDACION CORRECTA
+				Utilidades.escribir("VALIDACIÓN CORRECTA!");
+				long inputRut = Long.parseLong(input);
+				if(contenedor.existeUsuario(inputRut)) {
+					//EXISTE USUARIO
+					for(Cliente itemCliente:) {
+						
+					}
+				}else {
+					//NO EXISTE USUARIO
+				}
+			}
+		}while(!input.matches(regEx));
 	}
 
 }
