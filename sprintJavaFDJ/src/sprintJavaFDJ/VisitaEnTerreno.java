@@ -18,12 +18,12 @@ public class VisitaEnTerreno {
 	private String hora;
 	private String lugar;
 	private String comentarios;
-	private ArrayList <Revision> revisiones = new ArrayList<Revision>();
+	private ArrayList<Revision> revisiones = new ArrayList<Revision>();
 
 	/**
 	 * Constructores de la clase.
 	 */
-	
+
 	public VisitaEnTerreno() {
 		Revision revision = new Revision();
 		revisiones.add(revision);
@@ -41,8 +41,8 @@ public class VisitaEnTerreno {
 	 * @param comentarios:   String
 	 */
 	public VisitaEnTerreno(String identificador, Cliente cliente, String dia, String hora, String lugar,
-			String comentarios ) {
-		
+			String comentarios) {
+
 		++idIdentificador;
 		this.identificador = idIdentificador;
 		this.cliente = cliente;
@@ -77,7 +77,7 @@ public class VisitaEnTerreno {
 			if (cliente.getRun() <= 99999999) {
 				this.cliente = cliente;
 			} else {
-				Utilidades.escribir("No puede exceder 99.999.999");
+				Utilidades.ingresar("No puede exceder 99.999.999");
 			}
 		} while (cliente.getRun() > 99999999);
 	}
@@ -91,9 +91,9 @@ public class VisitaEnTerreno {
 		do {
 			if (dia.matches(regex)) {
 				this.dia = dia;
-			} else {
-				Utilidades.escribir("La fecha no es valida");
-			}
+			} else
+				Utilidades.ingresar("La fecha no es valida");
+
 		} while (!dia.matches(regex));
 	}
 
@@ -107,7 +107,7 @@ public class VisitaEnTerreno {
 			if (hora.matches(regex)) {
 				this.hora = hora;
 			} else {
-				Utilidades.escribir("La hora no es valida");
+				Utilidades.ingresar("La hora no es valida");
 			}
 		} while (!hora.matches(regex));
 	}
@@ -118,12 +118,12 @@ public class VisitaEnTerreno {
 
 	public void setLugar(String lugar) {
 		do {
-			if (lugar.length() >= 10 && lugar.length() <= 50) {
+			if (lugar.length() > 9 && lugar.length() < 51) {
 				this.lugar = lugar;
 			} else {
-				Utilidades.escribir("Debe ingresar entre 10 y 50 caracteres");
+				Utilidades.ingresar("Debe ingresar entre 10 y 50 caracteres");
 			}
-		} while (lugar.length() < 10 || lugar.length() > 5);
+		} while (false);
 	}
 
 	public String getComentarios() {
@@ -132,14 +132,14 @@ public class VisitaEnTerreno {
 
 	public void setComentarios(String comentarios) {
 		do {
-			if (comentarios.length() <= 100) {
+			if (comentarios.length() < 101) {
 				this.comentarios = comentarios;
 			} else {
-				Utilidades.escribir("Puede ingresar maximo 100 caracteres");
+				Utilidades.ingresar("Puede ingresar maximo 100 caracteres");
 			}
 		} while (comentarios.length() > 100);
 	}
-		
+
 	public void agregarRevision(Revision nuevaRevision) {
 		revisiones.add(nuevaRevision);
 	}
@@ -149,8 +149,8 @@ public class VisitaEnTerreno {
 	 */
 	@Override
 	public String toString() {
-		return "VisitaEnTerreno Identificador=" + identificador + ", Cliente=" + cliente.getRun() + ", Dia=" + dia + ", Hora="
-				+ hora + ", Lugar=" + lugar + ", Comentarios=" + comentarios;
+		return "VisitaEnTerreno Identificador=" + identificador + ", Cliente=" + cliente.getRun() + ", Dia=" + dia
+				+ ", Hora=" + hora + ", Lugar=" + lugar + ", Comentarios=" + comentarios;
 	}
 
 }
