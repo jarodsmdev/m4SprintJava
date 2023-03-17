@@ -84,12 +84,14 @@ public class Contenedor {
 	 * Recibe un objeto Usuario y sólo muestra los objetos de este tipo
 	 */
 	public void listarUsuariosPorTipo(Class<? extends Usuario> tipoUsuario) {
+		int i = 1;
 		for (Asesoria asesoria : listaAsesoria) {
 	        if (tipoUsuario.isAssignableFrom(asesoria.getClass())) {
 	            Usuario usuario = (Usuario) asesoria;
 	            if (usuario instanceof Cliente) {
 	                Cliente cliente = (Cliente) usuario; // Casting a Cliente
-	                Utilidades.escribir(cliente.analizarUsuario());
+	                Utilidades.escribir((i++)+ ". " + cliente.analizarUsuario() + "\n");
+	                
 	            } else if (usuario instanceof Administrativo) {
 	                Administrativo admin = (Administrativo) usuario; // Casting a Administrativo
 	                Utilidades.escribir(admin.analizarUsuario());
@@ -120,6 +122,19 @@ public class Contenedor {
 				Utilidades.escribir(cliente.analizarUsuario());
 			}
 		}
+	}
+	
+	public Cliente obtenerCliente(long rutCliente) {
+		Cliente cliente = new Cliente();
+		for(int i = 0; i < listaAsesoria.size(); i++) {
+			cliente = (Cliente)listaAsesoria.get(i); //CASTING
+			if(cliente.getRun() == rutCliente) {
+				return cliente;
+			}else {
+				Utilidades.ingresar("no encontre nada");
+			}
+		}
+		return cliente;
 	}
 	
 	/**
