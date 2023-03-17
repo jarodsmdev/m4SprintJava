@@ -1,0 +1,167 @@
+Index: sprintJavaFDJ/src/sprintJavaFDJ/Principal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package sprintJavaFDJ;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class Principal {\r\n\r\n\tpublic static void main(String[] args) {\r\n\t\t// TODO Auto-generated method stub\r\n\r\n\t\tContenedor contenedor = new Contenedor();\r\n\t\tmenuPrincipal(contenedor);\r\n\t}\r\n\t\r\n\tpublic static void menuPrincipal(Contenedor contenedor) {\r\n\t\t\r\n\t\tUtilidades.escribir(\"\\t--MENÚ PRINCIPAL--\");\r\n\t\t\r\n\t\tUtilidades.escribir(\"\\n\\t1. CREAR USUARIO\" +\r\n\t\t\t\t\t\t\t\"\\n\\t2. CREAR CLIENTE\" +\r\n\t\t\t\t\t\t\t\"\\n\\t3. CREAR PROFESIONAL\" +\r\n\t\t\t\t\t\t\t\"\\n\\t4. CREAR ADMINISTRATIVO\" +\r\n\t\t\t\t\t\t\t\"\\n\\t5. CREAR CAPACITACIÓN\" +\r\n\t\t\t\t\t\t\t\"\\n\\t6. CREAR ACCIDENTE\" +\r\n\t\t\t\t\t\t\t\"\\n\\t7. CREAR VISITA EN TERRENO\" +\r\n\t\t\t\t\t\t\t\"\\n\\t8. CREAR REVISIÓN\" +\r\n\t\t\t\t\t\t\t\"\\n\\t9. SALIR\\n\"\r\n\t\t\t\t\t\t\t);\r\n\t\t\r\n\t\tString capturador = Utilidades.ingresar(\"Ingrese opción a ejecutar: \");\r\n\t\tint opcion = Integer.parseInt(capturador);\r\n\t\tswitch(opcion) {\r\n\t\t\tcase 1:\r\n\t\t\t\tUtilidades.escribir(\"\\t-- CREACIÓN DE USUARIO --\\n\");\r\n\t\t\t\tcrearUsuario(contenedor);\r\n\t\t\t\tbreak;\r\n\t\t\tcase 2:\r\n\t\t\t\tUtilidades.escribir(\"\\t-- CREACIÓN DE CLIENTE --\\n\");\r\n\t\t\t\tcrearCliente(contenedor);\r\n\r\n\t\t\t\tbreak;\r\n\t\t\tcase 3:\r\n\t\t\t\tUtilidades.escribir(\"\\t-- CREACIÓN DE PROFESIONAL --\\n\");\r\n\t\t\t\tbreak;\r\n\t\t\tcase 4:\r\n\t\t\t\tUtilidades.escribir(\"\\t-- CREACIÓN DE ADMINISTRATIVO --\\n\");\r\n\t\t\t\tcrearAdministrador(contenedor);\r\n\t\t\t\tbreak;\r\n\t\t\tcase 5:\r\n\t\t\t\tUtilidades.escribir(\"\\t-- CREACIÓN DE CAPACITACIÓN --\\n\");\r\n\t\t\t\tbreak;\r\n\t\t\tcase 6:\r\n\t\t\t\tUtilidades.escribir(\"\\t-- INGRESO DE ACCIDENTE --\\n\");\r\n\t\t\t\tbreak;\r\n\t\t\tcase 7:\r\n\t\t\t\tUtilidades.escribir(\"\\t-- ESTABLECER VISITA EN TERRENO --\\n\");\r\n\t\t\t\tbreak;\r\n\t\t\tcase 8:\r\n\t\t\t\tUtilidades.escribir(\"\\t-- REVISIONES --\\n\");\r\n\t\t\t\tbreak;\r\n\t\t\tcase 9:\r\n\t\t\t\tUtilidades.escribir(\"\\t-- CERRANDO EL SISTEMA --\\n\");\r\n\t\t\t\tSystem.exit(0);\r\n\t\t\t\tbreak;\r\n\t\t\tdefault:\r\n\t\t\t\tUtilidades.escribir(\"Opción No Válida.\");\r\n\t\t}\r\n\t}\r\n\r\n\tpublic static void crearAdministrador (Contenedor contenedor) {\r\n\t\t\r\n\t\tAdministrativo administrativo = new Administrativo();\r\n\t\t\r\n\t\tadministrativo.setNombreUsuario(Utilidades.ingresar(\"Ingresa nombre del Usuario\"));\r\n\t\tadministrativo.setArea(Utilidades.ingresar(\"Ingresa Área\"));\r\n\t\tadministrativo.setExpPrevia(Utilidades.ingresar(\"Ingrese experiencia previa\"));\r\n\t\tadministrativo.setRut(Long.parseLong(Utilidades.ingresar(\"Ingrese RUT\")));\r\n\t\tadministrativo.setFechaNacimiento(Utilidades.ingresar(\"Ingrese la fecha de nacimiento [dd/mm/aaaa]\"));\r\n\t\t\r\n\t\tcontenedor.almacenarAdministrativo(administrativo);\r\n\t\tUtilidades.escribir(\"Personal Administrativo ha sido guardado exitosamente\");\r\n\t\tcontenedor.listarUsuarios();\r\n\t\t\r\n\t\t//INVOCAR AL MENÚ PARA MANTENER EL LOOP\r\n\t\tmenuPrincipal(contenedor);\r\n\r\n\t}\r\n\t\r\n\tpublic static void crearUsuario(Contenedor contenedor) {\r\n\r\n\t\tUsuario usuario = new Usuario();\r\n\t\tusuario.setNombreUsuario(Utilidades.ingresar(\"Ingrese el nombre de Usuario\"));\r\n\t\tusuario.setFechaNacimiento(Utilidades.ingresar(\"Ingrese la fecha de nacimiento [dd/mm/aaaa]\"));\r\n\t\tusuario.setRut(Long.parseLong(Utilidades.ingresar(\"Ingrese el RUT del Usuario\")));\r\n\r\n\t\t//listaUsuarios.agregarUsuario(usuario);\r\n\t\t\r\n\t\tcontenedor.almacenarUsuario(usuario);\r\n\t\tUtilidades.escribir(\"El Usuario ha sido guardado exitosamente\");\r\n\t\t//listaUsuarios.mostrarUsuarios();\r\n\t\tcontenedor.listarUsuarios();\r\n\t\t\r\n\t\t\r\n\t\t//INVOCAR AL MENÚ PARA MANTENER EL LOOP\r\n\t\tmenuPrincipal(contenedor);\r\n\t\t}\r\n\r\n\tpublic static void crearCliente(Contenedor contenedor) {\r\n\t\t//VALIDAR QUE EL CONTENIDO DE capturador sea tipo long\r\n\t\tlong capturador = Long.parseLong(Utilidades.ingresar(\"Ingrese el RUT del Cliente\"));\r\n\t\t\r\n\t\t//VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS\r\n\t\tif(contenedor.existeUsuario(capturador)) {\r\n\t\t\tCliente cliente = new Cliente();\r\n\t\t\tcliente.setNombre(Utilidades.ingresar(\"Ingrese el nombre del cliente\"));\r\n\t\t\tcliente.setApellido(Utilidades.ingresar(\"Ingrese el apellido del cliente\"));\r\n\t\t\tcliente.setTelefono(Integer.parseInt(Utilidades.ingresar(\"Ingrese numero de telefono\")));\r\n\t\t\tcliente.setAfp(Utilidades.ingresar(\"Ingrese AFP\"));\r\n\t\t\tString capChar = Utilidades.ingresar(\"Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE\");\r\n\t\t\tcliente.setSistemaSalud(capChar.charAt(0));\r\n\t\t\tcliente.setDireccion(Utilidades.ingresar(\"Ingrese la dirección\"));\r\n\t\t\tcliente.setComuna(Utilidades.ingresar(\"Ingrese la comuna\"));\r\n\t\t\tcliente.setEdad(Integer.parseInt(Utilidades.ingresar(\"Ingrese la edad del cliente\")));\r\n\t\t\tcontenedor.almacenarCliente(cliente);\r\n\r\n\t\t}else {\r\n\t\t\tUtilidades.escribir(\"El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.\");\r\n\t\t}\r\n\r\n\t\t\r\n\t\t//INVOCAR AL MENÚ PARA MANTENER EL LOOP\r\n\t\tmenuPrincipal(contenedor);\r\n\t}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/sprintJavaFDJ/src/sprintJavaFDJ/Principal.java b/sprintJavaFDJ/src/sprintJavaFDJ/Principal.java
+--- a/sprintJavaFDJ/src/sprintJavaFDJ/Principal.java	(revision df1d2eb489e9334f1762b83cfd87dd639cd83873)
++++ b/sprintJavaFDJ/src/sprintJavaFDJ/Principal.java	(date 1678972425075)
+@@ -10,11 +10,11 @@
+ 		Contenedor contenedor = new Contenedor();
+ 		menuPrincipal(contenedor);
+ 	}
+-	
++
+ 	public static void menuPrincipal(Contenedor contenedor) {
+-		
++
+ 		Utilidades.escribir("\t--MENÚ PRINCIPAL--");
+-		
++
+ 		Utilidades.escribir("\n\t1. CREAR USUARIO" +
+ 							"\n\t2. CREAR CLIENTE" +
+ 							"\n\t3. CREAR PROFESIONAL" +
+@@ -25,7 +25,7 @@
+ 							"\n\t8. CREAR REVISIÓN" +
+ 							"\n\t9. SALIR\n"
+ 							);
+-		
++
+ 		String capturador = Utilidades.ingresar("Ingrese opción a ejecutar: ");
+ 		int opcion = Integer.parseInt(capturador);
+ 		switch(opcion) {
+@@ -67,24 +67,24 @@
+ 	}
+ 
+ 	public static void crearAdministrador (Contenedor contenedor) {
+-		
++
+ 		Administrativo administrativo = new Administrativo();
+-		
++
+ 		administrativo.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del Usuario"));
+ 		administrativo.setArea(Utilidades.ingresar("Ingresa Área"));
+ 		administrativo.setExpPrevia(Utilidades.ingresar("Ingrese experiencia previa"));
+ 		administrativo.setRut(Long.parseLong(Utilidades.ingresar("Ingrese RUT")));
+ 		administrativo.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]"));
+-		
++
+ 		contenedor.almacenarAdministrativo(administrativo);
+ 		Utilidades.escribir("Personal Administrativo ha sido guardado exitosamente");
+ 		contenedor.listarUsuarios();
+-		
++
+ 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
+ 		menuPrincipal(contenedor);
+ 
+ 	}
+-	
++
+ 	public static void crearUsuario(Contenedor contenedor) {
+ 
+ 		Usuario usuario = new Usuario();
+@@ -93,13 +93,13 @@
+ 		usuario.setRut(Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Usuario")));
+ 
+ 		//listaUsuarios.agregarUsuario(usuario);
+-		
++
+ 		contenedor.almacenarUsuario(usuario);
+ 		Utilidades.escribir("El Usuario ha sido guardado exitosamente");
+ 		//listaUsuarios.mostrarUsuarios();
+ 		contenedor.listarUsuarios();
+-		
+-		
++
++
+ 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
+ 		menuPrincipal(contenedor);
+ 		}
+@@ -107,7 +107,7 @@
+ 	public static void crearCliente(Contenedor contenedor) {
+ 		//VALIDAR QUE EL CONTENIDO DE capturador sea tipo long
+ 		long capturador = Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Cliente"));
+-		
++
+ 		//VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS
+ 		if(contenedor.existeUsuario(capturador)) {
+ 			Cliente cliente = new Cliente();
+@@ -125,10 +125,32 @@
+ 		}else {
+ 			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
+ 		}
+-
+-		
+ 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
+ 		menuPrincipal(contenedor);
+ 	}
+ 
++	//crear profe
++	public static void crearProfesional (Contenedor contenedor) {
++
++ 		Profesional profesional = new Profesional();
++
++		profesional.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del profesional"));
++		profesional.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]"));
++		profesional.setRut(Long.parseLong(Utilidades.ingresar("Ingrese RUT")));
++
++		profesional.setTitulo(Utilidades.ingresar("Ingresa titulo: "));
++		profesional.setFechaIngreso(Utilidades.ingresar("Ingrese Fecha de ingreso: "));
++
++		contenedor.almacenarProfesional(profesional);
++		Utilidades.escribir("Personal Profesional ha sido guardado exitosamente");
++		contenedor.listarUsuarios();
++
++		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
++		menuPrincipal(contenedor);
++
++	}
++
++
++
++
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c4b28190-dfa7-4c5e-8432-8e7cbbf1bb3b\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Administrativo.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Administrativo.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Profesional.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Profesional.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2N0Qtf7M97rUFdVAgawyRiGUYeo\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"last_opened_file_path\": \"C:/java/SPRINTPRO/m4SprintJava\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c4b28190-dfa7-4c5e-8432-8e7cbbf1bb3b\" name=\"Changes\" comment=\"\" />\r\n      <created>1678798736026</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1678798736026</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision df1d2eb489e9334f1762b83cfd87dd639cd83873)
++++ b/.idea/workspace.xml	(date 1678971911041)
+@@ -5,8 +5,9 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="c4b28190-dfa7-4c5e-8432-8e7cbbf1bb3b" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Administrativo.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Administrativo.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Profesional.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Profesional.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/m4SprintJava.iml" beforeDir="false" afterPath="$PROJECT_DIR$/m4SprintJava.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Principal.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -24,13 +25,13 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "last_opened_file_path": "C:/java/SPRINTPRO/m4SprintJava"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/java/SPRINTPRO/m4SprintJava&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">

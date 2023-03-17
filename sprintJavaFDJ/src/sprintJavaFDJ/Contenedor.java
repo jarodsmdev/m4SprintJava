@@ -72,7 +72,7 @@ public class Contenedor {
 		for(int i = 0; i < listaAsesoria.size(); i++) {
 			if(listaAsesoria.get(i) instanceof Usuario) {
 				Usuario usuario = (Usuario) listaAsesoria.get(i); //CASTING/REFUNDICIÓN
-				Utilidades.escribir((i+1) + ". " + usuario.analizarUsuario());
+				Utilidades.escribir((i+1) + ". " + usuario.toString());
 			}else {
 				Utilidades.escribir("[!] No existen objetos de tipo Usuario");
 			}
@@ -83,13 +83,21 @@ public class Contenedor {
 	 * @param tipo Asesoria
 	 * Recibe un objeto Usuario y sólo muestra los objetos de este tipo
 	 */
-	public void listarUsuariosPorTipo(Class<Asesoria> tipoUsuario) {
-		for(Asesoria itemAsesoria: listaAsesoria) {
-			Usuario usuario = (Usuario)itemAsesoria; //CASTING
-				if(tipoUsuario.isAssignableFrom(usuario.getClass())) {
-					Utilidades.escribir(usuario.analizarUsuario());
-			}
-		}
+	public void listarUsuariosPorTipo(Class<? extends Usuario> tipoUsuario) {
+		int i = 1;
+		for (Asesoria asesoria : listaAsesoria) {
+	        if (tipoUsuario.isAssignableFrom(asesoria.getClass())) {
+	            Usuario usuario = (Usuario) asesoria;
+	            if (usuario instanceof Cliente) {
+	                Cliente cliente = (Cliente) usuario; // Casting a Cliente
+	                Utilidades.escribir((i++)+ ". " + cliente.analizarUsuario() + "\n");
+	                
+	            } else if (usuario instanceof Administrativo) {
+	                Administrativo admin = (Administrativo) usuario; // Casting a Administrativo
+	                Utilidades.escribir(admin.analizarUsuario());
+	            }
+	        }
+	    }
 	}
 	
 	/**
@@ -99,7 +107,7 @@ public class Contenedor {
 		for(Capacitacion itemCapacitacion: listaCapacitacion) {
 			//MOSTRAR DATOS CAPACITACION + DATOS DE CLIENTE AL QUE ESTÁ ASOCIADA LA CAPACITACION
 			itemCapacitacion.toString();
-			mostrarDatosCliente(itemCapacitacion.getRun());
+			mostrarDatosCliente(itemCapacitacion.getRut());
 		}
 	}
 	
@@ -114,6 +122,19 @@ public class Contenedor {
 				Utilidades.escribir(cliente.analizarUsuario());
 			}
 		}
+	}
+	
+	public Cliente obtenerCliente(long rutCliente) {
+		Cliente cliente = new Cliente();
+		for(int i = 0; i < listaAsesoria.size(); i++) {
+			cliente = (Cliente)listaAsesoria.get(i); //CASTING
+			if(cliente.getRun() == rutCliente) {
+				return cliente;
+			}else {
+				Utilidades.ingresar("no encontre nada");
+			}
+		}
+		return cliente;
 	}
 	
 	/**

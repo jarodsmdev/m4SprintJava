@@ -15,19 +15,20 @@ public class Cliente extends Usuario {
 	private String direccion; 
 	private String comuna;
 	private int edad; 
-	ArrayList <Capacitacion> numeroCapacitacion = new ArrayList<Capacitacion>();
+	private ArrayList <Capacitacion> numeroCapacitacion = new ArrayList<Capacitacion>();
 	private int cantidadCapacitaciones;
-	ArrayList<Accidente> numeroAccidente = new ArrayList<Accidente>();
+	private ArrayList<Accidente> numeroAccidente = new ArrayList<Accidente>();
 	private int cantidadAccidentes;
-	ArrayList<VisitaEnTerreno> numeroVisitaTerreno = new ArrayList<VisitaEnTerreno>();
+	private ArrayList<VisitaEnTerreno> numeroVisitaTerreno = new ArrayList<VisitaEnTerreno>();
 	private int cantidadVisitas; 
 	
 	/** Constructor vacío */
 	public Cliente() {}
 	
 	/** Constructor con los atributos como parametros*/
-	public Cliente(String nombreUsuario, String fechaNacimiento, long rut,  String apellido, int telefono, String afp, char sistemaSalud, String direccion, String comuna, int edad) {
+	public Cliente(String nombreUsuario, String fechaNacimiento, long rut,  String nombre, String apellido, int telefono, String afp, char sistemaSalud, String direccion, String comuna, int edad) {
 		super(nombreUsuario, fechaNacimiento, rut);
+		this.nombre = nombre;
 		this.apellido = apellido; 
 		this.telefono = telefono;
 		this.afp = afp;
@@ -36,20 +37,21 @@ public class Cliente extends Usuario {
 		this.comuna = comuna;
 		this.edad = edad;
 	}
-	/** @param NOMBRE 
+	/** @param NOMBRE tipo String
 	 * Obligatorio; minimo 5 caracteres - maximo 30
-	 * SETTER Y GETTER*/
+	 * */
 	public void setNombre(String nombre) {
 		do {
-			if(nombre.length() > 4 && nombre.length() < 31) {
-			this.nombre = nombre; 
-		}
+			if (nombre.length() > 4 && nombre.length() < 31) {
+				this.nombre = nombre; 
+			}
 			else {
-			Utilidades.escribir("Ha superado el limite de caracteres");
-		}
-		} 
-		while(nombre.length() < 4 || nombre.length() > 31);
+				//opcion invalida
+				Utilidades.escribir("Error de ingreso. Rango de caracteres entre 5 y 30");
+			}
+		}while(nombre.length() < 4 || nombre.length() > 31);
 	}
+	
 	public String getNombre() {
 		return nombre; 
 	}
@@ -59,15 +61,14 @@ public class Cliente extends Usuario {
 	 * SETTER Y GETTER */
 	public void setApellido(String apellido) {
 		do {
-		if (apellido.length() > 4 && apellido.length() < 31) {
-			this.apellido = apellido; 
-		}
-		else {
-			//opcion invalida
-			Utilidades.escribir("Ha superado el límite de caracteres");
-		}
-		}
-		while(apellido.length() < 4 && apellido.length() > 31);
+			if (apellido.length() > 4 && apellido.length() < 31) {
+				this.apellido = apellido; 
+			}
+			else {
+				//opcion invalida
+				Utilidades.escribir("Ha superado el límite de caracteres");
+			}
+		}while(apellido.length() < 4 || apellido.length() > 31);
 	}
 	public String getApellido() {
 		return apellido;
@@ -95,11 +96,13 @@ public class Cliente extends Usuario {
 		do {
 			if(afp.length()> 3 && afp.length()<31) {
 				this.afp = afp;
+
 			}else {
 				//opcion invalida
 				Utilidades.escribir("Ha superado el máximo de caracteres");
 			}
 		}while(afp.length() < 4  && afp.length()> 30);
+
 	}
 	
 	/**
@@ -117,7 +120,6 @@ public class Cliente extends Usuario {
 		do {
 			if(sistemaSalud == '1' || sistemaSalud == '2') {
 				this.sistemaSalud = sistemaSalud;
-				Utilidades.escribir("OK");
 			}else {
 				//opcion invalida
 				Utilidades.escribir("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
@@ -246,7 +248,7 @@ public class Cliente extends Usuario {
 	 */
 	@Override
 	public String analizarUsuario() {
-		return getNombreUsuario()+ " " + getRun() + " " + getDireccion() + " " + getComuna();
+		return "Cliente: " + getNombre() + ", RUT: " + getRun() + ", Dirección: " + getDireccion() + ", Comuna: " + getComuna();
 	}
 
 	/** METODO  QUE AGREGA CAPACITACIONES A ARRAYLIST QUE CONTIENEN TODAS LAS CAPACITACIONES DE CADA CLIENTE*/
