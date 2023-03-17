@@ -350,19 +350,19 @@ public class Principal {
 					cl1.agregarVisitaTerreno(visitaTerreno);
 					
 
-					Utilidades.escribir("Se ha creado la Visita Terreno correctamente.");
+					Utilidades.escribir("Se ha creado el accidente correctamente.");
 
-					//TODO: PREGUNTAR SI DESEA SEGUIR INGRESANDO VISITAS AL MISMO CLIENTE
-					//INVOCAR AL MENÚ PARA MANTENER EL LOOP
+					//TODO: PREGUNTAR SI DESEA SEGUIR INGRESANDO VISITAS A TERRENO AL MISMO CLIENTE
+					//VOLVER AL MENÚ
 					menuPrincipal(contenedor);
 				}else {
 					//NO EXISTE USUARIO
 				}
 			}
 		}while(!input.matches(regEx));
-
-    }
-	
+	}
+    
+    
 	/**
 	 * Realiza validaciones antes de invocar al método que permite instanciar objetos capacitaciones
 	 * @param contenedor tipo Contenedor
@@ -384,6 +384,7 @@ public class Principal {
 			}
 		}while(!input.matches(regEx));
 	}
+
 
 	/**
 	 * Permite Instanciar Objetos Capacitación cuanto pasa por todas las validaciones
@@ -434,6 +435,7 @@ public class Principal {
 		}
 	}
 
+
 	//crear profesional
 	public static void crearProfesional (Contenedor contenedor) {
 
@@ -454,6 +456,55 @@ public class Principal {
 		menuPrincipal(contenedor);
 
 
-	}	
+
+	}
+	public static void crearAccidente(Contenedor contenedor) {
+		
+	   	//MOSTRAR CLIENTES
+			String input;
+			String regEx = "^[0-9]+$";
+			contenedor.listarUsuariosPorTipo(Cliente.class);
+			
+			do {
+				input = Utilidades.ingresar("Ingrese RUT Cliente: ");
+				if(input.trim().length() == 0) {
+					Utilidades.escribir("Error de Ingreso, Debe escribir RUT del Cliente a modificar.\n");
+				}else if(!input.matches(regEx)) {
+					Utilidades.escribir("Error de Ingreso, sólo se aceptan números\n");
+				}else {
+//					VALIDACION CORRECTA
+					Utilidades.escribir("VALIDACIÓN CORRECTA!\n");
+					long inputRut = Long.parseLong(input);
+					if(contenedor.existeUsuario(inputRut)) {
+						//EXISTE USUARIO OBTIENE CLIENTE
+						//Cliente cliente = contenedor.obtenerCliente(inputRut);
+						Utilidades.escribir("SE HA ENCONTRADO AL CLIENTE\n");
+				        Accidente accidente = new Accidente();
+				       
+				        Cliente cliente = contenedor.obtenerCliente(inputRut);
+				      
+				        accidente.setRutCliente(inputRut);
+						accidente.setFecha(Utilidades.ingresar("Ingresar Fecha con formato: DD/MM/AAAA"));
+						accidente.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
+						accidente.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
+						accidente.setOrigen(Utilidades.ingresar("Ingrese origen del accidente (max 100 caracteres): "));
+						accidente.setConsecuencias(Utilidades.ingresar("Ingrese consecuencias del accidente(max 100 caracteres): "));
+						
+						//Agrega accidente
+						cliente.agregarAccidente(accidente);
+						Utilidades.escribir("Se ha creado la Visita Terreno correctamente.");
+
+
+					}else {
+						//NO EXISTE USUARIO
+					}
+				}
+			}while(!input.matches(regEx));
+	}
+
+   public static void crearRevision() {
+	   
+   }
+	
 
 }

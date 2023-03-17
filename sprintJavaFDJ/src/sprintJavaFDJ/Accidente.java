@@ -8,7 +8,7 @@ package sprintJavaFDJ;
 public class Accidente {
 	private int identificador;
 	private static int idIdentificador;
-	private Cliente cliente;
+	private long rutCliente;
 	private String fecha;
 	private String hora;
 	private String lugar;
@@ -35,12 +35,12 @@ public class Accidente {
 	 * @param consecuencias: String
 	 */
 
-	public Accidente(String identificador, Cliente cliente, String fecha, String hora, String lugar, String origen,
+	public Accidente(String identificador, Long rutCliente, String fecha, String hora, String lugar, String origen,
 			String consecuencias) {
 
 		++idIdentificador;
 		this.identificador = idIdentificador;
-		this.cliente = cliente;
+		this.rutCliente = rutCliente;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.lugar = lugar;
@@ -62,18 +62,18 @@ public class Accidente {
 		this.identificador = identificador;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public long getRutCliente() {
+		return rutCliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setRutCliente(long rutCliente) {
 		do {
-			if (cliente.getRun() <= 99999999) {
-				this.cliente = cliente;
+			if (rutCliente <= 99999999) {
+				this.rutCliente = rutCliente;
 			} else {
 				Utilidades.escribir("No puede exceder 99.999.999");
 			}
-		} while (cliente.getRun() > 99999999);
+		} while (rutCliente > 99999999);
 	}
 
 	public String getFecha() {
@@ -152,8 +152,7 @@ public class Accidente {
 
 	@Override
 	public String toString() {
-		return "Accidente Identificador=" + identificador + ", Cliente=" + cliente + ", Fecha=" + fecha + ", Hora="
-				+ hora + ", Lugar=" + lugar + ", Origen=" + origen + ", Consecuencias=" + consecuencias;
+		return "Accidente ID: " + identificador + ", RUT: " + rutCliente + ", Fecha: " + fecha + ", Hora: " + hora + ", Lugar: " + lugar + ", Origen: " + origen + ", Consecuencias: " + consecuencias;
 	}
 
 }
