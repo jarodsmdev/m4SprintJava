@@ -106,26 +106,32 @@ public class Principal {
 
 	public static void crearCliente(Contenedor contenedor) {
 		//VALIDAR QUE EL CONTENIDO DE capturador sea tipo long
-		long capturador = Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Cliente"));
 		
-		//VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS
-		if(contenedor.existeUsuario(capturador)) {
-			Cliente cliente = new Cliente();
-			cliente.setNombre(Utilidades.ingresar("Ingrese el nombre del cliente"));
-			cliente.setApellido(Utilidades.ingresar("Ingrese el apellido del cliente"));
-			cliente.setTelefono(Integer.parseInt(Utilidades.ingresar("Ingrese numero de telefono")));
-			cliente.setAfp(Utilidades.ingresar("Ingrese AFP"));
-			String capChar = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
-			cliente.setSistemaSalud(capChar.charAt(0));
-			cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección"));
-			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
-			cliente.setEdad(Integer.parseInt(Utilidades.ingresar("Ingrese la edad del cliente")));
-			contenedor.almacenarCliente(cliente);
-			Utilidades.escribir("El Cliente ha sido guardado correctamente");
-
-		}else {
-			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
+		try {
+			long capturador = Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Cliente"));
+			//VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS
+			if(contenedor.existeUsuario(capturador)) {
+				Cliente cliente = new Cliente();
+				cliente.setNombre(Utilidades.ingresar("Ingrese el nombre del cliente"));
+				cliente.setApellido(Utilidades.ingresar("Ingrese el apellido del cliente"));
+				cliente.setTelefono(Integer.parseInt(Utilidades.ingresar("Ingrese numero de telefono")));
+				cliente.setAfp(Utilidades.ingresar("Ingrese AFP"));
+				String capChar = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
+				cliente.setSistemaSalud(capChar.charAt(0));
+				cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección"));
+				cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
+				cliente.setEdad(Integer.parseInt(Utilidades.ingresar("Ingrese la edad del cliente")));
+				contenedor.almacenarCliente(cliente);
+				Utilidades.escribir("El Cliente ha sido guardado correctamente");
+				
+			}else {
+				Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
+			}
 		}
+		catch (Exception e) {
+			Utilidades.escribir("Debe Ingresar un RUT para continuar");
+		}
+		
 
 		
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
