@@ -11,13 +11,14 @@ import java.util.ArrayList;
 
 public class VisitaEnTerreno {
 
-	private String identificador;
+	private int identificador;
+	private static int idIdentificador;
 	private Cliente cliente;
 	private String dia;
 	private String hora;
 	private String lugar;
 	private String comentarios;
-	ArrayList <Revision> revisiones = new ArrayList<Revision>();
+	private ArrayList <Revision> revisiones = new ArrayList<Revision>();
 
 	/**
 	 * Constructores de la clase.
@@ -26,6 +27,8 @@ public class VisitaEnTerreno {
 	public VisitaEnTerreno() {
 		Revision revision = new Revision();
 		revisiones.add(revision);
+		++idIdentificador;
+		this.identificador = idIdentificador;
 	};
 
 	/**
@@ -38,8 +41,10 @@ public class VisitaEnTerreno {
 	 * @param comentarios:   String
 	 */
 	public VisitaEnTerreno(String identificador, Cliente cliente, String dia, String hora, String lugar,
-			String comentarios) {
-		this.identificador = identificador;
+			String comentarios ) {
+		
+		++idIdentificador;
+		this.identificador = idIdentificador;
 		this.cliente = cliente;
 		this.dia = dia;
 		this.hora = hora;
@@ -55,11 +60,11 @@ public class VisitaEnTerreno {
 	 *         identificador de tipo string.
 	 */
 
-	public String getIdentificador() {
+	public int getIdentificador() {
 		return identificador;
 	}
 
-	public void setIdentificador(String identificador) {
+	public void setIdentificador(int identificador) {
 		this.identificador = identificador;
 	}
 
@@ -68,11 +73,13 @@ public class VisitaEnTerreno {
 	}
 
 	public void setCliente(Cliente cliente) {
-		if (cliente.getRun() <= 99999999) {
-			this.cliente = cliente;
-		} else {
-			Utilidades.escribir("No puede exceder 99.999.999");
-		}
+		do {
+			if (cliente.getRun() <= 99999999) {
+				this.cliente = cliente;
+			} else {
+				Utilidades.escribir("No puede exceder 99.999.999");
+			}
+		} while (cliente.getRun() > 99999999);
 	}
 
 	public String getDia() {
@@ -81,11 +88,13 @@ public class VisitaEnTerreno {
 
 	public void setDia(String dia) {
 		String regex = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}$";
-		if (dia.matches(regex)) {
-			this.dia = dia;
-		} else {
-			Utilidades.escribir("La fecha no es valida");
-		}
+		do {
+			if (dia.matches(regex)) {
+				this.dia = dia;
+			} else {
+				Utilidades.escribir("La fecha no es valida");
+			}
+		} while (!dia.matches(regex));
 	}
 
 	public String getHora() {
@@ -94,11 +103,13 @@ public class VisitaEnTerreno {
 
 	public void setHora(String hora) {
 		String regex = "^(0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
-		if (hora.matches(regex)) {
-			this.hora = hora;
-		} else {
-			Utilidades.escribir("La hora no es valida");
-		}
+		do {
+			if (hora.matches(regex)) {
+				this.hora = hora;
+			} else {
+				Utilidades.escribir("La hora no es valida");
+			}
+		} while (!hora.matches(regex));
 	}
 
 	public String getLugar() {
@@ -106,11 +117,13 @@ public class VisitaEnTerreno {
 	}
 
 	public void setLugar(String lugar) {
-		if (lugar.length() >= 10 && lugar.length() <= 50) {
-			this.lugar = lugar;
-		} else {
-			Utilidades.escribir("Debe ingresar entre 10 y 50 caracteres");
-		}
+		do {
+			if (lugar.length() >= 10 && lugar.length() <= 50) {
+				this.lugar = lugar;
+			} else {
+				Utilidades.escribir("Debe ingresar entre 10 y 50 caracteres");
+			}
+		} while (lugar.length() < 10 || lugar.length() > 5);
 	}
 
 	public String getComentarios() {
@@ -118,12 +131,13 @@ public class VisitaEnTerreno {
 	}
 
 	public void setComentarios(String comentarios) {
-		if (comentarios.length() <= 100) {
-			this.comentarios = comentarios;
-		} else {
-			Utilidades.escribir("Puede ingresar maximo 100 caracteres");
-		}
-
+		do {
+			if (comentarios.length() <= 100) {
+				this.comentarios = comentarios;
+			} else {
+				Utilidades.escribir("Puede ingresar maximo 100 caracteres");
+			}
+		} while (comentarios.length() > 100);
 	}
 		
 	public void agregarRevision(Revision nuevaRevision) {
