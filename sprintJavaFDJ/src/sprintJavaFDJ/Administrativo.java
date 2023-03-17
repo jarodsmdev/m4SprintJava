@@ -59,7 +59,7 @@ public class Administrativo extends Usuario {
 	 */
 	public void setArea(String area) {
 		if (area != null && area.length() < 5 && area.length() > 20) {
-			Utilidades.escribir("El area debe ingresar mínimo 5 caracteres, máximo 20");
+			Utilidades.ingresar("El area debe ingresar mínimo 5 caracteres, máximo 20");
 		}
 		this.area = area;
 	}
