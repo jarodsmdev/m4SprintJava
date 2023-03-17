@@ -21,8 +21,14 @@ public class Utilidades {
 		Utilidades.escribir("[+] " + mensaje + " ");
 		String capturador = sc.nextLine(); 
 		do {
-			Utilidades.escribir("No puede estar vacío");
-		}while(capturador.length() == 0);
+			if(capturador.length() != 0) {
+				break;
+			}
+			else {
+				Utilidades.escribir("No puede estar vacío ");
+				capturador = sc.nextLine();
+			}
+		}while(true);
 		return capturador;
 	}
 }

@@ -12,42 +12,42 @@ public class Principal {
 	}
 
 	
-	public static void DebugMode(Contenedor contenedor) {
-		Usuario usuario1 = new Usuario();
-		usuario1.setNombreUsuario("SOY DE TIPO USUARIO1");
-		
-		Cliente cliente1 = new Cliente();
-		cliente1.setNombre("SOY CLIENTE1");
-		cliente1.setApellido("SOY APELLIDO DE CLIENTE1");
-		cliente1.setRut(1234561);
-		cliente1.setDireccion("DIRECCION CLIENTE1");
-		cliente1.setComuna("COMUNA CLIENTE1");
-		
-		Cliente cliente2 = new Cliente();
-		cliente2.setNombre("SOY CLIENTE2");
-		cliente2.setApellido("SOY APELLIDO DE CLIENTE2");
-		cliente2.setRut(7894662);
-		cliente2.setDireccion("DIRECCION CLIENTE2");
-		cliente2.setComuna("COMUNA CLIENTE2");
-		
-		Administrativo administrativo1 = new Administrativo();
-		administrativo1.setNombreUsuario("SOY DE TIPO ADMINISTRATIVO1");
-		
-		Profesional profesional1 = new Profesional();
-		profesional1.setNombreUsuario("SOY DE TIPO PROFESIONAL1");
-		
-		contenedor.almacenarUsuario(usuario1);
-		contenedor.almacenarCliente(cliente1);
-		contenedor.almacenarCliente(cliente2);
-		contenedor.almacenarAdministrativo(administrativo1);
-		contenedor.almacenarProfesional(profesional1);
-		contenedor.almacenarProfesional(profesional1);
-	}
+//	public static void DebugMode(Contenedor contenedor) {
+//		Usuario usuario1 = new Usuario();
+//		usuario1.setNombreUsuario("SOY DE TIPO USUARIO1");
+//		
+//		Cliente cliente1 = new Cliente();
+//		cliente1.setNombre("SOY CLIENTE1");
+//		cliente1.setApellido("SOY APELLIDO DE CLIENTE1");
+//		cliente1.setRut(1234561);
+//		cliente1.setDireccion("DIRECCION CLIENTE1");
+//		cliente1.setComuna("COMUNA CLIENTE1");
+//		
+//		Cliente cliente2 = new Cliente();
+//		cliente2.setNombre("SOY CLIENTE2");
+//		cliente2.setApellido("SOY APELLIDO DE CLIENTE2");
+//		cliente2.setRut(7894662);
+//		cliente2.setDireccion("DIRECCION CLIENTE2");
+//		cliente2.setComuna("COMUNA CLIENTE2");
+//		
+//		Administrativo administrativo1 = new Administrativo();
+//		administrativo1.setNombreUsuario("SOY DE TIPO ADMINISTRATIVO1");
+//		
+//		Profesional profesional1 = new Profesional();
+//		profesional1.setNombreUsuario("SOY DE TIPO PROFESIONAL1");
+//		
+//		contenedor.almacenarUsuario(usuario1);
+//		contenedor.almacenarCliente(cliente1);
+//		contenedor.almacenarCliente(cliente2);
+//		contenedor.almacenarAdministrativo(administrativo1);
+//		contenedor.almacenarProfesional(profesional1);
+//		contenedor.almacenarProfesional(profesional1);
+//	}
 	
 	public static void menuPrincipal(Contenedor contenedor) {
 		
 		//DATOS DE PRUEBA
-		DebugMode(contenedor);
+//		DebugMode(contenedor);
 		
 		String capturador;
 		do{
@@ -151,15 +151,14 @@ public class Principal {
 			//VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS
 			if(!contenedor.existeUsuario(capturador)) {
 				Cliente cliente = new Cliente();
-				cliente.setNombre(Utilidades.ingresarObligatorio("Ingrese el nombre del cliente"));
-				cliente.setApellido(Utilidades.ingresar("Ingrese el apellido del cliente"));
-				cliente.setTelefono(Integer.parseInt(Utilidades.ingresar("Ingrese numero de telefono")));
-				cliente.setAfp(Utilidades.ingresar("Ingrese AFP"));
-				String capChar = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
-				cliente.setSistemaSalud(capChar.charAt(0));
-				cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección"));
-				cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
-				cliente.setEdad(Integer.parseInt(Utilidades.ingresar("Ingrese la edad del cliente")));
+				cliente.setNombre();
+				cliente.setApellido();
+				cliente.setTelefono();
+				cliente.setAfp();
+				cliente.setSistemaSalud();
+				cliente.setDireccion();
+				cliente.setComuna();
+				cliente.setEdad();
 				contenedor.almacenarCliente(cliente);
 				Utilidades.escribir("El Cliente ha sido guardado correctamente");
 				
