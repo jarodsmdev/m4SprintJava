@@ -106,8 +106,8 @@ public class Contenedor {
 	public void listarCapacitaciones() {
 		for(Capacitacion itemCapacitacion: listaCapacitacion) {
 			//MOSTRAR DATOS CAPACITACION + DATOS DE CLIENTE AL QUE ESTÁ ASOCIADA LA CAPACITACION
-			itemCapacitacion.toString();
 			mostrarDatosCliente(itemCapacitacion.getRut());
+			Utilidades.escribir(itemCapacitacion.toString());
 		}
 	}
 	
@@ -117,9 +117,11 @@ public class Contenedor {
 	 */
 	public void mostrarDatosCliente(long rutCliente) {
 		for(Asesoria itemCliente: listaAsesoria) {
-			Cliente cliente = (Cliente)itemCliente; //CASTING
-			if(cliente.getRun() == rutCliente) {
-				Utilidades.escribir(cliente.analizarUsuario());
+			if(itemCliente instanceof Cliente){
+				Cliente cliente = (Cliente) itemCliente; //CASTING
+				if(cliente.getRun() == rutCliente){
+					Utilidades.escribir(cliente.analizarUsuario()+ "\n\n");
+				}
 			}
 		}
 	}

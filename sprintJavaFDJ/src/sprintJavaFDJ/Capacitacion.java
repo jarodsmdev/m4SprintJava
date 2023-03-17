@@ -5,6 +5,7 @@ package sprintJavaFDJ;
 
 public class Capacitacion{
 	private int id;
+	private static int idSiguiente;
 	private long rut; //SE CAMBIA DE TIPO CLIENTE A LONG PARA CONTINUAR CON LA RELACION DE TIPO AGREGACION
 	private String dia;
 	private String hora;
@@ -15,11 +16,14 @@ public class Capacitacion{
 	
 	/** metodo constructor vacio*/
 	public Capacitacion() {
+		++idSiguiente;
+		id = idSiguiente;
 	}
 	
 	/** metodo constructor con los atributos como parametros */
-	public Capacitacion(int id, long rut, String dia, String hora, String lugar, String duracion, int cantidadAsistentes ) {
-		this.id = id;
+	public Capacitacion(long rut, String dia, String hora, String lugar, String duracion, int cantidadAsistentes ) {
+		++idSiguiente;
+		this.id = idSiguiente;
 		this.rut = rut;
 		this.dia = dia;
 		this.hora = hora;
@@ -32,6 +36,7 @@ public class Capacitacion{
 	 * Obligatorio
 	 * SETTER Y GETTER */
 	public void setId(int id) {
+		//ID AUTOINCREMENTAL MÉTODO INNECESARIO
 		this.id = id;
 	}
 	public int getId() {
@@ -44,6 +49,11 @@ public class Capacitacion{
 	public void setRut(long rut) {
 		this.rut = rut;
 	}
+
+	/**
+	 * MÉTODO QUE RETORNA RUT DEL CLIENTE
+	 * @return rut tipo long
+	 */
 	public long getRut() {
 		return rut;
 	}
@@ -62,9 +72,15 @@ public class Capacitacion{
 			this.dia = dia;
 		}
 		else {
-			Utilidades.escribir("Ingrese un dia válido.");
+			Utilidades.ingresar("Ingrese un día válido.");
 		}
 	}
+
+	
+	/**
+	 * Método que retorna dia
+ 	 * @return dia tipo String
+	 */
 	public String getDia() {
 		return dia;
 	}
@@ -74,13 +90,21 @@ public class Capacitacion{
 	 * SETTER Y GETTER */
 	public void setHora(String hora) {
 		String regEx = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$";
-		if(hora.matches(regEx)) {
-			this.hora = hora;
-		}
-		else {
-			Utilidades.escribir("Ingrese una hora valida. HH:MM");
-		}
+
+		do{
+			if(hora.matches(regEx)) {
+				this.hora = hora;
+			}
+			else {
+				Utilidades.ingresar("Ingrese una hora válida. HH:MM");
+			}
+		}while(!hora.matches(regEx));
 	}
+
+	/**
+	 * Método que retorna hora formato HH:MM
+	 * @return hora tipo String 
+	 */
 	public String getHora() {
 		return hora;
 	}
@@ -139,7 +163,6 @@ public class Capacitacion{
 	/** SOBREESCRITURA DEL METODO TOSTRING() */
 	@Override
 	public String toString() {
-		return "Capacitación ID: " + getId() + "\n Rut Cliente: " + getRut() + "\n Lugar: " + getLugar() + "\n Día"
-				+ getDia() + "\n Hora: " + getHora() + "\n Duración: " + getDuracion() + "\n Cantidad Asistentes: " + getCantidadAsistentes();
+		return "Capacitación ID: " + getId() + "\n Rut Cliente: " + getRut() + "\n Lugar: " + getLugar() + "\n Día: "+ getDia() + "\n Hora: " + getHora() + "\n Duración: " + getDuracion() + "\n Cantidad Asistentes: " + getCantidadAsistentes() + "\n";
 	}
 }

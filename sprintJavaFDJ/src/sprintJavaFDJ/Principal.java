@@ -1,6 +1,5 @@
 package sprintJavaFDJ;
 
-import java.util.ArrayList;
 
 public class Principal {
 
@@ -29,6 +28,14 @@ public class Principal {
 		cliente2.setRut(7894662);
 		cliente2.setDireccion("DIRECCION CLIENTE2");
 		cliente2.setComuna("COMUNA CLIENTE2");
+
+		Capacitacion capacitacion = new Capacitacion();
+		capacitacion.setRut(1234561);
+		capacitacion.setDia("LUNES");
+		capacitacion.setHora("22:00");
+		capacitacion.setLugar("Este texto tiene mas de 10 caracteres");
+		capacitacion.setDuracion("55");
+		capacitacion.setCantidadAsistentes(20);
 		
 		Administrativo administrativo1 = new Administrativo();
 		administrativo1.setNombreUsuario("SOY DE TIPO ADMINISTRATIVO1");
@@ -42,6 +49,7 @@ public class Principal {
 		contenedor.almacenarAdministrativo(administrativo1);
 		contenedor.almacenarProfesional(profesional1);
 		contenedor.almacenarProfesional(profesional1);
+		contenedor.almacenarCapacitacion(capacitacion);
 	}
 	
 	public static void menuPrincipal(Contenedor contenedor) {
@@ -84,6 +92,7 @@ public class Principal {
 					break;
 				case "5":
 					Utilidades.escribir("\t-- CREACIÓN DE CAPACITACIÓN --\n\n");
+					contenedor.listarCapacitaciones();
 					crearCapacitacion(contenedor);
 					break;
 				case "6":
@@ -186,23 +195,57 @@ public class Principal {
 		do {
 			input = Utilidades.ingresar("Ingrese RUT Cliente: ");
 			if(input.trim().length() == 0) {
-				Utilidades.escribir("Error de Ingreso, Debe escribir RUT del Cliente a modificar.\n");
+				Utilidades.escribir("Error de Ingreso, Debe escribir RUT del Cliente.\n");
 			}else if(!input.matches(regEx)) {
 				Utilidades.escribir("Error de Ingreso, sólo se aceptan números\n");
 			}else {
-				//VALIDACION CORRECTA
-				Utilidades.escribir("VALIDACIÓN CORRECTA!");
-				long inputRut = Long.parseLong(input);
-				if(contenedor.existeUsuario(inputRut)) {
-					//EXISTE USUARIO
-					Cliente cliente = contenedor.obtenerCliente(inputRut);
-				}else {
-					//NO EXISTE USUARIO
-				}
+				registrarCapacitacion(contenedor, input);
 			}
 		}while(!input.matches(regEx));
 	}
 
+	public static void registrarCapacitacion(Contenedor contenedor, String input){
+		//VALIDACION CORRECTA
+		long inputRut = Long.parseLong(input);
+		if(contenedor.existeUsuario(inputRut)) {
+			//EXISTE USUARIO OBTIENE CLIENTE
+			//Cliente cliente = contenedor.obtenerCliente(inputRut);
+			Utilidades.escribir("SE HA ENCONTRADO AL CLIENTE\n");
+			Capacitacion capacitacion = new Capacitacion();
+			capacitacion.setRut(inputRut);
+			capacitacion.setDia(Utilidades.ingresar("Ingrese día de la Semana: (Ej.: 'Lunes')"));
+			capacitacion.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
+			capacitacion.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
+			capacitacion.setDuracion(Utilidades.ingresar("Ingrese Duración en minutos: "));
+			capacitacion.setCantidadAsistentes(Integer.parseInt(Utilidades.ingresar("Ingrese cantidad de asistentes: (Máximo 999)")));
+			
+			//Agrega capacitación a la lista de Capacitacion
+			contenedor.almacenarCapacitacion(capacitacion);
+			contenedor.listarCapacitaciones();
+
+			Utilidades.escribir("Se ha creado la Capacitación correctamente.\n");
+
+			//PREGUNTA SI DESEA SEGUIR INGRESANDO CAPACITACIONES AL MISMO CLIENTE
+			String respuesta;
+			do{
+				respuesta = Utilidades.ingresar("¿Desea continuar ingresando otra Capacitación? ('s'/'n')");
+				if(respuesta.equalsIgnoreCase("s")){
+					//CONTINUAR CON OTRO INGRESO
+					crearCapacitacion(contenedor);
+				}else if(respuesta.equalsIgnoreCase("n")){
+					//VOLVER AL MENU PRINCIPAL
+
+				}else{
+					Utilidades.escribir("[!] Error de ingreso. opción ingresada no válida. (s|n)");
+				}
+			}while(!respuesta.trim().matches("^[sn]$"));
+			//VOLVER AL MENÚ
+		}else {
+			//NO EXISTE USUARIO
+			Utilidades.escribir("RUT ingresado no existe en la base de datos.\n");
+			crearCapacitacion(contenedor);
+		}
+	}
 	//crear profe
 	public static void crearProfesional (Contenedor contenedor) {
 
