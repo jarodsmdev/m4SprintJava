@@ -1,6 +1,5 @@
 package sprintJavaFDJ;
 
-import sprintJavaFDJ.Utilidades;
 
 public class Administrativo extends Usuario {
 
@@ -109,7 +108,6 @@ public class Administrativo extends Usuario {
 	 */
 	@Override
 	public String analizarUsuario() {
-		return "Administrativo : nombre usuario: " + super.getNombreUsuario() + "Run usuario: " + super.getRun()
-				+ "area " + area + ", expPrevia=" + expPrevia;
+		return "Administrativo : " + getNombreUsuario() + ", RUT: " + getRun() + ", Área: " + area + ", Experiencia Previa: " + expPrevia;
 	}
 }

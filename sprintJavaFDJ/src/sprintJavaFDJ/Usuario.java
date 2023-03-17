@@ -104,7 +104,7 @@ public class Usuario implements Asesoria{
 	 */
 	@Override
 	public String analizarUsuario() {
-		return "Nombre de Usuario: " + nombreUsuario + ", RUN:" + run;
+		return "Usuario: " + nombreUsuario + ", RUN:" + run;
 	}
 
 	//METODO MOSTRAR EDAD
@@ -120,7 +120,7 @@ public class Usuario implements Asesoria{
 
 	@Override
 	public String toString() {
-		return "Usuario [nombreUsuario=" + nombreUsuario + ", fechaNacimiento=" + fechaNacimiento + ", run=" + run + "]";
+		return "Usuario\n Nombre Usuario: " + nombreUsuario + ", Fecha Nacimiento: " + fechaNacimiento + ", RUT: " + run + "\n";
 	}
 
 

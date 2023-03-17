@@ -14,20 +14,23 @@ public class Contenedor {
 	public void almacenarUsuario(Usuario usuario) {
 		listaAsesoria.add(usuario);
 	}
+
 	/**
 	 * 
 	 * @param cliente
 	 */
-	public void almacenarCliente(Cliente cliente){
+	public void almacenarCliente(Cliente cliente) {
 		listaAsesoria.add(cliente);
 	}
+
 	/**
 	 * 
 	 * @param administrativo
 	 */
-	public void almacenarAdministrativo(Administrativo administrativo){
+	public void almacenarAdministrativo(Administrativo administrativo) {
 		listaAsesoria.add(administrativo);
 	}
+
 	/**
 	 * 
 	 * @param profesional
@@ -35,6 +38,7 @@ public class Contenedor {
 	public void almacenarProfesional(Profesional profesional) {
 		listaAsesoria.add(profesional);
 	}
+
 	/**
 	 * 
 	 * @param capacitacion
@@ -42,112 +46,126 @@ public class Contenedor {
 	public void almacenarCapacitacion(Capacitacion capacitacion) {
 		listaCapacitacion.add(capacitacion);
 	}
-	
+
 	/**
 	 * 
 	 * @param run
-	 * Recibe como parámetro rut para eliminar objeto
+	 *            Recibe como parámetro rut para eliminar objeto
 	 */
 	public void eliminarUsuario(long run) {
 		boolean encontrado = false;
-		for(int i = 0; i < listaAsesoria.size(); i++) {
-			Usuario usuario = (Usuario)listaAsesoria.get(i); //CASTING PARA OBTENER EL RUT DEL USUARIO
-			if(usuario.getRun() == run) {
+		for (int i = 0; i < listaAsesoria.size(); i++) {
+			Usuario usuario = (Usuario) listaAsesoria.get(i); // CASTING PARA OBTENER EL RUT DEL USUARIO
+			if (usuario.getRun() == run) {
 				listaAsesoria.remove(i);
 				Utilidades.escribir("[!] Se ha eliminado el usuario: " + usuario.analizarUsuario());
 				encontrado = true;
 				break;
 			}
-			if(encontrado == false) {
+			if (encontrado == false) {
 				Utilidades.escribir("[!] No se ha encontrado el RUT");
 			}
 		}
 	}
-	
+
 	/**
 	 * Método que permite mostrar sólo los objetos de la clase Usuario
 	 */
 	public void listarUsuarios() {
-		//LISTAR SOLO LOS DATOS DE LA CLASE USUARIO
-		for(int i = 0; i < listaAsesoria.size(); i++) {
-			if(listaAsesoria.get(i) instanceof Usuario) {
-				Usuario usuario = (Usuario) listaAsesoria.get(i); //CASTING/REFUNDICIÓN
-				Utilidades.escribir((i+1) + ". " + usuario.toString());
-			}else {
+		// LISTAR LOS DATOS DE LA CLASE USUARIO
+		Utilidades.escribir("-- INICIO DEL REPORTE --\n\n");
+		for (int i = 0; i < listaAsesoria.size(); i++) {
+			if (listaAsesoria.get(i) instanceof Usuario) {
+				Usuario usuario = (Usuario) listaAsesoria.get(i); // CASTING/REFUNDICIÓN
+				Utilidades.escribir((i + 1) + ". " + usuario.analizarUsuario() + "\n");
+			} else {
 				Utilidades.escribir("[!] No existen objetos de tipo Usuario");
 			}
 		}
+		Utilidades.escribir("\n-- FIN DEL REPORTE --\n");
 	}
-	
+
 	/**
 	 * @param tipo Asesoria
-	 * Recibe un objeto Usuario y sólo muestra los objetos de este tipo
+	 *             Recibe un objeto Usuario y sólo muestra los objetos de este tipo
 	 */
 	public void listarUsuariosPorTipo(Class<? extends Usuario> tipoUsuario) {
 		int i = 1;
 		for (Asesoria asesoria : listaAsesoria) {
-	        if (tipoUsuario.isAssignableFrom(asesoria.getClass())) {
-	            Usuario usuario = (Usuario) asesoria;
-	            if (usuario instanceof Cliente) {
-	                Cliente cliente = (Cliente) usuario; // Casting a Cliente
-	                Utilidades.escribir((i++)+ ". " + cliente.analizarUsuario() + "\n");
-	                
-	            } else if (usuario instanceof Administrativo) {
-	                Administrativo admin = (Administrativo) usuario; // Casting a Administrativo
-	                Utilidades.escribir(admin.analizarUsuario());
-	            }
-	        }
-	    }
-	}
-	
-	/**
-	 * Método que Lista todas la capacitaciones e invoca un método para mostrar los datos del cliente asociado pasando como parámetro rut de tipo long
-	 */
-	public void listarCapacitaciones() {
-		for(Capacitacion itemCapacitacion: listaCapacitacion) {
-			//MOSTRAR DATOS CAPACITACION + DATOS DE CLIENTE AL QUE ESTÁ ASOCIADA LA CAPACITACION
-			mostrarDatosCliente(itemCapacitacion.getRut());
-			Utilidades.escribir(itemCapacitacion.toString());
+			if (tipoUsuario.isAssignableFrom(asesoria.getClass())) {
+				Usuario usuario = (Usuario) asesoria;
+				if (usuario instanceof Cliente) {
+					Cliente cliente = (Cliente) usuario; // Casting a Cliente
+					Utilidades.escribir((i++) + ". " + cliente.analizarUsuario() + "\n");
+
+				} else if (usuario instanceof Administrativo) {
+					Administrativo admin = (Administrativo) usuario; // Casting a Administrativo
+					Utilidades.escribir((i++) + ". " + admin.analizarUsuario() + "\n");
+
+				} else if (usuario instanceof Profesional){
+					Profesional profesional = (Profesional) usuario; //Casting a Profesional
+					Utilidades.escribir((i++) + ". "  + profesional.analizarUsuario() + "\n");
+				}/*else if (usuario instanceof Usuario){
+					Usuario user = (Usuario) usuario; //Casting a Usuario
+					Utilidades.escribir((i++) + ". "  + user.analizarUsuario() + "\n");
+				}*/
+			}
 		}
 	}
-	
+
 	/**
-	 * Método que muestra los datos de Cliente, recibe como parámetro rut de tipo long
+	 * Método que Lista todas la capacitaciones e invoca un método para mostrar los
+	 * datos del cliente asociado pasando como parámetro rut de tipo long
+	 */
+	public void listarCapacitaciones() {
+		for(int i = 0; i < listaCapacitacion.size(); i++){
+			// MOSTRAR DATOS CAPACITACION + DATOS DE CLIENTE AL QUE ESTÁ ASOCIADA LA CAPACITACION
+			Utilidades.escribir((i+1)+ ". "  + listaCapacitacion.get(i).toString());
+			mostrarDatosCliente(listaCapacitacion.get(i).getRut());
+		}
+	}
+
+	/**
+	 * Método que muestra los datos de Cliente, recibe como parámetro rut de tipo
+	 * long
+	 * 
 	 * @param rutCliente tipo long
 	 */
 	public void mostrarDatosCliente(long rutCliente) {
-		for(Asesoria itemCliente: listaAsesoria) {
-			if(itemCliente instanceof Cliente){
-				Cliente cliente = (Cliente) itemCliente; //CASTING
-				if(cliente.getRun() == rutCliente){
-					Utilidades.escribir(cliente.analizarUsuario()+ "\n\n");
+		for (Asesoria itemCliente : listaAsesoria) {
+			if (itemCliente instanceof Cliente) {
+				Cliente cliente = (Cliente) itemCliente; // CASTING
+				if (cliente.getRun() == rutCliente) {
+					Utilidades.escribir(cliente.analizarUsuario() + "\n\n");
 				}
 			}
 		}
 	}
-	
+
 	public Cliente obtenerCliente(long rutCliente) {
 		Cliente cliente = new Cliente();
-		for(int i = 0; i < listaAsesoria.size(); i++) {
-			cliente = (Cliente)listaAsesoria.get(i); //CASTING
-			if(cliente.getRun() == rutCliente) {
+		for (int i = 0; i < listaAsesoria.size(); i++) {
+			cliente = (Cliente) listaAsesoria.get(i); // CASTING
+			if (cliente.getRun() == rutCliente) {
 				return cliente;
-			}else {
+			} else {
 				Utilidades.ingresar("no encontre nada");
 			}
 		}
 		return cliente;
 	}
-	
+
 	/**
-	 * Método que retorna true si existe el rut ingresado, false en caso de no encontrarlo
+	 * Método que retorna true si existe el rut ingresado, false en caso de no
+	 * encontrarlo
+	 * 
 	 * @param rutUsuario tipo long
 	 * @return boolean
 	 */
 	public boolean existeUsuario(long rutUsuario) {
-		for(Asesoria itemUsuario: listaAsesoria) {
-			Usuario usuario = (Usuario)itemUsuario; //CASTING
-			if(usuario.getRun() == rutUsuario) {
+		for (Asesoria itemUsuario : listaAsesoria) {
+			Usuario usuario = (Usuario) itemUsuario; // CASTING
+			if (usuario.getRun() == rutUsuario) {
 				return true;
 			}
 		}

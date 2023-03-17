@@ -5,15 +5,20 @@ public class Principal {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
 		Contenedor contenedor = new Contenedor();
+		
+		//DATOS DE PRUEBA
+		DebugMode(contenedor);
 		menuPrincipal(contenedor);
 	}
 
 	
 	public static void DebugMode(Contenedor contenedor) {
 		Usuario usuario1 = new Usuario();
-		usuario1.setNombreUsuario("SOY DE TIPO USUARIO1");
+		usuario1.setNombreUsuario("SOY USUARIO1");
+		usuario1.setFechaNacimiento("22/03/1983");
+		usuario1.setRut(15521239);
 		
 		Cliente cliente1 = new Cliente();
 		cliente1.setNombre("SOY CLIENTE1");
@@ -29,93 +34,221 @@ public class Principal {
 		cliente2.setDireccion("DIRECCION CLIENTE2");
 		cliente2.setComuna("COMUNA CLIENTE2");
 
-		Capacitacion capacitacion = new Capacitacion();
-		capacitacion.setRut(1234561);
-		capacitacion.setDia("LUNES");
-		capacitacion.setHora("22:00");
-		capacitacion.setLugar("Este texto tiene mas de 10 caracteres");
-		capacitacion.setDuracion("55");
-		capacitacion.setCantidadAsistentes(20);
+		Capacitacion capacitacion1 = new Capacitacion();
+		capacitacion1.setRut(7894662);
+		capacitacion1.setDia("LUNES");
+		capacitacion1.setHora("22:00");
+		capacitacion1.setLugar("[CAP1] Este texto tiene mas de 10 caracteres");
+		capacitacion1.setDuracion("55");
+		capacitacion1.setCantidadAsistentes(20);
+
+		Capacitacion capacitacion2 = new Capacitacion();
+		capacitacion2.setRut(1234561);
+		capacitacion2.setDia("LUNES");
+		capacitacion2.setHora("09:00");
+		capacitacion2.setLugar("[CAP2 Este texto tiene mas de 10 caracteres");
+		capacitacion2.setDuracion("45");
+		capacitacion2.setCantidadAsistentes(30);
 		
 		Administrativo administrativo1 = new Administrativo();
-		administrativo1.setNombreUsuario("SOY DE TIPO ADMINISTRATIVO1");
+		administrativo1.setNombreUsuario("SOY ADMINISTRATIVO1");
+		administrativo1.setArea("51");
+		administrativo1.setExpPrevia("5");
+		administrativo1.setFechaNacimiento("22/03/1983");
+		administrativo1.setNombreUsuario("NICKNAME ADM1");
+		administrativo1.setRut(1452654);
 		
 		Profesional profesional1 = new Profesional();
-		profesional1.setNombreUsuario("SOY DE TIPO PROFESIONAL1");
+		profesional1.setNombreUsuario("SOY PROFESIONAL1");
+		profesional1.setFechaIngreso("14/03/1999");
+		profesional1.setFechaNacimiento("05/02/1956");
+		profesional1.setNombreUsuario("NICKNAME PROF1");
+		profesional1.setRut(458744);
+		profesional1.setTitulo("INGENIER@");
+
+		Profesional profesional2 = new Profesional();
+		profesional2.setNombreUsuario("SOY PROFESIONAL2");
+		profesional2.setFechaIngreso("14/03/1996");
+		profesional2.setFechaNacimiento("05/02/1956");
+		profesional2.setNombreUsuario("NICKNAME PROF2");
+		profesional2.setRut(1554744);
+		profesional2.setTitulo("ARQUITECT@");
 		
 		contenedor.almacenarUsuario(usuario1);
 		contenedor.almacenarCliente(cliente1);
 		contenedor.almacenarCliente(cliente2);
 		contenedor.almacenarAdministrativo(administrativo1);
 		contenedor.almacenarProfesional(profesional1);
-		contenedor.almacenarProfesional(profesional1);
-		contenedor.almacenarCapacitacion(capacitacion);
+		contenedor.almacenarProfesional(profesional2);
+		contenedor.almacenarCapacitacion(capacitacion1);
+		contenedor.almacenarCapacitacion(capacitacion2);
 	}
-	
-	public static void menuPrincipal(Contenedor contenedor) {
-		
-		//DATOS DE PRUEBA
-		DebugMode(contenedor);
-		
+
+		public static void menuPrincipal(Contenedor contenedor){
+			
+
+			String capturador;
+			do{
+				Utilidades.escribir("\n\t--MENÚ PRINCIPAL--\n");
+				Utilidades.escribir("\n\t1. MENÚ USUARIOS" +
+									"\n\t2. MENÚ INFORMES" +
+									"\n\t3. MENÚ ADMINISTRATIVO" +
+									"\n\t4. SALIR DEL SISTEMA\n\n"
+
+				);
+
+				capturador = Utilidades.ingresar("Ingrese una opción para ingresar: ");
+
+				switch (capturador) {
+					case "1":
+						Utilidades.escribir("\t-- MENÚ USUARIOS --\n\n");
+						menuUsuarios(contenedor);
+						break;
+					case "2":
+						//Utilidades.escribir("\t-- MENÚ INFORMES --\n\n");
+						menuInformes(contenedor);
+						break;
+					case "3":
+						Utilidades.escribir("\t-- MENÚ ADMINISTRATIVO --\n\n");
+						break;
+					case "4":
+						Utilidades.escribir("\t-- CERRANDO EL SISTEMA --\n\n");
+						System.exit(0);
+						break;
+					default:
+					Utilidades.escribir("[!] OPCIÓN INGRESADA NO ES VÁLIDA, SÓLO INGRESE VALORES ENTRE 1 AL 4.\n\n");
+				}
+
+			}while(!capturador.matches("^[1-4]$"));
+		}
+
+	public static void menuUsuarios(Contenedor contenedor){
 		String capturador;
 		do{
-			Utilidades.escribir("\n\t--MENÚ PRINCIPAL--\n");
-			
+			//Utilidades.escribir("\n\t--MENÚ PRINCIPAL--\n");
 			Utilidades.escribir("\n\t1. CREAR USUARIO" +
 								"\n\t2. CREAR CLIENTE" +
 								"\n\t3. CREAR PROFESIONAL" +
 								"\n\t4. CREAR ADMINISTRATIVO" +
-								"\n\t5. CREAR CAPACITACIÓN" +
-								"\n\t6. CREAR ACCIDENTE" +
-								"\n\t7. CREAR VISITA EN TERRENO" +
-								"\n\t8. CREAR REVISIÓN" +
-								"\n\t9. SALIR\n\n"
-								);
-			
-			capturador = Utilidades.ingresar("Ingrese opción a ejecutar: ");
-	
-			switch(capturador) {
+								"\n\t5. VOLVER AL MENÚ PRINCIPAL\n\n"
+
+			);
+
+			capturador = Utilidades.ingresar("Ingrese una opción para ingresar: ");
+
+			switch (capturador) {
 				case "1":
-					Utilidades.escribir("\n\t-- CREACIÓN DE USUARIO --\n\n");
+					Utilidades.escribir("\t-- CREAR USUARIO --\n\n");
 					crearUsuario(contenedor);
 					break;
 				case "2":
-					Utilidades.escribir("\n\t-- CREACIÓN DE CLIENTE --\n\n");
+					Utilidades.escribir("\t-- CREAR CLIENTE --\n\n");
 					crearCliente(contenedor);
 					break;
 				case "3":
-					Utilidades.escribir("\t-- CREACIÓN DE PROFESIONAL --\n\n");
+					Utilidades.escribir("\t-- CREAR PROFESIONAL --\n\n");
+					crearProfesional(contenedor);
 					break;
 				case "4":
-					Utilidades.escribir("\t-- CREACIÓN DE ADMINISTRATIVO --\n\n");
+					Utilidades.escribir("\t-- CREAR ADMINISTRATIVO --\n\n");
 					crearAdministrador(contenedor);
 					break;
 				case "5":
-					Utilidades.escribir("\t-- CREACIÓN DE CAPACITACIÓN --\n\n");
-					contenedor.listarCapacitaciones();
-					crearCapacitacion(contenedor);
-					break;
-				case "6":
-					Utilidades.escribir("\t-- INGRESO DE ACCIDENTE --\n\n");
-					break;
-				case "7":
-					Utilidades.escribir("\t-- ESTABLECER VISITA EN TERRENO --\n\n");
-					crearVisitaTerreno(contenedor);
-					break;
-				case "8":
-					Utilidades.escribir("\t-- REVISIONES --\n\n");
-					break;
-				case "9":
-					Utilidades.escribir("\t-- CERRANDO EL SISTEMA --\n\n");
-					System.exit(0);
+					//Utilidades.escribir("\t-- REGRESANDO AL MENÚ PRINCIPAL --\n\n");
+					menuPrincipal(contenedor);
 					break;
 				default:
-					Utilidades.escribir("[!] OPCIÓN INGRESADA NO ES VÁLIDA, SÓLO INGRESE VALORES ENTRE 1 AL 9.\n\n");
+					Utilidades.escribir("[!] OPCIÓN INGRESADA NO ES VÁLIDA, SÓLO INGRESE VALORES ENTRE 1 AL 5.\n\n");
 			}
-		}while(!capturador.matches("^[1-9]$"));
 
+		}while(!capturador.matches("^[1-5]$"));
 	}
 
+	public static void menuInformes(Contenedor contenedor){
+		String capturador;
+		do{
+			Utilidades.escribir("\n\t-- MENÚ INFORMES --\n");
+			Utilidades.escribir("\n\t1. MOSTRAR TODOS LOS USUARIOS" +
+								"\n\t2. MOSTRAR USUARIOS POR TIPO" +
+								"\n\t3. MOSTRAR CAPACITACIONES" +
+								"\n\t4. MOSTRAR VISITAS" +
+								"\n\t5. VOLVER AL MENÚ PRINCIPAL\n\n"
+
+			);
+
+			capturador = Utilidades.ingresar("Ingrese una opción para ingresar: ");
+
+			switch (capturador) {
+				case "1":
+					Utilidades.escribir("\t-- MOSTRAR TODOS LOS USUARIOS --\n\n");
+					contenedor.listarUsuarios();
+					menuInformes(contenedor);
+					break;
+				case "2":
+					//Utilidades.escribir("\t-- MOSTRAR TODOS LOS USUARIOS POR TIPO --\n\n");
+					menuFiltrarUsuariosPorTipo(contenedor);
+					//menuInformes(contenedor);
+					break;
+				case "3":
+					Utilidades.escribir("\t-- MOSTRAR CAPACITACIONES --\n\n");
+					contenedor.listarCapacitaciones();
+					menuInformes(contenedor);
+					break;
+				case "4":
+					Utilidades.escribir("\t-- MOSTRAR VISITAS --\n\n");
+					Utilidades.escribir("NO IMPLEMENTADO AÚN");
+					break;
+				case "5":
+					//Utilidades.escribir("\t-- REGRESANDO AL MENÚ PRINCIPAL --\n\n");
+					menuPrincipal(contenedor);
+					break;
+				default:
+					Utilidades.escribir("[!] OPCIÓN INGRESADA NO ES VÁLIDA, SÓLO INGRESE VALORES ENTRE 1 AL 5.\n\n");
+			}
+
+		}while(!capturador.matches("^[1-5]$"));
+	}
+
+	public static void menuFiltrarUsuariosPorTipo(Contenedor contenedor){
+		String capturador;
+		do{
+			Utilidades.escribir("\n\t-- SELECCIONE PARA APLICAR FILTRO --\n");
+			Utilidades.escribir("\n\t1. MOSTRAR CLIENTES" +
+								"\n\t2. MOSTRAR ADMINISTRATIVOS" +
+								"\n\t3. MOSTRAR PROFESIONALES" +
+								"\n\t4. VOLVER\n\n"
+			);
+
+			capturador = Utilidades.ingresar("Ingrese una opción para ingresar: ");
+
+			switch (capturador) {
+				case "1":
+					Utilidades.escribir("\t-- MOSTRAR TODOS LOS CLIENTES --\n\n");
+					contenedor.listarUsuariosPorTipo(Cliente.class);
+					menuFiltrarUsuariosPorTipo(contenedor);
+					break;
+				case "2":
+					Utilidades.escribir("\t-- MOSTRAR TODOS LOS ADMINISTRATIVOS --\n\n");
+					contenedor.listarUsuariosPorTipo(Administrativo.class);
+					menuFiltrarUsuariosPorTipo(contenedor);
+					break;
+				case "3":
+					Utilidades.escribir("\t-- MOSTRAR TODOS LOS PROFESIONALES --\n\n");
+					contenedor.listarUsuariosPorTipo(Profesional.class);
+					menuFiltrarUsuariosPorTipo(contenedor);
+					break;
+				case "4":
+					//Utilidades.escribir("\t-- VOLVER --\n\n");
+					menuInformes(contenedor);
+					break;
+				default:
+					Utilidades.escribir("[!] OPCIÓN INGRESADA NO ES VÁLIDA, SÓLO INGRESE VALORES ENTRE 1 AL 4.\n\n");
+			}
+
+		}while(!capturador.matches("^[1-4]$"));
+	}
+	
+	
 	public static void crearAdministrador (Contenedor contenedor) {
 
 		Administrativo administrativo = new Administrativo();
@@ -141,14 +274,11 @@ public class Principal {
 		usuario.setNombreUsuario(Utilidades.ingresar("Ingrese el nombre de Usuario:"));
 		usuario.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]:"));
 		usuario.setRut(Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Usuario:")));
-
-		//listaUsuarios.agregarUsuario(usuario);
-
+		
 		contenedor.almacenarUsuario(usuario);
 		Utilidades.escribir("El Usuario ha sido guardado exitosamente");
-		//listaUsuarios.mostrarUsuarios();
-		contenedor.listarUsuarios();
-
+		
+		//contenedor.listarUsuarios();
 
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
@@ -222,8 +352,9 @@ public class Principal {
 
 					Utilidades.escribir("Se ha creado la Visita Terreno correctamente.");
 
-					//TODO: PREGUNTAR SI DESEA SEGUIR INGRESANDO CAPACITACIONES AL MISMO CLIENTE
-					//VOLVER AL MENÚ
+					//TODO: PREGUNTAR SI DESEA SEGUIR INGRESANDO VISITAS AL MISMO CLIENTE
+					//INVOCAR AL MENÚ PARA MANTENER EL LOOP
+					menuPrincipal(contenedor);
 				}else {
 					//NO EXISTE USUARIO
 				}
@@ -289,6 +420,7 @@ public class Principal {
 					crearCapacitacion(contenedor);
 				}else if(respuesta.equalsIgnoreCase("n")){
 					//VOLVER AL MENU PRINCIPAL
+
 
 				}else{
 					Utilidades.escribir("[!] Error de ingreso. opción ingresada no válida. (s|n)");
