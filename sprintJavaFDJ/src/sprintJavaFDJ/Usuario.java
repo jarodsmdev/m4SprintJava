@@ -9,7 +9,7 @@ public class Usuario implements Asesoria{
 
 	private String nombreUsuario;
 	private String fechaNacimiento;
-	private static long run;
+	private long run;
 	
 	/**
 	 * Método constructor predederminado
@@ -90,12 +90,11 @@ public class Usuario implements Asesoria{
 			Utilidades.escribir("Ingrese un RUT válido");
 		}
 	}
-	
 	/**
 	 * 
 	 * @return
 	 */
-	public static long getRun() {
+	public long getRun() {
 		return run;
 	}
 	

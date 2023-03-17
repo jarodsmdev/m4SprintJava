@@ -29,11 +29,11 @@ public class Revision {
 	 * @param nombreRevision tipo String
 	 * @param estado tipo int
 	 */
-	public Revision(String nombreRevision, String detalles, int estado) {
+	public Revision(String nombreRevision, int idVisita, String detalles, int estado) {
 		++idRevSiguiente;
 		this.idRevision = idRevSiguiente;
 //		++idVisitaSiguiente;
-//		this.idVisita = idVisitaSiguiente;
+		this.idVisita = idVisita;
 		this.nombreRevision = nombreRevision;
 		this.detalles = detalles;
 		this.estado = estado;
