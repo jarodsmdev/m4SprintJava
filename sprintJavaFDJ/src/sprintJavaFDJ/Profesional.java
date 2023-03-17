@@ -63,8 +63,8 @@ public class Profesional extends Usuario {
 		 * @param titulo el título del profesional
 		 */
 		public void setTitulo(String titulo) {
-			if (titulo.length() < 10 || titulo.length() > 50) {
-				System.out.println("El titulo debe ser mínimo 10 caracteres, máximo 50");
+			if (titulo.length() < 10 || titulo.length() > 50&& titulo.isEmpty() && titulo==null) {
+				System.out.println("El titulo debe ser mínimo 10 caracteres, máximo 50 y no debe estar vacio");
 			}
 			this.titulo = titulo;
 		}
