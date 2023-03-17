@@ -10,6 +10,7 @@ public class Principal {
 		Contenedor contenedor = new Contenedor();
 		menuPrincipal(contenedor);
 	}
+
 	
 	public static void DebugMode(Contenedor contenedor) {
 		Usuario usuario1 = new Usuario();
@@ -102,10 +103,11 @@ public class Principal {
 					Utilidades.escribir("[!] OPCIÓN INGRESADA NO ES VÁLIDA, SÓLO INGRESE VALORES ENTRE 1 AL 9.\n\n");
 			}
 		}while(!capturador.matches("^[1-9]$"));
+
 	}
 
 	public static void crearAdministrador (Contenedor contenedor) {
-		
+
 		Administrativo administrativo = new Administrativo();
 		
 		administrativo.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del Usuario:"));
@@ -117,12 +119,12 @@ public class Principal {
 		contenedor.almacenarAdministrativo(administrativo);
 		Utilidades.escribir("Personal Administrativo ha sido guardado exitosamente");
 		contenedor.listarUsuarios();
-		
+
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
 
 	}
-	
+
 	public static void crearUsuario(Contenedor contenedor) {
 
 		Usuario usuario = new Usuario();
@@ -131,13 +133,13 @@ public class Principal {
 		usuario.setRut(Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Usuario:")));
 
 		//listaUsuarios.agregarUsuario(usuario);
-		
+
 		contenedor.almacenarUsuario(usuario);
 		Utilidades.escribir("El Usuario ha sido guardado exitosamente");
 		//listaUsuarios.mostrarUsuarios();
 		contenedor.listarUsuarios();
-		
-		
+
+
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
 		}
@@ -145,7 +147,7 @@ public class Principal {
 	public static void crearCliente(Contenedor contenedor) {
 		//VALIDAR QUE EL CONTENIDO DE capturador sea tipo long
 		long capturador = Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Cliente"));
-		
+
 		//VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS
 		if(!contenedor.existeUsuario(capturador)) {
 			Cliente cliente = new Cliente();
@@ -167,8 +169,6 @@ public class Principal {
 		}else {
 			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
 		}
-
-		
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
 	}
@@ -201,6 +201,28 @@ public class Principal {
 				}
 			}
 		}while(!input.matches(regEx));
+	}
+
+	//crear profe
+	public static void crearProfesional (Contenedor contenedor) {
+
+ 		Profesional profesional = new Profesional();
+
+		profesional.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del profesional"));
+		profesional.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]"));
+		profesional.setRut(Long.parseLong(Utilidades.ingresar("Ingrese RUT")));
+
+		profesional.setTitulo(Utilidades.ingresar("Ingresa titulo: "));
+		profesional.setFechaIngreso(Utilidades.ingresar("Ingrese Fecha de ingreso: "));
+
+		contenedor.almacenarProfesional(profesional);
+		Utilidades.escribir("Personal Profesional ha sido guardado exitosamente");
+		contenedor.listarUsuarios();
+
+		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
+		menuPrincipal(contenedor);
+
+
 	}
 
 }
