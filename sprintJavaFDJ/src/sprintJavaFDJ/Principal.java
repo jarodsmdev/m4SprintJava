@@ -159,7 +159,10 @@ public class Principal {
 			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
 			cliente.setEdad(Integer.parseInt(Utilidades.ingresar("Ingrese la edad del cliente")));
 			contenedor.almacenarCliente(cliente);
+
 			Utilidades.escribir(cliente.analizarUsuario());
+			Utilidades.escribir("El Cliente ha sido guardado correctamente");
+
 
 		}else {
 			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
@@ -192,9 +195,7 @@ public class Principal {
 				long inputRut = Long.parseLong(input);
 				if(contenedor.existeUsuario(inputRut)) {
 					//EXISTE USUARIO
-					for(Cliente itemCliente:) {
-						
-					}
+					Cliente cliente = contenedor.obtenerCliente(inputRut);
 				}else {
 					//NO EXISTE USUARIO
 				}
