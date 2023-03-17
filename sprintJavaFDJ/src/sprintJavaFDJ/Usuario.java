@@ -1,74 +1,127 @@
-package sprintjava;
+/**
+ * @author Priscila Carrillo
+ */
+package sprintJavaFDJ;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Usuario implements Asesoria{
 
-	private String nombre;
+	private String nombreUsuario;
 	private String fechaNacimiento;
-	private int rut;
+	private long run;
 	
-	Scanner sc = new Scanner(System.in);
-
-	//CONSTRUCTOR POR DEFECTO
+	/**
+	 * Método constructor predederminado
+	 */
 	public Usuario() {}
-	
-	//CONSTRUCTOR PARAMETRIZADO
-	public Usuario(String nombre, String fechaNacimiento, int rut) {
-		this.nombre = nombre;
+
+	/**
+	 * Método constructor parametrizado
+	 * @param nombre tipo String
+	 * @param fechaNacimiento tipo String
+	 * @param run tipo long
+	 */
+	public Usuario(String nombre, String fechaNacimiento, long run) {
+		this.nombreUsuario = nombre;
 		this.fechaNacimiento = fechaNacimiento;
-		this.rut = rut;
+		this.run = run;
+	}
+
+	/**
+	 * 
+	 * @param nombreUsuario
+	 */
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 	
-	//MÉTODOS ACCESORES
-	public String getNombre() {
-		return nombre;
+	/**
+	 * 
+	 * @return
+	 */
+	public String getNombreUsuario() {
+		return nombreUsuario;
 	}
-	
+
+	/**
+	 * 
+	 * @return
+	 */
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
 	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	
-	public int getRut() {
-		return rut;
-	}
-	
-	//METODO PARA OBTENER FECHA DE NACIMIENTO
+
+	/**
+	 * METODO PARA OBTENER FECHA DE NACIMIENTO
+	 * @return String con el formato de fecha dd/mm/aaaa
+	 */
 	public String obtenerFechaNac() {
+		//Scanner sc = new Scanner(System.in);
 		int dia=0;
 		int mes=0;
 		int anio=0;
 		while (dia<1 || dia>31) {
-		System.out.println("Ingrese dia");
-		dia= sc.nextInt();
+		//Utilidades.escribir("Ingrese dia");
+		dia = Integer.parseInt(Utilidades.ingresar("Ingrese día"));
+		//dia= sc.nextInt();
 		}
-		System.out.println("Ingrese mes");
-		mes= sc.nextInt();
-		System.out.println("Ingrese anio");
-		anio= sc.nextInt();
+		//Utilidades.escribir("Ingrese mes");
+		mes = Integer.parseInt(Utilidades.ingresar("Ingrese mes"));
+		anio = Integer.parseInt(Utilidades.ingresar("Ingrese año"));
+		//Utilidades.escribir("Ingrese anio");
+		//anio= sc.nextInt();
 		return dia+"/" + mes +"/" + anio;
-		
 	}
 	
-	//IMPLEMENTACION DE LA INTERFAZ ASESORIA
-	
-	public void analizarUsuario() {
-		System.out.println("Nombre de Usuario: " + nombre + ", rut:" + rut );
-		
+	/**
+	 * 
+	 * @param run
+	 */
+	public void setRut(long run) {
+		if (run <= 99999999) {
+			this.run = run; 
+		}
+		else {
+			//opcion inválida
+			Utilidades.escribir("Ingrese un RUT válido");
+		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getRun() {
+		return run;
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String analizarUsuario() {
+		return "Nombre de Usuario: " + nombreUsuario + ", RUN:" + run;
+	}
+
 	//METODO MOSTRAR EDAD
-	
 	public void mostrarEdad() {
-		
+
 		LocalDate fechaActual = LocalDate.now();  //OBTENER LA FECHA ACTUAL
 		String anios = obtenerFechaNac();
 		String anio = anios.substring(anios.length()-4);
 	    int fecha = Integer.parseInt(anio);
 	    int edad = fechaActual.getYear() - fecha; 
-		System.out.println("El usuario tiene" + edad + " anios");
+		Utilidades.escribir("El usuario tiene " + edad + " años");
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Usuario [nombreUsuario=" + nombreUsuario + ", fechaNacimiento=" + fechaNacimiento + ", run=" + run + "]";
+	}
+
 
 }
