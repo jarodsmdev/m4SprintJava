@@ -1,6 +1,7 @@
 package sprintJavaFDJ;
 
 public class Profesional extends Usuario {
+	
 //	//Título: obligatorio, mínimo 10 caracteres, máximo 50
 //	- Fecha de ingreso: independiente si lo declara como una fecha o un String,
 //	debeser desplegado con el formato DD/MM/AAAA
@@ -63,11 +64,15 @@ public class Profesional extends Usuario {
 		 * @param titulo el título del profesional
 		 */
 		public void setTitulo(String titulo) {
-			if (titulo.length() < 10 || titulo.length() > 50) {
-				System.out.println("El titulo debe ser mínimo 10 caracteres, máximo 50");
+			do {
+				if (titulo.length() > 9 && titulo.length() < 51) {
+					System.out.println("El titulo debe tener mínimo 10 caracteres, máximo 50");
+				}
+				this.titulo = titulo;
+				
+			} while(titulo.length() <10 || titulo.length() >50);
+				
 			}
-			this.titulo = titulo;
-		}
 
 		/**
 		 * 

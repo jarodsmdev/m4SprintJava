@@ -1,5 +1,6 @@
 /**
  * @author Priscila Carrillo
+
  */
 package sprintJavaFDJ;
 
@@ -33,8 +34,19 @@ public class Usuario implements Asesoria{
 	 * @param nombreUsuario
 	 */
 	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+		do {
+			Utilidades.ingresar("Ingrese nombre de usuario");
+			if(nombreUsuario.length() >9 && nombreUsuario.length() <51) { 
+				this.nombreUsuario = nombreUsuario;
+			}
+			
+			else {
+				Utilidades.ingresar("Ha superado el limite de caracteres");
+			}
+			
+		} while(nombreUsuario.length() <10 || nombreUsuario.length() >50);
 	}
+	
 	
 	/**
 	 * 
@@ -56,7 +68,7 @@ public class Usuario implements Asesoria{
 	}
 
 	/**
-	 * METODO PARA OBTENER FECHA DE NACIMIENTO
+	 * Metodo para obtener fecha de nacimiento
 	 * @return String con el formato de fecha dd/mm/aaaa
 	 */
 	public String obtenerFechaNac() {
@@ -82,13 +94,18 @@ public class Usuario implements Asesoria{
 	 * @param run
 	 */
 	public void setRut(long run) {
-		if (run <= 99999999) {
-			this.run = run; 
-		}
-		else {
-			//opcion inválida
-			Utilidades.escribir("Ingrese un RUT válido");
-		}
+		do {
+			Utilidades.ingresar("Ingrese RUT");
+			if (run <= 99999999) {
+				this.run = run; 
+			}
+			else {
+				//opcion inválida
+				Utilidades.ingresar("Ingrese un RUT válido");
+			}
+			
+		} while(run >99999999);
+		
 	}
 	
 	/**
@@ -107,18 +124,18 @@ public class Usuario implements Asesoria{
 		return "Nombre de Usuario: " + nombreUsuario + ", RUN:" + run;
 	}
 
-	//METODO MOSTRAR EDAD
+	//Metodo mostrar edad
 	public void mostrarEdad() {
 
-		LocalDate fechaActual = LocalDate.now();  //OBTENER LA FECHA ACTUAL
+		LocalDate fechaActual = LocalDate.now();  //Obtener fecha actual
 		String anios = obtenerFechaNac();
 		String anio = anios.substring(anios.length()-4);
 	    int fecha = Integer.parseInt(anio);
 	    int edad = fechaActual.getYear() - fecha; 
-		Utilidades.escribir("El usuario tiene " + edad + " años");
+		Utilidades.ingresar("El usuario tiene " + edad + " años");
 	}
 
-	@Override
+	@Override //metodo to string
 	public String toString() {
 		return "Usuario [nombreUsuario=" + nombreUsuario + ", fechaNacimiento=" + fechaNacimiento + ", run=" + run + "]";
 	}

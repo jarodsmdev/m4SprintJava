@@ -104,12 +104,13 @@ public class Revision {
 	 * @param detalles tipo String
 	 */
 	public void setDetalleRevisar(String detalles) {
-		if(detalles.length() >100) {
+		if(detalles.length() <101) {
 			this.detalles = detalles;			
 		}else {
-			Utilidades.escribir("[!] Máximo 100 caracteres para escribir detalles de la Revsión.");
+			Utilidades.escribir("[!] Máximo 100 caracteres para escribir detalles de la revisión.");
 		}
 	}
+	
 	
 	/**
 	 * Obtiene campo de clase estado tipo int

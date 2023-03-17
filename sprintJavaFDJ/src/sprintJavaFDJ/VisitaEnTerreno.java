@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * 
- * @author Leonel Briones, Kevin Moreno, Valentia Saldias, Priscila Flores,
+ * @author Leonel Briones, Kevin Moreno, Valentia Saldias, Priscila Carrillo,
  *         Andres Contreras.
  *
  */

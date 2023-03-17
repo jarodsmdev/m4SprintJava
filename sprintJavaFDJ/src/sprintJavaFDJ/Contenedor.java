@@ -54,12 +54,12 @@ public class Contenedor {
 			Usuario usuario = (Usuario)listaAsesoria.get(i); //CASTING PARA OBTENER EL RUT DEL USUARIO
 			if(usuario.getRun() == run) {
 				listaAsesoria.remove(i);
-				Utilidades.escribir("[!] Se ha eliminado el usuario: " + usuario.analizarUsuario());
+				Utilidades.ingresar("[!] Se ha eliminado el usuario: " + usuario.analizarUsuario());
 				encontrado = true;
 				break;
 			}
 			if(encontrado == false) {
-				Utilidades.escribir("[!] No se ha encontrado el RUT");
+				Utilidades.ingresar("[!] No se ha encontrado el RUT");
 			}
 		}
 	}
@@ -72,9 +72,9 @@ public class Contenedor {
 		for(int i = 0; i < listaAsesoria.size(); i++) {
 			if(listaAsesoria.get(i) instanceof Usuario) {
 				Usuario usuario = (Usuario) listaAsesoria.get(i); //CASTING/REFUNDICIÓN
-				Utilidades.escribir((i+1) + ". " + usuario.toString());
+				Utilidades.ingresar((i+1) + ". " + usuario.toString());
 			}else {
-				Utilidades.escribir("[!] No existen objetos de tipo Usuario");
+				Utilidades.ingresar("[!] No existen objetos de tipo Usuario");
 			}
 		}
 	}
@@ -90,11 +90,11 @@ public class Contenedor {
 	            Usuario usuario = (Usuario) asesoria;
 	            if (usuario instanceof Cliente) {
 	                Cliente cliente = (Cliente) usuario; // Casting a Cliente
-	                Utilidades.escribir((i++)+ ". " + cliente.analizarUsuario() + "\n");
+	                Utilidades.ingresar((i++)+ ". " + cliente.analizarUsuario() + "\n");
 	                
 	            } else if (usuario instanceof Administrativo) {
 	                Administrativo admin = (Administrativo) usuario; // Casting a Administrativo
-	                Utilidades.escribir(admin.analizarUsuario());
+	                Utilidades.ingresar(admin.analizarUsuario());
 	            }
 	        }
 	    }
@@ -119,7 +119,7 @@ public class Contenedor {
 		for(Asesoria itemCliente: listaAsesoria) {
 			Cliente cliente = (Cliente)itemCliente; //CASTING
 			if(cliente.getRun() == rutCliente) {
-				Utilidades.escribir(cliente.analizarUsuario());
+				Utilidades.ingresar(cliente.analizarUsuario());
 			}
 		}
 	}

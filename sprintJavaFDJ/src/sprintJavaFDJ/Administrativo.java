@@ -6,8 +6,8 @@ public class Administrativo extends Usuario {
 
 	/**
 	 * Esta clase representa a un usuario administrativo, que hereda de la clase
-	 * Usuario. Contiene los atributos 'area' y 'expPrevia', así como los métodos
-	 * getters y setters correspondientes. Además, sobrescribe los métodos
+	 * Usuario, ademas, contiene los atributos 'area' y 'expPrevia', así como los métodos
+	 * getters y setters correspondientes. Finalmente, sobrescribe los métodos
 	 * toString() y analizarUsuario() de la clase padre.
 	 */
 

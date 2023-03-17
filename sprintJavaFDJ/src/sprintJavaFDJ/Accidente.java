@@ -2,7 +2,7 @@ package sprintJavaFDJ;
 
 /**
  * 
- * @author Leonel Briones, Kevin Moreno, Valentia Saldías, Priscila Flores, Andrés Contreras.
+ * @author Leonel Briones, Kevin Moreno, Valentia Saldías, Priscila Carrillo, Andrés Contreras.
  *      
  */
 public class Accidente {
@@ -71,7 +71,7 @@ public class Accidente {
 			if (cliente.getRun() <= 99999999) {
 				this.cliente = cliente;
 			} else {
-				Utilidades.escribir("No puede exceder 99.999.999");
+				Utilidades.ingresar("No puede exceder 99.999.999");
 			}
 		} while (cliente.getRun() > 99999999);
 	}
@@ -86,7 +86,7 @@ public class Accidente {
 			if (fecha.matches(regex)) {
 				this.fecha = fecha;
 			} else {
-				Utilidades.escribir("La fecha no es valida");
+				Utilidades.ingresar("La fecha no es valida");
 			}
 		} while (!fecha.matches(regex));
 	}
@@ -101,7 +101,7 @@ public class Accidente {
 			if (hora.matches(regex)) {
 				this.hora = hora;
 			} else {
-				Utilidades.escribir("La hora no es valida");
+				Utilidades.ingresar("El formato de hora ingresada no es valida");
 			}
 		} while (!hora.matches(regex));
 	}
@@ -115,7 +115,7 @@ public class Accidente {
 			if (lugar.length() >= 10 && lugar.length() <= 50) {
 				this.lugar = lugar;
 			} else {
-				Utilidades.escribir("Debe ingresar entre 10 y 50 caracteres");
+				Utilidades.ingresar("Debe ingresar entre 10 y 50 caracteres");
 			}
 		} while (lugar.length() < 10 || lugar.length() > 50);
 
@@ -130,7 +130,7 @@ public class Accidente {
 			if (origen.length() <= 100) {
 				this.origen = origen;
 			} else {
-				Utilidades.escribir("No puede ingresar mas de 100 caracteres");
+				Utilidades.ingresar("No puede ingresar mas de 100 caracteres");
 			}
 		} while (origen.length() > 100);
 	}
@@ -144,7 +144,7 @@ public class Accidente {
 			if (consecuencias.length() <= 100) {
 				this.consecuencias = consecuencias;
 			} else {
-				Utilidades.escribir("No puede ingresar mas de 100 caracteres");
+				Utilidades.ingresar("No puede ingresar mas de 100 caracteres");
 			}
 		} while (consecuencias.length() > 100);
 
