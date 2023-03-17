@@ -57,11 +57,17 @@ public class Administrativo extends Usuario {
 	 * 
 	 * @param area El área del usuario administrativo.
 	 */
-	public void setArea(String area) {
-		if (area != null && area.length() < 5 && area.length() > 20) {
-			Utilidades.escribir("El area debe ingresar mínimo 5 caracteres, máximo 20");
+	public void setArea() {
+		String area = Utilidades.ingresarObligatorio("Ingresa Área: "); 
+		do {
+			if (area.length() < 5 || area.length() > 20) { //HAY QUE REVISAR ESTO DESPUES DE MERGEAR LAS COSAS
+			area =Utilidades.ingresarObligatorio("El area debe ingresar mínimo 5 caracteres, máximo 20");
 		}
-		this.area = area;
+			else {
+				this.area = area;
+				break;
+			}
+	}while(true);
 	}
 
 	/**
@@ -82,11 +88,21 @@ public class Administrativo extends Usuario {
 	 * 
 	 * @param expPrevia La experiencia previa del usuario administrativo.
 	 */
-	public void setExpPrevia(String expPrevia) {
-		if (expPrevia != null && expPrevia.length() > 100) {
-			System.out.println("La experiencia previa no puede exceder los 100 caracteres.");
+	public void setExpPrevia() {
+		String expPrevia = Utilidades.ingresar("Ingrese la experiencia previa del Administrativo");
+		do {
+			if (expPrevia.length() < 101) {
+				this.expPrevia = expPrevia;
+				break;
 		}
-		this.expPrevia = expPrevia;
+			else if (expPrevia.length() > 99) {
+				expPrevia = Utilidades.ingresar("La experiencia previa no puede exceder los 100 caracteres.");
+			}
+			else {
+				break;
+			}
+			
+		}while(true);
 	}
 
 	/**

@@ -62,11 +62,17 @@ public class Profesional extends Usuario {
 		 * 
 		 * @param titulo el título del profesional
 		 */
-		public void setTitulo(String titulo) {
-			if (titulo.length() < 10 || titulo.length() > 50) {
-				System.out.println("El titulo debe ser mínimo 10 caracteres, máximo 50");
-			}
-			this.titulo = titulo;
+		public void setTitulo() {
+			String titulo = Utilidades.ingresarObligatorio("Ingresa nombre del profesional");
+			do {
+				if (titulo.length() > 9 || titulo.length() < 51) {
+					this.titulo = titulo;
+					break; 
+				}
+				else {
+					titulo = Utilidades.ingresarObligatorio("El titulo debe ser mínimo 10 caracteres, máximo 50");
+				}
+			}while(true);
 		}
 
 		/**
@@ -84,12 +90,21 @@ public class Profesional extends Usuario {
 		 * Método para establecer la fecha de ingreso del profesional con validación de formato
 		 * @param fechaIngreso la fecha de ingreso del profesional en formato "DD/MM/AAAA"
 		 */
-		public void setFechaIngreso(String fechaIngreso) {
+		public void setFechaIngreso() {
 			String regex = "\\d{2}/\\d{2}/\\d{4}";
-			if (fechaIngreso.matches(regex)) {
+			String fechaIngreso = Utilidades.ingresar("Ingrese la fecha de ingreso del Profesional");
+			do {
+				if (fechaIngreso.matches(regex)) {
 				this.fechaIngreso = fechaIngreso;
+				break;
+			}	
+			else if (!fechaIngreso.matches(regex)) {
+				fechaIngreso = Utilidades.ingresar("Debe ingresar con formato: DD/MM/AAAA");
 			}
-			Utilidades.escribir("Debe ingresar con formato: DD/MM/AAAA");
+			else {
+				break;
+			}
+			} while(true);
 		}
 
 		/**

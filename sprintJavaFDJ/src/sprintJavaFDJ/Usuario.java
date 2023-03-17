@@ -32,8 +32,17 @@ public class Usuario implements Asesoria{
 	 * 
 	 * @param nombreUsuario
 	 */
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setNombreUsuario() {
+		String nombreUsuario = Utilidades.ingresarObligatorio("Ingrese el nombre de Usuario");
+		do {
+			if(nombreUsuario.length() > 9 && nombreUsuario.length() < 51){
+			this.nombreUsuario = nombreUsuario;
+			break;
+		}
+			else {
+				nombreUsuario = Utilidades.ingresarObligatorio("Error de ingreso. Rango de caracteres entre 10 y 50");
+			}
+		}while(true);
 	}
 	
 	/**
@@ -49,7 +58,7 @@ public class Usuario implements Asesoria{
 	 * @return
 	 */
 	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+		this.fechaNacimiento = obtenerFechaNac();
 	}
 	public String getFechaNacimiento() {
 		return fechaNacimiento;
@@ -66,12 +75,12 @@ public class Usuario implements Asesoria{
 		int anio=0;
 		while (dia<1 || dia>31) {
 		//Utilidades.escribir("Ingrese dia");
-		dia = Integer.parseInt(Utilidades.ingresar("Ingrese día"));
+		dia = Integer.parseInt(Utilidades.ingresarObligatorio("Ingrese día"));
 		//dia= sc.nextInt();
 		}
 		//Utilidades.escribir("Ingrese mes");
-		mes = Integer.parseInt(Utilidades.ingresar("Ingrese mes"));
-		anio = Integer.parseInt(Utilidades.ingresar("Ingrese año"));
+		mes = Integer.parseInt(Utilidades.ingresarObligatorio("Ingrese mes"));
+		anio = Integer.parseInt(Utilidades.ingresarObligatorio("Ingrese año"));
 		//Utilidades.escribir("Ingrese anio");
 		//anio= sc.nextInt();
 		return dia+"/" + mes +"/" + anio;
@@ -81,14 +90,18 @@ public class Usuario implements Asesoria{
 	 * 
 	 * @param run
 	 */
-	public void setRut(long run) {
-		if (run <= 99999999) {
-			this.run = run; 
-		}
-		else {
-			//opcion inválida
-			Utilidades.escribir("Ingrese un RUT válido");
-		}
+	public void setRut() {
+		String run = Utilidades.ingresarObligatorio("Ingrese el RUT");
+		do {
+			if (Long.parseLong(run) <= 99999999) {
+				this.run = Long.parseLong(run); 
+				break;
+			}
+			else {
+				//opcion inválida
+				run = Utilidades.ingresarObligatorio("Ingrese un RUT válido"); //HAY QUE REVISAR ESTO CUANDO SE HAYA MERGEADO
+			}
+		} while(true);
 	}
 	/**
 	 * 

@@ -110,10 +110,10 @@ public class Principal {
 
 		Administrativo administrativo = new Administrativo();
 		
-		administrativo.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del Usuario:"));
-		administrativo.setArea(Utilidades.ingresar("Ingresa Área:"));
-		administrativo.setExpPrevia(Utilidades.ingresar("Ingrese experiencia previa:"));
-		administrativo.setRut(Long.parseLong(Utilidades.ingresar("Ingrese RUT:")));
+		administrativo.setNombreUsuario();
+		administrativo.setArea();
+		administrativo.setExpPrevia();
+		administrativo.setRut();
 		administrativo.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]:"));
 		
 		contenedor.almacenarAdministrativo(administrativo);
@@ -128,9 +128,9 @@ public class Principal {
 	public static void crearUsuario(Contenedor contenedor) {
 
 		Usuario usuario = new Usuario();
-		usuario.setNombreUsuario(Utilidades.ingresar("Ingrese el nombre de Usuario:"));
+		usuario.setNombreUsuario();
 		usuario.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]:"));
-		usuario.setRut(Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Usuario:")));
+		usuario.setRut();
 
 		//listaUsuarios.agregarUsuario(usuario);
 
@@ -208,12 +208,12 @@ public class Principal {
 
  		Profesional profesional = new Profesional();
 
-		profesional.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del profesional"));
+		profesional.setNombreUsuario();
 		profesional.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]"));
-		profesional.setRut(Long.parseLong(Utilidades.ingresar("Ingrese RUT")));
+		profesional.setRut();
 
-		profesional.setTitulo(Utilidades.ingresar("Ingresa titulo: "));
-		profesional.setFechaIngreso(Utilidades.ingresar("Ingrese Fecha de ingreso: "));
+		profesional.setTitulo();
+		profesional.setFechaIngreso();
 
 		contenedor.almacenarProfesional(profesional);
 		Utilidades.escribir("Personal Profesional ha sido guardado exitosamente");
