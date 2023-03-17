@@ -72,7 +72,7 @@ public class Capacitacion{
 			this.dia = dia;
 		}
 		else {
-			Utilidades.ingresar("Ingrese un día válido.");
+			Utilidades.ingresar("Ingrese un dia de la semana válido.");
 		}
 	}
 
@@ -114,13 +114,16 @@ public class Capacitacion{
 	 * Obligatorio; minimo 10 caracteres - maximo 50
 	 * SETTER Y GETTER */
 	public void setLugar(String lugar) {
-		if(lugar.length() > 11 && lugar.length() < 51) {
+		if(lugar.length() > 9 && lugar.length() < 51) {
 			this.lugar = lugar; 
 		}
 		else {
-			Utilidades.escribir("Ha superado el límite de caracteres");
+			Utilidades.ingresar("Ha superado el límite de caracteres");
 		}
+		
+		while(lugar.length() <10 || lugar.length() >50);
 	}
+	
 	public String getLugar() {
 		return lugar;
 	}
@@ -133,7 +136,7 @@ public class Capacitacion{
 			this.duracion = duracion;
 		}
 		else{
-			Utilidades.escribir("Ha superado el límite de caracteres");
+			Utilidades.ingresar("Ha superado el límite de caracteres");
 		}
 	}
 	public String getDuracion() {
@@ -148,8 +151,10 @@ public class Capacitacion{
 			this.cantidadAsistentes = cantidadAsistentes;
 		}
 		else {
-			Utilidades.escribir("Ingrese una cantidad válida de asistentes.");
+			Utilidades.ingresar("Ingrese una cantidad válida de asistentes.");
 		}
+		
+		while(cantidadAsistentes >999);
 	}
 	public int getCantidadAsistentes() {
 		return cantidadAsistentes;
@@ -157,7 +162,7 @@ public class Capacitacion{
 	
 	/** METODO MOSTRAR DETALLES CAPACITACIONES*/
 	public void mostrarDetalle() {
-		Utilidades.escribir("La capacitación será en " + getLugar() + "\n A las " + getHora() + " del día " + getDia() + "\n Y durará " + getDuracion() + " minutos.");
+		Utilidades.ingresar("La capacitación será en " + getLugar() + "\n A las " + getHora() + " del día " + getDia() + "\n Y durará " + getDuracion() + " minutos.");
 	}
 	
 	/** SOBREESCRITURA DEL METODO TOSTRING() */

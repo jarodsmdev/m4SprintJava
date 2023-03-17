@@ -454,9 +454,6 @@ public class Principal {
 
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
-
-
-
 	}
 	public static void crearAccidente(Contenedor contenedor) {
 		

@@ -58,7 +58,7 @@ public class Contenedor {
 			Usuario usuario = (Usuario) listaAsesoria.get(i); // CASTING PARA OBTENER EL RUT DEL USUARIO
 			if (usuario.getRun() == run) {
 				listaAsesoria.remove(i);
-				Utilidades.escribir("[!] Se ha eliminado el usuario: " + usuario.analizarUsuario());
+				Utilidades.ingresar("[!] Se ha eliminado el usuario: " + usuario.analizarUsuario());
 				encontrado = true;
 				break;
 			}

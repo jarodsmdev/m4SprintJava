@@ -47,9 +47,9 @@ public class Cliente extends Usuario {
 			}
 			else {
 				//opcion invalida
-				Utilidades.escribir("Error de ingreso. Rango de caracteres entre 5 y 30");
+				Utilidades.ingresar("Error de ingreso. Rango de caracteres entre 5 y 30");
 			}
-		}while(nombre.length() < 4 || nombre.length() > 31);
+		}while(nombre.length() < 5 || nombre.length() > 30);
 	}
 	
 	public String getNombre() {
@@ -66,9 +66,9 @@ public class Cliente extends Usuario {
 			}
 			else {
 				//opcion invalida
-				Utilidades.escribir("Ha superado el límite de caracteres");
+				Utilidades.ingresar("Ha superado el límite de caracteres");
 			}
-		}while(apellido.length() < 4 || apellido.length() > 31);
+		}while(apellido.length() < 5 || apellido.length() > 30);
 	}
 	public String getApellido() {
 		return apellido;
@@ -99,7 +99,7 @@ public class Cliente extends Usuario {
 
 			}else {
 				//opcion invalida
-				Utilidades.escribir("Ha superado el máximo de caracteres");
+				Utilidades.ingresar("Ha superado el máximo de caracteres");
 			}
 		}while(afp.length() < 4  && afp.length()> 30);
 
@@ -122,7 +122,7 @@ public class Cliente extends Usuario {
 				this.sistemaSalud = sistemaSalud;
 			}else {
 				//opcion invalida
-				Utilidades.escribir("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
+				Utilidades.ingresar("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
 			}
 		}while(sistemaSalud != '1' && sistemaSalud != '2');
 	}
@@ -144,7 +144,7 @@ public class Cliente extends Usuario {
 				this.direccion = direccion; 
 			}else {
 				//opcion invalida
-				Utilidades.escribir("Ha superado el límite de caracteres");
+				Utilidades.ingresar("Ha superado el límite de caracteres");
 			}
 		}while(direccion.length() > 70);
 	}
@@ -162,11 +162,11 @@ public class Cliente extends Usuario {
 	 * SETTER Y GETTER */
 	public void setComuna(String comuna) {
 		do {
-			if(comuna.length() <= 50) {
+			if(comuna.length() < 51) {
 				this.comuna = comuna; 
 			}else {
 				//opcion invalida
-				Utilidades.escribir("Ha superado el máximo de caracteres");
+				Utilidades.ingresar("Ha superado el máximo de caracteres");
 			}
 		}while(comuna.length() > 50);
 	}
@@ -188,7 +188,7 @@ public class Cliente extends Usuario {
 				this.edad = edad; 
 			}else{
 				//opcion invalida
-				Utilidades.escribir("Ingrese una edad válida [0-149]");
+				Utilidades.ingresar("Ingrese una edad válida [0-149]");
 			}
 		}while(edad < 0 || edad > 149);
 	}
@@ -230,16 +230,16 @@ public class Cliente extends Usuario {
 	
 	/** METODO OBTENER NOMBRE = NOMBRE Y APELLIDOS CONCATENADOS*/
 	public String obtenerNombre() {
-		return Utilidades.escribir(nombre + " " + apellido);
+		return Utilidades.ingresar(nombre + " " + apellido);
 	}
 	
 	/** METODO QUE RETORNA EL SISTEMA DE SALUD DEL CLIENTE */
 	public void obtenerSistemaSalud(char sistemaSalud) {
 		if(sistemaSalud ==1) {
-			Utilidades.escribir("FONASA");
+			Utilidades.ingresar("FONASA");
 		}
 		else {
-			Utilidades.escribir("ISAPRE");
+			Utilidades.ingresar("ISAPRE");
 		}
 	}
 	
@@ -276,13 +276,13 @@ public class Cliente extends Usuario {
 	/** METODOS QUE MUESTRAN LA CANTIDAD DE CAPACITACIONES, VISITAS A TERRENO Y ACCIDENTES DEL CLIENTE*/
 	
 	public void mostrarCantCapacitaciones() {
-		Utilidades.escribir("El cliente " + obtenerNombre() + " ha realizado " + cantidadCapacitaciones + " capacitaciones." );
+		Utilidades.ingresar("El cliente " + obtenerNombre() + " ha realizado " + cantidadCapacitaciones + " capacitaciones." );
 	}
 	public void mostrarCantAccidentes() {
-		Utilidades.escribir("El cliente " + obtenerNombre() + " ha tenido " + cantidadAccidentes + " accidentes.");
+		Utilidades.ingresar("El cliente " + obtenerNombre() + " ha tenido " + cantidadAccidentes + " accidentes.");
 	}
 	public void mostrarCantVisitasTerreno() {
-		Utilidades.escribir("El cliente " + obtenerNombre() + " ha recibido " + cantidadVisitas + " visitas a terreno.");
+		Utilidades.ingresar("El cliente " + obtenerNombre() + " ha recibido " + cantidadVisitas + " visitas a terreno.");
 	}
 	@Override
 	public String toString() {
