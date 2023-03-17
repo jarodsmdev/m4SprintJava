@@ -311,9 +311,10 @@ public class Principal {
 						//Cliente cliente = contenedor.obtenerCliente(inputRut);
 						Utilidades.escribir("SE HA ENCONTRADO AL CLIENTE\n");
 				        Accidente accidente = new Accidente();
-				        Cliente cl1 = new Cliente();
-				        
-				        cl1.setRut(inputRut);
+				       
+				        Cliente cliente = contenedor.obtenerCliente(inputRut);
+				      
+				        accidente.setRunCliente(inputRut);
 						accidente.setFecha(Utilidades.ingresar("Ingresar Fecha con formato: DD/MM/AAAA"));
 						accidente.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
 						accidente.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
@@ -322,7 +323,7 @@ public class Principal {
 						
 						//Agrega accidente
 						
-						cl1.agregarAccidente(accidente);
+
 						
 						Utilidades.escribir("Se ha creado la Visita Terreno correctamente.");
 
@@ -333,7 +334,9 @@ public class Principal {
 			}while(!input.matches(regEx));
 	}
 
-   
+   public static void crearRevision() {
+	   
+   }
 	
 
 }
