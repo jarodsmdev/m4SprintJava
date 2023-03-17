@@ -198,22 +198,21 @@ public class Principal {
 					//Cliente cliente = contenedor.obtenerCliente(inputRut);
 					Utilidades.escribir("SE HA ENCONTRADO AL CLIENTE\n");
 			        VisitaEnTerreno visitaTerreno = new VisitaEnTerreno();
-			        Cliente cl1 = new Cliente();
+
+			        Cliente cliente = contenedor.obtenerCliente(inputRut);
 			        
-			        cl1.setRut(inputRut);
+			        visitaTerreno.setRut(inputRut);
 					visitaTerreno.setDia(Utilidades.ingresar("Ingresar Fecha con formato: DD/MM/AAAA"));
 					visitaTerreno.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
 					visitaTerreno.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
 					visitaTerreno.setComentarios(Utilidades.ingresar("Ingrese comentarios de la visita : "));
 					
 					//Agrega capacitación a la lista de visita terreno
-//					contenedor
-					cl1.agregarVisitaTerreno(visitaTerreno);
-					
+					cliente.agregarVisitaTerreno(visitaTerreno);
 
 					Utilidades.escribir("Se ha creado la Visita Terreno correctamente.");
 
-					//TODO: PREGUNTAR SI DESEA SEGUIR INGRESANDO CAPACITACIONES AL MISMO CLIENTE
+					//TODO: PREGUNTAR SI DESEA SEGUIR INGRESANDO VISITA EN TERRENO AL MISMO CLIENTE
 					//VOLVER AL MENÚ
 				}else {
 					//NO EXISTE USUARIO
