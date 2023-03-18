@@ -178,9 +178,9 @@ public class Contenedor {
 			cliente = (Cliente) listaAsesoria.get(i); // CASTING
 			if (cliente.getRun() == rutCliente) {
 				return cliente;
-			} else {
-				Utilidades.ingresar("no encontre nada");
-			}
+			}/* else {
+				Utilidades.escribir("[!] No se ha encontrado al Cliente RUT: " + rutCliente);
+			}*/
 		}
 		return cliente;
 	}

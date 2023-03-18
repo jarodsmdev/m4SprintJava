@@ -88,7 +88,7 @@ public class Principal {
 
 			String capturador;
 			do{
-				Utilidades.escribir("\n\t--MENÚ PRINCIPAL--\n");
+				Utilidades.escribir("\n[\t--MENÚ PRINCIPAL--\t]\n");
 				Utilidades.escribir("\n\t1. MENÚ USUARIOS" +
 									"\n\t2. MENÚ INFORMES" +
 									"\n\t3. MENÚ ADMINISTRATIVO" +
@@ -173,7 +173,7 @@ public class Principal {
 	public static void menuUsuarios(Contenedor contenedor){
 		String capturador;
 		do{
-			Utilidades.escribir("\n\t--MENÚ USUARIO--\n");
+			Utilidades.escribir("\n[\t--MENÚ USUARIO--\n]\n");
 			Utilidades.escribir("\n\t1. CREAR USUARIO" +
 								"\n\t2. CREAR CLIENTE" +
 								"\n\t3. CREAR PROFESIONAL" +
@@ -215,7 +215,7 @@ public class Principal {
 	public static void menuInformes(Contenedor contenedor){
 		String capturador;
 		do{
-			Utilidades.escribir("\n\t-- MENÚ INFORMES --\n");
+			Utilidades.escribir("\n[\t-- MENÚ INFORMES --\t]\n");
 			Utilidades.escribir("\n\t1. MOSTRAR TODOS LOS USUARIOS" +
 								"\n\t2. MOSTRAR USUARIOS POR TIPO" +
 								"\n\t3. MOSTRAR CAPACITACIONES" +
@@ -254,7 +254,7 @@ public class Principal {
 					Utilidades.escribir("[!] OPCIÓN INGRESADA NO ES VÁLIDA, SÓLO INGRESE VALORES ENTRE 1 AL 5.\n\n");
 			}
 
-		}while(!capturador.matches("^[1-5]$"));
+		}while(!capturador.matches("^[1-6]$"));
 	}
 
 	public static void menuFiltrarUsuariosPorTipo(Contenedor contenedor){
@@ -571,43 +571,53 @@ public class Principal {
 	   	//MOSTRAR CLIENTES
 			String input;
 			String regEx = "^[0-9]+$";
+
+			Utilidades.escribir("[-- SELECCIONE UN CLIENTE --]\n\n");
 			contenedor.listarUsuariosPorTipo(Cliente.class);
 			
+			//VALIDA CORRECTAMENTE EL INGRESO DEL RUT DEL CLIENTE
 			do {
-				input = Utilidades.ingresar("Ingrese RUT Cliente: ");
+				input = Utilidades.ingresar("Ingrese RUT Cliente ['SALIR' para cancelar]: ");
 				if(input.trim().length() == 0) {
-					Utilidades.escribir("Error de Ingreso, Debe escribir RUT del Cliente a modificar.\n");
+					Utilidades.escribir("[ERROR] Debe escribir RUT del Cliente.\n");
+				}else if(input.trim().equalsIgnoreCase("SALIR")){
+					//SALIR DEL BUCLE HACIA UN MENU
+					Utilidades.escribir("[!] Se ha cancelado el ingreso de Accidentes\n");
+					menuGestion(contenedor);
 				}else if(!input.matches(regEx)) {
-					Utilidades.escribir("Error de Ingreso, sólo se aceptan números\n");
-				}else {
-//					VALIDACION CORRECTA
-					Utilidades.escribir("VALIDACIÓN CORRECTA!\n");
+					Utilidades.escribir("[ERROR] Sólo se aceptan números\n");
+				}else{
+
 					long inputRut = Long.parseLong(input);
+
 					if(contenedor.existeUsuario(inputRut)) {
 						//EXISTE USUARIO OBTIENE CLIENTE
-						//Cliente cliente = contenedor.obtenerCliente(inputRut);
-						Utilidades.escribir("SE HA ENCONTRADO AL CLIENTE\n");
+				        Cliente cliente = contenedor.obtenerCliente(inputRut);
+						
+						Utilidades.escribir("[CLIENTE] " + cliente.obtenerNombre() + "\n");
+
 				        Accidente accidente = new Accidente();
 				       
-				        Cliente cliente = contenedor.obtenerCliente(inputRut);
 				      
 				        accidente.setRutCliente(inputRut);
-						accidente.setFecha(Utilidades.ingresar("Ingresar Fecha con formato: DD/MM/AAAA"));
+						accidente.setFecha(Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: "));
 						accidente.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
-						accidente.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
-						accidente.setOrigen(Utilidades.ingresar("Ingrese origen del accidente (max 100 caracteres): "));
-						accidente.setConsecuencias(Utilidades.ingresar("Ingrese consecuencias del accidente(max 100 caracteres): "));
+						accidente.setLugar(Utilidades.ingresar("Ingrese Lugar (Texto entre 10 y 50 caracteres): "));
+						accidente.setOrigen(Utilidades.ingresar("Ingrese origen del accidente (máx 100 caracteres): "));
+						accidente.setConsecuencias(Utilidades.ingresar("Ingrese consecuencias del accidente(máx 100 caracteres): "));
 						
 						//Agrega accidente
 						cliente.agregarAccidente(accidente);
-						Utilidades.escribir("Se ha creado la Visita Terreno correctamente.");
+						Utilidades.escribir("Se ha ingresado el Accidente correctamente.\n\n");
 
-
+						//MUESTRA TODOS LOS ACCIDENTES
+						cliente.mostrarAccidentes(inputRut);
 					}else {
-						//NO EXISTE USUARIO
+						Utilidades.escribir("[ERROR] RUT Ingresado no existe en los registros.\n\n");
+						crearAccidente(contenedor);
 					}
 				}
-			}while(!input.matches(regEx));
+			}while(!input.matches(regEx) || !input.trim().equalsIgnoreCase("SALIR"));
 	}
 
    public static void crearRevision() {
