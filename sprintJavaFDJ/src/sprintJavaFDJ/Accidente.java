@@ -110,6 +110,10 @@ public class Accidente {
 		return lugar;
 	}
 
+	/**
+	 * 
+	 * @param lugar
+	 */
 	public void setLugar(String lugar) {
 		do {
 			if (lugar.length() >= 10 && lugar.length() <= 50) {
@@ -121,10 +125,18 @@ public class Accidente {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getOrigen() {
 		return origen;
 	}
 
+	/**
+	 * 
+	 * @param origen
+	 */
 	public void setOrigen(String origen) {
 		do {
 			if (origen.length() <= 100) {

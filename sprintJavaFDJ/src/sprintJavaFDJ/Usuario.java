@@ -34,17 +34,19 @@ public class Usuario implements Asesoria{
 	 * @param nombreUsuario
 	 */
 	public void setNombreUsuario(String nombreUsuario) {
+
 		do {
-			Utilidades.ingresar("Ingrese nombre de usuario");
-			if(nombreUsuario.length() >9 && nombreUsuario.length() <51) { 
+			if(nombreUsuario.trim().length() == 0) { 
+				Utilidades.escribir("No puede estar en blanco\n");
+				nombreUsuario = Utilidades.ingresar("Ingrese nombre de Usuario (Entre 10 y 50 caracteres)");
+			}else if(nombreUsuario.trim().length() < 10 || nombreUsuario.trim().length() > 50){
+				Utilidades.escribir("Permitido entre 10 y 50 caracteres\n");
+				nombreUsuario = Utilidades.ingresar("Ingrese nombre de Usuario (Entre 10 y 50 caracteres)");
+			}else{
 				this.nombreUsuario = nombreUsuario;
-			}
+			}	
 			
-			else {
-				Utilidades.ingresar("Ha superado el limite de caracteres");
-			}
-			
-		} while(nombreUsuario.length() <10 || nombreUsuario.length() >50);
+		} while(nombreUsuario.length() < 10 || nombreUsuario.length() > 50);
 	}
 	
 	
@@ -61,7 +63,16 @@ public class Usuario implements Asesoria{
 	 * @return
 	 */
 	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+		String regEx = "\\d{2}/\\d{2}/\\d{4}";
+		do{
+			if(!fechaNacimiento.trim().matches(regEx)){
+				fechaNacimiento = Utilidades.ingresar("Error de Ingreso. Debe tener formato dd/mm/aaaa. Vuelva a intentar.");
+			}else if(fechaNacimiento.trim().length() == 0){
+				fechaNacimiento = Utilidades.ingresar("Error de Ingreso. Debe tener formato dd/mm/aaaa. Vuelva a intentar.");
+			}else {
+				this.fechaNacimiento = fechaNacimiento;
+			}
+		}while(!fechaNacimiento.trim().matches(regEx));
 	}
 	public String getFechaNacimiento() {
 		return fechaNacimiento;
@@ -77,15 +88,12 @@ public class Usuario implements Asesoria{
 		int mes=0;
 		int anio=0;
 		while (dia<1 || dia>31) {
-		//Utilidades.escribir("Ingrese dia");
-		dia = Integer.parseInt(Utilidades.ingresar("Ingrese día"));
-		//dia= sc.nextInt();
+			dia = Integer.parseInt(Utilidades.ingresar("Ingrese día"));
 		}
-		//Utilidades.escribir("Ingrese mes");
+	
 		mes = Integer.parseInt(Utilidades.ingresar("Ingrese mes"));
 		anio = Integer.parseInt(Utilidades.ingresar("Ingrese año"));
-		//Utilidades.escribir("Ingrese anio");
-		//anio= sc.nextInt();
+
 		return dia+"/" + mes +"/" + anio;
 	}
 	
@@ -93,21 +101,24 @@ public class Usuario implements Asesoria{
 	 * 
 	 * @param run
 	 */
-	public void setRut(long run) {
-		do {
-			Utilidades.ingresar("Ingrese RUT");
-			if (run <= 99999999) {
-				this.run = run; 
+	public void setRut(String runString) {
+		String regExNumbers = "^[0-9]+$";
+		do{
+			if(!runString.matches(regExNumbers) || runString.isEmpty() || runString.trim().length() == 0){
+				Utilidades.escribir("Ingreso de sólo números para establecer RUT");
+				runString = Utilidades.ingresar("Ingrese RUT").trim();
+			}else{
+				long run = Long.parseLong(runString);
+				if(run < 100000000 && run > 0){
+					this.run = run;
+				}else{
+					Utilidades.escribir("Valor ingresado no es válido para establecer un RUT\n");
+					runString = Utilidades.ingresar("Vuelva a intentar ingresar RUT").trim();
+				}
 			}
-			else {
-				//opcion inválida
-				Utilidades.ingresar("Ingrese un RUT válido");
-			}
-			
-		} while(run >99999999);
+		}while(!runString.matches(regExNumbers) || runString.isEmpty() || run > 99999999);
 		
 	}
-	
 	/**
 	 * 
 	 * @return

@@ -116,6 +116,10 @@ public class VisitaEnTerreno {
 		return lugar;
 	}
 
+	/**
+	 * 
+	 * @param lugar
+	 */
 	public void setLugar(String lugar) {
 		do {
 			if (lugar.length() > 9 && lugar.length() < 51) {

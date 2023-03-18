@@ -4,12 +4,11 @@ package sprintJavaFDJ;
 public class Principal {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		Contenedor contenedor = new Contenedor();
 		
 		//DATOS DE PRUEBA
-		DebugMode(contenedor);
+		//DebugMode(contenedor);
 		menuPrincipal(contenedor);
 	}
 
@@ -18,21 +17,21 @@ public class Principal {
 		Usuario usuario1 = new Usuario();
 		usuario1.setNombreUsuario("SOY USUARIO1");
 		usuario1.setFechaNacimiento("22/03/1983");
-		usuario1.setRut(15521239);
+		usuario1.setRut("15521239");
 		
 		Cliente cliente1 = new Cliente();
-		cliente1.setNombre("SOY CLIENTE1");
-		cliente1.setApellido("SOY APELLIDO DE CLIENTE1");
-		cliente1.setRut(1234561);
-		cliente1.setDireccion("DIRECCION CLIENTE1");
-		cliente1.setComuna("COMUNA CLIENTE1");
+		cliente1.setNombre("SOY UN CLIENTE1");
+		// cliente1.setApellido();
+		cliente1.setRut("1234561");
+		// cliente1.setDireccion();
+		// cliente1.setComuna();
 		
-		Cliente cliente2 = new Cliente();
-		cliente2.setNombre("SOY CLIENTE2");
-		cliente2.setApellido("SOY APELLIDO DE CLIENTE2");
-		cliente2.setRut(7894662);
-		cliente2.setDireccion("DIRECCION CLIENTE2");
-		cliente2.setComuna("COMUNA CLIENTE2");
+		// Cliente cliente2 = new Cliente();
+		// cliente2.setNombre();
+		// cliente2.setApellido();
+		// cliente2.setRut(7894662);
+		// cliente2.setDireccion();
+		// cliente2.setComuna();
 
 		Capacitacion capacitacion1 = new Capacitacion();
 		capacitacion1.setRut(7894662);
@@ -56,14 +55,14 @@ public class Principal {
 		administrativo1.setExpPrevia("5");
 		administrativo1.setFechaNacimiento("22/03/1983");
 		administrativo1.setNombreUsuario("NICKNAME ADM1");
-		administrativo1.setRut(1452654);
+		administrativo1.setRut("1452654");
 		
 		Profesional profesional1 = new Profesional();
 		profesional1.setNombreUsuario("SOY PROFESIONAL1");
 		profesional1.setFechaIngreso("14/03/1999");
 		profesional1.setFechaNacimiento("05/02/1956");
 		profesional1.setNombreUsuario("NICKNAME PROF1");
-		profesional1.setRut(458744);
+		profesional1.setRut("458744");
 		profesional1.setTitulo("INGENIER@");
 
 		Profesional profesional2 = new Profesional();
@@ -71,12 +70,12 @@ public class Principal {
 		profesional2.setFechaIngreso("14/03/1996");
 		profesional2.setFechaNacimiento("05/02/1956");
 		profesional2.setNombreUsuario("NICKNAME PROF2");
-		profesional2.setRut(1554744);
+		profesional2.setRut("1554744");
 		profesional2.setTitulo("ARQUITECT@");
 		
 		contenedor.almacenarUsuario(usuario1);
-		contenedor.almacenarCliente(cliente1);
-		contenedor.almacenarCliente(cliente2);
+		//contenedor.almacenarCliente(cliente1);
+		//contenedor.almacenarCliente(cliente2);
 		contenedor.almacenarAdministrativo(administrativo1);
 		contenedor.almacenarProfesional(profesional1);
 		contenedor.almacenarProfesional(profesional2);
@@ -256,7 +255,7 @@ public class Principal {
 		administrativo.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del Usuario:"));
 		administrativo.setArea(Utilidades.ingresar("Ingresa Área:"));
 		administrativo.setExpPrevia(Utilidades.ingresar("Ingrese experiencia previa:"));
-		administrativo.setRut(Long.parseLong(Utilidades.ingresar("Ingrese RUT:")));
+		administrativo.setRut(Utilidades.ingresar("Ingrese RUT:"));
 		administrativo.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]:"));
 		
 		contenedor.almacenarAdministrativo(administrativo);
@@ -271,9 +270,9 @@ public class Principal {
 	public static void crearUsuario(Contenedor contenedor) {
 
 		Usuario usuario = new Usuario();
-		usuario.setNombreUsuario(Utilidades.ingresar("Ingrese el nombre de Usuario:"));
+		usuario.setNombreUsuario(Utilidades.ingresar("Ingrese el nombre del Usuario:"));
 		usuario.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]:"));
-		usuario.setRut(Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Usuario:")));
+		usuario.setRut(Utilidades.ingresar("Ingrese el RUT del Usuario:"));
 		
 		contenedor.almacenarUsuario(usuario);
 		Utilidades.escribir("El Usuario ha sido guardado exitosamente");
@@ -286,31 +285,41 @@ public class Principal {
 
 	public static void crearCliente(Contenedor contenedor) {
 		//VALIDAR QUE EL CONTENIDO DE capturador sea tipo long
-		long capturador = Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Cliente"));
+		long capturador;
+		do{
+			try {
+				capturador = Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Cliente"));
+			}
+			catch (Exception e) {
+				capturador = 0;
+				Utilidades.escribir("Debe Ingresar un RUT para continuar\n");
+			}
+		}while(false);
+		
+
 
 		//VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS
-		if(!contenedor.existeUsuario(capturador)) {
-			Cliente cliente = new Cliente();
-			cliente.setNombre(Utilidades.ingresar("Ingrese el nombre del cliente"));
-			cliente.setApellido(Utilidades.ingresar("Ingrese el apellido del cliente"));
-			cliente.setTelefono(Integer.parseInt(Utilidades.ingresar("Ingrese numero de telefono")));
-			cliente.setAfp(Utilidades.ingresar("Ingrese AFP"));
-			String capChar = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
-			cliente.setSistemaSalud(capChar.charAt(0));
-			cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección"));
-			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna"));
-			cliente.setEdad(Integer.parseInt(Utilidades.ingresar("Ingrese la edad del cliente")));
-			contenedor.almacenarCliente(cliente);
-
-			Utilidades.escribir(cliente.analizarUsuario());
-			Utilidades.escribir("El Cliente ha sido guardado correctamente");
-
-
-		}else {
-			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
-		}
+			if(!contenedor.existeUsuario(capturador)) {
+				Cliente cliente = new Cliente();
+				cliente.setRut(String.valueOf(capturador));
+				cliente.setNombre(Utilidades.escribir("Nombre debe estar en el rango entre [5-30] caracteres\n"));
+				cliente.setApellido();
+				cliente.setTelefono();
+				cliente.setAfp();
+				cliente.setSistemaSalud();
+				cliente.setDireccion();
+				cliente.setComuna();
+				cliente.setEdad();
+				contenedor.almacenarCliente(cliente);
+				Utilidades.escribir("El Cliente ha sido guardado correctamente");
+				
+			}else {
+				Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
+			}
+		// }
+			
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
-		menuPrincipal(contenedor);
+		menuUsuarios(contenedor);
 	}
 	 /**
      * Metodo crear visita en terreno
@@ -339,7 +348,7 @@ public class Principal {
 			        VisitaEnTerreno visitaTerreno = new VisitaEnTerreno();
 			        Cliente cl1 = new Cliente();
 			        
-			        cl1.setRut(inputRut);
+			        cl1.setRut(input);
 					visitaTerreno.setDia(Utilidades.ingresar("Ingresar Fecha con formato: DD/MM/AAAA"));
 					visitaTerreno.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
 					visitaTerreno.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
@@ -443,7 +452,7 @@ public class Principal {
 
 		profesional.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del profesional"));
 		profesional.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]"));
-		profesional.setRut(Long.parseLong(Utilidades.ingresar("Ingrese RUT")));
+		profesional.setRut(Utilidades.ingresar("Ingrese RUT"));
 
 		profesional.setTitulo(Utilidades.ingresar("Ingresa titulo: "));
 		profesional.setFechaIngreso(Utilidades.ingresar("Ingrese Fecha de ingreso: "));

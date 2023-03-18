@@ -16,8 +16,19 @@ public class Utilidades {
 		return capturador;
 	}
 	
-	public static String preguntarDato(String pregunta) {
-		String capturador = Utilidades.ingresar(pregunta);
+	public static String ingresarObligatorio(String mensaje) {
+		Scanner sc = new Scanner(System.in);
+		Utilidades.escribir("[+] " + mensaje + " ");
+		String capturador = sc.nextLine(); 
+		do {
+			if(capturador.length() != 0) {
+				break;
+			}
+			else {
+				Utilidades.escribir("No puede estar vacío ");
+				capturador = sc.nextLine();
+			}
+		}while(true);
 		return capturador;
 	}
 }

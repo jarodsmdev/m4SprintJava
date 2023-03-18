@@ -35,9 +35,15 @@ public class Capacitacion{
 	/**@param IDS
 	 * Obligatorio
 	 * SETTER Y GETTER */
-	public void setId(int id) {
-		//ID AUTOINCREMENTAL MÉTODO INNECESARIO
-		this.id = id;
+	public void setId() {
+		//MÉTODO INNECESARIO ID AUTOINCREMENTAL
+		String id = Utilidades.ingresarObligatorio("Ingrese el ID de la capacitacion");
+			do {
+				if(id.length() != 0) {
+					this.id = Integer.parseInt(id);
+					break;
+				}
+			}while(true);
 	}
 	public int getId() {
 		return id;
