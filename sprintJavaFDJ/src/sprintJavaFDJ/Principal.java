@@ -17,12 +17,12 @@ public class Principal {
 		Usuario usuario1 = new Usuario();
 		usuario1.setNombreUsuario("SOY USUARIO1");
 		usuario1.setFechaNacimiento("22/03/1983");
-		usuario1.setRut("15521239");
+		usuario1.setRut(1552123);
 		
 		Cliente cliente1 = new Cliente();
 		cliente1.setNombre("SOY UN CLIENTE1");
-		// cliente1.setApellido();
-		cliente1.setRut("1234561");
+		///cliente1.setApellido();
+		cliente1.setRut(1234561);
 		// cliente1.setDireccion();
 		// cliente1.setComuna();
 		
@@ -55,14 +55,14 @@ public class Principal {
 		administrativo1.setExpPrevia("5");
 		administrativo1.setFechaNacimiento("22/03/1983");
 		administrativo1.setNombreUsuario("NICKNAME ADM1");
-		administrativo1.setRut("1452654");
+		administrativo1.setRut(1452654);
 		
 		Profesional profesional1 = new Profesional();
 		profesional1.setNombreUsuario("SOY PROFESIONAL1");
 		profesional1.setFechaIngreso("14/03/1999");
 		profesional1.setFechaNacimiento("05/02/1956");
 		profesional1.setNombreUsuario("NICKNAME PROF1");
-		profesional1.setRut("458744");
+		profesional1.setRut(458744);
 		profesional1.setTitulo("INGENIER@");
 
 		Profesional profesional2 = new Profesional();
@@ -70,7 +70,7 @@ public class Principal {
 		profesional2.setFechaIngreso("14/03/1996");
 		profesional2.setFechaNacimiento("05/02/1956");
 		profesional2.setNombreUsuario("NICKNAME PROF2");
-		profesional2.setRut("1554744");
+		profesional2.setRut(1554744);
 		profesional2.setTitulo("ARQUITECT@");
 		
 		contenedor.almacenarUsuario(usuario1);
@@ -169,7 +169,7 @@ public class Principal {
 	public static void menuUsuarios(Contenedor contenedor){
 		String capturador;
 		do{
-			//Utilidades.escribir("\n\t--MENÚ PRINCIPAL--\n");
+			Utilidades.escribir("\n\t--MENÚ USUARIO--\n");
 			Utilidades.escribir("\n\t1. CREAR USUARIO" +
 								"\n\t2. CREAR CLIENTE" +
 								"\n\t3. CREAR PROFESIONAL" +
@@ -195,7 +195,7 @@ public class Principal {
 					break;
 				case "4":
 					Utilidades.escribir("\t-- CREAR ADMINISTRATIVO --\n\n");
-					crearAdministrador(contenedor);
+					crearAdministrativo(contenedor);
 					break;
 				case "5":
 					//Utilidades.escribir("\t-- REGRESANDO AL MENÚ PRINCIPAL --\n\n");
@@ -293,22 +293,28 @@ public class Principal {
 	}
 	
 	
-	public static void crearAdministrador (Contenedor contenedor) {
+	public static void crearAdministrativo (Contenedor contenedor) {
 
 		Administrativo administrativo = new Administrativo();
 		
-		administrativo.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del Usuario:"));
-		administrativo.setArea(Utilidades.ingresar("Ingresa Área:"));
-		administrativo.setExpPrevia(Utilidades.ingresar("Ingrese experiencia previa:"));
-		administrativo.setRut(Utilidades.ingresar("Ingrese RUT:"));
-		administrativo.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]:"));
+		//PRIMERO VALIDAR SI EL RUT YA EXISTEN EN LA BD
+		Utilidades.validarLong("Ingrese RUT:", contenedor, administrativo);
+		
+		administrativo.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del Administrativo: "));
+		administrativo.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]: "));
+		administrativo.setArea(Utilidades.ingresar("Ingresa Área: "));
+		administrativo.setExpPrevia(Utilidades.ingresar("Ingrese su experiencia previa [Máx. 100 caracteres]: "));
+		//administrativo.setRut(Utilidades.ingresar("Ingrese RUT:"));
 		
 		contenedor.almacenarAdministrativo(administrativo);
 		Utilidades.escribir("Personal Administrativo ha sido guardado exitosamente");
+
+		//DEBUG MODE
+		Utilidades.escribir("[RETORNO MÉTODO ANALIZAR ADMINISTRATIVO]" + administrativo.analizarUsuario());//DEBUGMODE
 		contenedor.listarUsuarios();
 
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
-		menuPrincipal(contenedor);
+		menuUsuarios(contenedor);
 
 	}
 
@@ -317,58 +323,75 @@ public class Principal {
 		Usuario usuario = new Usuario();
 		usuario.setNombreUsuario(Utilidades.ingresar("Ingrese el nombre del Usuario:"));
 		usuario.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]:"));
-		usuario.setRut(Utilidades.ingresar("Ingrese el RUT del Usuario:"));
-		
+
+		//usuario.setRut(Utilidades.ingresar("Ingrese el RUT del Usuario:"));
+		Utilidades.validarLong("Ingrese el RUT del Usuario: ", contenedor, usuario);
+
 		contenedor.almacenarUsuario(usuario);
-		Utilidades.escribir("El Usuario ha sido guardado exitosamente");
+		Utilidades.escribir("El Usuario ha sido guardado exitosamente\n");
 		
-		//contenedor.listarUsuarios();
+		//DEBUG MODE
+		Utilidades.escribir("[RETORNO MÉTODO ANALIZAR USUARIO]" + usuario.analizarUsuario());//DEBUGMODE
+		contenedor.listarUsuarios(); //DEBUGMODE
+		
 
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
 		}
 
+	/**
+	 * MÉTODO QUE SE ASEGURA QUE EL RUT INGRESADO SEA NUMERICO PODER CONTINUAR CON LA CREACION DE OBJETO CLIENTE
+	 * @param contenedor
+	 */	
 	public static void crearCliente(Contenedor contenedor) {
 		//VALIDAR QUE EL CONTENIDO DE capturador sea tipo long
-		long capturador;
-		do{
-			try {
-				capturador = Long.parseLong(Utilidades.ingresar("Ingrese el RUT del Cliente"));
-			}
-			catch (Exception e) {
-				capturador = 0;
-				Utilidades.escribir("Debe Ingresar un RUT para continuar\n");
-			}
-		}while(false);
-		
+		String capturador = (Utilidades.ingresar("Ingresar RUT:"));
 
-
-		//VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS
-			if(!contenedor.existeUsuario(capturador)) {
-				Cliente cliente = new Cliente();
-				cliente.setRut(String.valueOf(capturador));
-				cliente.setNombre(Utilidades.ingresar("Ingrese Nombre Cliente:"));
-				cliente.setApellido(); //OK
-				cliente.setTelefono(); //OK
-				cliente.setAfp(); //OK
-				cliente.setSistemaSalud(); //OK//al ingresar 3 bucle
-				cliente.setDireccion(); //OK OPCIONAL
-				cliente.setComuna(); //OK OPCIONAL
-				cliente.setEdad(); //FALLA CON LETRAS
-				contenedor.almacenarCliente(cliente);
-				Utilidades.escribir("El Cliente ha sido guardado correctamente");
-				
-			}else {
-				Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
-			}
-		// }
-			
-		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
-		menuUsuarios(contenedor);
+		if(Utilidades.esNumerica(capturador)){
+			registrarCliente(contenedor, Long.parseLong(capturador));
+		}else{
+			Utilidades.escribir("[ERROR] Valor ingresado no es válido.\n");
+			crearCliente(contenedor);
+		}
 	}
-	 /**
-     * Metodo crear visita en terreno
-     */
+		
+	/**
+	 * MÉTODO QUE PERMITE LA CREACIÓN DE OBJETOS TIPO CLIENTE
+	 * @param contenedor
+	 * @param rutLong
+	 */
+	public static void registrarCliente(Contenedor contenedor, long rutLong){
+		//VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS
+		if(!contenedor.existeUsuario(rutLong)) {
+			Cliente cliente = new Cliente();
+			cliente.setRut(rutLong);
+			cliente.setNombre(Utilidades.ingresar("Ingrese Nombre Cliente:"));
+			cliente.setApellido(); //OK OBLIGATORIO
+			cliente.setTelefono(); //OK OBLIGATORIO
+			cliente.setAfp(); //OK OPCIONAL
+			cliente.setSistemaSalud(); //OK//al ingresar 3 bucle //CORREGIDO
+			cliente.setDireccion(); //OK OPCIONAL
+			cliente.setComuna(); //OK OPCIONAL
+			cliente.setEdad(); //FALLA CON LETRAS //CORREGIDO
+			contenedor.almacenarCliente(cliente);
+			Utilidades.escribir("El Cliente ha sido guardado correctamente");
+
+			Utilidades.escribir("[RETORNO MÉTODO ANALIZAR CLIENTE]" + cliente.analizarUsuario());//DEBUG
+			
+			//INVOCAR AL MENÚ USUARIOS PARA MANTENER EL LOOP
+			menuUsuarios(contenedor);
+			
+		}else {
+			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
+			//INVOCAR AL MENÚ USUARIOS PARA MANTENER EL LOOP
+			crearCliente(contenedor);
+		}
+	}
+
+	/**
+	 * MÉTODO QUE PERMITE LA CREACIÓN DE OBJETOS VISITA EN TERRENO
+	 * @param contenedor
+	 */
     public static void crearVisitaTerreno(Contenedor contenedor) {
     	
     	//MOSTRAR CLIENTES
@@ -393,7 +416,8 @@ public class Principal {
 			        VisitaEnTerreno visitaTerreno = new VisitaEnTerreno();
 			        Cliente cl1 = new Cliente();
 			        
-			        cl1.setRut(input);
+			        //cl1.setRut(input);
+					Utilidades.validarLong("Ingrese RUT:", contenedor, cl1);
 					visitaTerreno.setDia(Utilidades.ingresar("Ingresar Fecha con formato: DD/MM/AAAA"));
 					visitaTerreno.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
 					visitaTerreno.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
@@ -490,25 +514,38 @@ public class Principal {
 	}
 
 
-	//crear profesional
+	/**
+	 * MÉTODO QUE PERMITE CREAR OBJETOS DE TIPO PROFESIONAL
+	 * @param contenedor
+	 */
 	public static void crearProfesional (Contenedor contenedor) {
 
  		Profesional profesional = new Profesional();
+		
+		//VALIDAR SI EXISTE EL RUT ANTES DE CONTINUAR
+		Utilidades.validarLong("Ingrese RUT:", contenedor, profesional);
 
-		profesional.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del profesional"));
-		profesional.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]"));
-		profesional.setRut(Utilidades.ingresar("Ingrese RUT"));
+		profesional.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del profesional: "));
+		profesional.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]: "));
+		//profesional.setRut(Utilidades.ingresar("Ingrese RUT"));
 
-		profesional.setTitulo(Utilidades.ingresar("Ingresa titulo: "));
-		profesional.setFechaIngreso(Utilidades.ingresar("Ingrese Fecha de ingreso: "));
+		profesional.setTitulo(Utilidades.ingresar("Ingresa título: "));
+		profesional.setFechaIngreso(Utilidades.ingresar("Ingrese Fecha de ingreso [dd/mm/aaaa]: "));
 
 		contenedor.almacenarProfesional(profesional);
-		Utilidades.escribir("Personal Profesional ha sido guardado exitosamente");
-		contenedor.listarUsuarios();
+		Utilidades.escribir("Profesional ha sido guardado exitosamente");
+
+		Utilidades.escribir("[RETORNO MÉTODO ANALIZAR PROFESIONAL]" + profesional.analizarUsuario());//DEBUG
+		contenedor.listarUsuarios(); //DEBUG
 
 		//INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
 	}
+
+	/**
+	 * MÉTODO QUE PERMITE LA CREACIÓN DE OBJETOS TIPO ACCIDENTE
+	 * @param contenedor
+	 */
 	public static void crearAccidente(Contenedor contenedor) {
 		
 	   	//MOSTRAR CLIENTES

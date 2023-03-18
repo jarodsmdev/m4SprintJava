@@ -65,13 +65,18 @@ public class Profesional extends Usuario {
 		 */
 		public void setTitulo(String titulo) {
 		
+			//System.out.println("El titulo debe tener mínimo 10 caracteres, máximo 50");
 			do {
-				if (titulo.length() > 9 && titulo.length() < 51) {
-					System.out.println("El titulo debe tener mínimo 10 caracteres, máximo 50");
+				if(titulo.trim().length() > 9 && titulo.trim().length() < 51){
+					//System.out.println("RECIBÍ: " + titulo);//DEBUG
+					this.titulo = titulo;
+					break;
+				}else{
+					Utilidades.escribir("El título de profesional debe de estar entre 10 y 50 caracteres.\n");
+					titulo = Utilidades.ingresar("Ingrese Título: ");
 				}
-				this.titulo = titulo;
 				
-			} while(titulo.length() < 10 || titulo.length() > 50 && titulo.isEmpty() && titulo == null); //false
+			} while(true);
 				
 			}
 
@@ -92,10 +97,20 @@ public class Profesional extends Usuario {
 		 */
 		public void setFechaIngreso(String fechaIngreso) {
 			String regex = "\\d{2}/\\d{2}/\\d{4}";
-			if (fechaIngreso.matches(regex)) {
-				this.fechaIngreso = fechaIngreso;
-			}
-			Utilidades.escribir("Debe ingresar con formato: DD/MM/AAAA");
+			
+			do{
+				if(fechaIngreso.trim().length() == 0){
+					Utilidades.escribir("Favor ingrese una fecha, no puede estar vacío.\n");
+					fechaIngreso = Utilidades.ingresar("Ingrese Fecha de Ingreso [dd/nn/aaaa]: ");
+				}else if(fechaIngreso.trim().matches(regex)){
+					//System.out.println("RECIBI :" +  fechaIngreso); //DEBUG
+					this.fechaIngreso = fechaIngreso;
+					break;
+				}else{
+					Utilidades.escribir("Valor ingresado no corresponde a una fecha válida\n");
+					fechaIngreso = Utilidades.ingresar("Ingrese Fecha de Ingreso [dd/mm/aaaa]: ");
+				}
+			}while(true);
 		}
 
 		/**

@@ -57,11 +57,22 @@ public class Administrativo extends Usuario {
 	 * @param area El área del usuario administrativo.
 	 */
 	public void setArea(String area) {
-		if (area != null && area.length() < 5 && area.length() > 20 && area.isEmpty()) {
-			Utilidades.escribir("El área debe ingresar mínimo 5 caracteres, máximo 20");
-		}
-		this.area = area;
+		do{
+			if(area.trim().length() == 0){
+				Utilidades.escribir("Área no puede estar vacío\n");
+				area = Utilidades.ingresar("Ingrese Área: ");
+			}else if(area.trim().length() > 4 && area.trim().length() < 21){
+				//DEBUG MODE
+				//System.out.println("RECIBI :" + area);
+				this.area = area;
+				break;
+			}else{
+				Utilidades.escribir("Área debe estar entre 5 y 20 caracteres\n");
+				area = Utilidades.ingresar("Ingrese Área: ");	
+			}
+		}while(true);
 	}
+
 
 	/**
 	 * 
@@ -82,10 +93,18 @@ public class Administrativo extends Usuario {
 	 * @param expPrevia La experiencia previa del usuario administrativo.
 	 */
 	public void setExpPrevia(String expPrevia) {
-		if (expPrevia != null && expPrevia.length() > 100 && expPrevia.isEmpty()) {
-			System.out.println("La experiencia previa no puede exceder los 100 caracteres.");
-		}
-		this.expPrevia = expPrevia;
+		do{
+			if(expPrevia.trim().length() == 0){
+				this.expPrevia = expPrevia;
+				break;
+			}else if(expPrevia.trim().length() > 0 && expPrevia.trim().length() < 101){
+				this.expPrevia = expPrevia;
+				break;
+			}else{
+				Utilidades.escribir("Experiencia previa no puede superar los 100 caracteres.\n");
+				expPrevia = Utilidades.ingresar("Ingrese su experiencia previa [Máx. 100 caracteres]: ");
+			}
+		}while(true);
 	}
 
 	/**

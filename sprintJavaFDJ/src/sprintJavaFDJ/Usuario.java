@@ -34,19 +34,20 @@ public class Usuario implements Asesoria{
 	 * @param nombreUsuario
 	 */
 	public void setNombreUsuario(String nombreUsuario) {
-
+		
+		//nombreUsuario = Utilidades.ingresar("Ingrese nombre de Usuario (Entre 10 y 50 caracteres): ");
 		do {
-			if(nombreUsuario.trim().length() == 0) { 
-				Utilidades.escribir("No puede estar en blanco\n");
-				nombreUsuario = Utilidades.ingresar("Ingrese nombre de Usuario (Entre 10 y 50 caracteres)");
-			}else if(nombreUsuario.trim().length() < 10 || nombreUsuario.trim().length() > 50){
-				Utilidades.escribir("Permitido entre 10 y 50 caracteres\n");
-				nombreUsuario = Utilidades.ingresar("Ingrese nombre de Usuario (Entre 10 y 50 caracteres)");
-			}else{
-				this.nombreUsuario = nombreUsuario;
-			}	
 			
-		} while(nombreUsuario.length() < 10 || nombreUsuario.length() > 50);
+			if(nombreUsuario.length() > 9 && nombreUsuario.length() < 51){
+				//System.out.println("RECIBÍ NOMBRE USUARIO :" + nombreUsuario);
+				this.nombreUsuario = nombreUsuario;
+				break;
+			}else{
+				Utilidades.escribir("[ERROR] Nombre debe de estar entre 10 y 50 caracteres.\n");
+				nombreUsuario = Utilidades.ingresar("Ingrese Nombre");
+			}
+			
+		} while(true);
 	}
 	
 	
@@ -74,6 +75,11 @@ public class Usuario implements Asesoria{
 			}
 		}while(!fechaNacimiento.trim().matches(regEx));
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
 	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
@@ -98,25 +104,12 @@ public class Usuario implements Asesoria{
 	}
 	
 	/**
-	 * 
-	 * @param run
+	 * Método SetRut recibe como parámetro un dato de tipo string
+	 * @param run tipo String
 	 */
-	public void setRut(String runString) {
-		String regExNumbers = "^[0-9]+$";
-		do{
-			if(!runString.matches(regExNumbers) || runString.isEmpty() || runString.trim().length() == 0){
-				Utilidades.escribir("Ingreso de sólo números para establecer RUT");
-				runString = Utilidades.ingresar("Ingrese RUT").trim();
-			}else{
-				long run = Long.parseLong(runString);
-				if(run < 100000000 && run > 0){
-					this.run = run;
-				}else{
-					Utilidades.escribir("Valor ingresado no es válido para establecer un RUT\n");
-					runString = Utilidades.ingresar("Ingrese RUT").trim();
-				}
-			}
-		}while(!runString.matches(regExNumbers) || runString.isEmpty() || run > 99999999);
+	public void setRut(long run) {
+
+		this.run = run;
 		
 	}
 	/**
