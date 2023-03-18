@@ -1,13 +1,12 @@
 package sprintJavaFDJ;
 
-import sprintJavaFDJ.Utilidades;
 
 public class Administrativo extends Usuario {
 
 	/**
 	 * Esta clase representa a un usuario administrativo, que hereda de la clase
-	 * Usuario. Contiene los atributos 'area' y 'expPrevia', así como los métodos
-	 * getters y setters correspondientes. Además, sobrescribe los métodos
+	 * Usuario, ademas, contiene los atributos 'area' y 'expPrevia', así como los métodos
+	 * getters y setters correspondientes. Finalmente, sobrescribe los métodos
 	 * toString() y analizarUsuario() de la clase padre.
 	 */
 
@@ -58,11 +57,22 @@ public class Administrativo extends Usuario {
 	 * @param area El área del usuario administrativo.
 	 */
 	public void setArea(String area) {
-		if (area != null && area.length() < 5 && area.length() > 20) {
-			Utilidades.escribir("El area debe ingresar mínimo 5 caracteres, máximo 20");
-		}
-		this.area = area;
+		do{
+			if(area.trim().length() == 0){
+				Utilidades.escribir("Área no puede estar vacío\n");
+				area = Utilidades.ingresar("Ingrese Área: ");
+			}else if(area.trim().length() > 4 && area.trim().length() < 21){
+				//DEBUG MODE
+				//System.out.println("RECIBI :" + area);
+				this.area = area;
+				break;
+			}else{
+				Utilidades.escribir("Área debe estar entre 5 y 20 caracteres\n");
+				area = Utilidades.ingresar("Ingrese Área: ");	
+			}
+		}while(true);
 	}
+
 
 	/**
 	 * 
@@ -83,10 +93,18 @@ public class Administrativo extends Usuario {
 	 * @param expPrevia La experiencia previa del usuario administrativo.
 	 */
 	public void setExpPrevia(String expPrevia) {
-		if (expPrevia != null && expPrevia.length() > 100) {
-			System.out.println("La experiencia previa no puede exceder los 100 caracteres.");
-		}
-		this.expPrevia = expPrevia;
+		do{
+			if(expPrevia.trim().length() == 0){
+				this.expPrevia = expPrevia;
+				break;
+			}else if(expPrevia.trim().length() > 0 && expPrevia.trim().length() < 101){
+				this.expPrevia = expPrevia;
+				break;
+			}else{
+				Utilidades.escribir("Experiencia previa no puede superar los 100 caracteres.\n");
+				expPrevia = Utilidades.ingresar("Ingrese su experiencia previa [Máx. 100 caracteres]: ");
+			}
+		}while(true);
 	}
 
 	/**
@@ -98,7 +116,7 @@ public class Administrativo extends Usuario {
 	 */
 	@Override
 	public String toString() {
-		return "Administrativo"+super.toString() +"area " + area + ", expPrevia=" + expPrevia;
+		return "Administrativo: " + super.toString() +", Área " + area + ", Experiencia Previa: " + expPrevia;
 	}
 
 	/**
@@ -109,7 +127,6 @@ public class Administrativo extends Usuario {
 	 */
 	@Override
 	public String analizarUsuario() {
-		return "Administrativo : nombre usuario: " + super.getNombreUsuario() + "Run usuario: " + super.getRun()
-				+ "area " + area + ", expPrevia=" + expPrevia;
+		return "Administrativo : " + getNombreUsuario() + ", RUT: " + getRun() + ", Área: " + area + ", Experiencia Previa: " + expPrevia;
 	}
 }
