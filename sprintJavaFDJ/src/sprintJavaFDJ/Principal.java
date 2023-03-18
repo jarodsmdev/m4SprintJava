@@ -109,6 +109,7 @@ public class Principal {
 						break;
 					case "3":
 						Utilidades.escribir("\t-- MENÚ ADMINISTRATIVO --\n\n");
+						menuGestion(contenedor);
 						break;
 					case "4":
 						Utilidades.escribir("\t-- CERRANDO EL SISTEMA --\n\n");
@@ -120,6 +121,50 @@ public class Principal {
 
 			}while(!capturador.matches("^[1-4]$"));
 		}
+
+	public static void menuGestion(Contenedor contenedor){
+		String capturador;
+		do{
+			Utilidades.escribir("\n\t1. CREAR CAPACITACIÓN" +
+								"\n\t2. CREAR VISITA A TERRENO" +
+								"\n\t3. INGRESAR ACCIDENTE" +
+								"\n\t4. ELIMINAR USUARIO" +
+								"\n\t5. VOLVER AL MENÚ PRINCIPAL\n\n"
+								);
+
+			capturador = Utilidades.ingresar("Ingrese una opción para ingresar");
+
+			switch (capturador) {
+				case "1":
+					Utilidades.escribir("\t-- CREAR CAPACITACIÓN --\n\n");
+					crearCapacitacion(contenedor);
+					menuGestion(contenedor);
+					break;
+				case "2":
+					Utilidades.escribir("\t-- CREAR VISITA A TERRENO --\n\n");
+					crearVisitaTerreno(contenedor);
+					menuGestion(contenedor);
+					break;
+				case "3":
+					Utilidades.escribir("\t-- INGRESAR ACCIDENTE --\n\n");
+					crearAccidente(contenedor);
+					menuGestion(contenedor);
+					break;
+				case "4":
+					Utilidades.escribir("\t-- ELIMINAR USUARIO --\n\n");
+					//SOLICITAR RUT
+					//INVOCAR MÉTODO contenedor.eliminarUsuario(long rut);
+					break;
+				case "5":
+					Utilidades.escribir("\t-- VOLVER AL MENÚ PRINCIPAL--\n\n");
+					menuPrincipal(contenedor);
+					break;
+				default:
+					Utilidades.escribir("[!] OPCIÓN INGRESADA NO ES VÁLIDA, SÓLO INGRESE VALORES ENTRE 1 AL 5.\n\n");
+			}
+			
+		}while(!capturador.matches("^[1-5]$"));
+	}
 
 	public static void menuUsuarios(Contenedor contenedor){
 		String capturador;
@@ -302,14 +347,14 @@ public class Principal {
 			if(!contenedor.existeUsuario(capturador)) {
 				Cliente cliente = new Cliente();
 				cliente.setRut(String.valueOf(capturador));
-				cliente.setNombre(Utilidades.escribir("Nombre debe estar en el rango entre [5-30] caracteres\n"));
-				cliente.setApellido();
-				cliente.setTelefono();
-				cliente.setAfp();
-				cliente.setSistemaSalud();
-				cliente.setDireccion();
-				cliente.setComuna();
-				cliente.setEdad();
+				cliente.setNombre(Utilidades.ingresar("Ingrese Nombre Cliente:"));
+				cliente.setApellido(); //OK
+				cliente.setTelefono(); //OK
+				cliente.setAfp(); //OK
+				cliente.setSistemaSalud(); //OK//al ingresar 3 bucle
+				cliente.setDireccion(); //OK OPCIONAL
+				cliente.setComuna(); //OK OPCIONAL
+				cliente.setEdad(); //FALLA CON LETRAS
 				contenedor.almacenarCliente(cliente);
 				Utilidades.escribir("El Cliente ha sido guardado correctamente");
 				

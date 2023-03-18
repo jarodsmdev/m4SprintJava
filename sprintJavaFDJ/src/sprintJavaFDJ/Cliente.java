@@ -46,7 +46,8 @@ public class Cliente extends Usuario {
 			if (nombre != null && nombre.length() >= 5 && nombre.length() <= 30) {
 				this.nombre = nombre;
 			} else {
-				nombre = Utilidades.ingresar("Error de ingreso. Rango de caracteres entre 5 y 30");
+				Utilidades.escribir("Error de ingreso. Rango de caracteres entre 5 y 30\n");
+				nombre = Utilidades.ingresar("Ingrese Nombre:");
 			}
 		} while (nombre == null || nombre.length() < 5 || nombre.length() > 30);
 	}
@@ -81,17 +82,17 @@ public class Cliente extends Usuario {
 	 * SETTER Y GETTER */
 	public void setTelefono() {
 		String regEx = "^[0-9]+$";
-		String telefono = Utilidades.ingresarObligatorio("Ingrese el numero de telefono del cliente");
+		String telefono = Utilidades.ingresarObligatorio("Ingrese el número de teléfono del cliente");
 		do {
 			if (!telefono.matches(regEx)) {
-				telefono = Utilidades.ingresarObligatorio("Solo se aceptan numeros");
+				telefono = Utilidades.ingresarObligatorio("Sólo se aceptan números");
 			}
 			else if (telefono.length() < 9) {
 				this.telefono = Integer.parseInt(telefono);
 				break;
 			}
 			else if(telefono.length() > 8) {
-				telefono = Utilidades.ingresarObligatorio("Error: El telefono no puede superar 8 caracteres");
+				telefono = Utilidades.ingresarObligatorio("Error: El teléfono no puede superar 8 caracteres");
 			}
 			} while(true);
 	}
@@ -135,14 +136,16 @@ public class Cliente extends Usuario {
 	/** @param SISTEMA DE SALUD 
 	 * 1 FONASA / 2 ISAPRE
 	 * SETTER, GETTER */
+
 	public void setSistemaSalud() {
 		String sistemaSalud = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
 		do {
-			if(sistemaSalud == "1" || sistemaSalud == "2" || sistemaSalud.length() == 0) {
+			if(sistemaSalud.equals("1") || sistemaSalud.equals("2")) {
 				this.sistemaSalud = sistemaSalud;
 				break;
-			}else {
-				//opcion invalida
+			} else if(sistemaSalud.isEmpty()) {
+				sistemaSalud = Utilidades.ingresar("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
+			} else {
 				sistemaSalud = Utilidades.ingresar("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
 			}
 		}while(true);
@@ -208,16 +211,16 @@ public class Cliente extends Usuario {
 	 * Obligatorio: mayor o igual a 0 - menor que 150
 	 * SETTER Y GETTER*/
 	public void setEdad() {
+		String regEx = "^[0-9]+$";
 		String edad = Utilidades.ingresarObligatorio("Ingrese su edad");
 		do {
-			if(Integer.parseInt(edad) > -1 && Integer.parseInt(edad) < 150) {
-				this.edad = Integer.parseInt(edad); 
-				break;
-			}else{
+			if(!edad.trim().matches(regEx)){
 				//opcion invalida
-				Utilidades.ingresar("Ingrese una edad válida [0-149]");
-			}
-		}while(true);
+				edad = Utilidades.ingresar("Ingrese una edad válida [0-150]");
+			}else if(Integer.parseInt(edad) > -1 && Integer.parseInt(edad) < 150) {
+					this.edad = Integer.parseInt(edad); 
+				}
+		}while(!edad.trim().matches(regEx));
 	}
 	
 	/**

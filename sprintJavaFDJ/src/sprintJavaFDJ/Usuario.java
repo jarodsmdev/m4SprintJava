@@ -113,7 +113,7 @@ public class Usuario implements Asesoria{
 					this.run = run;
 				}else{
 					Utilidades.escribir("Valor ingresado no es válido para establecer un RUT\n");
-					runString = Utilidades.ingresar("Vuelva a intentar ingresar RUT").trim();
+					runString = Utilidades.ingresar("Ingrese RUT").trim();
 				}
 			}
 		}while(!runString.matches(regExNumbers) || runString.isEmpty() || run > 99999999);
