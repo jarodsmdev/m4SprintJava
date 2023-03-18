@@ -2,13 +2,13 @@ package sprintJavaFDJ;
 
 /**
  * 
- * @author Leonel Briones, Kevin Moreno, Valentia Saldías, Priscila Flores, Andrés Contreras.
+ * @author Leonel Briones, Kevin Moreno, Valentia Saldías, Priscila Carrillo, Andrés Contreras.
  *      
  */
 public class Accidente {
 	private int identificador;
 	private static int idIdentificador;
-	private Cliente cliente;
+	private long rutCliente;
 	private String fecha;
 	private String hora;
 	private String lugar;
@@ -35,12 +35,12 @@ public class Accidente {
 	 * @param consecuencias: String
 	 */
 
-	public Accidente(String identificador, Cliente cliente, String fecha, String hora, String lugar, String origen,
+	public Accidente(String identificador, Long rutCliente, String fecha, String hora, String lugar, String origen,
 			String consecuencias) {
 
 		++idIdentificador;
 		this.identificador = idIdentificador;
-		this.cliente = cliente;
+		this.rutCliente = rutCliente;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.lugar = lugar;
@@ -62,18 +62,18 @@ public class Accidente {
 		this.identificador = identificador;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public long getRutCliente() {
+		return rutCliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setRutCliente(long rutCliente) {
 		do {
-			if (cliente.getRun() <= 99999999) {
-				this.cliente = cliente;
+			if (rutCliente <= 99999999) {
+				this.rutCliente = rutCliente;
 			} else {
-				Utilidades.escribir("No puede exceder 99.999.999");
+				Utilidades.ingresar("No puede exceder 99.999.999");
 			}
-		} while (cliente.getRun() > 99999999);
+		} while (rutCliente > 99999999);
 	}
 
 	public String getFecha() {
@@ -86,7 +86,7 @@ public class Accidente {
 			if (fecha.matches(regex)) {
 				this.fecha = fecha;
 			} else {
-				Utilidades.escribir("La fecha no es valida");
+				Utilidades.ingresar("La fecha no es valida");
 			}
 		} while (!fecha.matches(regex));
 	}
@@ -101,7 +101,7 @@ public class Accidente {
 			if (hora.matches(regex)) {
 				this.hora = hora;
 			} else {
-				Utilidades.escribir("La hora no es valida");
+				Utilidades.ingresar("El formato de hora ingresada no es valida");
 			}
 		} while (!hora.matches(regex));
 	}
@@ -110,27 +110,39 @@ public class Accidente {
 		return lugar;
 	}
 
+	/**
+	 * 
+	 * @param lugar
+	 */
 	public void setLugar(String lugar) {
 		do {
 			if (lugar.length() >= 10 && lugar.length() <= 50) {
 				this.lugar = lugar;
 			} else {
-				Utilidades.escribir("Debe ingresar entre 10 y 50 caracteres");
+				Utilidades.ingresar("Debe ingresar entre 10 y 50 caracteres");
 			}
 		} while (lugar.length() < 10 || lugar.length() > 50);
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getOrigen() {
 		return origen;
 	}
 
+	/**
+	 * 
+	 * @param origen
+	 */
 	public void setOrigen(String origen) {
 		do {
 			if (origen.length() <= 100) {
 				this.origen = origen;
 			} else {
-				Utilidades.escribir("No puede ingresar mas de 100 caracteres");
+				Utilidades.ingresar("No puede ingresar mas de 100 caracteres");
 			}
 		} while (origen.length() > 100);
 	}
@@ -144,7 +156,7 @@ public class Accidente {
 			if (consecuencias.length() <= 100) {
 				this.consecuencias = consecuencias;
 			} else {
-				Utilidades.escribir("No puede ingresar mas de 100 caracteres");
+				Utilidades.ingresar("No puede ingresar mas de 100 caracteres");
 			}
 		} while (consecuencias.length() > 100);
 
@@ -152,8 +164,7 @@ public class Accidente {
 
 	@Override
 	public String toString() {
-		return "Accidente Identificador=" + identificador + ", Cliente=" + cliente + ", Fecha=" + fecha + ", Hora="
-				+ hora + ", Lugar=" + lugar + ", Origen=" + origen + ", Consecuencias=" + consecuencias;
+		return "Accidente ID: " + identificador + ", RUT: " + rutCliente + ", Fecha: " + fecha + ", Hora: " + hora + ", Lugar: " + lugar + ", Origen: " + origen + ", Consecuencias: " + consecuencias;
 	}
 
 }
