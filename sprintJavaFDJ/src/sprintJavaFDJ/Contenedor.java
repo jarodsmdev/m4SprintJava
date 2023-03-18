@@ -73,7 +73,7 @@ public class Contenedor {
 	 */
 	public void listarUsuarios() {
 		// LISTAR LOS DATOS DE LA CLASE USUARIO
-		Utilidades.escribir("-- INICIO DEL REPORTE --\n\n");
+		Utilidades.escribir("\n-- INICIO DEL REPORTE --\n\n");
 		for (int i = 0; i < listaAsesoria.size(); i++) {
 			if (listaAsesoria.get(i) instanceof Usuario) {
 				Usuario usuario = (Usuario) listaAsesoria.get(i); // CASTING/REFUNDICIÓN
@@ -90,7 +90,9 @@ public class Contenedor {
 	 *             Recibe un objeto Usuario y sólo muestra los objetos de este tipo
 	 */
 	public void listarUsuariosPorTipo(Class<? extends Usuario> tipoUsuario) {
+		
 		int i = 1;
+
 		for (Asesoria asesoria : listaAsesoria) {
 			if (tipoUsuario.isAssignableFrom(asesoria.getClass())) {
 				Usuario usuario = (Usuario) asesoria;
@@ -101,16 +103,44 @@ public class Contenedor {
 				} else if (usuario instanceof Administrativo) {
 					Administrativo admin = (Administrativo) usuario; // Casting a Administrativo
 					Utilidades.escribir((i++) + ". " + admin.analizarUsuario() + "\n");
-
+		
 				} else if (usuario instanceof Profesional){
 					Profesional profesional = (Profesional) usuario; //Casting a Profesional
 					Utilidades.escribir((i++) + ". "  + profesional.analizarUsuario() + "\n");
+		
 				}/*else if (usuario instanceof Usuario){
 					Usuario user = (Usuario) usuario; //Casting a Usuario
 					Utilidades.escribir((i++) + ". "  + user.analizarUsuario() + "\n");
 				}*/
 			}
+
 		}
+
+		Utilidades.escribir("\n");
+	}
+
+	/**
+	 * Método que cuenta y retorna el número de objetos del tipo que recibe por parámetro
+	 * @param tipoUsuario
+	 * @return tipo int
+	 */
+	public int contarUsuariosClientes(Class<? extends Usuario> tipoUsuario){
+
+		int qClientes = 0;
+
+		for(Asesoria asesoria: listaAsesoria){
+			Usuario usuario = (Usuario) asesoria;
+			if(tipoUsuario.isAssignableFrom(asesoria.getClass())){
+				if(usuario instanceof Cliente){
+					qClientes++;
+				}
+			}
+
+		}
+		
+		if(qClientes == 0){ Utilidades.escribir("No existen Clientes registrados");}
+		
+		return qClientes;
 	}
 
 	/**

@@ -8,28 +8,28 @@ public class Principal {
 		Contenedor contenedor = new Contenedor();
 		
 		//DATOS DE PRUEBA
-		//DebugMode(contenedor);
+		DebugMode(contenedor);
 		menuPrincipal(contenedor);
 	}
 
 	
 	public static void DebugMode(Contenedor contenedor) {
-		Usuario usuario1 = new Usuario();
-		usuario1.setNombreUsuario("SOY USUARIO1");
-		usuario1.setFechaNacimiento("22/03/1983");
-		usuario1.setRut(1552123);
+		// Usuario usuario1 = new Usuario();
+		// usuario1.setNombreUsuario("SOY USUARIO1");
+		// usuario1.setFechaNacimiento("22/03/1983");
+		// usuario1.setRut(1552123);
 		
 		Cliente cliente1 = new Cliente();
-		cliente1.setNombre("SOY UN CLIENTE1");
-		///cliente1.setApellido();
+		cliente1.setNombre("SOY CLIENTE1");
+		//cliente1.setApellido();
 		cliente1.setRut(1234561);
 		// cliente1.setDireccion();
 		// cliente1.setComuna();
 		
-		// Cliente cliente2 = new Cliente();
-		// cliente2.setNombre();
+		Cliente cliente2 = new Cliente();
+		cliente2.setNombre("SOY CLIENTE2");
 		// cliente2.setApellido();
-		// cliente2.setRut(7894662);
+		cliente2.setRut(7894662);
 		// cliente2.setDireccion();
 		// cliente2.setComuna();
 
@@ -49,36 +49,36 @@ public class Principal {
 		capacitacion2.setDuracion("45");
 		capacitacion2.setCantidadAsistentes(30);
 		
-		Administrativo administrativo1 = new Administrativo();
-		administrativo1.setNombreUsuario("SOY ADMINISTRATIVO1");
-		administrativo1.setArea("51");
-		administrativo1.setExpPrevia("5");
-		administrativo1.setFechaNacimiento("22/03/1983");
-		administrativo1.setNombreUsuario("NICKNAME ADM1");
-		administrativo1.setRut(1452654);
+		// Administrativo administrativo1 = new Administrativo();
+		// administrativo1.setNombreUsuario("SOY ADMINISTRATIVO1");
+		// administrativo1.setArea("51");
+		// administrativo1.setExpPrevia("5");
+		// administrativo1.setFechaNacimiento("22/03/1983");
+		// administrativo1.setNombreUsuario("NICKNAME ADM1");
+		// administrativo1.setRut(1452654);
 		
-		Profesional profesional1 = new Profesional();
-		profesional1.setNombreUsuario("SOY PROFESIONAL1");
-		profesional1.setFechaIngreso("14/03/1999");
-		profesional1.setFechaNacimiento("05/02/1956");
-		profesional1.setNombreUsuario("NICKNAME PROF1");
-		profesional1.setRut(458744);
-		profesional1.setTitulo("INGENIER@");
+		// Profesional profesional1 = new Profesional();
+		// profesional1.setNombreUsuario("SOY PROFESIONAL1");
+		// profesional1.setFechaIngreso("14/03/1999");
+		// profesional1.setFechaNacimiento("05/02/1956");
+		// profesional1.setNombreUsuario("NICKNAME PROF1");
+		// profesional1.setRut(458744);
+		// profesional1.setTitulo("INGENIER@");
 
-		Profesional profesional2 = new Profesional();
-		profesional2.setNombreUsuario("SOY PROFESIONAL2");
-		profesional2.setFechaIngreso("14/03/1996");
-		profesional2.setFechaNacimiento("05/02/1956");
-		profesional2.setNombreUsuario("NICKNAME PROF2");
-		profesional2.setRut(1554744);
-		profesional2.setTitulo("ARQUITECT@");
+		// Profesional profesional2 = new Profesional();
+		// profesional2.setNombreUsuario("SOY PROFESIONAL2");
+		// profesional2.setFechaIngreso("14/03/1996");
+		// profesional2.setFechaNacimiento("05/02/1956");
+		// profesional2.setNombreUsuario("NICKNAME PROF2");
+		// profesional2.setRut(1554744);
+		// profesional2.setTitulo("ARQUITECT@");
 		
-		contenedor.almacenarUsuario(usuario1);
-		//contenedor.almacenarCliente(cliente1);
-		//contenedor.almacenarCliente(cliente2);
-		contenedor.almacenarAdministrativo(administrativo1);
-		contenedor.almacenarProfesional(profesional1);
-		contenedor.almacenarProfesional(profesional2);
+		// contenedor.almacenarUsuario(usuario1);
+		contenedor.almacenarCliente(cliente1);
+		contenedor.almacenarCliente(cliente2);
+		// contenedor.almacenarAdministrativo(administrativo1);
+		// contenedor.almacenarProfesional(profesional1);
+		// contenedor.almacenarProfesional(profesional2);
 		contenedor.almacenarCapacitacion(capacitacion1);
 		contenedor.almacenarCapacitacion(capacitacion2);
 	}
@@ -124,7 +124,11 @@ public class Principal {
 
 	public static void menuGestion(Contenedor contenedor){
 		String capturador;
+
+
 		do{
+
+			Utilidades.escribir("\n[\t-- MENÚ ADMINISTRATIVO --\t]\n");
 			Utilidades.escribir("\n\t1. CREAR CAPACITACIÓN" +
 								"\n\t2. CREAR VISITA A TERRENO" +
 								"\n\t3. INGRESAR ACCIDENTE" +
@@ -449,18 +453,27 @@ public class Principal {
 		//MOSTRAR CLIENTES
 		String input;
 		String regEx = "^[0-9]+$";
-		contenedor.listarUsuariosPorTipo(Cliente.class);
 		
-		do {
-			input = Utilidades.ingresar("Ingrese RUT Cliente: ");
-			if(input.trim().length() == 0) {
-				Utilidades.escribir("Error de Ingreso, Debe escribir RUT del Cliente.\n");
-			}else if(!input.matches(regEx)) {
-				Utilidades.escribir("Error de Ingreso, sólo se aceptan números\n");
-			}else {
-				registrarCapacitacion(contenedor, input);
-			}
-		}while(!input.matches(regEx));
+		//System.out.println("EXISTEN CLIENTES " + contenedor.contarUsuariosClientes(Cliente.class));
+
+		if(contenedor.contarUsuariosClientes(Cliente.class) > 0){
+			contenedor.listarUsuariosPorTipo(Cliente.class);
+
+			do {
+				input = Utilidades.ingresar("Ingrese RUT Cliente: ['SALIR' PARA CANCELAR]: ");
+				if(input.trim().equalsIgnoreCase("SALIR")){
+					Utilidades.escribir("[AVISO] Se ha cancelado el Ingreso de Capacitacion.\n");
+					menuGestion(contenedor);
+				}if(input.trim().length() == 0) {
+					Utilidades.escribir("[ERROR] Debe escribir RUT del Cliente.\n");
+				}else if(!input.matches(regEx)) {
+					Utilidades.escribir("[ERROR] Sólo se aceptan números, corrija y vuelva a intentar.\n");
+				}else {
+					registrarCapacitacion(contenedor, input);
+				}
+			}while(!input.matches(regEx) || input.trim().equalsIgnoreCase("SALIR"));
+		}
+		
 	}
 
 
@@ -473,16 +486,24 @@ public class Principal {
 		//VALIDACION CORRECTA
 		long inputRut = Long.parseLong(input);
 		if(contenedor.existeUsuario(inputRut)) {
-			//EXISTE USUARIO OBTIENE CLIENTE
-			//Cliente cliente = contenedor.obtenerCliente(inputRut);
-			Utilidades.escribir("SE HA ENCONTRADO AL CLIENTE\n");
+		
+			Utilidades.escribir("SE HA ENCONTRADO AL CLIENTE\n"); //DEBUGMODE
 			Capacitacion capacitacion = new Capacitacion();
 			capacitacion.setRut(inputRut);
-			capacitacion.setDia(Utilidades.ingresar("Ingrese día de la Semana: (Ej.: 'Lunes')"));
+			capacitacion.setDia(Utilidades.ingresar("Ingrese día de la Semana (Ej.: 'Lunes'): "));
 			capacitacion.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
-			capacitacion.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
+			capacitacion.setLugar(Utilidades.ingresar("Ingrese Lugar (Texto entre 10 y 50 caracteres): "));
 			capacitacion.setDuracion(Utilidades.ingresar("Ingrese Duración en minutos: "));
-			capacitacion.setCantidadAsistentes(Integer.parseInt(Utilidades.ingresar("Ingrese cantidad de asistentes: (Máximo 999)")));
+			
+			do{
+				String capturador = Utilidades.ingresar("Ingrese cantidad de asistentes (Máximo 999): ");
+				if(Utilidades.esNumerica(capturador)){
+					capacitacion.setCantidadAsistentes(Integer.parseInt(capturador));
+					break;
+				}else{
+					Utilidades.escribir("[ERROR] Ingrese una cantidad válida de asistentes.\n");
+				}
+			}while(true);
 			
 			//Agrega capacitación a la lista de Capacitacion
 			contenedor.almacenarCapacitacion(capacitacion);
@@ -493,14 +514,13 @@ public class Principal {
 			//PREGUNTA SI DESEA SEGUIR INGRESANDO CAPACITACIONES AL MISMO CLIENTE
 			String respuesta;
 			do{
-				respuesta = Utilidades.ingresar("¿Desea continuar ingresando otra Capacitación? ('s'/'n')");
+				respuesta = Utilidades.ingresar("¿Desea continuar ingresando otra Capacitación? ('s|n')");
 				if(respuesta.equalsIgnoreCase("s")){
 					//CONTINUAR CON OTRO INGRESO
 					crearCapacitacion(contenedor);
 				}else if(respuesta.equalsIgnoreCase("n")){
 					//VOLVER AL MENU PRINCIPAL
-
-
+					menuGestion(contenedor);
 				}else{
 					Utilidades.escribir("[!] Error de ingreso. opción ingresada no válida. (s|n)");
 				}
@@ -508,7 +528,7 @@ public class Principal {
 			//VOLVER AL MENÚ
 		}else {
 			//NO EXISTE USUARIO
-			Utilidades.escribir("RUT ingresado no existe en la base de datos.\n");
+			Utilidades.escribir("[ERROR] RUT ingresado no existe en la base de datos.\n");
 			crearCapacitacion(contenedor);
 		}
 	}
