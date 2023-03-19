@@ -311,12 +311,41 @@ public class Principal {
 	}
 
 	public static void crearAdministrativo(Contenedor contenedor) {
+		long rutLong;
+		// VALIDAR QUE EL CONTENIDO DE capturador sea tipo long
+		String capturador = (Utilidades.ingresar("Ingresar RUT:"));
+
+		if (Utilidades.esNumerica(capturador)) {
+			rutLong = Long.parseLong(capturador);
+
+			//VERIFICAR QUE NO SE INGRESEN DUPLICADOS
+			if(!contenedor.existeUsuario(rutLong)){
+				registrarAdministrativo(contenedor, rutLong);
+			}else{
+				Utilidades.escribir("[!] RUT ingresado existe en los registros.\n");
+				menuUsuarios(contenedor);
+			}
+
+		} else {
+			Utilidades.escribir("[ERROR] Valor ingresado no es válido.\n");
+			menuUsuarios(contenedor);
+		}
+
+
+
+
+	}
+
+	/**
+	 * 
+	 * @param contenedor
+	 * @param rutLong
+	 */
+	public static void registrarAdministrativo(Contenedor contenedor, long rutLong){
 
 		Administrativo administrativo = new Administrativo();
 
-		// PRIMERO VALIDAR SI EL RUT YA EXISTEN EN LA BD
-		Utilidades.validarLong("Ingrese RUT:", contenedor, administrativo);
-
+		administrativo.setRut(rutLong);
 		administrativo.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del Administrativo: "));
 		administrativo.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]: "));
 		administrativo.setArea(Utilidades.ingresar("Ingresa Área: "));
@@ -332,7 +361,6 @@ public class Principal {
 
 		// INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuUsuarios(contenedor);
-
 	}
 
 	/**
@@ -621,12 +649,37 @@ public class Principal {
 	 */
 	public static void crearProfesional(Contenedor contenedor) {
 
+		long rutLong;
+		// VALIDAR QUE EL CONTENIDO DE capturador sea tipo long
+		String capturador = (Utilidades.ingresar("Ingresar RUT:"));
+
+		if (Utilidades.esNumerica(capturador)) {
+			rutLong = Long.parseLong(capturador);
+
+			// VALIDAR SI EXISTE EL RUT ANTES DE CONTINUAR
+			if(!contenedor.existeUsuario(rutLong)){
+				registrarProfesional(contenedor, rutLong);
+			}else{
+				Utilidades.escribir("[!] RUT ingresado existe en los registros.\n");
+				menuUsuarios(contenedor);
+			}
+
+		} else {
+			Utilidades.escribir("[ERROR] Valor ingresado no es válido.\n");
+			menuUsuarios(contenedor);
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param contenedor
+	 * @param rutLong
+	 */
+	public static void registrarProfesional(Contenedor contenedor, long rutLong){
+
 		Profesional profesional = new Profesional();
-
-		// VALIDAR SI EXISTE EL RUT ANTES DE CONTINUAR
-		//Utilidades.validarLong("Ingrese RUT:", contenedor, profesional);
-
-
+		profesional.setRut(rutLong);
 		profesional.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del profesional: "));
 		profesional.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]: "));
 
