@@ -141,7 +141,7 @@ public class Cliente extends Usuario {
 	public void setSistemaSalud() {
 		String sistemaSalud = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
 		do {
-			if(sistemaSalud == "1" || sistemaSalud == "2" || sistemaSalud.length() == 0) {
+			if(Integer.parseInt(sistemaSalud) == 1 || Integer.parseInt(sistemaSalud) == 2 || sistemaSalud.length() == 0) {
 				this.sistemaSalud = sistemaSalud;
 				break;
 			}else {
