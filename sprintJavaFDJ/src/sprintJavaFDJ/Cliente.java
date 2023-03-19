@@ -15,12 +15,8 @@ public class Cliente extends Usuario {
 	private String direccion; 
 	private String comuna;
 	private int edad; 
-	private ArrayList <Capacitacion> numeroCapacitacion = new ArrayList<Capacitacion>();
-	private int cantidadCapacitaciones;
-	private ArrayList<Accidente> numeroAccidente = new ArrayList<Accidente>();
-	private int cantidadAccidentes;
-	private ArrayList<VisitaEnTerreno> numeroVisitaTerreno = new ArrayList<VisitaEnTerreno>();
-	private int cantidadVisitas;  
+	private ArrayList<Accidente> listaAccidentes = new ArrayList<Accidente>();
+	private ArrayList<VisitaEnTerreno> listaVisitaEnTerreno = new ArrayList<VisitaEnTerreno>(); 
 	
 	/** Constructor vacío */
 	public Cliente() {}
@@ -40,20 +36,18 @@ public class Cliente extends Usuario {
 	/** @param NOMBRE tipo String
 	 * Obligatorio; minimo 5 caracteres - maximo 30
 	 * */
-	public void setNombre() {
-		String capt = Utilidades.ingresarObligatorio("Ingrese nombre del cliente");
+	public void setNombre(String nombre) {
 		do {
-//			System.out.println(capt.length()); //debug
-			if(capt.length() > 4 && capt.length() < 31) {
-					this.nombre = capt;
-					break;
-				}
-			else {
-				//opcion invalida
-				capt = Utilidades.ingresarObligatorio("Error de ingreso. Rango de caracteres entre 5 y 30");
+			nombre = nombre.trim();
+			if (nombre != null && nombre.length() >= 5 && nombre.length() <= 30) {
+				this.nombre = nombre;
+			} else {
+				Utilidades.escribir("Error de ingreso. Rango de caracteres entre 5 y 30\n");
+				nombre = Utilidades.ingresar("Ingrese Nombre:");
 			}
-		}while(true);
+		} while (nombre == null || nombre.length() < 5 || nombre.length() > 30);
 	}
+	
 	
 	public String getNombre() {
 		return nombre; 
@@ -84,17 +78,17 @@ public class Cliente extends Usuario {
 	 * SETTER Y GETTER */
 	public void setTelefono() {
 		String regEx = "^[0-9]+$";
-		String telefono = Utilidades.ingresarObligatorio("Ingrese el numero de telefono del cliente");
+		String telefono = Utilidades.ingresarObligatorio("Ingrese el número de teléfono del cliente");
 		do {
 			if (!telefono.matches(regEx)) {
-				telefono = Utilidades.ingresarObligatorio("Solo se aceptan numeros");
+				telefono = Utilidades.ingresarObligatorio("Sólo se aceptan números");
 			}
 			else if (telefono.length() < 9) {
 				this.telefono = Integer.parseInt(telefono);
 				break;
 			}
 			else if(telefono.length() > 8) {
-				telefono = Utilidades.ingresarObligatorio("Error: El telefono no puede superar 8 caracteres");
+				telefono = Utilidades.ingresarObligatorio("Error: El teléfono no puede superar 8 caracteres");
 			}
 			} while(true);
 	}
@@ -138,14 +132,16 @@ public class Cliente extends Usuario {
 	/** @param SISTEMA DE SALUD 
 	 * 1 FONASA / 2 ISAPRE
 	 * SETTER, GETTER */
+
 	public void setSistemaSalud() {
 		String sistemaSalud = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
 		do {
-			if(Integer.parseInt(sistemaSalud) == 1 || Integer.parseInt(sistemaSalud) == 2 || sistemaSalud.length() == 0) {
+			if(sistemaSalud.equals("1") || sistemaSalud.equals("2")) {
 				this.sistemaSalud = sistemaSalud;
 				break;
-			}else {
-				//opcion invalida
+			} else if(sistemaSalud.isEmpty()) {
+				sistemaSalud = Utilidades.ingresar("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
+			} else {
 				sistemaSalud = Utilidades.ingresar("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
 			}
 		}while(true);
@@ -189,7 +185,7 @@ public class Cliente extends Usuario {
 	public void setComuna() {
 		String comuna = Utilidades.ingresar("Ingrese la comuna");
 		do {
-			if(comuna.length() <= 50) {
+			if(comuna.length() < 51) {
 				this.comuna = comuna; 
 				break;
 			}else {
@@ -211,16 +207,16 @@ public class Cliente extends Usuario {
 	 * Obligatorio: mayor o igual a 0 - menor que 150
 	 * SETTER Y GETTER*/
 	public void setEdad() {
+		String regEx = "^[0-9]+$";
 		String edad = Utilidades.ingresarObligatorio("Ingrese su edad");
 		do {
-			if(Integer.parseInt(edad) > -1 && Integer.parseInt(edad) < 150) {
-				this.edad = Integer.parseInt(edad); 
-				break;
-			}else{
+			if(!edad.trim().matches(regEx)){
 				//opcion invalida
-				Utilidades.escribir("Ingrese una edad válida [0-149]");
-			}
-		}while(true);
+				edad = Utilidades.ingresar("Ingrese una edad válida [0-150]");
+			}else if(Integer.parseInt(edad) > -1 && Integer.parseInt(edad) < 150) {
+					this.edad = Integer.parseInt(edad); 
+				}
+		}while(!edad.trim().matches(regEx));
 	}
 	
 	/**
@@ -231,45 +227,20 @@ public class Cliente extends Usuario {
 		return edad;
 	}
 	
-	/** @param CANTIDAD DE CAPACITACIONES
-	 * SETTER Y GETTER */
-	public void setCantidadCapacitaciones(int cantidadCapacitaciones) {
-		this.cantidadCapacitaciones = cantidadCapacitaciones;
-	}
-	public int getCantidadCapacitaciones() {
-		return cantidadCapacitaciones;
-	}
 	
-	/** @param CANTIDAD DE ACCIDENTES
-	 * SETTER Y GETTER*/
-	public void setCantidadAccidentes(int cantidadAccidentes) {
-		this.cantidadAccidentes = cantidadAccidentes;
-	}
-	public int getCantidadAccidentes() {
-		return cantidadAccidentes;
-	}
-	
-	/** @param CANTIDAD DE VISITAS EN TERRENO
-	 * SETTER Y GETTER*/
-	public void setCantidadVisitas(int cantidadVisitas) {
-		this.cantidadVisitas = cantidadVisitas;
-	}
-	public int getCantidadVisitas() {
-		return cantidadVisitas;
-	}
 	
 	/** METODO OBTENER NOMBRE = NOMBRE Y APELLIDOS CONCATENADOS*/
 	public String obtenerNombre() {
-		return Utilidades.escribir(nombre + " " + apellido);
+		return (nombre + " " + apellido);
 	}
 	
 	/** METODO QUE RETORNA EL SISTEMA DE SALUD DEL CLIENTE */
-	public void obtenerSistemaSalud(String sistemaSalud) {
+	public String obtenerSistemaSalud(String sistemaSalud) {
 		if(sistemaSalud == "1") {
-			Utilidades.escribir("FONASA");
+			return "FONASA";
 		}
 		else {
-			Utilidades.escribir("ISAPRE");
+			return "ISAPRE";
 		}
 	}
 	
@@ -281,43 +252,55 @@ public class Cliente extends Usuario {
 		return "Cliente: " + getNombre() + ", RUT: " + getRun() + ", Dirección: " + getDireccion() + ", Comuna: " + getComuna();
 	}
 
-	/** METODO  QUE AGREGA CAPACITACIONES A ARRAYLIST QUE CONTIENEN TODAS LAS CAPACITACIONES DE CADA CLIENTE*/
-	public void agregarCapacitacion(Capacitacion nuevaCapacitacion) {
-		if(numeroCapacitacion.size() > -1) {
-			numeroCapacitacion.add(nuevaCapacitacion);
-			cantidadCapacitaciones++;
-		}
-	}
+	
 	/** METODO QUE AGREGA ACCIDENTES A ARRAYLIST QUE ALMACENA TODOS LOS ACCIDENTES DEL CLIENTE*/
 	public void agregarAccidente(Accidente nuevoAccidente) {
-		if (numeroAccidente.size() > -1) {
-			numeroAccidente.add(nuevoAccidente);
-			cantidadAccidentes++;
-		}
+		listaAccidentes.add(nuevoAccidente);
 	}
 	/** METODO QUE AGREGA VISITAS A TERRENO A UN ARRAYLIST QUE GUARDA TODAS LAS VISITAS A TERRENO DEL CLIENTE */
 	public void agregarVisitaTerreno(VisitaEnTerreno nuevaVisita) {
-		if(numeroVisitaTerreno.size() > 0 ) {
-			numeroVisitaTerreno.add(nuevaVisita);
-			cantidadVisitas++;
+			listaVisitaEnTerreno.add(nuevaVisita);
+	}
+
+	/**
+	 * Getter para obtener array
+	 * @return
+	 */
+	public ArrayList<VisitaEnTerreno> getListaVisitas(){
+		return listaVisitaEnTerreno;
+	}
+
+	/**
+	 * Método que muestra todas las visitas
+	 * @return
+	 */
+	public String mostrarVisitas(){
+		String visitas = "";
+		for(int i = 0; i < listaVisitaEnTerreno.size() ; i++){
+			visitas = ((i+1) + ". " + listaVisitaEnTerreno.get(i).toString()+ "\n") + visitas;
+		}
+		return visitas;
+	}
+
+	/**
+	 * Método que permite mostrar todos los accidentes asociados al cliente
+	 */
+	public void mostrarAccidentes(long rut){
+		
+		int i = 0;
+		
+		for(Accidente objAccidente : listaAccidentes){
+			if(objAccidente.getRutCliente() == rut){
+				Utilidades.escribir( (i + 1 ) + ". " + objAccidente.toString() + "\n");
+				i++;
+			}
 		}
 	}
 	
-	/** METODOS QUE MUESTRAN LA CANTIDAD DE CAPACITACIONES, VISITAS A TERRENO Y ACCIDENTES DEL CLIENTE*/
 	
-	public void mostrarCantCapacitaciones() {
-		Utilidades.escribir("El cliente " + obtenerNombre() + " ha realizado " + cantidadCapacitaciones + " capacitaciones." );
-	}
-	public void mostrarCantAccidentes() {
-		Utilidades.escribir("El cliente " + obtenerNombre() + " ha tenido " + cantidadAccidentes + " accidentes.");
-	}
-	public void mostrarCantVisitasTerreno() {
-		Utilidades.escribir("El cliente " + obtenerNombre() + " ha recibido " + cantidadVisitas + " visitas a terreno.");
-	}
 	@Override
 	public String toString() {
-		return "Cliente: " + obtenerNombre() + "\n Telefono: " + getTelefono() + "\n AFP: " + getAfp() + "\n Sistema de Salud: " + getSistemaSalud()
-		+ "\n Direccion: " + getDireccion() + "\n Comuna: " + getComuna() + "\n Edad: " + getEdad();
+		return "Cliente: " + obtenerNombre() + "\n Telefono: " + getTelefono() + "\n AFP: " + getAfp() + "\n Sistema de Salud: " + getSistemaSalud() + "\n Direccion: " + getDireccion() + "\n Comuna: " + getComuna() + "\n Edad: " + getEdad();
 		
 	}
 }
