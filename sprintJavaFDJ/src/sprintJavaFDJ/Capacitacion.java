@@ -45,6 +45,11 @@ public class Capacitacion{
 				}
 			}while(true);
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId() {
 		return id;
 	}
@@ -68,18 +73,24 @@ public class Capacitacion{
 	 * Texto 
 	 * SETTER Y GETTER*/
 	public void setDia(String dia) {
-		if(dia.toUpperCase().matches("LUNES") ||
-			dia.toUpperCase().matches("MARTES") ||
-			dia.toUpperCase().matches("MIERCOLES") ||
-			dia.toUpperCase().matches("JUEVES") ||
-			dia.toUpperCase().matches("VIERNES") ||
-			dia.toUpperCase().matches("SABADO") ||
-			dia.toUpperCase().matches("DOMINGO")) {
-			this.dia = dia;
-		}
-		else {
-			Utilidades.ingresar("Ingrese un dia de la semana válido.");
-		}
+
+		do{
+			if(dia.toUpperCase().matches("LUNES") ||
+				dia.toUpperCase().matches("MARTES") ||
+				dia.toUpperCase().matches("MIERCOLES") ||
+				dia.toUpperCase().matches("JUEVES") ||
+				dia.toUpperCase().matches("VIERNES") ||
+				dia.toUpperCase().matches("SABADO") ||
+				dia.toUpperCase().matches("DOMINGO"))
+			{
+				this.dia = dia;
+				break;
+			}
+			else {
+				Utilidades.escribir("[ERROR] Ingrese un dia de la semana válido.\n");
+				dia = Utilidades.ingresar("Ingrese día de la Semana: (Ej.: 'Lunes') ");
+			}
+		}while(true);
 	}
 
 	
@@ -102,7 +113,8 @@ public class Capacitacion{
 				this.hora = hora;
 			}
 			else {
-				Utilidades.ingresar("Ingrese una hora válida. HH:MM");
+				Utilidades.escribir("[ERROR] Ingrese una hora válida. HH:MM\n");
+				hora = Utilidades.ingresar("Ingrese hora formato [HH:MM]: ");
 			}
 		}while(!hora.matches(regEx));
 	}
@@ -120,14 +132,17 @@ public class Capacitacion{
 	 * Obligatorio; minimo 10 caracteres - maximo 50
 	 * SETTER Y GETTER */
 	public void setLugar(String lugar) {
-		if(lugar.length() > 9 && lugar.length() < 51) {
-			this.lugar = lugar; 
-		}
-		else {
-			Utilidades.ingresar("Ha superado el límite de caracteres");
-		}
-		
-		while(lugar.length() <10 || lugar.length() >50);
+
+		do{
+			if(lugar.length() > 9 && lugar.length() < 51) {
+				this.lugar = lugar;
+				break;
+			}
+			else {
+				Utilidades.escribir("[ERROR] Obligatorio, cantidad de caracteres debe estar entre 10 y 50.\n");
+				lugar = Utilidades.ingresar("Ingrese Lugar (Texto entre 10 y 50 caracteres): ");
+			}
+		}while(true);
 	}
 	
 	public String getLugar() {
@@ -138,12 +153,21 @@ public class Capacitacion{
 	 * Maximo 70 caracteres
 	 * SETTER Y GETTER */
 	public void setDuracion(String duracion) {
-		if(duracion.length() < 71) {
-			this.duracion = duracion;
-		}
-		else{
-			Utilidades.ingresar("Ha superado el límite de caracteres");
-		}
+	    do {
+			if (duracion.length() == 0) {
+				this.duracion = duracion;
+				break;
+			} else if (!Utilidades.esNumerica(duracion)) {
+				Utilidades.escribir("[ERROR] Debe ingresar un número\n");
+				duracion = Utilidades.ingresar("Ingrese Duración en minutos: ");
+			} else if (Integer.parseInt(duracion) > 70) {
+				Utilidades.escribir("[ERROR] Caracteres máximos 70\n");
+				duracion = Utilidades.ingresar("Ingrese Duración en minutos: ");
+			} else {
+				this.duracion = duracion;
+				break;
+			}
+		} while (true);
 	}
 	public String getDuracion() {
 		return duracion;
@@ -153,14 +177,20 @@ public class Capacitacion{
 	 * Obligatorio; int menor que 1000
 	 * SETTER Y GETTER*/
 	public void setCantidadAsistentes(int cantidadAsistentes) {
-		if(cantidadAsistentes < 1000) {
-			this.cantidadAsistentes = cantidadAsistentes;
-		}
-		else {
-			Utilidades.ingresar("Ingrese una cantidad válida de asistentes.");
-		}
-		
-		while(cantidadAsistentes >999);
+		String capturador = null;
+		do{
+			if(cantidadAsistentes > 0 && cantidadAsistentes < 1000 || Utilidades.esNumerica(capturador)) {
+				this.cantidadAsistentes = cantidadAsistentes;
+				break;
+			}
+			else {
+				Utilidades.escribir("[ERROR] Ingrese una cantidad válida de asistentes.\n");
+				capturador = Utilidades.ingresar("Ingrese cantidad de asistentes (Máximo 999): ");
+				if(Utilidades.esNumerica(capturador)){
+					cantidadAsistentes = Integer.parseInt(capturador);
+				}
+			}
+		}while(true);
 	}
 	public int getCantidadAsistentes() {
 		return cantidadAsistentes;

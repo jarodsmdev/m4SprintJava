@@ -13,7 +13,7 @@ public class VisitaEnTerreno {
 
 	private int identificador;
 	private static int idIdentificador;
-	private Cliente cliente;
+	private long rutCliente;
 	private String dia;
 	private String hora;
 	private String lugar;
@@ -25,10 +25,10 @@ public class VisitaEnTerreno {
 	 */
 
 	public VisitaEnTerreno() {
-		Revision revision = new Revision();
-		revisiones.add(revision);
+		// Revision revision = new Revision();
+		// revisiones.add(revision);
 		++idIdentificador;
-		this.identificador = idIdentificador;
+		identificador = idIdentificador;
 	};
 
 	/**
@@ -40,18 +40,18 @@ public class VisitaEnTerreno {
 	 * @param lugar:         String
 	 * @param comentarios:   String
 	 */
-	public VisitaEnTerreno(String identificador, Cliente cliente, String dia, String hora, String lugar,
+	public VisitaEnTerreno(String identificador, long rutCliente, String dia, String hora, String lugar,
 			String comentarios) {
 
 		++idIdentificador;
 		this.identificador = idIdentificador;
-		this.cliente = cliente;
+		this.rutCliente = rutCliente;
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
 		this.comentarios = comentarios;
-		Revision revision = new Revision();
-		revisiones.add(revision);
+		// Revision revision = new Revision();
+		// revisiones.add(revision);
 	}
 
 	/**
@@ -68,18 +68,13 @@ public class VisitaEnTerreno {
 		this.identificador = identificador;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public long getRutCliente() {
+		return rutCliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		do {
-			if (cliente.getRun() <= 99999999) {
-				this.cliente = cliente;
-			} else {
-				Utilidades.ingresar("No puede exceder 99.999.999");
-			}
-		} while (cliente.getRun() > 99999999);
+	public void setRutCliente(long rutCliente) {
+		this.rutCliente = rutCliente;
+
 	}
 
 	public String getDia() {
@@ -91,10 +86,12 @@ public class VisitaEnTerreno {
 		do {
 			if (dia.matches(regex)) {
 				this.dia = dia;
+				break;
 			} else
-				Utilidades.ingresar("La fecha no es valida");
+				Utilidades.escribir("[ERROR] La fecha no es valida.\n");
+				dia = Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: ");
 
-		} while (!dia.matches(regex));
+		} while (true);
 	}
 
 	public String getHora() {
@@ -106,10 +103,12 @@ public class VisitaEnTerreno {
 		do {
 			if (hora.matches(regex)) {
 				this.hora = hora;
+				break;
 			} else {
-				Utilidades.ingresar("La hora no es valida");
+				Utilidades.escribir("[ERROR] La hora no es válida.\n");
+				hora = Utilidades.ingresar("Ingrese hora formato [HH:MM]: ");
 			}
-		} while (!hora.matches(regex));
+		} while (true);
 	}
 
 	public String getLugar() {
@@ -124,10 +123,12 @@ public class VisitaEnTerreno {
 		do {
 			if (lugar.length() > 9 && lugar.length() < 51) {
 				this.lugar = lugar;
+				break;
 			} else {
-				Utilidades.ingresar("Debe ingresar entre 10 y 50 caracteres");
+				Utilidades.escribir("[ERROR] Debe ingresar entre 10 y 50 caracteres\n");
+				lugar = Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)");
 			}
-		} while (false);
+		} while (true);
 	}
 
 	public String getComentarios() {
@@ -138,10 +139,12 @@ public class VisitaEnTerreno {
 		do {
 			if (comentarios.length() < 101) {
 				this.comentarios = comentarios;
+				break;
 			} else {
-				Utilidades.ingresar("Puede ingresar maximo 100 caracteres");
+				Utilidades.escribir("[ERROR] Puede ingresar maximo 100 caracteres\n");
+				comentarios = Utilidades.ingresar("Ingrese comentarios de la visita [Máx 100 caracteres]: ");
 			}
-		} while (comentarios.length() > 100);
+		} while (true);
 	}
 
 	public void agregarRevision(Revision nuevaRevision) {
@@ -149,12 +152,18 @@ public class VisitaEnTerreno {
 	}
 
 	/**
+	 * Getter que retorna ArrayList con las revisiones
+	 * @return
+	 */
+	public ArrayList<Revision> getRevisiones(){
+		return revisiones;
+	}
+	/**
 	 * Metodo toString de la clase VisitaEnTerreno.
 	 */
 	@Override
 	public String toString() {
-		return "VisitaEnTerreno Identificador=" + identificador + ", Cliente=" + cliente.getRun() + ", Dia=" + dia
-				+ ", Hora=" + hora + ", Lugar=" + lugar + ", Comentarios=" + comentarios;
+		return " [VISITA] ID Visita: " + identificador + ", RUT Cliente: " + rutCliente + ", Dia: " + dia + ", Hora: " + hora + ", Lugar: " + lugar + ", Comentarios: " + comentarios;
 	}
 
 }
