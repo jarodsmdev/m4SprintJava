@@ -85,10 +85,12 @@ public class Accidente {
 		do {
 			if (fecha.matches(regex)) {
 				this.fecha = fecha;
+				break;
 			} else {
-				Utilidades.ingresar("La fecha no es valida");
+				Utilidades.escribir("[ERROR] La fecha no es válida\n");
+				fecha = Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: ");
 			}
-		} while (!fecha.matches(regex));
+		} while (true);
 	}
 
 	public String getHora() {
@@ -100,10 +102,12 @@ public class Accidente {
 		do {
 			if (hora.matches(regex)) {
 				this.hora = hora;
+				break;
 			} else {
-				Utilidades.ingresar("El formato de hora ingresada no es valida");
+				Utilidades.escribir("[ERROR] El formato de hora ingresada no es valida\n");
+				hora = Utilidades.ingresar("Ingrese hora formato [HH:MM]: ");
 			}
-		} while (!hora.matches(regex));
+		} while (true);
 	}
 
 	public String getLugar() {
@@ -118,10 +122,12 @@ public class Accidente {
 		do {
 			if (lugar.length() >= 10 && lugar.length() <= 50) {
 				this.lugar = lugar;
+				break;
 			} else {
-				Utilidades.ingresar("Debe ingresar entre 10 y 50 caracteres");
+				Utilidades.escribir("[ERROR] Debe ingresar entre 10 y 50 caracteres\n");
+				lugar = Utilidades.ingresar("Ingrese Lugar (Texto entre 10 y 50 caracteres): ");
 			}
-		} while (lugar.length() < 10 || lugar.length() > 50);
+		} while (true);
 
 	}
 
@@ -141,10 +147,12 @@ public class Accidente {
 		do {
 			if (origen.length() <= 100) {
 				this.origen = origen;
+				break;
 			} else {
-				Utilidades.ingresar("No puede ingresar mas de 100 caracteres");
+				Utilidades.escribir("[ERROR]No puede ingresar mas de 100 caracteres\n");
+				origen = Utilidades.ingresar("Ingrese origen del accidente (máx 100 caracteres): ");
 			}
-		} while (origen.length() > 100);
+		} while (true);
 	}
 
 	public String getConsecuencias() {
@@ -155,10 +163,12 @@ public class Accidente {
 		do {
 			if (consecuencias.length() <= 100) {
 				this.consecuencias = consecuencias;
+				break;
 			} else {
-				Utilidades.ingresar("No puede ingresar mas de 100 caracteres");
+				Utilidades.escribir("[ERROR]No puede ingresar mas de 100 caracteres\n");
+				consecuencias = Utilidades.ingresar("Ingrese consecuencias del accidente(máx 100 caracteres): ");
 			}
-		} while (consecuencias.length() > 100);
+		} while (true);
 
 	}
 
