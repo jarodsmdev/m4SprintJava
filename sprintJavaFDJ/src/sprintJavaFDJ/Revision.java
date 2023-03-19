@@ -84,11 +84,15 @@ public class Revision {
 	 * @param nombreRevision tipo String
 	 */
 	public void setNombreRevision(String nombreRevision) {
-		if(nombreRevision.length() >= 10 && nombreRevision.length() <= 50) {
-			this.nombreRevision = nombreRevision;			
-		}else {
-			Utilidades.escribir("[!] Nombre Revisión debe tener entre 10 y 50 caracteres");
-		}
+		do{
+			if(nombreRevision.length() >= 10 && nombreRevision.length() <= 50) {
+				this.nombreRevision = nombreRevision;
+				break;			
+			}else {
+				Utilidades.escribir("[ERROR] Nombre Revisión debe tener entre 10 y 50 caracteres\n");
+				nombreRevision = Utilidades.ingresar("Ingrese nombre Revisión [Entre 10 y 50 caracteres]: ");
+			}
+		}while(true);
 	}
 	
 	/**
@@ -104,11 +108,15 @@ public class Revision {
 	 * @param detalles tipo String
 	 */
 	public void setDetalleRevisar(String detalles) {
-		if(detalles.length() <101) {
-			this.detalles = detalles;			
-		}else {
-			Utilidades.escribir("[!] Máximo 100 caracteres para escribir detalles de la revisión.");
-		}
+		do{
+			if(detalles.length() <101) {
+				this.detalles = detalles;
+				break;			
+			}else {
+				Utilidades.escribir("[ERROR] Máximo 100 caracteres para escribir detalles de la revisión.\n");
+				detalles = Utilidades.ingresarObligatorio("Detallar Revisión [Máx. 100 caracteres ]: ");
+			}
+		}while(true);
 	}
 	
 	
@@ -154,7 +162,7 @@ public class Revision {
 	
 	@Override
 	public String toString() {
-		return "Revision ID Revisión: " + idRevision + ", ID Visita: " + idVisita + ", Nombre Revisión: " + nombreRevision + ", Detalles: " + detalles +", Estado: " + mostrarResultadoRevision();
+		return " [REVISIÓN] ID Revisión: " + idRevision + ", ID Visita: " + idVisita + ", Nombre Revisión: " + nombreRevision + ", Detalles: " + detalles + ", Estado: " + mostrarResultadoRevision() + ".";
 	}
 	
 }

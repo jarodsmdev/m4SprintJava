@@ -161,7 +161,7 @@ public class VisitaEnTerreno {
 	 */
 	@Override
 	public String toString() {
-		return " Visita En Terreno ID: " + identificador + ", RUT Cliente: " + rutCliente + ", Dia: " + dia + ", Hora: " + hora + ", Lugar: " + lugar + ", Comentarios: " + comentarios;
+		return " [Visita En Terreno] ID: " + identificador + ", RUT Cliente: " + rutCliente + ", Dia: " + dia + ", Hora: " + hora + ", Lugar: " + lugar + ", Comentarios: " + comentarios;
 	}
 
 }
