@@ -56,8 +56,7 @@ public class Cliente extends Usuario {
 	/** @param APELLIDO
 	 * Obligatorio; minimo 5 caracteres - maximo 30
 	 * SETTER Y GETTER */
-	public void setApellido() {
-		String apellido = Utilidades.ingresarObligatorio("Ingrese el apellido del cliente");
+	public void setApellido(String apellido) {
 		do {
 			if (apellido.length() > 4 && apellido.length() < 31) {
 				this.apellido = apellido;
@@ -65,7 +64,8 @@ public class Cliente extends Usuario {
 			}
 			else {
 				//opcion invalida
-				apellido = Utilidades.ingresarObligatorio("Debe tener entre 5 y 30 caracteres");
+				Utilidades.escribir("[ERROR] Debe tener entre 5 y 30 caracteres\n");
+				apellido = Utilidades.ingresar("Ingrese Apellido [Entre 5 y 30 caracteres]: ");
 			}
 		}while(true);
 	}
@@ -76,21 +76,23 @@ public class Cliente extends Usuario {
 	/** @param TELEFONO
 	 * Obligatorio
 	 * SETTER Y GETTER */
-	public void setTelefono() {
+	public void setTelefono(String telefono) {
 		String regEx = "^[0-9]+$";
-		String telefono = Utilidades.ingresarObligatorio("Ingrese el número de teléfono del cliente");
+		 
 		do {
 			if (!telefono.matches(regEx)) {
-				telefono = Utilidades.ingresarObligatorio("Sólo se aceptan números");
+				Utilidades.escribir("[ERROR] Sólo se aceptan números.\n");
+				telefono = Utilidades.ingresar("Ingrese el número de teléfono del cliente");
 			}
 			else if (telefono.length() < 9) {
 				this.telefono = Integer.parseInt(telefono);
 				break;
 			}
 			else if(telefono.length() > 8) {
-				telefono = Utilidades.ingresarObligatorio("Error: El teléfono no puede superar 8 caracteres");
+				Utilidades.escribir("[ERROR] El teléfono no puede superar 8 caracteres\n");
+				telefono = Utilidades.ingresar("Ingrese el número de teléfono del cliente");
 			}
-			} while(true);
+		} while(true);
 	}
 	
 	/**
@@ -104,20 +106,22 @@ public class Cliente extends Usuario {
 	/** @param AFP
 	 * Minimo 4 caracteres - maximo 30
 	 *  SETTER Y GETTER */
-	public void setAfp() {
-		String afp = Utilidades.ingresar("Ingrese el nombre de la AFP del cliente");
+	public void setAfp(String afp) {
+
 		do {
-			if(afp.length()> 3 && afp.length()<31) {
+			if (afp.length() > 0 && afp.length() < 4) {
+				// opcion inválida
+				Utilidades.escribir("[ERROR] Ha ingresado menos del Mínimo de caracteres permitidos. Inténtelo otra vez.\n");
+				afp = Utilidades.ingresar("Ingrese el nombre de la AFP del cliente [Entre 4 y 30 caracteres]: ");
+			} else if (afp.length() > 30) {
+				// opcion inválida
+				Utilidades.escribir("[ERROR] Ha superado el máximo de caracteres. Inténtelo otra vez.\n");
+				afp = Utilidades.ingresar("Ingrese el nombre de la AFP del cliente [Entre 4 y 30 caracteres]: ");
+			} else {
 				this.afp = afp;
 				break;
-			}else if(afp.length() < 4  && afp.length()> 30) {
-				//opcion invalida
-				afp = Utilidades.ingresar("Ha superado el máximo de caracteres. Intentelo otra vez. ");
 			}
-			else {
-				break;
-			}
-		}while(true);
+		} while (true);
 
 	}
 	
@@ -133,16 +137,18 @@ public class Cliente extends Usuario {
 	 * 1 FONASA / 2 ISAPRE
 	 * SETTER, GETTER */
 
-	public void setSistemaSalud() {
-		String sistemaSalud = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
+	public void setSistemaSalud(String sistemaSalud) {
+		
 		do {
 			if(sistemaSalud.equals("1") || sistemaSalud.equals("2")) {
 				this.sistemaSalud = sistemaSalud;
 				break;
 			} else if(sistemaSalud.isEmpty()) {
-				sistemaSalud = Utilidades.ingresar("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
+				Utilidades.escribir("[ERROR] Ingrese una opcion válida.\n");
+				sistemaSalud = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
 			} else {
-				sistemaSalud = Utilidades.ingresar("Ingrese una opcion válida. 1 FONASA || 2 ISAPRE");
+				Utilidades.escribir("[ERROR] Ingrese una opcion válida.\n");
+				sistemaSalud = Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE");
 			}
 		}while(true);
 	}
@@ -158,15 +164,16 @@ public class Cliente extends Usuario {
 	/** @param DIRECCION
 	 * Maximo 70 caracteres
 	 * SETTER Y GETTER */
-	public void setDireccion() {
-		String direccion = Utilidades.ingresar("Ingrese la dirección");
+	public void setDireccion(String direccion) {
+	
 		do {
 			if(direccion.length() < 71) {
 				this.direccion = direccion; 
 				break;
 			}else {
 				//opcion invalida
-				direccion = Utilidades.escribir("Ha superado el límite de caracteres");
+				Utilidades.escribir("[ERROR] Ha superado el límite de caracteres\n");
+				direccion = Utilidades.escribir("Ingrese la dirección [Máx 70 caracteres]:");
 			}
 		}while(true);
 	}
@@ -182,15 +189,16 @@ public class Cliente extends Usuario {
 	/** @param COMUNA 
 	 * Maximo 50 caracteres
 	 * SETTER Y GETTER */
-	public void setComuna() {
-		String comuna = Utilidades.ingresar("Ingrese la comuna");
+	public void setComuna(String comuna) {
+		
 		do {
 			if(comuna.length() < 51) {
 				this.comuna = comuna; 
 				break;
 			}else {
 				//opcion invalida
-				comuna = Utilidades.escribir("Ha superado el máximo de caracteres");
+				Utilidades.escribir("Ha superado el máximo de caracteres");
+				comuna = Utilidades.ingresar("Ingrese la comuna [Máx 50 caracteres]: ");
 			}
 		}while(true);
 	}
@@ -206,17 +214,22 @@ public class Cliente extends Usuario {
 	/** @param EDAD 
 	 * Obligatorio: mayor o igual a 0 - menor que 150
 	 * SETTER Y GETTER*/
-	public void setEdad() {
+	public void setEdad(String edad) {
 		String regEx = "^[0-9]+$";
-		String edad = Utilidades.ingresarObligatorio("Ingrese su edad");
 		do {
 			if(!edad.trim().matches(regEx)){
 				//opcion invalida
-				edad = Utilidades.ingresar("Ingrese una edad válida [0-150]");
-			}else if(Integer.parseInt(edad) > -1 && Integer.parseInt(edad) < 150) {
-					this.edad = Integer.parseInt(edad); 
-				}
-		}while(!edad.trim().matches(regEx));
+				Utilidades.escribir("Ingrese una edad válida [0 - 150]\n");
+				edad = Utilidades.ingresar("Ingrese su edad [0 - 150]");
+			}else if(Integer.parseInt(edad) > -1 && Integer.parseInt(edad) < 151) {
+					this.edad = Integer.parseInt(edad);
+					break;
+			}else{
+				//opcion invalida
+				Utilidades.escribir("Ingrese una edad válida [0 - 150]\n");
+				edad = Utilidades.ingresar("Ingrese su edad [0 - 150]");
+			}
+		}while(true);
 	}
 	
 	/**

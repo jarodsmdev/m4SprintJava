@@ -81,6 +81,7 @@ public class Contenedor {
 			if (listaAsesoria.get(i) instanceof Usuario) {
 				Usuario usuario = (Usuario) listaAsesoria.get(i); // CASTING/REFUNDICIÓN
 				Utilidades.escribir((i + 1) + ". " + usuario.analizarUsuario() + "\n");
+				//Utilidades.escribir((i + 1) + ". " + usuario.toString() + "\n");
 			} else {
 				Utilidades.escribir("[!] No existen objetos de tipo Usuario");
 			}

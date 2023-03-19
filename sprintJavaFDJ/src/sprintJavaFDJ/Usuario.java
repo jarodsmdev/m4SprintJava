@@ -108,9 +108,7 @@ public class Usuario implements Asesoria{
 	 * @param run tipo String
 	 */
 	public void setRut(long run) {
-
 		this.run = run;
-		
 	}
 	/**
 	 * 
