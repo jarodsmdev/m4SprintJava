@@ -127,6 +127,11 @@ public class Usuario implements Asesoria{
 	public String analizarUsuario() {
 		return "Usuario: " + nombreUsuario + ", RUN:" + run;
 	}
+	
+	@Override
+	public String soloUsuario() {
+		return "Usuario: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+	}
 
 	//Metodo mostrar edad
 	public void mostrarEdad() {

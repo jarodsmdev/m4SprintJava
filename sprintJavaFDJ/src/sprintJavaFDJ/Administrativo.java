@@ -127,6 +127,13 @@ public class Administrativo extends Usuario {
 	 */
 	@Override
 	public String analizarUsuario() {
-		return "Administrativo : " + getNombreUsuario() + ", RUT: " + getRun() + ", Área: " + area + ", Experiencia Previa: " + expPrevia;
+		return "Administrativo: " + getNombreUsuario() + ", RUT: " + getRun() + ", Área: " + area + ", Experiencia Previa: " + expPrevia;
+		
 	}
+	
+	@Override
+	public String soloUsuario() {
+		return "Administrativo: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+	}
+
 }

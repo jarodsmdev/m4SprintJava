@@ -243,7 +243,7 @@ public class Principal {
 			switch (capturador) {
 				case "1":
 					Utilidades.escribir("\t-- MOSTRAR TODOS LOS USUARIOS --\n\n");
-					contenedor.listarUsuarios();
+					contenedor.listarSoloUsuarios();
 					menuInformes(contenedor);
 					break;
 				case "2":

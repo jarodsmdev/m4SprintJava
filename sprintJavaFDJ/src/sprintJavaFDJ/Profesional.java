@@ -133,4 +133,9 @@ public class Profesional extends Usuario {
 		public String analizarUsuario() {
 			return "Profesional: " + super.getNombreUsuario() + ", RUT: " + super.getRun() + ", Título: " + titulo + ", Fecha Ingreso: " + fechaIngreso;
 		}
+		
+		@Override
+		public String soloUsuario() {
+			return "Profesional: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+		}
 	}
