@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4b28190-dfa7-4c5e-8432-8e7cbbf1bb3b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/.project" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Accidente.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Accidente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Administrativo.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Administrativo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Capacitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Capacitacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Contenedor.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Contenedor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Principal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Profesional.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Profesional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Revision.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Revision.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Utilidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/Utilidades.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/VisitaEnTerreno.java" beforeDir="false" afterPath="$PROJECT_DIR$/sprintJavaFDJ/src/sprintJavaFDJ/VisitaEnTerreno.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
