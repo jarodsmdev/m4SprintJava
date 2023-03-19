@@ -175,12 +175,14 @@ public class Contenedor {
 	public Cliente obtenerCliente(long rutCliente) {
 		Cliente cliente = new Cliente();
 		for (int i = 0; i < listaAsesoria.size(); i++) {
-			cliente = (Cliente) listaAsesoria.get(i); // CASTING
-			if (cliente.getRun() == rutCliente) {
-				return cliente;
-			}/* else {
-				Utilidades.escribir("[!] No se ha encontrado al Cliente RUT: " + rutCliente);
-			}*/
+			if(listaAsesoria.get(i) instanceof Cliente){
+				cliente = (Cliente) listaAsesoria.get(i); // CASTING
+				if (cliente.getRun() == rutCliente) {
+					return cliente;
+				}/* else {
+					Utilidades.escribir("[!] No se ha encontrado al Cliente RUT: " + rutCliente);
+				}*/
+			}
 		}
 		return cliente;
 	}

@@ -15,11 +15,8 @@ public class Cliente extends Usuario {
 	private String direccion; 
 	private String comuna;
 	private int edad; 
-	private int cantidadCapacitaciones;
 	private ArrayList<Accidente> listaAccidentes = new ArrayList<Accidente>();
-	private int cantidadAccidentes;
-	private ArrayList<VisitaEnTerreno> listaVisitaEnTerreno = new ArrayList<VisitaEnTerreno>();
-	private int cantidadVisitas;  
+	private ArrayList<VisitaEnTerreno> listaVisitaEnTerreno = new ArrayList<VisitaEnTerreno>(); 
 	
 	/** Constructor vacío */
 	public Cliente() {}
@@ -230,32 +227,7 @@ public class Cliente extends Usuario {
 		return edad;
 	}
 	
-	/** @param CANTIDAD DE CAPACITACIONES
-	 * SETTER Y GETTER */
-	public void setCantidadCapacitaciones(int cantidadCapacitaciones) {
-		this.cantidadCapacitaciones = cantidadCapacitaciones;
-	}
-	public int getCantidadCapacitaciones() {
-		return cantidadCapacitaciones;
-	}
 	
-	/** @param CANTIDAD DE ACCIDENTES
-	 * SETTER Y GETTER*/
-	public void setCantidadAccidentes(int cantidadAccidentes) {
-		this.cantidadAccidentes = cantidadAccidentes;
-	}
-	public int getCantidadAccidentes() {
-		return cantidadAccidentes;
-	}
-	
-	/** @param CANTIDAD DE VISITAS EN TERRENO
-	 * SETTER Y GETTER*/
-	public void setCantidadVisitas(int cantidadVisitas) {
-		this.cantidadVisitas = cantidadVisitas;
-	}
-	public int getCantidadVisitas() {
-		return cantidadVisitas;
-	}
 	
 	/** METODO OBTENER NOMBRE = NOMBRE Y APELLIDOS CONCATENADOS*/
 	public String obtenerNombre() {
@@ -283,17 +255,31 @@ public class Cliente extends Usuario {
 	
 	/** METODO QUE AGREGA ACCIDENTES A ARRAYLIST QUE ALMACENA TODOS LOS ACCIDENTES DEL CLIENTE*/
 	public void agregarAccidente(Accidente nuevoAccidente) {
-		if (listaAccidentes.size() > -1) {
-			listaAccidentes.add(nuevoAccidente);
-			cantidadAccidentes++;
-		}
+		listaAccidentes.add(nuevoAccidente);
 	}
 	/** METODO QUE AGREGA VISITAS A TERRENO A UN ARRAYLIST QUE GUARDA TODAS LAS VISITAS A TERRENO DEL CLIENTE */
 	public void agregarVisitaTerreno(VisitaEnTerreno nuevaVisita) {
-		if(listaVisitaEnTerreno.size() > 0 ) {
 			listaVisitaEnTerreno.add(nuevaVisita);
-			cantidadVisitas++;
+	}
+
+	/**
+	 * Getter para obtener array
+	 * @return
+	 */
+	public ArrayList<VisitaEnTerreno> getListaVisitas(){
+		return listaVisitaEnTerreno;
+	}
+
+	/**
+	 * Método que muestra todas las visitas
+	 * @return
+	 */
+	public String mostrarVisitas(){
+		String visitas = "";
+		for(int i = 0; i < listaVisitaEnTerreno.size() ; i++){
+			visitas = ((i+1) + ". " + listaVisitaEnTerreno.get(i).toString()+ "\n") + visitas;
 		}
+		return visitas;
 	}
 
 	/**
@@ -311,18 +297,7 @@ public class Cliente extends Usuario {
 		}
 	}
 	
-	/** METODOS QUE MUESTRAN LA CANTIDAD DE CAPACITACIONES, VISITAS A TERRENO Y ACCIDENTES DEL CLIENTE*/
 	
-	public void mostrarCantAccidentes() {
-		Utilidades.ingresar("El cliente " + obtenerNombre() + " ha tenido " + cantidadAccidentes + " accidentes.");
-	}
-
-	
-	public void mostrarCantVisitasTerreno() {
-		Utilidades.ingresar("El cliente " + obtenerNombre() + " ha recibido " + cantidadVisitas + " visitas a terreno.");
-	}
-
-
 	@Override
 	public String toString() {
 		return "Cliente: " + obtenerNombre() + "\n Telefono: " + getTelefono() + "\n AFP: " + getAfp() + "\n Sistema de Salud: " + getSistemaSalud() + "\n Direccion: " + getDireccion() + "\n Comuna: " + getComuna() + "\n Edad: " + getEdad();

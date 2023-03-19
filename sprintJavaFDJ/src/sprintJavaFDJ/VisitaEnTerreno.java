@@ -25,10 +25,10 @@ public class VisitaEnTerreno {
 	 */
 
 	public VisitaEnTerreno() {
-		Revision revision = new Revision();
-		revisiones.add(revision);
+		// Revision revision = new Revision();
+		// revisiones.add(revision);
 		++idIdentificador;
-		this.identificador = idIdentificador;
+		identificador = idIdentificador;
 	};
 
 	/**
@@ -50,8 +50,8 @@ public class VisitaEnTerreno {
 		this.hora = hora;
 		this.lugar = lugar;
 		this.comentarios = comentarios;
-		Revision revision = new Revision();
-		revisiones.add(revision);
+		// Revision revision = new Revision();
+		// revisiones.add(revision);
 	}
 
 	/**
@@ -73,13 +73,8 @@ public class VisitaEnTerreno {
 	}
 
 	public void setRutCliente(long rutCliente) {
-		do {
-			if (rutCliente <= 99999999) {
-				this.rutCliente = rutCliente;
-			} else {
-				Utilidades.ingresar("No puede exceder 99.999.999");
-			}
-		} while (rutCliente > 99999999);
+		this.rutCliente = rutCliente;
+
 	}
 
 	public String getDia() {
@@ -157,11 +152,18 @@ public class VisitaEnTerreno {
 	}
 
 	/**
+	 * Getter que retorna ArrayList con las revisiones
+	 * @return
+	 */
+	public ArrayList<Revision> getRevisiones(){
+		return revisiones;
+	}
+	/**
 	 * Metodo toString de la clase VisitaEnTerreno.
 	 */
 	@Override
 	public String toString() {
-		return " [Visita En Terreno] ID: " + identificador + ", RUT Cliente: " + rutCliente + ", Dia: " + dia + ", Hora: " + hora + ", Lugar: " + lugar + ", Comentarios: " + comentarios;
+		return " [VISITA] ID Visita: " + identificador + ", RUT Cliente: " + rutCliente + ", Dia: " + dia + ", Hora: " + hora + ", Lugar: " + lugar + ", Comentarios: " + comentarios;
 	}
 
 }

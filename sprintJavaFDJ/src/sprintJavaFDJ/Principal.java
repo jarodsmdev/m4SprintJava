@@ -1,5 +1,7 @@
 package sprintJavaFDJ;
 
+import java.util.ArrayList;
+
 public class Principal {
 
 	public static void main(String[] args) {
@@ -12,10 +14,10 @@ public class Principal {
 	}
 
 	public static void DebugMode(Contenedor contenedor) {
-		// Usuario usuario1 = new Usuario();
-		// usuario1.setNombreUsuario("SOY USUARIO1");
-		// usuario1.setFechaNacimiento("22/03/1983");
-		// usuario1.setRut(1552123);
+		Usuario usuario1 = new Usuario();
+		usuario1.setNombreUsuario("SOY USUARIO1");
+		usuario1.setFechaNacimiento("22/03/1983");
+		usuario1.setRut(1552123);
 
 		Cliente cliente1 = new Cliente();
 		cliente1.setNombre("SOY CLIENTE1");
@@ -47,38 +49,59 @@ public class Principal {
 		capacitacion2.setDuracion("45");
 		capacitacion2.setCantidadAsistentes(30);
 
-		// Administrativo administrativo1 = new Administrativo();
-		// administrativo1.setNombreUsuario("SOY ADMINISTRATIVO1");
+		Administrativo administrativo1 = new Administrativo();
+		administrativo1.setNombreUsuario("SOY ADMINISTRATIVO1");
 		// administrativo1.setArea("51");
-		// administrativo1.setExpPrevia("5");
-		// administrativo1.setFechaNacimiento("22/03/1983");
-		// administrativo1.setNombreUsuario("NICKNAME ADM1");
-		// administrativo1.setRut(1452654);
+		administrativo1.setExpPrevia("5");
+		administrativo1.setFechaNacimiento("22/03/1983");
+		administrativo1.setNombreUsuario("NICKNAME ADM1");
+		administrativo1.setRut(1452654);
 
-		// Profesional profesional1 = new Profesional();
-		// profesional1.setNombreUsuario("SOY PROFESIONAL1");
-		// profesional1.setFechaIngreso("14/03/1999");
-		// profesional1.setFechaNacimiento("05/02/1956");
-		// profesional1.setNombreUsuario("NICKNAME PROF1");
-		// profesional1.setRut(458744);
+		Profesional profesional1 = new Profesional();
+		profesional1.setNombreUsuario("SOY PROFESIONAL1");
+		profesional1.setFechaIngreso("14/03/1999");
+		profesional1.setFechaNacimiento("05/02/1956");
+		profesional1.setNombreUsuario("NICKNAME PROF1");
+		profesional1.setRut(458744);
 		// profesional1.setTitulo("INGENIER@");
 
-		// Profesional profesional2 = new Profesional();
-		// profesional2.setNombreUsuario("SOY PROFESIONAL2");
-		// profesional2.setFechaIngreso("14/03/1996");
-		// profesional2.setFechaNacimiento("05/02/1956");
-		// profesional2.setNombreUsuario("NICKNAME PROF2");
-		// profesional2.setRut(1554744);
+		Profesional profesional2 = new Profesional();
+		profesional2.setNombreUsuario("SOY PROFESIONAL2");
+		profesional2.setFechaIngreso("14/03/1996");
+		profesional2.setFechaNacimiento("05/02/1956");
+		profesional2.setNombreUsuario("NICKNAME PROF2");
+		profesional2.setRut(1554744);
 		// profesional2.setTitulo("ARQUITECT@");
 
-		// contenedor.almacenarUsuario(usuario1);
+		VisitaEnTerreno visita1 = new VisitaEnTerreno();
+		visita1.setRutCliente(cliente1.getRun());
+		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 1");
+		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 1");
+		
+
+		VisitaEnTerreno visita2 = new VisitaEnTerreno();
+		visita1.setRutCliente(cliente2.getRun());
+		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 2");
+		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 2");
+		
+
+		VisitaEnTerreno visita3 = new VisitaEnTerreno();
+		visita1.setRutCliente(cliente2.getRun());
+		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 3");
+		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 3");
+		
+
+		contenedor.almacenarUsuario(usuario1);
 		contenedor.almacenarCliente(cliente1);
 		contenedor.almacenarCliente(cliente2);
-		// contenedor.almacenarAdministrativo(administrativo1);
-		// contenedor.almacenarProfesional(profesional1);
-		// contenedor.almacenarProfesional(profesional2);
+		contenedor.almacenarAdministrativo(administrativo1);
+		contenedor.almacenarProfesional(profesional1);
+		contenedor.almacenarProfesional(profesional2);
 		contenedor.almacenarCapacitacion(capacitacion1);
 		contenedor.almacenarCapacitacion(capacitacion2);
+		cliente1.agregarVisitaTerreno(visita1);
+		cliente2.agregarVisitaTerreno(visita2);
+		cliente2.agregarVisitaTerreno(visita3);
 	}
 
 	public static void menuPrincipal(Contenedor contenedor) {
@@ -168,7 +191,7 @@ public class Principal {
 	public static void menuUsuarios(Contenedor contenedor) {
 		String capturador;
 		do {
-			Utilidades.escribir("\n[\t--MENÚ USUARIO--\n]\n");
+			Utilidades.escribir("\n[\t--MENÚ USUARIO--\t]\n\n");
 			Utilidades.escribir("\n\t1. CREAR USUARIO" +
 					"\n\t2. CREAR CLIENTE" +
 					"\n\t3. CREAR PROFESIONAL" +
@@ -239,7 +262,8 @@ public class Principal {
 					break;
 				case "4":
 					Utilidades.escribir("\t-- MOSTRAR VISITAS --\n\n");
-					Utilidades.escribir("NO IMPLEMENTADO AÚN");
+					mostrarVisitas(contenedor);
+					menuInformes(contenedor);
 					break;
 				case "5":
 					// Utilidades.escribir("\t-- REGRESANDO AL MENÚ PRINCIPAL --\n\n");
@@ -648,7 +672,7 @@ public class Principal {
 	public static void crearRevision(VisitaEnTerreno visitaEnTerreno, Contenedor contenedor) {
 		Revision revision = new Revision();
 
-		Utilidades.escribir(" [ID REVISION: " + revision.getIdRevision()  +"]\n\n");
+		Utilidades.escribir(" [ID REVISION: " + revision.getIdRevision() + "]\n\n");
 
 		revision.setIdVisita(visitaEnTerreno.getIdentificador());
 		revision.setNombreRevision(Utilidades.ingresar("Ingrese nombre Revisión [Entre 10 y 50 caracteres]: "));
@@ -657,21 +681,19 @@ public class Principal {
 		do {
 			String capturador = Utilidades.ingresar("Ingrese Resultado de la Revisión [1 - 3]: \n\n" +
 
-												"1. SIN PROBLEMAS\n" +
-												"2. CON OBSERVACIONES\n" +
-												"3. NO APRUEBA\n\n"
-												);
+					"1. SIN PROBLEMAS\n" +
+					"2. CON OBSERVACIONES\n" +
+					"3. NO APRUEBA\n\n");
 
-			if(Utilidades.esNumerica(capturador)){
-				if(capturador.equals("1") || capturador.equals("2") || capturador.equals("3")){
+			if (Utilidades.esNumerica(capturador)) {
+				if (capturador.equals("1") || capturador.equals("2") || capturador.equals("3")) {
 					revision.setEstado(Integer.parseInt(capturador));
 					break;
 				}
-			}else{
+			} else {
 				Utilidades.escribir("[ERROR] Debe seleccionar una opción [1 - 3]\n");
-			}									
+			}
 		} while (true);
-
 
 		// Muestra el detalle de la revisíón
 		Utilidades.escribir(revision.toString() + "\n");
@@ -679,18 +701,44 @@ public class Principal {
 		// Agrega la revisión al listado de revisiones del objeto VisitaEnTerreno
 		visitaEnTerreno.agregarRevision(revision);
 
-		do{
+		do {
 			String respuesta = Utilidades.ingresar("¿Desea ingresar otra revisión? ['s|n']");
-			if(respuesta.equalsIgnoreCase("s")){
-				//VOLVER A INVOCAR ESTE MÉTODO
+			if (respuesta.equalsIgnoreCase("s")) {
+				// VOLVER A INVOCAR ESTE MÉTODO
 				crearRevision(visitaEnTerreno, contenedor);
-			}else if(respuesta.equalsIgnoreCase("n")){
+			} else if (respuesta.equalsIgnoreCase("n")) {
 				menuGestion(contenedor);
-			}else{
+			} else {
 				Utilidades.escribir("[ERROR] Respuesta ingresada no es válida ['s|n']");
 			}
-		}while(true);
+		} while (true);
 
+	}
+
+	public static void mostrarVisitas(Contenedor contenedor) {
+		int nVisita = 1;
+		int nRevision = 1;
+		// RECORRER LISTA DE ASESORIAS
+		for (int i = 0; i < contenedor.listaAsesoria.size(); i++) {
+			// IDENTIFICAR A CADA OBJETO DE LA LISTA QUE SEA UNO DE TIPO CLIENTE
+
+			if (contenedor.listaAsesoria.get(i) instanceof Cliente) {
+
+				Cliente cliente = (Cliente) contenedor.listaAsesoria.get(i); // CASTING A CLIENTE
+				// OBTENGO LA LISTA DEL CLIENTE EN CADA ITERACION
+				ArrayList<VisitaEnTerreno> visitas = cliente.getListaVisitas();
+
+				for(VisitaEnTerreno objVisita: visitas){
+					Utilidades.escribir((nVisita++)+ ". " + objVisita.toString() + "\n");
+					//OBTENER REVISIONES POR CADA VISITA
+					ArrayList<Revision> revisiones = objVisita.getRevisiones();
+					
+					for(Revision objRevision: revisiones){
+						Utilidades.escribir("\t" + (nRevision++) + ". " + objRevision.toString() + "\n");
+					}
+				}
+			}
+		}
 	}
 
 }

@@ -8,7 +8,6 @@ public class Revision {
 	private int idRevision;
 	private static int idRevSiguiente;
 	private int idVisita;
-	//private static int idVisitaSiguiente;
 	private String nombreRevision;
 	private String detalles;
 	private int estado;
@@ -19,9 +18,7 @@ public class Revision {
 	 */
 	public Revision() {
 		++idRevSiguiente;
-		this.idRevision = idRevSiguiente;
-//		++idVisitaSiguiente;
-//		this.idVisita = idVisitaSiguiente;
+		idRevision = idRevSiguiente;
 	}
 	/**
 	 * Constructor parametrizado solicita todos los campos de clase.
@@ -32,7 +29,6 @@ public class Revision {
 	public Revision(String nombreRevision, int idVisita, String detalles, int estado) {
 		++idRevSiguiente;
 		this.idRevision = idRevSiguiente;
-//		++idVisitaSiguiente;
 		this.idVisita = idVisita;
 		this.nombreRevision = nombreRevision;
 		this.detalles = detalles;
