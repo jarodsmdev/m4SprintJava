@@ -335,21 +335,52 @@ public class Principal {
 
 	}
 
+	/**
+	 * 
+	 * @param contenedor
+	 */
 	public static void crearUsuario(Contenedor contenedor) {
 
+		String rutString;
+		do {
+			rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
+
+			if (rutString.equalsIgnoreCase("SALIR")) {
+				// break;
+				menuUsuarios(contenedor);
+			} else if (rutString.length() == 0) {
+				Utilidades.escribir("[ERROR] Valor ingresado no es válido, sólo ingrese Números\n");
+				rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
+			} else if (Utilidades.esNumerica(rutString)) {
+				long rutLong = Long.parseLong(rutString);
+
+				// VALIDAR QUE NO SE ENCUENTRE DUPLICADO
+				if (!contenedor.existeUsuario(rutLong)) {
+					// NO EXISTE RUT, CONTINUAR CON LA CREACION DE USUARIO
+					registrarUsuario(contenedor, rutLong);
+				} else {
+					Utilidades.escribir("[!] RUT Ingresado existe en los registros.\n");
+					crearUsuario(contenedor);
+				}
+				// break;
+			} else {
+				Utilidades.escribir("[ERROR] Valor ingresado no es válido, sólo ingrese Números\n");
+				rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
+			}
+		} while (true);
+
+	}
+
+	public static void registrarUsuario(Contenedor contenedor, long rutLong) {
 		Usuario usuario = new Usuario();
+		usuario.setRut(rutLong);
 		usuario.setNombreUsuario(Utilidades.ingresar("Ingrese el nombre del Usuario:"));
 		usuario.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]:"));
-
-
-		// usuario.setRut(Utilidades.ingresar("Ingrese el RUT del Usuario:"));
-		Utilidades.validarLong("Ingrese el RUT del Usuario: ", contenedor, usuario);
 
 		contenedor.almacenarUsuario(usuario);
 		Utilidades.escribir("El Usuario ha sido guardado exitosamente\n");
 
-		// DEBUG MODE
-		Utilidades.escribir("[RETORNO MÉTODO ANALIZAR USUARIO]" + usuario.analizarUsuario());// DEBUGMODE
+		Utilidades.escribir("[USUARIO] " + usuario.analizarUsuario() + "\n");
 		contenedor.listarUsuarios(); // DEBUGMODE
 
 		// INVOCAR AL MENÚ PARA MANTENER EL LOOP
@@ -383,28 +414,37 @@ public class Principal {
 	public static void registrarCliente(Contenedor contenedor, long rutLong) {
 		// VERIFICA QUE NO PUEDA INGRESAR RUT DUPLICADOS
 		if (!contenedor.existeUsuario(rutLong)) {
+
 			Cliente cliente = new Cliente();
+
 			cliente.setRut(rutLong);
 			cliente.setNombre(Utilidades.ingresar("Ingrese Nombre Cliente:"));
-			cliente.setApellido(); // OK OBLIGATORIO
-			cliente.setTelefono(); // OK OBLIGATORIO
-			cliente.setAfp(); // OK OPCIONAL
-			cliente.setSistemaSalud(); // OK//al ingresar 3 bucle //CORREGIDO
-			cliente.setDireccion(); // OK OPCIONAL
-			cliente.setComuna(); // OK OPCIONAL
-			cliente.setEdad(); // FALLA CON LETRAS //CORREGIDO
+			cliente.setApellido(Utilidades.ingresar("Ingrese Apellido [Entre 5 y 30 caracteres]: ")); // OK OBLIGATORIO
+			cliente.setTelefono(Utilidades.ingresar("Ingrese el número de teléfono del cliente")); // OK OBLIGATORIO
+			cliente.setAfp(Utilidades.ingresar("Ingrese el nombre de la AFP del cliente [Entre 4 y 30 caracteres]: ")); // OK
+																														// OPCIONAL
+			cliente.setSistemaSalud(Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE")); // OK//al
+																											// ingresar
+																											// 3 bucle
+																											// //CORREGIDO
+			cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección [Máx 70 caracteres]: ")); // OK OPCIONAL
+			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna [Máx 50 caracteres]: ")); // OK OPCIONAL
+			cliente.setEdad(Utilidades.ingresar("Ingrese su edad [0 - 150]: ")); // FALLA CON LETRAS //CORREGIDO
 			contenedor.almacenarCliente(cliente);
 			Utilidades.escribir("El Cliente ha sido guardado correctamente\n");
 
-			Utilidades.escribir("[CLIENTE] " + cliente.analizarUsuario());
+			Utilidades.escribir("[CLIENTE] " + cliente.analizarUsuario() + "\n");
+
+			// INVOCAR VISITA EN TERRENO
+			registrarVisitaEnTerreno(contenedor, rutLong);
 
 			// INVOCAR AL MENÚ USUARIOS PARA MANTENER EL LOOP
 			menuUsuarios(contenedor);
 
 		} else {
-			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.");
+			Utilidades.escribir("El RUT ingresado ya existe, favor revise los datos y vuelva a intentarlo.\n");
 			// INVOCAR AL MENÚ USUARIOS PARA MANTENER EL LOOP
-			crearCliente(contenedor);
+			menuUsuarios(contenedor);
 		}
 	}
 
@@ -437,41 +477,46 @@ public class Principal {
 
 				long inputRut = Long.parseLong(input);
 
-				if (contenedor.existeUsuario(inputRut)) {
-
-					// EXISTE USUARIO OBTIENE CLIENTE
-					Cliente cl1 = contenedor.obtenerCliente(inputRut);
-
-					VisitaEnTerreno visitaTerreno = new VisitaEnTerreno();
-
-					Utilidades.escribir("\n [ID VISITA: " + visitaTerreno.getIdentificador() + "] [CLIENTE: "
-							+ cl1.obtenerNombre() + "]\n\n");
-
-					visitaTerreno.setRutCliente(inputRut);
-					visitaTerreno.setDia(Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: "));
-					visitaTerreno.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
-					visitaTerreno.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
-					visitaTerreno.setComentarios(
-							Utilidades.ingresar("Ingrese comentarios de la visita [Máx 100 caracteres]: "));
-
-					// Agrega capacitación a la lista de visita terreno contenedor
-					cl1.agregarVisitaTerreno(visitaTerreno);
-
-					Utilidades.escribir("\nSe ha ingresado la Visita en Terreno correctamente.\n\n");
-
-					// MOSTRAR DATOS DE LA VISITA
-					Utilidades.escribir(visitaTerreno.toString() + "\n\n"); // DEBUGMODE
-
-					// INGRESAR LAS REVISIONES NECESARIAS PARA ESTA VISITA
-					crearRevision(visitaTerreno, contenedor);
-
-					// VOLVER AL MENÚ ADMINISTRACIÓN
-					menuGestion(contenedor);
-				} else {
-					// NO EXISTE USUARIO
-				}
+				registrarVisitaEnTerreno(contenedor, inputRut);
 			}
 		} while (!input.matches(regEx) || !input.trim().equalsIgnoreCase("SALIR"));
+	}
+
+	public static void registrarVisitaEnTerreno(Contenedor contenedor, long inputRut) {
+		// REGISTRA LA VISTA EN TERRENO CUANDO EL RUT ES VÁLIDO
+		if (contenedor.existeUsuario(inputRut)) {
+
+			// EXISTE USUARIO OBTIENE CLIENTE
+			Cliente cl1 = contenedor.obtenerCliente(inputRut);
+
+			VisitaEnTerreno visitaTerreno = new VisitaEnTerreno();
+
+			Utilidades.escribir("\n [ID VISITA: " + visitaTerreno.getIdentificador() + "] [CLIENTE: "
+					+ cl1.obtenerNombre() + "]\n\n");
+
+			visitaTerreno.setRutCliente(inputRut);
+			visitaTerreno.setDia(Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: "));
+			visitaTerreno.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
+			visitaTerreno.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
+			visitaTerreno.setComentarios(
+					Utilidades.ingresar("Ingrese comentarios de la visita [Máx 100 caracteres]: "));
+
+			// Agrega capacitación a la lista de visita terreno contenedor
+			cl1.agregarVisitaTerreno(visitaTerreno);
+
+			Utilidades.escribir("\nSe ha ingresado la Visita en Terreno correctamente.\n\n");
+
+			// MOSTRAR DATOS DE LA VISITA
+			Utilidades.escribir(visitaTerreno.toString() + "\n\n"); // DEBUGMODE
+
+			// INGRESAR LAS REVISIONES NECESARIAS PARA ESTA VISITA
+			crearRevision(visitaTerreno, contenedor);
+
+			// VOLVER AL MENÚ ADMINISTRACIÓN
+			menuGestion(contenedor);
+		} else {
+			// NO EXISTE USUARIO
+		}
 	}
 
 	/**
@@ -583,7 +628,6 @@ public class Principal {
 
 		profesional.setNombreUsuario(Utilidades.ingresar("Ingresa nombre del profesional: "));
 		profesional.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]: "));
-		// profesional.setRut(Utilidades.ingresar("Ingrese RUT"));
 
 		profesional.setTitulo(Utilidades.ingresar("Ingresa título: "));
 		profesional.setFechaIngreso(Utilidades.ingresar("Ingrese Fecha de ingreso [dd/mm/aaaa]: "));
@@ -591,8 +635,7 @@ public class Principal {
 		contenedor.almacenarProfesional(profesional);
 		Utilidades.escribir("Profesional ha sido guardado exitosamente");
 
-		Utilidades.escribir("[RETORNO MÉTODO ANALIZAR PROFESIONAL]" + profesional.analizarUsuario());// DEBUG
-		contenedor.listarUsuarios(); // DEBUG
+		Utilidades.escribir("[PROFESIONAL]" + profesional.analizarUsuario() + "\n");
 
 		// INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);
@@ -608,13 +651,13 @@ public class Principal {
 		String input;
 		String regEx = "^[0-9]+$";
 
-		if(contenedor.contarUsuariosClientes(Cliente.class) > 0){
+		if (contenedor.contarUsuariosClientes(Cliente.class) > 0) {
 
 			// MOSTRAR CLIENTES
 			Utilidades.escribir("[-- SELECCIONE UN CLIENTE --]\n\n");
 
 			contenedor.listarUsuariosPorTipo(Cliente.class);
-					
+
 			// VALIDA CORRECTAMENTE EL INGRESO DEL RUT DEL CLIENTE
 			do {
 				input = Utilidades.ingresar("Ingrese RUT Cliente ['SALIR' para cancelar]: ");
@@ -627,18 +670,19 @@ public class Principal {
 				} else if (!input.matches(regEx)) {
 					Utilidades.escribir("[ERROR] Sólo se aceptan números\n");
 				} else {
-				
+
 					long inputRut = Long.parseLong(input);
-				
+
 					if (contenedor.existeUsuario(inputRut)) {
-					
+
 						// EXISTE USUARIO OBTIENE CLIENTE
 						Cliente cliente = contenedor.obtenerCliente(inputRut);
-					
+
 						Accidente accidente = new Accidente();
-					
-						Utilidades.escribir("\n [ID ACCIDENTE: " + accidente.getIdentificador() + "] [CLIENTE: " + cliente.obtenerNombre() + "]\n\n");
-					
+
+						Utilidades.escribir("\n [ID ACCIDENTE: " + accidente.getIdentificador() + "] [CLIENTE: "
+								+ cliente.obtenerNombre() + "]\n\n");
+
 						accidente.setRutCliente(inputRut);
 						accidente.setFecha(Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: "));
 						accidente.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
@@ -646,15 +690,15 @@ public class Principal {
 						accidente.setOrigen(Utilidades.ingresar("Ingrese origen del accidente (máx 100 caracteres): "));
 						accidente.setConsecuencias(
 								Utilidades.ingresar("Ingrese consecuencias del accidente(máx 100 caracteres): "));
-					
+
 						// Agrega accidente
 						cliente.agregarAccidente(accidente);
-					
+
 						Utilidades.escribir("\nSe ha ingresado el Accidente correctamente.\n\n");
-					
+
 						// MUESTRA TODOS LOS ACCIDENTES
 						cliente.mostrarAccidentes(inputRut);
-					
+
 						// TODO: PREGUNTAR SI DESEO SEGUIR INGRESANDO ACCIDENTES
 						menuGestion(contenedor);
 					} else {
@@ -761,7 +805,7 @@ public class Principal {
 			Utilidades.escribir("[-- SELECCIONE UN CLIENTE --]\n\n");
 
 			contenedor.listarUsuariosPorTipo(Cliente.class);
-			//contenedor.listarUsuarios();
+			// contenedor.listarUsuarios();
 			// SOLICITAR RUT
 			do {
 				input = Utilidades.ingresar("Ingrese RUT Cliente ['SALIR' para cancelar]: ");
@@ -776,7 +820,7 @@ public class Principal {
 				} else {
 					// CUMPLE CON EL FORMATO PARA SER UN RUT VÁLIDO
 					long inputRut = Long.parseLong(input);
-				
+
 					if (contenedor.existeUsuario(inputRut)) {
 						Utilidades.escribir(contenedor.eliminarUsuario(inputRut) + "\n"); // RETORNA MENSAJE
 						menuGestion(contenedor);
@@ -784,7 +828,7 @@ public class Principal {
 						Utilidades.escribir("[ERROR] RUT Ingresado no existe en los registros.\n\n");
 						menuGestion(contenedor);
 					}
-				
+
 				}
 			} while (!input.matches(regEx) || !input.trim().equalsIgnoreCase("SALIR"));
 			// RECORRER ARRAY PARA ENCONTRAR EL OBJETO Y POSTERIORMENTE ELIMINARLO
