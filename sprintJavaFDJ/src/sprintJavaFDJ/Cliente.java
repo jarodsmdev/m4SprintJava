@@ -231,12 +231,13 @@ public class Cliente extends Usuario {
 	
 	/** METODO OBTENER NOMBRE = NOMBRE Y APELLIDOS CONCATENADOS*/
 	public String obtenerNombre() {
-		return (nombre + " " + apellido);
+		return (getNombre() + " " + getApellido());
 	}
 	
 	/** METODO QUE RETORNA EL SISTEMA DE SALUD DEL CLIENTE */
-	public String obtenerSistemaSalud(String sistemaSalud) {
-		if(sistemaSalud == "1") {
+	public String obtenerSistemaSalud(int sistemaSalud) {
+//		sistemaSalud = Integer.parseInt(getSistemaSalud());
+		if(sistemaSalud == 1) {
 			return "FONASA";
 		}
 		else {
@@ -249,7 +250,7 @@ public class Cliente extends Usuario {
 	 */
 	@Override
 	public String analizarUsuario() {
-		return "Cliente: " + getNombre() + ", RUT: " + getRun() + ", Dirección: " + getDireccion() + ", Comuna: " + getComuna();
+		return "Cliente: " + obtenerNombre() + ", RUT: " + getRun() + ", Dirección: " + getDireccion() + ", Comuna: " + getComuna();
 	}
 
 	
