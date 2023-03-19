@@ -77,19 +77,16 @@ public class Principal {
 		visita1.setRutCliente(cliente1.getRun());
 		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 1");
 		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 1");
-		
 
 		VisitaEnTerreno visita2 = new VisitaEnTerreno();
 		visita1.setRutCliente(cliente2.getRun());
 		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 2");
 		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 2");
-		
 
 		VisitaEnTerreno visita3 = new VisitaEnTerreno();
 		visita1.setRutCliente(cliente2.getRun());
 		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 3");
 		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 3");
-		
 
 		contenedor.almacenarUsuario(usuario1);
 		contenedor.almacenarCliente(cliente1);
@@ -174,8 +171,7 @@ public class Principal {
 					break;
 				case "4":
 					Utilidades.escribir("\t-- ELIMINAR USUARIO --\n\n");
-					// SOLICITAR RUT
-					// INVOCAR MÉTODO contenedor.eliminarUsuario(long rut);
+					eliminarUsuario(contenedor);
 					break;
 				case "5":
 					Utilidades.escribir("\t-- VOLVER AL MENÚ PRINCIPAL--\n\n");
@@ -397,9 +393,9 @@ public class Principal {
 			cliente.setComuna(); // OK OPCIONAL
 			cliente.setEdad(); // FALLA CON LETRAS //CORREGIDO
 			contenedor.almacenarCliente(cliente);
-			Utilidades.escribir("El Cliente ha sido guardado correctamente");
+			Utilidades.escribir("El Cliente ha sido guardado correctamente\n");
 
-			Utilidades.escribir("[RETORNO MÉTODO ANALIZAR CLIENTE]" + cliente.analizarUsuario());// DEBUG
+			Utilidades.escribir("[CLIENTE] " + cliente.analizarUsuario());
 
 			// INVOCAR AL MENÚ USUARIOS PARA MANTENER EL LOOP
 			menuUsuarios(contenedor);
@@ -492,12 +488,15 @@ public class Principal {
 		// contenedor.contarUsuariosClientes(Cliente.class));
 
 		if (contenedor.contarUsuariosClientes(Cliente.class) > 0) {
+
+			Utilidades.escribir("[-- SELECCIONE UN CLIENTE --]\n\n");
+
 			contenedor.listarUsuariosPorTipo(Cliente.class);
 
 			do {
 				input = Utilidades.ingresar("Ingrese RUT Cliente: ['SALIR' PARA CANCELAR]: ");
 				if (input.trim().equalsIgnoreCase("SALIR")) {
-					Utilidades.escribir("[AVISO] Se ha cancelado el Ingreso de Capacitacion.\n");
+					Utilidades.escribir("[!] Se ha cancelado el Ingreso de Capacitacion.\n");
 					menuGestion(contenedor);
 				}
 				if (input.trim().length() == 0) {
@@ -608,59 +607,63 @@ public class Principal {
 		String input;
 		String regEx = "^[0-9]+$";
 
-		// MOSTRAR CLIENTES
-		Utilidades.escribir("[-- SELECCIONE UN CLIENTE --]\n\n");
-		contenedor.listarUsuariosPorTipo(Cliente.class);
+		if(contenedor.contarUsuariosClientes(Cliente.class) > 0){
 
-		// VALIDA CORRECTAMENTE EL INGRESO DEL RUT DEL CLIENTE
-		do {
-			input = Utilidades.ingresar("Ingrese RUT Cliente ['SALIR' para cancelar]: ");
-			if (input.trim().length() == 0) {
-				Utilidades.escribir("[ERROR] Debe escribir RUT del Cliente.\n");
-			} else if (input.trim().equalsIgnoreCase("SALIR")) {
-				// SALIR DEL BUCLE HACIA UN MENU
-				Utilidades.escribir("[!] Se ha cancelado el ingreso de Accidentes\n");
-				menuGestion(contenedor);
-			} else if (!input.matches(regEx)) {
-				Utilidades.escribir("[ERROR] Sólo se aceptan números\n");
-			} else {
+			// MOSTRAR CLIENTES
+			Utilidades.escribir("[-- SELECCIONE UN CLIENTE --]\n\n");
 
-				long inputRut = Long.parseLong(input);
-
-				if (contenedor.existeUsuario(inputRut)) {
-
-					// EXISTE USUARIO OBTIENE CLIENTE
-					Cliente cliente = contenedor.obtenerCliente(inputRut);
-
-					Accidente accidente = new Accidente();
-
-					Utilidades.escribir("\n [ID ACCIDENTE: " + accidente.getIdentificador() + "] [CLIENTE: "
-							+ cliente.obtenerNombre() + "]\n\n");
-
-					accidente.setRutCliente(inputRut);
-					accidente.setFecha(Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: "));
-					accidente.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
-					accidente.setLugar(Utilidades.ingresar("Ingrese Lugar (Texto entre 10 y 50 caracteres): "));
-					accidente.setOrigen(Utilidades.ingresar("Ingrese origen del accidente (máx 100 caracteres): "));
-					accidente.setConsecuencias(
-							Utilidades.ingresar("Ingrese consecuencias del accidente(máx 100 caracteres): "));
-
-					// Agrega accidente
-					cliente.agregarAccidente(accidente);
-
-					Utilidades.escribir("\nSe ha ingresado el Accidente correctamente.\n\n");
-
-					// MUESTRA TODOS LOS ACCIDENTES
-					cliente.mostrarAccidentes(inputRut);
-
-					// TODO: PREGUNTAR SI DESEO SEGUIR INGRESANDO ACCIDENTES
+			contenedor.listarUsuariosPorTipo(Cliente.class);
+					
+			// VALIDA CORRECTAMENTE EL INGRESO DEL RUT DEL CLIENTE
+			do {
+				input = Utilidades.ingresar("Ingrese RUT Cliente ['SALIR' para cancelar]: ");
+				if (input.trim().length() == 0) {
+					Utilidades.escribir("[ERROR] Debe escribir RUT del Cliente.\n");
+				} else if (input.trim().equalsIgnoreCase("SALIR")) {
+					// SALIR DEL BUCLE HACIA UN MENU
+					Utilidades.escribir("[!] Se ha cancelado el ingreso de Accidentes\n");
 					menuGestion(contenedor);
+				} else if (!input.matches(regEx)) {
+					Utilidades.escribir("[ERROR] Sólo se aceptan números\n");
 				} else {
-					Utilidades.escribir("[ERROR] RUT Ingresado no existe en los registros.\n\n");
-					crearAccidente(contenedor);
+				
+					long inputRut = Long.parseLong(input);
+				
+					if (contenedor.existeUsuario(inputRut)) {
+					
+						// EXISTE USUARIO OBTIENE CLIENTE
+						Cliente cliente = contenedor.obtenerCliente(inputRut);
+					
+						Accidente accidente = new Accidente();
+					
+						Utilidades.escribir("\n [ID ACCIDENTE: " + accidente.getIdentificador() + "] [CLIENTE: " + cliente.obtenerNombre() + "]\n\n");
+					
+						accidente.setRutCliente(inputRut);
+						accidente.setFecha(Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: "));
+						accidente.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
+						accidente.setLugar(Utilidades.ingresar("Ingrese Lugar (Texto entre 10 y 50 caracteres): "));
+						accidente.setOrigen(Utilidades.ingresar("Ingrese origen del accidente (máx 100 caracteres): "));
+						accidente.setConsecuencias(
+								Utilidades.ingresar("Ingrese consecuencias del accidente(máx 100 caracteres): "));
+					
+						// Agrega accidente
+						cliente.agregarAccidente(accidente);
+					
+						Utilidades.escribir("\nSe ha ingresado el Accidente correctamente.\n\n");
+					
+						// MUESTRA TODOS LOS ACCIDENTES
+						cliente.mostrarAccidentes(inputRut);
+					
+						// TODO: PREGUNTAR SI DESEO SEGUIR INGRESANDO ACCIDENTES
+						menuGestion(contenedor);
+					} else {
+						Utilidades.escribir("[ERROR] RUT Ingresado no existe en los registros.\n\n");
+						crearAccidente(contenedor);
+					}
 				}
-			}
-		} while (!input.matches(regEx) || !input.trim().equalsIgnoreCase("SALIR"));
+			} while (!input.matches(regEx) || !input.trim().equalsIgnoreCase("SALIR"));
+		}
+
 	}
 
 	/**
@@ -715,6 +718,12 @@ public class Principal {
 
 	}
 
+	/**
+	 * Método que permite Mostrar Todas las Visitas a Terreno con sus respectivas
+	 * revisiones
+	 * 
+	 * @param contenedor
+	 */
 	public static void mostrarVisitas(Contenedor contenedor) {
 		int nVisita = 1;
 		int nRevision = 1;
@@ -728,16 +737,56 @@ public class Principal {
 				// OBTENGO LA LISTA DEL CLIENTE EN CADA ITERACION
 				ArrayList<VisitaEnTerreno> visitas = cliente.getListaVisitas();
 
-				for(VisitaEnTerreno objVisita: visitas){
-					Utilidades.escribir((nVisita++)+ ". " + objVisita.toString() + "\n");
-					//OBTENER REVISIONES POR CADA VISITA
+				for (VisitaEnTerreno objVisita : visitas) {
+					Utilidades.escribir("\n" + (nVisita++) + ". " + objVisita.toString() + "\n");
+					// OBTENER REVISIONES POR CADA VISITA
 					ArrayList<Revision> revisiones = objVisita.getRevisiones();
-					
-					for(Revision objRevision: revisiones){
+
+					for (Revision objRevision : revisiones) {
 						Utilidades.escribir("\t" + (nRevision++) + ". " + objRevision.toString() + "\n");
 					}
 				}
 			}
+		}
+	}
+
+	public static void eliminarUsuario(Contenedor contenedor) {
+		String input;
+		String regEx = "^[0-9]+$";
+
+		if (contenedor.contarUsuariosClientes(Cliente.class) > 0) {
+
+			// MOSTRAR TODOS LOS USUARIOS
+			Utilidades.escribir("[-- SELECCIONE UN CLIENTE --]\n\n");
+
+			contenedor.listarUsuariosPorTipo(Cliente.class);
+			//contenedor.listarUsuarios();
+			// SOLICITAR RUT
+			do {
+				input = Utilidades.ingresar("Ingrese RUT Cliente ['SALIR' para cancelar]: ");
+				if (input.trim().length() == 0) {
+					Utilidades.escribir("[ERROR] Debe escribir RUT del Cliente.\n");
+				} else if (input.trim().equalsIgnoreCase("SALIR")) {
+					// SALIR DEL BUCLE HACIA UN MENU
+					Utilidades.escribir("[!] Se ha cancelado la Eliminación\n");
+					menuGestion(contenedor);
+				} else if (!input.matches(regEx)) {
+					Utilidades.escribir("[ERROR] Sólo se aceptan números\n");
+				} else {
+					// CUMPLE CON EL FORMATO PARA SER UN RUT VÁLIDO
+					long inputRut = Long.parseLong(input);
+				
+					if (contenedor.existeUsuario(inputRut)) {
+						Utilidades.escribir(contenedor.eliminarUsuario(inputRut) + "\n"); // RETORNA MENSAJE
+						menuGestion(contenedor);
+					} else {
+						Utilidades.escribir("[ERROR] RUT Ingresado no existe en los registros.\n\n");
+						menuGestion(contenedor);
+					}
+				
+				}
+			} while (!input.matches(regEx) || !input.trim().equalsIgnoreCase("SALIR"));
+			// RECORRER ARRAY PARA ENCONTRAR EL OBJETO Y POSTERIORMENTE ELIMINARLO
 		}
 	}
 
