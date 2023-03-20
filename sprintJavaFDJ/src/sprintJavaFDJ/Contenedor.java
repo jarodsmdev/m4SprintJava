@@ -48,24 +48,27 @@ public class Contenedor {
 	}
 
 	/**
-	 * 
+	 * Método que permite eliminar un objeto de tipo Usuario recibiendo un long como parámetro, retorna String
 	 * @param run
-	 *            Recibe como parámetro rut para eliminar objeto
+	 * @return tipo String
 	 */
-	public void eliminarUsuario(long run) {
+	public String eliminarUsuario(long run) {
 		boolean encontrado = false;
+		String mensaje = "";
 		for (int i = 0; i < listaAsesoria.size(); i++) {
 			Usuario usuario = (Usuario) listaAsesoria.get(i); // CASTING PARA OBTENER EL RUT DEL USUARIO
 			if (usuario.getRun() == run) {
 				listaAsesoria.remove(i);
-				Utilidades.ingresar("[!] Se ha eliminado el usuario: " + usuario.analizarUsuario());
 				encontrado = true;
+				mensaje = "[!] Se ha eliminado el usuario: " + usuario.analizarUsuario();
 				break;
 			}
 			if (encontrado == false) {
-				Utilidades.escribir("[!] No se ha encontrado el RUT");
+				mensaje = "[!] No se ha encontrado el RUT";
 			}
 		}
+
+		return mensaje;
 	}
 
 	/**
@@ -78,11 +81,29 @@ public class Contenedor {
 			if (listaAsesoria.get(i) instanceof Usuario) {
 				Usuario usuario = (Usuario) listaAsesoria.get(i); // CASTING/REFUNDICIÓN
 				Utilidades.escribir((i + 1) + ". " + usuario.analizarUsuario() + "\n");
+				//Utilidades.escribir((i + 1) + ". " + usuario.toString() + "\n");
 			} else {
 				Utilidades.escribir("[!] No existen objetos de tipo Usuario");
 			}
 		}
 		Utilidades.escribir("\n-- FIN DEL REPORTE --\n");
+	}
+
+	/**
+	 * Método que permite mostrar sólo los objetos
+	 */
+	public void listarSoloUsuarios() {
+	    // LISTAR LOS DATOS DE LA CLASE USUARIO
+	    Utilidades.escribir("\n-- INICIO DEL REPORTE --\n\n");
+	    for (int i = 0; i < listaAsesoria.size(); i++) {
+	        if (listaAsesoria.get(i) instanceof Usuario) {
+	            Usuario usuario = (Usuario) listaAsesoria.get(i); // CASTING/REFUNDICIÓN
+	            Utilidades.escribir((i + 1) + ". " + usuario.soloUsuario() + "\n");
+	        } else {
+	            Utilidades.escribir("[!] No existen objetos de tipo Usuario");
+	        }
+	    }
+	    Utilidades.escribir("\n-- FIN DEL REPORTE --\n");
 	}
 
 	/**
@@ -138,7 +159,7 @@ public class Contenedor {
 
 		}
 		
-		if(qClientes == 0){ Utilidades.escribir("No existen Clientes registrados");}
+		if(qClientes == 0){ Utilidades.escribir("[!] No existen Clientes registrados.\n\n");}
 		
 		return qClientes;
 	}
@@ -150,7 +171,7 @@ public class Contenedor {
 	public void listarCapacitaciones() {
 		for(int i = 0; i < listaCapacitacion.size(); i++){
 			// MOSTRAR DATOS CAPACITACION + DATOS DE CLIENTE AL QUE ESTÁ ASOCIADA LA CAPACITACION
-			Utilidades.escribir((i+1)+ ". "  + listaCapacitacion.get(i).toString());
+			Utilidades.escribir("\n" + (i+1)+ ". "  + listaCapacitacion.get(i).toString());
 			mostrarDatosCliente(listaCapacitacion.get(i).getRut());
 		}
 	}
@@ -166,7 +187,7 @@ public class Contenedor {
 			if (itemCliente instanceof Cliente) {
 				Cliente cliente = (Cliente) itemCliente; // CASTING
 				if (cliente.getRun() == rutCliente) {
-					Utilidades.escribir(cliente.analizarUsuario() + "\n\n");
+					Utilidades.escribir(cliente.analizarUsuario() + "\n");
 				}
 			}
 		}

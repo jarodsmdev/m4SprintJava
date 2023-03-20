@@ -129,4 +129,13 @@ public class Administrativo extends Usuario {
 	public String analizarUsuario() {
 		return "Administrativo : " + getNombreUsuario() + ", RUT: " + getRun() + ", Área: " + area + ", Experiencia Previa: " + expPrevia;
 	}
+
+	/**
+	 * Sobre escribe el método soloUsuario de la superClase, Imprime una cadena
+	 * @return Una cadena de texto con la información: nombre, rut, y fecha de nacimiento del Administrativo
+	 */
+	@Override
+	public String soloUsuario() {
+		return "Administrativo: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+	}
 }
