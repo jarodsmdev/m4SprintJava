@@ -15,12 +15,8 @@ public class TestUsuario {
 	
 	@Test 
 	public void testObtenerFechaNac() {
-		int dia = 20;
-		int mes = 7;
-		int anio = 1997;
-		
-		rptaCorrecta = usuario.obtenerFechaNac();
-		assertEquals(dia + "/" + mes + "/" + anio, rptaCorrecta);
-		
+
+		usuario.setFechaNacimiento("20/07/1988");
+		assertEquals("20/07/1988",usuario.getFechaNacimiento());
 	}
 }
