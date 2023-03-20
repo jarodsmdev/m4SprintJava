@@ -6,5 +6,5 @@
  *
  */
 module sprintJavaFDJ {
-
+	requires junit;
 }

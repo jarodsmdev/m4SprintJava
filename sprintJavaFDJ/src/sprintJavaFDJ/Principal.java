@@ -1,5 +1,13 @@
 package sprintJavaFDJ;
 
+/**
+ * 
+ * @version 1.0
+ * @author Leonel Briones, Kevin Moreno, Valentia Saldias, Priscila Carrillo,
+ *         Andres Contreras.
+ *
+ */
+
 import java.util.ArrayList;
 
 public class Principal {
@@ -13,6 +21,10 @@ public class Principal {
 		menuPrincipal(contenedor);
 	}
 
+	/**
+	 * Método que permite generar objetos para realizar pruebas
+	 * @param contenedor
+	 */
 	public static void DebugMode(Contenedor contenedor) {
 		Usuario usuario1 = new Usuario();
 		usuario1.setNombreUsuario("SOY USUARIO1");
@@ -21,17 +33,19 @@ public class Principal {
 
 		Cliente cliente1 = new Cliente();
 		cliente1.setNombre("SOY CLIENTE1");
-		// cliente1.setApellido();
+		cliente1.setApellido("APELLIDO CLIENTE1");
+		cliente1.setFechaNacimiento("22/14/1999");
 		cliente1.setRut(1234561);
-		// cliente1.setDireccion();
-		// cliente1.setComuna();
+		cliente1.setDireccion("DIRECCION CLIENTE1");
+		cliente1.setComuna("COMUNA CLIENTE 1");
 
 		Cliente cliente2 = new Cliente();
 		cliente2.setNombre("SOY CLIENTE2");
-		// cliente2.setApellido();
+		cliente2.setApellido("APELLIDO CLIENTE2");
+		cliente2.setFechaNacimiento("12/01/1998");
 		cliente2.setRut(7894662);
-		// cliente2.setDireccion();
-		// cliente2.setComuna();
+		cliente2.setDireccion("DIRECCION CLIENTE2");
+		cliente2.setComuna("COMUNA CLIENTE2");
 
 		Capacitacion capacitacion1 = new Capacitacion();
 		capacitacion1.setRut(7894662);
@@ -51,9 +65,9 @@ public class Principal {
 
 		Administrativo administrativo1 = new Administrativo();
 		administrativo1.setNombreUsuario("SOY ADMINISTRATIVO1");
-		// administrativo1.setArea("51");
-		administrativo1.setExpPrevia("5");
-		administrativo1.setFechaNacimiento("22/03/1983");
+		administrativo1.setArea("AREA 51 ADM1");
+		administrativo1.setExpPrevia("MUCHA EXP ADM1");
+		administrativo1.setFechaNacimiento("12/07/1983");
 		administrativo1.setNombreUsuario("NICKNAME ADM1");
 		administrativo1.setRut(1452654);
 
@@ -63,7 +77,7 @@ public class Principal {
 		profesional1.setFechaNacimiento("05/02/1956");
 		profesional1.setNombreUsuario("NICKNAME PROF1");
 		profesional1.setRut(458744);
-		// profesional1.setTitulo("INGENIER@");
+		profesional1.setTitulo("INGENIERO EN BOTÁNICA DE ESPACIOS REDUCIDOS");
 
 		Profesional profesional2 = new Profesional();
 		profesional2.setNombreUsuario("SOY PROFESIONAL2");
@@ -71,22 +85,70 @@ public class Principal {
 		profesional2.setFechaNacimiento("05/02/1956");
 		profesional2.setNombreUsuario("NICKNAME PROF2");
 		profesional2.setRut(1554744);
-		// profesional2.setTitulo("ARQUITECT@");
+		profesional2.setTitulo("INGENIERÍA EN COMUNICACIONES");
 
 		VisitaEnTerreno visita1 = new VisitaEnTerreno();
 		visita1.setRutCliente(cliente1.getRun());
 		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 1");
 		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 1");
+		
+		Revision revision1 = new Revision();
+		revision1.setNombreRevision("Revision A");
+		revision1.setDetalleRevisar("Detalle Revisión A");
+		revision1.setEstado(1);
+		visita1.agregarRevision(revision1);
+		
+		Revision revision2 = new Revision();
+		revision2.setNombreRevision("Revision B");
+		revision2.setDetalleRevisar("Detalle Revisión B");
+		revision2.setEstado(2);
+		visita1.agregarRevision(revision2);
+		
+		Revision revision3 = new Revision();
+		revision3.setNombreRevision("Revision C");
+		revision3.setDetalleRevisar("Detalle Revisión C");
+		revision3.setEstado(3);
+		visita1.agregarRevision(revision3);
 
 		VisitaEnTerreno visita2 = new VisitaEnTerreno();
-		visita1.setRutCliente(cliente2.getRun());
-		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 2");
-		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 2");
+		visita2.setRutCliente(cliente2.getRun());
+		visita2.setLugar("ESTE ES UN LUGAR PARA LA VISITA 2");
+		visita2.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 2");
+		
+		Revision revision4 = new Revision();
+		revision4.setNombreRevision("Revisión D");
+		revision4.setDetalleRevisar("Detalle Revisión D");
+		revision4.setEstado(2);
+		visita2.agregarRevision(revision4);
 
 		VisitaEnTerreno visita3 = new VisitaEnTerreno();
-		visita1.setRutCliente(cliente2.getRun());
-		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 3");
-		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 3");
+		visita3.setRutCliente(cliente2.getRun());
+		visita3.setLugar("ESTE ES UN LUGAR PARA LA VISITA 3");
+		visita3.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 3");
+		
+		Revision revision5 = new Revision();
+		revision5.setNombreRevision("Revision B");
+		revision5.setDetalleRevisar("Detalle Revision B");
+		revision5.setEstado(3);
+		visita3.agregarRevision(revision5);
+
+		Accidente accidente1 = new Accidente();
+		accidente1.setRutCliente(cliente1.getRun());
+		accidente1.setConsecuencias("CONSECUENTAS CLIENTE1");
+		accidente1.setFecha("14/01/1999");
+		accidente1.setHora("22:48");
+		accidente1.setLugar("LUGAR DEL ACCIDENTE. CLIENTE1");
+		accidente1.setOrigen("ORIGEN DEL ACCIDENTE");
+		cliente1.agregarAccidente(accidente1);
+
+		Accidente accidente2 = new Accidente();
+		accidente2.setRutCliente(cliente1.getRun());
+		accidente2.setConsecuencias("CONSECUENTAS CLIENTE1 ACCIDENTE B");
+		accidente2.setFecha("31/1/2000");
+		accidente2.setHora("22:48");
+		accidente2.setLugar("LUGAR DEL ACCIDENTE. CLIENTE1");
+		accidente2.setOrigen("ORIGEN DEL ACCIDENTE B");
+		cliente1.agregarAccidente(accidente2);
 
 		contenedor.almacenarUsuario(usuario1);
 		contenedor.almacenarCliente(cliente1);
@@ -101,6 +163,10 @@ public class Principal {
 		cliente2.agregarVisitaTerreno(visita3);
 	}
 
+	/**
+	 * Método que permite visualizar un Menú
+	 * @param contenedor
+	 */
 	public static void menuPrincipal(Contenedor contenedor) {
 
 		String capturador;
@@ -139,6 +205,10 @@ public class Principal {
 		} while (!capturador.matches("^[1-4]$"));
 	}
 
+	/**
+	 * Método que permiete visualizar un Menú
+	 * @param contenedor
+	 */
 	public static void menuGestion(Contenedor contenedor) {
 		String capturador;
 
@@ -184,6 +254,10 @@ public class Principal {
 		} while (!capturador.matches("^[1-5]$"));
 	}
 
+	/**
+	 * Método que permite visualizar un menú
+	 * @param contenedor
+	 */
 	public static void menuUsuarios(Contenedor contenedor) {
 		String capturador;
 		do {
@@ -226,6 +300,10 @@ public class Principal {
 		} while (!capturador.matches("^[1-5]$"));
 	}
 
+	/**
+	 * Método que permite Visualizar un Menú
+	 * @param contenedor
+	 */
 	public static void menuInformes(Contenedor contenedor) {
 		String capturador;
 		do {
@@ -234,7 +312,8 @@ public class Principal {
 					"\n\t2. MOSTRAR USUARIOS POR TIPO" +
 					"\n\t3. MOSTRAR CAPACITACIONES" +
 					"\n\t4. MOSTRAR VISITAS" +
-					"\n\t5. VOLVER AL MENÚ PRINCIPAL\n\n"
+					"\n\t5. MOSTRAR ACCIDENTES" +
+					"\n\t6. VOLVER AL MENÚ PRINCIPAL\n\n"
 
 			);
 
@@ -263,6 +342,12 @@ public class Principal {
 					menuInformes(contenedor);
 					break;
 				case "5":
+					Utilidades.escribir("\t-- MOSTRAR ACCIDENTES --\n\n");
+					//mostrarVisitas(contenedor);
+					mostrarAccidentes(contenedor);
+					menuInformes(contenedor);
+					break;
+				case "6":
 					// Utilidades.escribir("\t-- REGRESANDO AL MENÚ PRINCIPAL --\n\n");
 					menuPrincipal(contenedor);
 					break;
@@ -273,6 +358,10 @@ public class Principal {
 		} while (!capturador.matches("^[1-6]$"));
 	}
 
+	/**
+	 * Método que permite visualizar un menú
+	 * @param contenedor
+	 */
 	public static void menuFiltrarUsuariosPorTipo(Contenedor contenedor) {
 		String capturador;
 		do {
@@ -311,6 +400,10 @@ public class Principal {
 		} while (!capturador.matches("^[1-4]$"));
 	}
 
+	/**
+	 * Método que permite Crear un Objeto de tipo Administrativo
+	 * @param contenedor
+	 */
 	public static void crearAdministrativo(Contenedor contenedor) {
 		long rutLong;
 		// VALIDAR QUE EL CONTENIDO DE capturador sea tipo long
@@ -332,13 +425,10 @@ public class Principal {
 			menuUsuarios(contenedor);
 		}
 
-
-
-
 	}
 
 	/**
-	 * 
+	 * Método que permite registrar el objeto de tipo Administrativo
 	 * @param contenedor
 	 * @param rutLong
 	 */
@@ -365,7 +455,7 @@ public class Principal {
 	}
 
 	/**
-	 * 
+	 * Método que permite crear un objeto de tipo Usuario
 	 * @param contenedor
 	 */
 	public static void crearUsuario(Contenedor contenedor) {
@@ -400,21 +490,41 @@ public class Principal {
 
 	}
 
+	/**
+	 * Método que permite registrar el objeto de tipo Usuario
+	 * @param contenedor
+	 * @param rutLong
+	 */
 	public static void registrarUsuario(Contenedor contenedor, long rutLong) {
 
-		Usuario usuario = new Usuario();
-		usuario.setRut(rutLong);
-		usuario.setNombreUsuario(Utilidades.ingresar("Ingrese el nombre del Usuario:"));
-		usuario.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]:"));
+		String rutString;
+		do {
+			rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
 
-		contenedor.almacenarUsuario(usuario);
-		Utilidades.escribir("El Usuario ha sido guardado exitosamente\n");
+			if (rutString.equalsIgnoreCase("SALIR")) {
+				// break;
+				menuUsuarios(contenedor);
+			} else if (rutString.length() == 0) {
+				Utilidades.escribir("[ERROR] Valor ingresado no es válido, sólo ingrese Números\n");
+				rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
+			} else if (Utilidades.esNumerica(rutString)) {
+				rutLong = Long.parseLong(rutString);
 
-		Utilidades.escribir("[USUARIO] " + usuario.analizarUsuario() + "\n");
-		contenedor.listarUsuarios(); // DEBUGMODE
+				// VALIDAR QUE NO SE ENCUENTRE DUPLICADO
+				if (!contenedor.existeUsuario(rutLong)) {
+					// NO EXISTE RUT, CONTINUAR CON LA CREACION DE USUARIO
+					registrarUsuario(contenedor, rutLong);
+				} else {
+					Utilidades.escribir("[!] RUT Ingresado existe en los registros.\n");
+					crearUsuario(contenedor);
+				}
+				// break;
+			} else {
+				Utilidades.escribir("[ERROR] Valor ingresado no es válido, sólo ingrese Números\n");
+				rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
+			}
+		} while (true);
 
-		// INVOCAR AL MENÚ PARA MANTENER EL LOOP
-		menuPrincipal(contenedor);
 	}
 
 	/**
@@ -509,6 +619,11 @@ public class Principal {
 		} while (!input.matches(regEx) || !input.trim().equalsIgnoreCase("SALIR"));
 	}
 
+	/**
+	 * Método que permite registrar una visita en Terreno
+	 * @param contenedor
+	 * @param inputRut
+	 */
 	public static void registrarVisitaEnTerreno(Contenedor contenedor, long inputRut) {
 		// REGISTRA LA VISTA EN TERRENO CUANDO EL RUT ES VÁLIDO
 		if (contenedor.existeUsuario(inputRut)) {
@@ -525,8 +640,7 @@ public class Principal {
 			visitaTerreno.setDia(Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: "));
 			visitaTerreno.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
 			visitaTerreno.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
-			visitaTerreno.setComentarios(
-					Utilidades.ingresar("Ingrese comentarios de la visita [Máx 100 caracteres]: "));
+			visitaTerreno.setComentarios(Utilidades.ingresar("Ingrese comentarios de la visita [Máx 100 caracteres]: "));
 
 			// Agrega capacitación a la lista de visita terreno contenedor
 			cl1.agregarVisitaTerreno(visitaTerreno);
@@ -671,7 +785,7 @@ public class Principal {
 	}
 
 	/**
-	 * 
+	 * Método que permite registrar un objeto de tipo Profesional
 	 * @param contenedor
 	 * @param rutLong
 	 */
@@ -848,6 +962,10 @@ public class Principal {
 		}
 	}
 
+	/**
+	 * Método que permite eliminar un Usuario
+	 * @param contenedor
+	 */
 	public static void eliminarUsuario(Contenedor contenedor) {
 		String input;
 		String regEx = "^[0-9]+$";
@@ -885,6 +1003,32 @@ public class Principal {
 				}
 			} while (!input.matches(regEx) || !input.trim().equalsIgnoreCase("SALIR"));
 			// RECORRER ARRAY PARA ENCONTRAR EL OBJETO Y POSTERIORMENTE ELIMINARLO
+		}
+	}
+
+	/**
+	 * Método que permite visualizar por consola los accidentes registrados
+	 * @param contenedor
+	 */
+	public static void mostrarAccidentes(Contenedor contenedor){
+		int nAccidente = 1;
+		int nCliente = 1;
+		// RECORRER LISTA DE ASESORIAS
+		for (int i = 0; i < contenedor.listaAsesoria.size(); i++) {
+			// IDENTIFICAR A CADA OBJETO DE LA LISTA QUE SEA UNO DE TIPO CLIENTE
+
+			if (contenedor.listaAsesoria.get(i) instanceof Cliente) {
+
+				Cliente cliente = (Cliente) contenedor.listaAsesoria.get(i); // CASTING A CLIENTE
+
+				Utilidades.escribir(nCliente++ +". " + cliente.analizarUsuario() + "\n");
+				// OBTENGO LA LISTA DEL CLIENTE EN CADA ITERACION
+				ArrayList<Accidente> accidentes = cliente.getListaAccidentes();
+
+				for (Accidente objAccidente : accidentes) {
+					Utilidades.escribir("\t" +(nAccidente++) + ". " + objAccidente.toString() + "\n");
+				}
+			}
 		}
 	}
 

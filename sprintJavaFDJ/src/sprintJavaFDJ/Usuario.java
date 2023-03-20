@@ -1,6 +1,6 @@
 /**
  * @author Priscila Carrillo
-
+ * version 1.0	
  */
 package sprintJavaFDJ;
 

@@ -1,5 +1,13 @@
 package sprintJavaFDJ;
 
+/**
+ * 
+ * @version 1.0
+ * @author Leonel Briones, Kevin Moreno, Valentia Saldias, Priscila Carrillo,
+ *         Andres Contreras.
+ *
+ */
+
 
 public class Administrativo extends Usuario {
 
@@ -91,7 +99,7 @@ public class Administrativo extends Usuario {
 	 * falla, imprime un mensaje de error en la consola.
 	 * 
 	 * @param expPrevia La experiencia previa del usuario administrativo.
-	 */
+*/
 	public void setExpPrevia(String expPrevia) {
 		do{
 			if(expPrevia.trim().length() == 0){

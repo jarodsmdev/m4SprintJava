@@ -248,8 +248,9 @@ public class Cliente extends Usuario {
 	}
 	
 	/** METODO QUE RETORNA EL SISTEMA DE SALUD DEL CLIENTE */
-	public String obtenerSistemaSalud(String sistemaSalud) {
-		if(sistemaSalud == "1") {
+	public String obtenerSistemaSalud(int sistemaSalud) {
+//		sistemaSalud = Integer.parseInt(getSistemaSalud()); 
+		if(sistemaSalud == 1) {
 			return "FONASA";
 		}
 		else {
@@ -281,6 +282,10 @@ public class Cliente extends Usuario {
 	 */
 	public ArrayList<VisitaEnTerreno> getListaVisitas(){
 		return listaVisitaEnTerreno;
+	}
+
+	public ArrayList<Accidente> getListaAccidentes(){
+		return listaAccidentes;
 	}
 
 	/**
@@ -326,6 +331,6 @@ public class Cliente extends Usuario {
 	 */
 	@Override
 	public String soloUsuario() {
-		return "Cliente: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+		return "Cliente: " + getNombre() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 	}
 }
