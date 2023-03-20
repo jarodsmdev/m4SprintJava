@@ -284,6 +284,10 @@ public class Cliente extends Usuario {
 		return listaVisitaEnTerreno;
 	}
 
+	public ArrayList<Accidente> getListaAccidentes(){
+		return listaAccidentes;
+	}
+
 	/**
 	 * Método que muestra todas las visitas
 	 * @return

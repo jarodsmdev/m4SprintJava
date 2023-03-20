@@ -128,6 +128,24 @@ public class Principal {
 		revision5.setEstado(3);
 		visita3.agregarRevision(revision5);
 
+		Accidente accidente1 = new Accidente();
+		accidente1.setRutCliente(cliente1.getRun());
+		accidente1.setConsecuencias("CONSECUENTAS CLIENTE1");
+		accidente1.setFecha("14/01/1999");
+		accidente1.setHora("22:48");
+		accidente1.setLugar("LUGAR DEL ACCIDENTE. CLIENTE1");
+		accidente1.setOrigen("ORIGEN DEL ACCIDENTE");
+		cliente1.agregarAccidente(accidente1);
+
+		Accidente accidente2 = new Accidente();
+		accidente2.setRutCliente(cliente1.getRun());
+		accidente2.setConsecuencias("CONSECUENTAS CLIENTE1 ACCIDENTE B");
+		accidente2.setFecha("31/1/2000");
+		accidente2.setHora("22:48");
+		accidente2.setLugar("LUGAR DEL ACCIDENTE. CLIENTE1");
+		accidente2.setOrigen("ORIGEN DEL ACCIDENTE B");
+		cliente1.agregarAccidente(accidente2);
+
 		contenedor.almacenarUsuario(usuario1);
 		contenedor.almacenarCliente(cliente1);
 		contenedor.almacenarCliente(cliente2);
@@ -274,7 +292,8 @@ public class Principal {
 					"\n\t2. MOSTRAR USUARIOS POR TIPO" +
 					"\n\t3. MOSTRAR CAPACITACIONES" +
 					"\n\t4. MOSTRAR VISITAS" +
-					"\n\t5. VOLVER AL MENÚ PRINCIPAL\n\n"
+					"\n\t5. MOSTRAR ACCIDENTES" +
+					"\n\t6. VOLVER AL MENÚ PRINCIPAL\n\n"
 
 			);
 
@@ -303,6 +322,12 @@ public class Principal {
 					menuInformes(contenedor);
 					break;
 				case "5":
+					Utilidades.escribir("\t-- MOSTRAR ACCIDENTES --\n\n");
+					//mostrarVisitas(contenedor);
+					mostrarAccidentes(contenedor);
+					menuInformes(contenedor);
+					break;
+				case "6":
 					// Utilidades.escribir("\t-- REGRESANDO AL MENÚ PRINCIPAL --\n\n");
 					menuPrincipal(contenedor);
 					break;
@@ -937,6 +962,28 @@ public class Principal {
 				}
 			} while (!input.matches(regEx) || !input.trim().equalsIgnoreCase("SALIR"));
 			// RECORRER ARRAY PARA ENCONTRAR EL OBJETO Y POSTERIORMENTE ELIMINARLO
+		}
+	}
+
+	public static void mostrarAccidentes(Contenedor contenedor){
+		int nAccidente = 1;
+		int nCliente = 1;
+		// RECORRER LISTA DE ASESORIAS
+		for (int i = 0; i < contenedor.listaAsesoria.size(); i++) {
+			// IDENTIFICAR A CADA OBJETO DE LA LISTA QUE SEA UNO DE TIPO CLIENTE
+
+			if (contenedor.listaAsesoria.get(i) instanceof Cliente) {
+
+				Cliente cliente = (Cliente) contenedor.listaAsesoria.get(i); // CASTING A CLIENTE
+
+				Utilidades.escribir(nCliente++ +". " + cliente.analizarUsuario() + "\n");
+				// OBTENGO LA LISTA DEL CLIENTE EN CADA ITERACION
+				ArrayList<Accidente> accidentes = cliente.getListaAccidentes();
+
+				for (Accidente objAccidente : accidentes) {
+					Utilidades.escribir("\t" +(nAccidente++) + ". " + objAccidente.toString() + "\n");
+				}
+			}
 		}
 	}
 
