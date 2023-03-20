@@ -91,7 +91,7 @@ public class Administrativo extends Usuario {
 	 * falla, imprime un mensaje de error en la consola.
 	 * 
 	 * @param expPrevia La experiencia previa del usuario administrativo.
-	 */
+*/
 	public void setExpPrevia(String expPrevia) {
 		do{
 			if(expPrevia.trim().length() == 0){

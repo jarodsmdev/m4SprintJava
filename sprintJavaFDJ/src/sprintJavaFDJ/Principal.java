@@ -21,17 +21,19 @@ public class Principal {
 
 		Cliente cliente1 = new Cliente();
 		cliente1.setNombre("SOY CLIENTE1");
-		// cliente1.setApellido();
+		cliente1.setApellido("APELLIDO CLIENTE1");
+		cliente1.setFechaNacimiento("22/14/1999");
 		cliente1.setRut(1234561);
-		// cliente1.setDireccion();
-		// cliente1.setComuna();
+		cliente1.setDireccion("DIRECCION CLIENTE1");
+		cliente1.setComuna("COMUNA CLIENTE 1");
 
 		Cliente cliente2 = new Cliente();
 		cliente2.setNombre("SOY CLIENTE2");
-		// cliente2.setApellido();
+		cliente2.setApellido("APELLIDO CLIENTE2");
+		cliente2.setFechaNacimiento("12/01/1998");
 		cliente2.setRut(7894662);
-		// cliente2.setDireccion();
-		// cliente2.setComuna();
+		cliente2.setDireccion("DIRECCION CLIENTE2");
+		cliente2.setComuna("COMUNA CLIENTE2");
 
 		Capacitacion capacitacion1 = new Capacitacion();
 		capacitacion1.setRut(7894662);
@@ -51,9 +53,9 @@ public class Principal {
 
 		Administrativo administrativo1 = new Administrativo();
 		administrativo1.setNombreUsuario("SOY ADMINISTRATIVO1");
-		// administrativo1.setArea("51");
-		administrativo1.setExpPrevia("5");
-		administrativo1.setFechaNacimiento("22/03/1983");
+		administrativo1.setArea("AREA 51 ADM1");
+		administrativo1.setExpPrevia("MUCHA EXP ADM1");
+		administrativo1.setFechaNacimiento("12/07/1983");
 		administrativo1.setNombreUsuario("NICKNAME ADM1");
 		administrativo1.setRut(1452654);
 
@@ -63,7 +65,7 @@ public class Principal {
 		profesional1.setFechaNacimiento("05/02/1956");
 		profesional1.setNombreUsuario("NICKNAME PROF1");
 		profesional1.setRut(458744);
-		// profesional1.setTitulo("INGENIER@");
+		profesional1.setTitulo("INGENIERO EN BOTÁNICA DE ESPACIOS REDUCIDOS");
 
 		Profesional profesional2 = new Profesional();
 		profesional2.setNombreUsuario("SOY PROFESIONAL2");
@@ -71,22 +73,52 @@ public class Principal {
 		profesional2.setFechaNacimiento("05/02/1956");
 		profesional2.setNombreUsuario("NICKNAME PROF2");
 		profesional2.setRut(1554744);
-		// profesional2.setTitulo("ARQUITECT@");
+		profesional2.setTitulo("INGENIERÍA EN COMUNICACIONES");
 
 		VisitaEnTerreno visita1 = new VisitaEnTerreno();
 		visita1.setRutCliente(cliente1.getRun());
 		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 1");
 		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 1");
+		
+		Revision revision1 = new Revision();
+		revision1.setNombreRevision("Revision A");
+		revision1.setDetalleRevisar("Detalle Revisión A");
+		revision1.setEstado(1);
+		visita1.agregarRevision(revision1);
+		
+		Revision revision2 = new Revision();
+		revision2.setNombreRevision("Revision B");
+		revision2.setDetalleRevisar("Detalle Revisión B");
+		revision2.setEstado(2);
+		visita1.agregarRevision(revision2);
+		
+		Revision revision3 = new Revision();
+		revision3.setNombreRevision("Revision C");
+		revision3.setDetalleRevisar("Detalle Revisión C");
+		revision3.setEstado(3);
+		visita1.agregarRevision(revision3);
 
 		VisitaEnTerreno visita2 = new VisitaEnTerreno();
-		visita1.setRutCliente(cliente2.getRun());
-		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 2");
-		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 2");
+		visita2.setRutCliente(cliente2.getRun());
+		visita2.setLugar("ESTE ES UN LUGAR PARA LA VISITA 2");
+		visita2.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 2");
+		
+		Revision revision4 = new Revision();
+		revision4.setNombreRevision("Revisión D");
+		revision4.setDetalleRevisar("Detalle Revisión D");
+		revision4.setEstado(2);
+		visita2.agregarRevision(revision4);
 
 		VisitaEnTerreno visita3 = new VisitaEnTerreno();
-		visita1.setRutCliente(cliente2.getRun());
-		visita1.setLugar("ESTE ES UN LUGAR PARA LA VISITA 3");
-		visita1.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 3");
+		visita3.setRutCliente(cliente2.getRun());
+		visita3.setLugar("ESTE ES UN LUGAR PARA LA VISITA 3");
+		visita3.setComentarios("ESTOS COMENTARIOS SON PARA LA VISITA 3");
+		
+		Revision revision5 = new Revision();
+		revision5.setNombreRevision("Revision B");
+		revision5.setDetalleRevisar("Detalle Revision B");
+		revision5.setEstado(3);
+		visita3.agregarRevision(revision5);
 
 		contenedor.almacenarUsuario(usuario1);
 		contenedor.almacenarCliente(cliente1);
@@ -332,9 +364,6 @@ public class Principal {
 			menuUsuarios(contenedor);
 		}
 
-
-
-
 	}
 
 	/**
@@ -402,19 +431,34 @@ public class Principal {
 
 	public static void registrarUsuario(Contenedor contenedor, long rutLong) {
 
-		Usuario usuario = new Usuario();
-		usuario.setRut(rutLong);
-		usuario.setNombreUsuario(Utilidades.ingresar("Ingrese el nombre del Usuario:"));
-		usuario.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]:"));
+		String rutString;
+		do {
+			rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
 
-		contenedor.almacenarUsuario(usuario);
-		Utilidades.escribir("El Usuario ha sido guardado exitosamente\n");
+			if (rutString.equalsIgnoreCase("SALIR")) {
+				// break;
+				menuUsuarios(contenedor);
+			} else if (rutString.length() == 0) {
+				Utilidades.escribir("[ERROR] Valor ingresado no es válido, sólo ingrese Números\n");
+				rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
+			} else if (Utilidades.esNumerica(rutString)) {
+				rutLong = Long.parseLong(rutString);
 
-		Utilidades.escribir("[USUARIO] " + usuario.analizarUsuario() + "\n");
-		contenedor.listarUsuarios(); // DEBUGMODE
+				// VALIDAR QUE NO SE ENCUENTRE DUPLICADO
+				if (!contenedor.existeUsuario(rutLong)) {
+					// NO EXISTE RUT, CONTINUAR CON LA CREACION DE USUARIO
+					registrarUsuario(contenedor, rutLong);
+				} else {
+					Utilidades.escribir("[!] RUT Ingresado existe en los registros.\n");
+					crearUsuario(contenedor);
+				}
+				// break;
+			} else {
+				Utilidades.escribir("[ERROR] Valor ingresado no es válido, sólo ingrese Números\n");
+				rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
+			}
+		} while (true);
 
-		// INVOCAR AL MENÚ PARA MANTENER EL LOOP
-		menuPrincipal(contenedor);
 	}
 
 	/**

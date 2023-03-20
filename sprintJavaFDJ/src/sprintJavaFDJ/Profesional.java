@@ -63,6 +63,7 @@ public class Profesional extends Usuario {
 		 * 
 		 * @param titulo el título del profesional
 		 */
+
 		public void setTitulo(String titulo) {
 		
 			//System.out.println("El titulo debe tener mínimo 10 caracteres, máximo 50");
@@ -93,11 +94,11 @@ public class Profesional extends Usuario {
 		/**
 		 * 
 		 * Método para establecer la fecha de ingreso del profesional con validación de formato
+		 * @param fechaIngreso 
 		 * @param fechaIngreso la fecha de ingreso del profesional en formato "DD/MM/AAAA"
 		 */
 		public void setFechaIngreso(String fechaIngreso) {
-			String regex = "\\d{2}/\\d{2}/\\d{4}";
-			
+			String regex = "\\d{2}/\\d{2}/\\d{4}";			
 			do{
 				if(fechaIngreso.trim().length() == 0){
 					Utilidades.escribir("Favor ingrese una fecha, no puede estar vacío.\n");
