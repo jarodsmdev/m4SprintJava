@@ -133,4 +133,13 @@ public class Profesional extends Usuario {
 		public String analizarUsuario() {
 			return "Profesional: " + super.getNombreUsuario() + ", RUT: " + super.getRun() + ", Título: " + titulo + ", Fecha Ingreso: " + fechaIngreso;
 		}
+
+		/**
+	 	* Sobre escribe el método soloUsuario de la superClase, Imprime una cadena
+	 	* @return Una cadena de texto con la información: nombre, rut, y fecha de nacimiento del Profesional
+	 	*/
+		@Override
+		public String soloUsuario() {
+			return "Profesional: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+		}
 	}
