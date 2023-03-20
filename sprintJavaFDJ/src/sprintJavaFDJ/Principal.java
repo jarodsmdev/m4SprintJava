@@ -27,23 +27,25 @@ public class Principal {
 	 */
 	public static void DebugMode(Contenedor contenedor) {
 		Usuario usuario1 = new Usuario();
-		usuario1.setNombreUsuario("SOY USUARIO1");
+		usuario1.setNombreUsuario("NICKNAME USUARIO1");
 		usuario1.setFechaNacimiento("22/03/1983");
 		usuario1.setRut(1552123);
 
 		Cliente cliente1 = new Cliente();
+		cliente1.setRut(1234561);
+		cliente1.setNombreUsuario("NICKNAME CLIENTE1");
+		cliente1.setFechaNacimiento("22/14/1999");
 		cliente1.setNombre("SOY CLIENTE1");
 		cliente1.setApellido("APELLIDO CLIENTE1");
-		cliente1.setFechaNacimiento("22/14/1999");
-		cliente1.setRut(1234561);
 		cliente1.setDireccion("DIRECCION CLIENTE1");
 		cliente1.setComuna("COMUNA CLIENTE 1");
 
 		Cliente cliente2 = new Cliente();
+		cliente2.setRut(7894662);
+		cliente2.setNombreUsuario("NICKNAME CLIENTE2");
+		cliente2.setFechaNacimiento("12/01/1998");
 		cliente2.setNombre("SOY CLIENTE2");
 		cliente2.setApellido("APELLIDO CLIENTE2");
-		cliente2.setFechaNacimiento("12/01/1998");
-		cliente2.setRut(7894662);
 		cliente2.setDireccion("DIRECCION CLIENTE2");
 		cliente2.setComuna("COMUNA CLIENTE2");
 
@@ -441,14 +443,11 @@ public class Principal {
 		administrativo.setFechaNacimiento(Utilidades.ingresar("Ingrese la fecha de nacimiento [dd/mm/aaaa]: "));
 		administrativo.setArea(Utilidades.ingresar("Ingresa Área: "));
 		administrativo.setExpPrevia(Utilidades.ingresar("Ingrese su experiencia previa [Máx. 100 caracteres]: "));
-		// administrativo.setRut(Utilidades.ingresar("Ingrese RUT:"));
 
 		contenedor.almacenarAdministrativo(administrativo);
 		Utilidades.escribir("Personal Administrativo ha sido guardado exitosamente");
 
-		// DEBUG MODE
-		Utilidades.escribir("[RETORNO MÉTODO ANALIZAR ADMINISTRATIVO]" + administrativo.analizarUsuario());// DEBUGMODE
-		contenedor.listarUsuarios();
+		Utilidades.escribir("[ADMINISTRATIVO]" + administrativo.analizarUsuario() + "\n");
 
 		// INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuUsuarios(contenedor);
@@ -469,19 +468,12 @@ public class Principal {
 				menuUsuarios(contenedor);
 			} else if (rutString.length() == 0) {
 				Utilidades.escribir("[ERROR] Valor ingresado no es válido, sólo ingrese Números\n");
-				rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
+				//rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
 			} else if (Utilidades.esNumerica(rutString)) {
 				long rutLong = Long.parseLong(rutString);
-
-				// VALIDAR QUE NO SE ENCUENTRE DUPLICADO
-				if (!contenedor.existeUsuario(rutLong)) {
-					// NO EXISTE RUT, CONTINUAR CON LA CREACION DE USUARIO
-					registrarUsuario(contenedor, rutLong);
-				} else {
-					Utilidades.escribir("[!] RUT Ingresado existe en los registros.\n");
-					crearUsuario(contenedor);
-				}
-				// break;
+				
+				registrarUsuario(contenedor, rutLong);
+				
 			} else {
 				Utilidades.escribir("[ERROR] Valor ingresado no es válido, sólo ingrese Números\n");
 				rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
@@ -496,34 +488,27 @@ public class Principal {
 	 * @param rutLong
 	 */
 	public static void registrarUsuario(Contenedor contenedor, long rutLong) {
+		// VALIDAR QUE NO SE ENCUENTRE DUPLICADO
+		if (!contenedor.existeUsuario(rutLong)) {
 
-		String rutString;
-		do {
-			rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
+			// NO EXISTE RUT, CONTINUAR CON LA CREACION DE USUARIO
+			//REGISTRAR USUARIO
+			Usuario usuario = new Usuario();
+			usuario.setRut(rutLong);
+			usuario.setNombreUsuario(Utilidades.ingresar("Ingrese nombre de Usuario: "));
+			usuario.setFechaNacimiento(Utilidades.ingresar("Ingrese Fecha de Nacimiento [dd/mm/aaaa]: "));
 
-			if (rutString.equalsIgnoreCase("SALIR")) {
-				// break;
-				menuUsuarios(contenedor);
-			} else if (rutString.length() == 0) {
-				Utilidades.escribir("[ERROR] Valor ingresado no es válido, sólo ingrese Números\n");
-				rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
-			} else if (Utilidades.esNumerica(rutString)) {
-				rutLong = Long.parseLong(rutString);
+			Utilidades.escribir("[!] Se ha ingresado el Usuario Satisfactoriamente.\n");
 
-				// VALIDAR QUE NO SE ENCUENTRE DUPLICADO
-				if (!contenedor.existeUsuario(rutLong)) {
-					// NO EXISTE RUT, CONTINUAR CON LA CREACION DE USUARIO
-					registrarUsuario(contenedor, rutLong);
-				} else {
-					Utilidades.escribir("[!] RUT Ingresado existe en los registros.\n");
-					crearUsuario(contenedor);
-				}
-				// break;
-			} else {
-				Utilidades.escribir("[ERROR] Valor ingresado no es válido, sólo ingrese Números\n");
-				rutString = Utilidades.ingresar("Ingrese el RUT del Usuario ['SALIR' para cancelar]: ");
-			}
-		} while (true);
+			menuUsuarios(contenedor);
+
+		} else {
+			//EXISTE RUT
+			Utilidades.escribir("[!] RUT Ingresado existe en los registros.\n");
+			crearUsuario(contenedor);
+		}
+		// break;
+
 
 	}
 
@@ -558,8 +543,10 @@ public class Principal {
 			Cliente cliente = new Cliente();
 
 			cliente.setRut(rutLong);
-			cliente.setNombre(Utilidades.ingresar("Ingrese Nombre Cliente:"));
+			cliente.setNombreUsuario("Ingrese Nombre de Usuario");
 			cliente.setFechaNacimiento(Utilidades.ingresar("Ingrese Fecha de Nacimiento: "));
+
+			cliente.setNombre(Utilidades.ingresar("Ingrese Nombre Cliente:"));
 			cliente.setApellido(Utilidades.ingresar("Ingrese Apellido [Entre 5 y 30 caracteres]: ")); // OK OBLIGATORIO
 			cliente.setTelefono(Utilidades.ingresar("Ingrese el número de teléfono del cliente")); // OK OBLIGATORIO
 			cliente.setAfp(Utilidades.ingresar("Ingrese el nombre de la AFP del cliente [Entre 4 y 30 caracteres]: ")); 																										
@@ -633,8 +620,7 @@ public class Principal {
 
 			VisitaEnTerreno visitaTerreno = new VisitaEnTerreno();
 
-			Utilidades.escribir("\n [ID VISITA: " + visitaTerreno.getIdentificador() + "] [CLIENTE: "
-					+ cl1.obtenerNombre() + "]\n\n");
+			Utilidades.escribir("\n [ID VISITA: " + visitaTerreno.getIdentificador() + "] [CLIENTE: " + cl1.obtenerNombre() + "]\n\n");
 
 			visitaTerreno.setRutCliente(inputRut);
 			visitaTerreno.setDia(Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: "));
@@ -866,7 +852,6 @@ public class Principal {
 						// MUESTRA TODOS LOS ACCIDENTES
 						cliente.mostrarAccidentes(inputRut);
 
-						// TODO: PREGUNTAR SI DESEO SEGUIR INGRESANDO ACCIDENTES
 						menuGestion(contenedor);
 					} else {
 						Utilidades.escribir("[ERROR] RUT Ingresado no existe en los registros.\n\n");

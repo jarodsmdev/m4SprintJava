@@ -147,7 +147,7 @@ public class Usuario implements Asesoria{
 	*/
 	@Override
 	public String soloUsuario() {
-		return "Usuario: " + getNombreUsuario() + ", RUN: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+		return "[USUARIO] Nombre Usuario: " + getNombreUsuario() + ", RUN: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 	}
 
 }

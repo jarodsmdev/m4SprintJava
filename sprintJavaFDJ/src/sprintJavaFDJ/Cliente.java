@@ -331,6 +331,6 @@ public class Cliente extends Usuario {
 	 */
 	@Override
 	public String soloUsuario() {
-		return "Cliente: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+		return "[CLIENTE] Nombre Usuario: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 	}
 }
