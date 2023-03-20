@@ -263,7 +263,7 @@ public class Cliente extends Usuario {
 	 */
 	@Override
 	public String analizarUsuario() {
-		return "Cliente: " + getNombre() + ", RUT: " + getRun() + ", Dirección: " + getDireccion() + ", Comuna: " + getComuna();
+		return "Cliente: " + getNombre() + ", RUN: " + getRun() + ", Dirección: " + getDireccion() + ", Comuna: " + getComuna();
 	}
 
 	
@@ -321,7 +321,7 @@ public class Cliente extends Usuario {
 	 */
 	@Override
 	public String toString() {
-		return "Cliente: " + obtenerNombre() + "\n Telefono: " + getTelefono() + "\n AFP: " + getAfp() + "\n Sistema de Salud: " + getSistemaSalud() + "\n Direccion: " + getDireccion() + "\n Comuna: " + getComuna() + "\n Edad: " + getEdad();
+		return "Cliente: \n Nombre Usuario: " + getNombreUsuario() + ", RUN: " + getRun() + ", Fecha Nacimiento: " + getFechaNacimiento() + "\n Nombre Cliente: " + obtenerNombre() + "\n Telefono: " + getTelefono() + "\n AFP: " + getAfp() + "\n Sistema de Salud: " + getSistemaSalud() + "\n Direccion: " + getDireccion() + "\n Comuna: " + getComuna() + "\n Edad: " + getEdad();
 		
 	}
 
@@ -331,6 +331,6 @@ public class Cliente extends Usuario {
 	 */
 	@Override
 	public String soloUsuario() {
-		return "Cliente: " + getNombre() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+		return "Cliente: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 	}
 }
