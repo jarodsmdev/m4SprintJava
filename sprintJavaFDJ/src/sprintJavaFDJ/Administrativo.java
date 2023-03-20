@@ -144,6 +144,6 @@ public class Administrativo extends Usuario {
 	 */
 	@Override
 	public String soloUsuario() {
-		return "Administrativo: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+		return "[ADMINISTRATIVO] Nombre Usuario: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 	}
 }

@@ -39,12 +39,11 @@ public class Usuario implements Asesoria{
 		do {
 			
 			if(nombreUsuario.length() > 9 && nombreUsuario.length() < 51){
-				//System.out.println("RECIBÍ NOMBRE USUARIO :" + nombreUsuario);
 				this.nombreUsuario = nombreUsuario;
 				break;
 			}else{
 				Utilidades.escribir("[ERROR] Nombre debe de estar entre 10 y 50 caracteres.\n");
-				nombreUsuario = Utilidades.ingresar("Ingrese Nombre");
+				nombreUsuario = Utilidades.ingresar("Ingrese Nombre de Usuario:");
 			}
 			
 		} while(true);
@@ -67,9 +66,9 @@ public class Usuario implements Asesoria{
 		String regEx = "\\d{2}/\\d{2}/\\d{4}";
 		do{
 			if(!fechaNacimiento.trim().matches(regEx)){
-				fechaNacimiento = Utilidades.ingresar("Error de Ingreso. Debe tener formato dd/mm/aaaa. Vuelva a intentar.");
+				fechaNacimiento = Utilidades.ingresar("[ERROR] Debe tener formato dd/mm/aaaa. Vuelva a intentar.");
 			}else if(fechaNacimiento.trim().length() == 0){
-				fechaNacimiento = Utilidades.ingresar("Error de Ingreso. Debe tener formato dd/mm/aaaa. Vuelva a intentar.");
+				fechaNacimiento = Utilidades.ingresar("[ERROR] Debe tener formato dd/mm/aaaa. Vuelva a intentar.");
 			}else {
 				this.fechaNacimiento = fechaNacimiento;
 			}
@@ -123,7 +122,7 @@ public class Usuario implements Asesoria{
 	 */
 	@Override
 	public String analizarUsuario() {
-		return "Usuario: " + nombreUsuario + ", RUN:" + run;
+		return "Usuario: " + getNombreUsuario() + ", RUN:" + run;
 	}
 
 	//Metodo mostrar edad
@@ -139,7 +138,7 @@ public class Usuario implements Asesoria{
 
 	@Override //metodo to string
 	public String toString() {
-		return "Usuario\n Nombre Usuario: " + nombreUsuario + ", Fecha Nacimiento: " + fechaNacimiento + ", RUT: " + run + "\n";
+		return "Usuario\n Nombre Usuario: " + getNombreUsuario() + ", Fecha Nacimiento: " + getFechaNacimiento() + ", RUN: " + run + "\n";
 	}
 
 	/**
@@ -148,7 +147,7 @@ public class Usuario implements Asesoria{
 	*/
 	@Override
 	public String soloUsuario() {
-		return "Usuario: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+		return "[USUARIO] Nombre Usuario: " + getNombreUsuario() + ", RUN: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 	}
 
 }

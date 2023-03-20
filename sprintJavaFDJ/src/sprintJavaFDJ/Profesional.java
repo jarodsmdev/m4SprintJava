@@ -141,6 +141,6 @@ public class Profesional extends Usuario {
 	 	*/
 		@Override
 		public String soloUsuario() {
-			return "Profesional: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+			return "[PROFESIONAL] Nombre Usuario: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 		}
 	}
