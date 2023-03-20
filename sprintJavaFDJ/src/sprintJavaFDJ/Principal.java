@@ -21,6 +21,10 @@ public class Principal {
 		menuPrincipal(contenedor);
 	}
 
+	/**
+	 * Método que permite generar objetos para realizar pruebas
+	 * @param contenedor
+	 */
 	public static void DebugMode(Contenedor contenedor) {
 		Usuario usuario1 = new Usuario();
 		usuario1.setNombreUsuario("SOY USUARIO1");
@@ -159,6 +163,10 @@ public class Principal {
 		cliente2.agregarVisitaTerreno(visita3);
 	}
 
+	/**
+	 * Método que permite visualizar un Menú
+	 * @param contenedor
+	 */
 	public static void menuPrincipal(Contenedor contenedor) {
 
 		String capturador;
@@ -197,6 +205,10 @@ public class Principal {
 		} while (!capturador.matches("^[1-4]$"));
 	}
 
+	/**
+	 * Método que permiete visualizar un Menú
+	 * @param contenedor
+	 */
 	public static void menuGestion(Contenedor contenedor) {
 		String capturador;
 
@@ -242,6 +254,10 @@ public class Principal {
 		} while (!capturador.matches("^[1-5]$"));
 	}
 
+	/**
+	 * Método que permite visualizar un menú
+	 * @param contenedor
+	 */
 	public static void menuUsuarios(Contenedor contenedor) {
 		String capturador;
 		do {
@@ -284,6 +300,10 @@ public class Principal {
 		} while (!capturador.matches("^[1-5]$"));
 	}
 
+	/**
+	 * Método que permite Visualizar un Menú
+	 * @param contenedor
+	 */
 	public static void menuInformes(Contenedor contenedor) {
 		String capturador;
 		do {
@@ -338,6 +358,10 @@ public class Principal {
 		} while (!capturador.matches("^[1-6]$"));
 	}
 
+	/**
+	 * Método que permite visualizar un menú
+	 * @param contenedor
+	 */
 	public static void menuFiltrarUsuariosPorTipo(Contenedor contenedor) {
 		String capturador;
 		do {
@@ -376,6 +400,10 @@ public class Principal {
 		} while (!capturador.matches("^[1-4]$"));
 	}
 
+	/**
+	 * Método que permite Crear un Objeto de tipo Administrativo
+	 * @param contenedor
+	 */
 	public static void crearAdministrativo(Contenedor contenedor) {
 		long rutLong;
 		// VALIDAR QUE EL CONTENIDO DE capturador sea tipo long
@@ -400,7 +428,7 @@ public class Principal {
 	}
 
 	/**
-	 * 
+	 * Método que permite registrar el objeto de tipo Administrativo
 	 * @param contenedor
 	 * @param rutLong
 	 */
@@ -427,7 +455,7 @@ public class Principal {
 	}
 
 	/**
-	 * 
+	 * Método que permite crear un objeto de tipo Usuario
 	 * @param contenedor
 	 */
 	public static void crearUsuario(Contenedor contenedor) {
@@ -462,6 +490,11 @@ public class Principal {
 
 	}
 
+	/**
+	 * Método que permite registrar el objeto de tipo Usuario
+	 * @param contenedor
+	 * @param rutLong
+	 */
 	public static void registrarUsuario(Contenedor contenedor, long rutLong) {
 
 		String rutString;
@@ -586,6 +619,11 @@ public class Principal {
 		} while (!input.matches(regEx) || !input.trim().equalsIgnoreCase("SALIR"));
 	}
 
+	/**
+	 * Método que permite registrar una visita en Terreno
+	 * @param contenedor
+	 * @param inputRut
+	 */
 	public static void registrarVisitaEnTerreno(Contenedor contenedor, long inputRut) {
 		// REGISTRA LA VISTA EN TERRENO CUANDO EL RUT ES VÁLIDO
 		if (contenedor.existeUsuario(inputRut)) {
@@ -602,8 +640,7 @@ public class Principal {
 			visitaTerreno.setDia(Utilidades.ingresar("Ingresar Fecha con formato [DD/MM/AAAA]: "));
 			visitaTerreno.setHora(Utilidades.ingresar("Ingrese hora formato [HH:MM]: "));
 			visitaTerreno.setLugar(Utilidades.ingresar("Ingrese Lugar: (Texto entre 10 y 50 caracteres)"));
-			visitaTerreno.setComentarios(
-					Utilidades.ingresar("Ingrese comentarios de la visita [Máx 100 caracteres]: "));
+			visitaTerreno.setComentarios(Utilidades.ingresar("Ingrese comentarios de la visita [Máx 100 caracteres]: "));
 
 			// Agrega capacitación a la lista de visita terreno contenedor
 			cl1.agregarVisitaTerreno(visitaTerreno);
@@ -748,7 +785,7 @@ public class Principal {
 	}
 
 	/**
-	 * 
+	 * Método que permite registrar un objeto de tipo Profesional
 	 * @param contenedor
 	 * @param rutLong
 	 */
@@ -925,6 +962,10 @@ public class Principal {
 		}
 	}
 
+	/**
+	 * Método que permite eliminar un Usuario
+	 * @param contenedor
+	 */
 	public static void eliminarUsuario(Contenedor contenedor) {
 		String input;
 		String regEx = "^[0-9]+$";
@@ -965,6 +1006,10 @@ public class Principal {
 		}
 	}
 
+	/**
+	 * Método que permite visualizar por consola los accidentes registrados
+	 * @param contenedor
+	 */
 	public static void mostrarAccidentes(Contenedor contenedor){
 		int nAccidente = 1;
 		int nCliente = 1;
