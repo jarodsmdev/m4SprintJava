@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * 
+ * @version 1.0
  * @author Leonel Briones, Kevin Moreno, Valentia Saldias, Priscila Carrillo,
  *         Andres Contreras.
  *

@@ -1,5 +1,13 @@
 package sprintJavaFDJ;
 
+/**
+ * 
+ * @version 1.0
+ * @author Leonel Briones, Kevin Moreno, Valentia Saldias, Priscila Carrillo,
+ *         Andres Contreras.
+ *
+ */
+
 import java.util.ArrayList;
 
 public class Principal {

@@ -1,7 +1,7 @@
 package sprintJavaFDJ;
 
 /**
- * 
+ * @version 1.0
  * @author Leonel Briones, Kevin Moreno, Valentia Saldías, Priscila Carrillo, Andrés Contreras.
  *      
  */
