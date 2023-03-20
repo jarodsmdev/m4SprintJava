@@ -142,5 +142,13 @@ public class Usuario implements Asesoria{
 		return "Usuario\n Nombre Usuario: " + nombreUsuario + ", Fecha Nacimiento: " + fechaNacimiento + ", RUT: " + run + "\n";
 	}
 
+	/**
+	* Sobre escribe el método soloUsuario de la superClase, Imprime una cadena
+	* @return Una cadena de texto con la información: nombre, rut, y fecha de nacimiento del Usuario
+	*/
+	@Override
+	public String soloUsuario() {
+		return "Usuario: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+	}
 
 }

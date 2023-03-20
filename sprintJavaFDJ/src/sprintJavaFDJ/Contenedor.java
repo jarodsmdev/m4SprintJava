@@ -90,6 +90,23 @@ public class Contenedor {
 	}
 
 	/**
+	 * Método que permite mostrar sólo los objetos
+	 */
+	public void listarSoloUsuarios() {
+	    // LISTAR LOS DATOS DE LA CLASE USUARIO
+	    Utilidades.escribir("\n-- INICIO DEL REPORTE --\n\n");
+	    for (int i = 0; i < listaAsesoria.size(); i++) {
+	        if (listaAsesoria.get(i) instanceof Usuario) {
+	            Usuario usuario = (Usuario) listaAsesoria.get(i); // CASTING/REFUNDICIÓN
+	            Utilidades.escribir((i + 1) + ". " + usuario.soloUsuario() + "\n");
+	        } else {
+	            Utilidades.escribir("[!] No existen objetos de tipo Usuario");
+	        }
+	    }
+	    Utilidades.escribir("\n-- FIN DEL REPORTE --\n");
+	}
+
+	/**
 	 * @param tipo Asesoria
 	 *             Recibe un objeto Usuario y sólo muestra los objetos de este tipo
 	 */

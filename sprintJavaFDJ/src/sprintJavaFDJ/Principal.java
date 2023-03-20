@@ -243,7 +243,8 @@ public class Principal {
 			switch (capturador) {
 				case "1":
 					Utilidades.escribir("\t-- MOSTRAR TODOS LOS USUARIOS --\n\n");
-					contenedor.listarUsuarios();
+					//contenedor.listarUsuarios();
+					contenedor.listarSoloUsuarios();
 					menuInformes(contenedor);
 					break;
 				case "2":
@@ -400,6 +401,7 @@ public class Principal {
 	}
 
 	public static void registrarUsuario(Contenedor contenedor, long rutLong) {
+
 		Usuario usuario = new Usuario();
 		usuario.setRut(rutLong);
 		usuario.setNombreUsuario(Utilidades.ingresar("Ingrese el nombre del Usuario:"));
@@ -447,14 +449,11 @@ public class Principal {
 
 			cliente.setRut(rutLong);
 			cliente.setNombre(Utilidades.ingresar("Ingrese Nombre Cliente:"));
+			cliente.setFechaNacimiento(Utilidades.ingresar("Ingrese Fecha de Nacimiento: "));
 			cliente.setApellido(Utilidades.ingresar("Ingrese Apellido [Entre 5 y 30 caracteres]: ")); // OK OBLIGATORIO
 			cliente.setTelefono(Utilidades.ingresar("Ingrese el número de teléfono del cliente")); // OK OBLIGATORIO
-			cliente.setAfp(Utilidades.ingresar("Ingrese el nombre de la AFP del cliente [Entre 4 y 30 caracteres]: ")); // OK
-																														// OPCIONAL
-			cliente.setSistemaSalud(Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE")); // OK//al
-																											// ingresar
-																											// 3 bucle
-																											// //CORREGIDO
+			cliente.setAfp(Utilidades.ingresar("Ingrese el nombre de la AFP del cliente [Entre 4 y 30 caracteres]: ")); 																										
+			cliente.setSistemaSalud(Utilidades.ingresar("Ingrese Sistema de Salud: 1 FONASA || 2 ISAPRE"));																		
 			cliente.setDireccion(Utilidades.ingresar("Ingrese la dirección [Máx 70 caracteres]: ")); // OK OPCIONAL
 			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna [Máx 50 caracteres]: ")); // OK OPCIONAL
 			cliente.setEdad(Utilidades.ingresar("Ingrese su edad [0 - 150]: ")); // FALLA CON LETRAS //CORREGIDO

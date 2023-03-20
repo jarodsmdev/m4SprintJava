@@ -310,10 +310,22 @@ public class Cliente extends Usuario {
 		}
 	}
 	
-	
+	/**
+	 * Sobrescribe el método analizarUsuario() de la clase padre. Imprime una cadena
+	 * que representa al usuario cliente
+	 */
 	@Override
 	public String toString() {
 		return "Cliente: " + obtenerNombre() + "\n Telefono: " + getTelefono() + "\n AFP: " + getAfp() + "\n Sistema de Salud: " + getSistemaSalud() + "\n Direccion: " + getDireccion() + "\n Comuna: " + getComuna() + "\n Edad: " + getEdad();
 		
+	}
+
+	/**
+	 * Sobre escribe el método soloUsuario de la superClase, Imprime una cadena
+	 * @return Una cadena de texto con la información: nombre, rut, y fecha de nacimiento del Cliente
+	 */
+	@Override
+	public String soloUsuario() {
+		return "Cliente: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 	}
 }
