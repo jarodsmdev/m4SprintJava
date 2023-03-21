@@ -119,15 +119,16 @@ public class Contenedor {
 				Usuario usuario = (Usuario) asesoria;
 				if (usuario instanceof Cliente) {
 					Cliente cliente = (Cliente) usuario; // Casting a Cliente
-					Utilidades.escribir((i++) + ". " + cliente.analizarUsuario() + "\n");
-
+					//Utilidades.escribir((i++) + ". " + cliente.analizarUsuario() + "\n");
+					Utilidades.escribir((i++) + ". " + cliente.mostrarDatosTipo() + "\n");
+					
 				} else if (usuario instanceof Administrativo) {
 					Administrativo admin = (Administrativo) usuario; // Casting a Administrativo
-					Utilidades.escribir((i++) + ". " + admin.analizarUsuario() + "\n");
+					Utilidades.escribir((i++) + ". " + admin.mostrarDatosTipo() + "\n");
 		
 				} else if (usuario instanceof Profesional){
 					Profesional profesional = (Profesional) usuario; //Casting a Profesional
-					Utilidades.escribir((i++) + ". "  + profesional.analizarUsuario() + "\n");
+					Utilidades.escribir((i++) + ". "  + profesional.mostrarDatosTipo() + "\n");
 		
 				}/*else if (usuario instanceof Usuario){
 					Usuario user = (Usuario) usuario; //Casting a Usuario

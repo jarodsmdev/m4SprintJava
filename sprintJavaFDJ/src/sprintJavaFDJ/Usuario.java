@@ -150,4 +150,9 @@ public class Usuario implements Asesoria{
 		return "[USUARIO] Nombre Usuario: " + getNombreUsuario() + ", RUN: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 	}
 
+	@Override
+	public String mostrarDatosTipo(){
+		return soloUsuario();
+	}
+
 }

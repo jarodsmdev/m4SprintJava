@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /** @author Leonel Briones, Priscila Carrillo, Andres Contreras, Kevin Moreno, Valentina Saldias*/
 /**@version 13/03 */
-public class Cliente extends Usuario {
+public class Cliente extends Usuario{
 
 	/** definicion de parametros de la clase Cliente */
 	private String nombre;
@@ -332,5 +332,10 @@ public class Cliente extends Usuario {
 	@Override
 	public String soloUsuario() {
 		return "[CLIENTE] Nombre Usuario: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
+	}
+
+	@Override
+	public String mostrarDatosTipo(){
+		return "Cliente: \n RUN: " + getRun() + "\n Nombre Cliente: " + obtenerNombre() + "\n Telefono: " + getTelefono() + "\n AFP: " + getAfp() + "\n Sistema de Salud: " + getSistemaSalud() + "\n Direccion: " + getDireccion() + "\n Comuna: " + getComuna() + "\n Edad: " + getEdad() + "\n";
 	}
 }
