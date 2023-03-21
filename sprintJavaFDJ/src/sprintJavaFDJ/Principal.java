@@ -264,42 +264,41 @@ public class Principal {
 		String capturador;
 		do {
 			Utilidades.escribir("\n[\t--MENÚ USUARIO--\t]\n\n");
-			Utilidades.escribir("\n\t1. CREAR USUARIO" +
-					"\n\t2. CREAR CLIENTE" +
-					"\n\t3. CREAR PROFESIONAL" +
-					"\n\t4. CREAR ADMINISTRATIVO" +
-					"\n\t5. VOLVER AL MENÚ PRINCIPAL\n\n"
+			Utilidades.escribir("\n\t1. CREAR CLIENTE" +
+					"\n\t2. CREAR PROFESIONAL" +
+					"\n\t3. CREAR ADMINISTRATIVO" +
+					"\n\t4. VOLVER AL MENÚ PRINCIPAL\n\n"
 
 			);
 
 			capturador = Utilidades.ingresar("Ingrese una opción para ingresar: ");
 
 			switch (capturador) {
+				// case "1":
+				// 	Utilidades.escribir("\t-- CREAR USUARIO --\n\n");
+				// 	crearUsuario(contenedor);
+				// 	break;
 				case "1":
-					Utilidades.escribir("\t-- CREAR USUARIO --\n\n");
-					crearUsuario(contenedor);
-					break;
-				case "2":
 					Utilidades.escribir("\t-- CREAR CLIENTE --\n\n");
 					crearCliente(contenedor);
 					break;
-				case "3":
+				case "2":
 					Utilidades.escribir("\t-- CREAR PROFESIONAL --\n\n");
 					crearProfesional(contenedor);
 					break;
-				case "4":
+				case "3":
 					Utilidades.escribir("\t-- CREAR ADMINISTRATIVO --\n\n");
 					crearAdministrativo(contenedor);
 					break;
-				case "5":
+				case "4":
 					// Utilidades.escribir("\t-- REGRESANDO AL MENÚ PRINCIPAL --\n\n");
 					menuPrincipal(contenedor);
 					break;
 				default:
-					Utilidades.escribir("[!] OPCIÓN INGRESADA NO ES VÁLIDA, SÓLO INGRESE VALORES ENTRE 1 AL 5.\n\n");
+					Utilidades.escribir("[!] OPCIÓN INGRESADA NO ES VÁLIDA, SÓLO INGRESE VALORES ENTRE 1 AL 4.\n\n");
 			}
 
-		} while (!capturador.matches("^[1-5]$"));
+		} while (!capturador.matches("^[1-4]$"));
 	}
 
 	/**
@@ -447,7 +446,8 @@ public class Principal {
 		contenedor.almacenarAdministrativo(administrativo);
 		Utilidades.escribir("Personal Administrativo ha sido guardado exitosamente");
 
-		Utilidades.escribir("[ADMINISTRATIVO]" + administrativo.analizarUsuario() + "\n");
+		//Utilidades.escribir("[ADMINISTRATIVO]" + administrativo.analizarUsuario() + "\n");
+		Utilidades.escribir(administrativo.toString() + "\n");
 
 		// INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuUsuarios(contenedor);
@@ -543,7 +543,7 @@ public class Principal {
 			Cliente cliente = new Cliente();
 
 			cliente.setRut(rutLong);
-			cliente.setNombreUsuario("Ingrese Nombre de Usuario");
+			cliente.setNombreUsuario(Utilidades.ingresar("Ingrese Nombre de Usuario"));
 			cliente.setFechaNacimiento(Utilidades.ingresar("Ingrese Fecha de Nacimiento: "));
 
 			cliente.setNombre(Utilidades.ingresar("Ingrese Nombre Cliente:"));
@@ -555,10 +555,10 @@ public class Principal {
 			cliente.setComuna(Utilidades.ingresar("Ingrese la comuna [Máx 50 caracteres]: ")); // OK OPCIONAL
 			cliente.setEdad(Utilidades.ingresar("Ingrese su edad [0 - 150]: ")); // FALLA CON LETRAS //CORREGIDO
 			contenedor.almacenarCliente(cliente);
-			Utilidades.escribir("El Cliente ha sido guardado correctamente\n");
+			Utilidades.escribir("El Cliente ha sido guardado correctamente\n\n");
 
-			Utilidades.escribir("[CLIENTE] " + cliente.analizarUsuario() + "\n");
-
+			//Utilidades.escribir("[CLIENTE] " + cliente.analizarUsuario() + "\n");
+			Utilidades.escribir(cliente.toString() + "\n");
 			// INVOCAR VISITA EN TERRENO
 			registrarVisitaEnTerreno(contenedor, rutLong);
 
@@ -788,7 +788,8 @@ public class Principal {
 		contenedor.almacenarProfesional(profesional);
 		Utilidades.escribir("Profesional ha sido guardado exitosamente");
 
-		Utilidades.escribir("[PROFESIONAL]" + profesional.analizarUsuario() + "\n");
+		//Utilidades.escribir("[PROFESIONAL]" + profesional.analizarUsuario() + "\n");
+		Utilidades.escribir(profesional.toString() + "\n");
 
 		// INVOCAR AL MENÚ PARA MANTENER EL LOOP
 		menuPrincipal(contenedor);

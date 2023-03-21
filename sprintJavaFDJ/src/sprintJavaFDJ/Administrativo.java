@@ -146,4 +146,9 @@ public class Administrativo extends Usuario {
 	public String soloUsuario() {
 		return "[ADMINISTRATIVO] Nombre Usuario: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 	}
+
+	@Override
+	public String mostrarDatosTipo(){
+		return "Administrativo: \n Área " + area + ", Experiencia Previa: " + expPrevia;
+	}
 }

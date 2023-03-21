@@ -123,7 +123,7 @@ public class Profesional extends Usuario {
 		 */
 		@Override
 		public String toString() {
-			return "Profesional" + super.toString() + "titulo=" + titulo + ", fechaIngreso=" + fechaIngreso;
+			return "Profesional" + super.toString() + "Título: " + titulo + ", Fecha Ingreso: " + fechaIngreso;
 		}
 
 		/**
@@ -143,4 +143,9 @@ public class Profesional extends Usuario {
 		public String soloUsuario() {
 			return "[PROFESIONAL] Nombre Usuario: " + getNombreUsuario() + ", RUT: " + getRun() + ", Fecha de Nacimiento: " + getFechaNacimiento() ;	
 		}
+
+		@Override
+		public String mostrarDatosTipo(){
+			return "Profesional: \n Titulo: " + titulo + ", Fecha Ingreso: " + fechaIngreso;
+	}
 	}
